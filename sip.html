@@ -85,6 +85,7 @@ color:green;
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -162,6 +163,7 @@ document.getElementById("value").innerHTML =
 document.getElementById("result").style.display="block";
 if (chart) {
     chart.destroy();
+    chart = null;
 }
 
 let ctx = document.getElementById("sipChart").getContext("2d");
