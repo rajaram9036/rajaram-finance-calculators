@@ -180,3 +180,23 @@ box-sizing:border-box;
 border-color:#084298;
 box-shadow:0 0 8px rgba(13,110,253,.3);
 }
+.hero{
+background:linear-gradient(135deg,#0d6efd,#0b5ed7);
+padding:40px 20px;
+text-align:center;
+color:#fff;
+border-radius:0 0 20px 20px;
+}
+
+.hero h1{
+font-size:40px;
+margin-bottom:15px;
+color:#fff;
+}
+
+.hero p{
+font-size:20px;
+color:#eaf3ff;
+max-width:700px;
+margin:auto;
+}
