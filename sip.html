@@ -117,6 +117,8 @@ color:green;
 <span class="green" id="value">₹0</span>
 </p>
 
+  <canvas id="sipChart" style="margin-top:20px;"></canvas> 
+
 </div>
   <br>
 
@@ -127,7 +129,9 @@ color:green;
 <a href="index.html">
     <button>🏠 Back to Home</button>
 </a>
+  
 <script>
+  let chart;
 function calculateSIP(){
 
 let P = parseFloat(document.getElementById("amount").value);
@@ -156,7 +160,30 @@ document.getElementById("value").innerHTML =
 "₹" + futureValue.toFixed(0);
 
 document.getElementById("result").style.display="block";
+if (chart) {
+    chart.destroy();
+}
 
+let ctx = document.getElementById("sipChart").getContext("2d");
+
+chart = new Chart(ctx, {
+    type: "doughnut",
+    data: {
+        labels: ["Total Invested", "Wealth Gain"],
+        datasets: [{
+            data: [invested, gain],
+            backgroundColor: ["#0d6efd", "#28a745"]
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: "bottom"
+            }
+        }
+    }
+});
 }
   function resetSIP() {
     document.getElementById("amount").value = "";
@@ -168,6 +195,10 @@ document.getElementById("result").style.display="block";
     document.getElementById("value").innerHTML = "₹0";
 
     document.getElementById("result").style.display = "none";
+ if (chart) {
+    chart.destroy();
+    chart = null;
+ }
   }
 </script>
 </body>
