@@ -5,15 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rajaram Finance Calculators</title>
 
-<meta name="description" content="Free Online Finance Calculators">
-
 <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <header class="header">
-
 <div class="logo">
 💰 Rajaram Finance Calculators
 </div>
@@ -26,19 +23,18 @@
 <a href="privacy.html">🔒 Privacy</a>
 <a href="disclaimer.html">📄 Disclaimer</a>
 </nav>
-
 </header>
-
 <section class="hero">
 
 <h1>Free Finance Calculators</h1>
 
 <p>
-Calculate SIP, EMI, FD, PPF, GST and Home Loan instantly.
+Calculate SIP, EMI, FD, PPF, GST and many more financial calculations instantly.
 </p>
 
 <input
 type="text"
+id="search"
 placeholder="Search Calculator..."
 class="search-box">
 
@@ -47,7 +43,7 @@ class="search-box">
 <section class="cards" id="calculators">
 
 <div class="card">
-<h2>💹 SIP Calculator</h2>
+<h2>💰 SIP Calculator</h2>
 <p>Calculate Mutual Fund SIP Returns.</p>
 <a href="sip.html"><button>Open</button></a>
 </div>
@@ -56,12 +52,6 @@ class="search-box">
 <h2>🏦 EMI Calculator</h2>
 <p>Loan EMI Calculator.</p>
 <a href="emi.html"><button>Open</button></a>
-</div>
-
-<div class="card">
-<h2>🏠 Home Loan Calculator</h2>
-<p>Calculate Home Loan EMI.</p>
-<a href="home-loan.html"><button>Open</button></a>
 </div>
 
 <div class="card">
@@ -82,15 +72,29 @@ class="search-box">
 <a href="gst.html"><button>Open</button></a>
 </div>
 
+<div class="card">
+<h2>🏠 Home Loan Calculator</h2>
+<p>Calculate Home Loan EMI.</p>
+<a href="home-loan.html"><button>Open</button></a>
+</div>
+
 </section>
-
 <footer>
-
-<p>© 2026 Rajaram Finance Calculators</p>
-
+  <p>© 2026 Rajaram Finance Calculators</p>
 </footer>
 
-<script src="script.js"></script>
+<script>
+const search = document.getElementById("search");
 
-</body>
-</html>
+if (search) {
+  search.addEventListener("keyup", function () {
+    let value = this.value.toLowerCase();
+    let cards = document.querySelectorAll(".card");
+
+    cards.forEach(function(card){
+      let text = card.innerText.toLowerCase();
+      card.style.display = text.includes(value) ? "block" : "none";
+    });
+  });
+}
+</script>
