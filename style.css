@@ -200,3 +200,50 @@ width:95%;
 font-size:17px;
 }
 }
+/* ===== Premium Effects ===== */
+
+button{
+background:linear-gradient(135deg,#1976D2,#0D47A1);
+color:#fff;
+border:none;
+padding:14px 30px;
+border-radius:12px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+transition:all .3s ease;
+}
+
+button:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 20px rgba(25,118,210,.35);
+}
+
+.search-box{
+background:#fff;
+box-shadow:0 6px 15px rgba(0,0,0,.12);
+}
+
+.hero{
+position:relative;
+overflow:hidden;
+}
+
+.hero::after{
+content:"";
+position:absolute;
+width:250px;
+height:250px;
+background:rgba(255,255,255,.08);
+border-radius:50%;
+top:-80px;
+right:-80px;
+}
+
+.card{
+border-top:5px solid #1976D2;
+}
+
+.card h2{
+color:#1565C0;
+}
