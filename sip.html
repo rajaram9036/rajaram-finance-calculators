@@ -3,56 +3,88 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SIP Calculator</title>
 
+<link rel="stylesheet" href="style.css">
+
 <style>
+
 body{
-font-family:Arial,sans-serif;
-background:#f5f5f5;
 margin:0;
-padding:20px;
+background:#eef3fb;
+font-family:Arial,sans-serif;
 }
 
 .container{
-max-width:450px;
-margin:auto;
+max-width:500px;
+margin:25px auto;
 background:#fff;
-padding:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,.2);
+padding:25px;
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
 h1{
 text-align:center;
-color:#1565C0;
+color:#0d6efd;
+font-size:42px;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+font-size:22px;
+font-weight:bold;
+margin-top:18px;
 }
 
 input{
 width:100%;
-padding:12px;
-margin:10px 0;
-font-size:18px;
+padding:18px;
+font-size:28px;
+border:1px solid #ccc;
+border-radius:10px;
+box-sizing:border-box;
+margin-top:8px;
 }
 
 button{
 width:100%;
-padding:12px;
-background:#1565C0;
+padding:18px;
+margin-top:25px;
+font-size:28px;
+background:#0d6efd;
 color:#fff;
-font-size:18px;
 border:none;
-border-radius:6px;
+border-radius:12px;
+cursor:pointer;
 }
 
-#result{
-margin-top:20px;
-font-size:22px;
+button:hover{
+background:#0b5ed7;
+}
+
+.result{
+margin-top:25px;
+background:#f3fff4;
+border:2px solid #c8f0cd;
+border-radius:12px;
+padding:20px;
+display:none;
+}
+
+.result p{
+font-size:24px;
+margin:12px 0;
 font-weight:bold;
-text-align:center;
+}
+
+.green{
 color:green;
 }
-</style>
 
+</style>
 </head>
 
 <body>
@@ -60,43 +92,66 @@ color:green;
 <div class="container">
 
 <h1>💰 SIP Calculator</h1>
-
 <label>Monthly Investment (₹)</label>
-<input type="number" id="sipAmount">
+<input type="number" id="amount" placeholder="2000">
 
 <label>Annual Return (%)</label>
-<input type="number" id="sipRate">
+<input type="number" id="rate" placeholder="12">
 
 <label>Time (Years)</label>
-<input type="number" id="sipYears">
+<input type="number" id="years" placeholder="10">
 
-<button onclick="calculateSIP()">Calculate SIP</button>
+<button onclick="calculateSIP()">📱 Calculate SIP</button>
 
-<div id="result"></div>
+<div class="result" id="result">
+
+<p>Total Invested:
+<span class="green" id="invested">₹0</span>
+</p>
+
+<p>Wealth Gain:
+<span class="green" id="gain">₹0</span>
+</p>
+
+<p>Estimated Value:
+<span class="green" id="value">₹0</span>
+</p>
 
 </div>
-
 <script>
-
 function calculateSIP(){
 
-let P=parseFloat(document.getElementById("sipAmount").value);
+let P = parseFloat(document.getElementById("amount").value);
+let annual = parseFloat(document.getElementById("rate").value);
+let years = parseFloat(document.getElementById("years").value);
 
-let annualRate=parseFloat(document.getElementById("sipRate").value);
-
-let years=parseFloat(document.getElementById("sipYears").value);
-
-let r=annualRate/12/100;
-
-let n=years*12;
-
-let M=P*(((Math.pow(1+r,n)-1)/r)*(1+r));
-
-document.getElementById("result").innerHTML="Estimated Value : ₹"+M.toFixed(0);
-
+if(isNaN(P) || isNaN(annual) || isNaN(years)){
+alert("Please fill all fields");
+return;
 }
 
+let r = annual / 12 / 100;
+let n = years * 12;
+
+let futureValue = P * (((Math.pow(1+r,n))-1) * (1+r)) / r;
+let invested = P * n;
+let gain = futureValue - invested;
+
+document.getElementById("invested").innerHTML =
+"₹" + invested.toFixed(0);
+
+document.getElementById("gain").innerHTML =
+"₹" + gain.toFixed(0);
+
+document.getElementById("value").innerHTML =
+"₹" + futureValue.toFixed(0);
+
+document.getElementById("result").style.display="block";
+
+}
 </script>
+
+</div>
 
 </body>
 </html>
