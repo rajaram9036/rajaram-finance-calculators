@@ -92,38 +92,5 @@ class="search-box">
 
 </footer>
 
-<div class="card">
-  <h2>💰 SIP Calculator</h2>
-
-  <label>Monthly Investment (₹)</label>
-  <input type="number" id="sipAmount" placeholder="5000">
-
-  <label>Annual Return (%)</label>
-  <input type="number" id="sipRate" placeholder="12">
-
-  <label>Time (Years)</label>
-  <input type="number" id="sipYears" placeholder="10">
-
-  <button onclick="calculateSIP()">Calculate SIP</button>
-
-  <h3 id="sipResult"></h3>
-</div>
-
-<script>
-function calculateSIP() {
-    let P = parseFloat(document.getElementById("sipAmount").value);
-    let annualRate = parseFloat(document.getElementById("sipRate").value);
-    let years = parseFloat(document.getElementById("sipYears").value);
-
-    let r = annualRate / 12 / 100;
-    let n = years * 12;
-
-    let M = P * (((Math.pow(1+r,n)-1)/r)*(1+r));
-
-    document.getElementById("sipResult").innerHTML =
-        "Estimated Value: ₹" + M.toFixed(0);
-}
-</script>
-
 </body>
 </html>
