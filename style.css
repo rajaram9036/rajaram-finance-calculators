@@ -200,3 +200,20 @@ color:#eaf3ff;
 max-width:700px;
 margin:auto;
 }
+button{
+background:linear-gradient(135deg,#0d6efd,#0b5ed7);
+color:#fff;
+border:none;
+padding:12px 30px;
+font-size:18px;
+font-weight:bold;
+border-radius:10px;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 5px 15px rgba(13,110,253,.3);
+}
+
+button:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 25px rgba(13,110,253,.4);
+}
