@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMI Calculator</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+background:#f5f5f5;
+margin:0;
+padding:20px;
+}
+.container{
+max-width:450px;
+margin:auto;
+background:#fff;
+padding:20px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,.2);
+}
+h1{
+text-align:center;
+color:#1565C0;
+}
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+font-size:18px;
+}
+button{
+width:100%;
+padding:12px;
+background:#1565C0;
+color:white;
+border:none;
+border-radius:6px;
+font-size:18px;
+}
+#result{
+margin-top:20px;
+font-size:22px;
+font-weight:bold;
+color:green;
+text-align:center;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏦 EMI Calculator</h1>
+
+<label>Loan Amount (₹)</label>
+<input type="number" id="loan">
+
+<label>Interest Rate (%)</label>
+<input type="number" id="rate">
+
+<label>Loan Tenure (Years)</label>
+<input type="number" id="years">
+
+<button onclick="calculateEMI()">Calculate EMI</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+function calculateEMI(){
+
+let P=parseFloat(document.getElementById("loan").value);
+
+let annualRate=parseFloat(document.getElementById("rate").value);
+
+let years=parseFloat(document.getElementById("years").value);
+
+let r=annualRate/12/100;
+
+let n=years*12;
+
+let emi=(P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+
+document.getElementById("result").innerHTML="Monthly EMI : ₹"+emi.toFixed(0);
+
+}
+</script>
+
+</body>
+</html>
