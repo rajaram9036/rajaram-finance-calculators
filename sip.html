@@ -118,7 +118,8 @@ color:green;
 <span class="green" id="value">₹0</span>
 </p>
 
-  <canvas id="sipChart" style="margin-top:20px;"></canvas> 
+<canvas id="sipChart"
+style="margin-top:20px;width:100%;height:300px;"></canvas> 
 
 </div>
   <br>
@@ -178,12 +179,14 @@ chart = new Chart(ctx, {
         }]
     },
     options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: "bottom"
-            }
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+        legend: {
+            position: "bottom"
         }
+    }
+    }
     }
 });
 }
