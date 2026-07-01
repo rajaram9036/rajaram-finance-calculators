@@ -1,44 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home Loan Calculator</title>
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
-<div class="container">
-<h1>🏠 Home Loan Calculator</h1>
-<p>Loan Amount (₹)</p>
-<input type="number" id="loan">
+<section class="hero">
+  <h1>💰 Rajaram Finance Hub</h1>
+  <p>Fast, Free & Easy Financial Calculators</p>
 
-<p>Interest Rate (%)</p>
-<input type="number" id="rate">
+  <input type="text" class="search-box" placeholder="🔍 Search Calculator...">
+</section>
 
-<p>Loan Tenure (Years)</p>
-<input type="number" id="years">
+<section class="cards">
 
-<br><br>
-
-<button onclick="calculateEMI()">Calculate EMI</button>
-
-<h2 id="result"></h2>
-
-<script>
-function calculateEMI() {
-  let P = parseFloat(document.getElementById("loan").value);
-  let annualRate = parseFloat(document.getElementById("rate").value);
-  let years = parseFloat(document.getElementById("years").value);
-
-  let r = annualRate / 12 / 100;
-  let n = years * 12;
-
-  let emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
-
-  document.getElementById("result").innerHTML =
-    "Monthly EMI: ₹" + emi.toFixed(2);
-}
-</script>
+<div class="card">
+<h2>💹 SIP Calculator</h2>
+<p>Plan your SIP investment.</p>
+<a href="sip.html"><button>Start</button></a>
 </div>
-</body>
-</html>
+
+<div class="card">
+<h2>🏦 EMI Calculator</h2>
+<p>Calculate Loan EMI instantly.</p>
+<a href="emi.html"><button>Start</button></a>
+</div>
+
+<div class="card">
+<h2>🏠 Home Loan Calculator</h2>
+<p>Find your monthly Home Loan EMI.</p>
+<a href="home-loan.html"><button>Start</button></a>
+</div>
+
+<div class="card">
+<h2>🏛 FD Calculator</h2>
+<p>Estimate Fixed Deposit returns.</p>
+<a href="fd.html"><button>Start</button></a>
+</div>
+
+<div class="card">
+<h2>📈 PPF Calculator</h2>
+<p>Calculate your PPF maturity.</p>
+<a href="ppf.html"><button>Start</button></a>
+</div>
+
+<div class="card">
+<h2>🧾 GST Calculator</h2>
+<p>Add or Remove GST easily.</p>
+<a href="gst.html"><button>Start</button></a>
+</div>
+
+</section>
