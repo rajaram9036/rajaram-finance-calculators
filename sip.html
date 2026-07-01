@@ -118,6 +118,15 @@ color:green;
 </p>
 
 </div>
+  <br>
+
+<button onclick="resetSIP()">🔄 Reset</button>
+
+<br><br>
+
+<a href="index.html">
+    <button>🏠 Back to Home</button>
+</a>
 <script>
 function calculateSIP(){
 
@@ -149,9 +158,17 @@ document.getElementById("value").innerHTML =
 document.getElementById("result").style.display="block";
 
 }
+  function resetSIP() {
+    document.getElementById("amount").value = "";
+    document.getElementById("rate").value = "";
+    document.getElementById("years").value = "";
+
+    document.getElementById("invested").innerHTML = "₹0";
+    document.getElementById("gain").innerHTML = "₹0";
+    document.getElementById("value").innerHTML = "₹0";
+
+    document.getElementById("result").style.display = "none";
+  }
 </script>
-
-</div>
-
 </body>
 </html>
