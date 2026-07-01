@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FD Calculator</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+.fd-box{
+max-width:600px;
+margin:40px auto;
+background:#fff;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.fd-box h1{
+text-align:center;
+color:#1565c0;
+}
+
+.fd-box input{
+width:100%;
+padding:15px;
+font-size:18px;
+margin:10px 0 20px;
+}
+
+.fd-box button{
+width:100%;
+padding:15px;
+font-size:20px;
+background:#1565c0;
+color:#fff;
+border:none;
+border-radius:8px;
+}
+
+#result{
+text-align:center;
+font-size:30px;
+font-weight:bold;
+color:green;
+margin-top:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="fd-box">
+
+<h1>🏦 FD Calculator</h1>
+
+<label>Deposit Amount (₹)</label>
+
+<input type="number" id="amount" value="100000">
+
+<label>Interest Rate (%)</label>
+
+<input type="number" id="rate" value="7">
+
+<label>Time (Years)</label>
+
+<input type="number" id="years" value="5">
+
+<button onclick="fd()">Calculate FD</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function fd(){
+
+let p=parseFloat(document.getElementById("amount").value);
+
+let r=parseFloat(document.getElementById("rate").value);
+
+let t=parseFloat(document.getElementById("years").value);
+
+let total=p*Math.pow((1+r/100),t);
+
+document.getElementById("result").innerHTML="Maturity Amount : ₹"+total.toFixed(0);
+
+}
+
+</script>
+
+</body>
+</html>
