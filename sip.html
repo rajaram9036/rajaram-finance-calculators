@@ -6,19 +6,20 @@
 
 <title>SIP Calculator</title>
 
-<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
 body{
 margin:0;
+padding:20px;
 background:#eef3fb;
 font-family:Arial,sans-serif;
 }
 
 .container{
 max-width:500px;
-margin:25px auto;
+margin:auto;
 background:#fff;
 padding:25px;
 border-radius:20px;
@@ -55,7 +56,7 @@ padding:18px;
 margin-top:25px;
 font-size:28px;
 background:#0d6efd;
-color:#fff;
+color:white;
 border:none;
 border-radius:12px;
 cursor:pointer;
@@ -66,26 +67,31 @@ background:#0b5ed7;
 }
 
 .result{
+display:none;
 margin-top:25px;
 background:#f3fff4;
 border:2px solid #c8f0cd;
 border-radius:12px;
 padding:20px;
-display:none;
 }
 
 .result p{
 font-size:24px;
-margin:12px 0;
 font-weight:bold;
+margin:12px 0;
 }
 
 .green{
 color:green;
 }
 
+canvas{
+margin-top:25px;
+max-width:100%;
+height:300px;
+}
+
 </style>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -118,53 +124,44 @@ color:green;
 <span class="green" id="value">₹0</span>
 </p>
 
-<canvas id="sipChart"
-style="margin-top:20px;width:100%;height:300px;"></canvas> 
+<canvas id="sipChart"></canvas>
 
 </div>
-  <br>
 
 <button onclick="resetSIP()">🔄 Reset</button>
 
-<br><br>
-
 <a href="index.html">
-    <button>🏠 Back to Home</button>
+<button>🏠 Back to Home</button>
 </a>
-  
-<script>
-  let chart;
-function calculateSIP(){
 
-let P = parseFloat(document.getElementById("amount").value);
+<script>
+
+let chart;
+
+function calculateSIP(){
+  let P = parseFloat(document.getElementById("amount").value);
 let annual = parseFloat(document.getElementById("rate").value);
 let years = parseFloat(document.getElementById("years").value);
 
-if(isNaN(P) || isNaN(annual) || isNaN(years)){
-alert("Please fill all fields");
-return;
+if (isNaN(P) || isNaN(annual) || isNaN(years)) {
+    alert("Please fill all fields");
+    return;
 }
 
 let r = annual / 12 / 100;
 let n = years * 12;
 
-let futureValue = P * (((Math.pow(1+r,n))-1) * (1+r)) / r;
+let futureValue = P * (((Math.pow(1 + r, n)) - 1) * (1 + r)) / r;
 let invested = P * n;
 let gain = futureValue - invested;
 
-document.getElementById("invested").innerHTML =
-"₹" + invested.toFixed(0);
+document.getElementById("invested").innerHTML = "₹" + invested.toFixed(0);
+document.getElementById("gain").innerHTML = "₹" + gain.toFixed(0);
+document.getElementById("value").innerHTML = "₹" + futureValue.toFixed(0);
 
-document.getElementById("gain").innerHTML =
-"₹" + gain.toFixed(0);
-
-document.getElementById("value").innerHTML =
-"₹" + futureValue.toFixed(0);
-
-document.getElementById("result").style.display="block";
-if (chart) {
+document.getElementById("result").style.display = "block";
+  if (chart) {
     chart.destroy();
-    chart = null;
 }
 
 let ctx = document.getElementById("sipChart").getContext("2d");
@@ -175,36 +172,47 @@ chart = new Chart(ctx, {
         labels: ["Total Invested", "Wealth Gain"],
         datasets: [{
             data: [invested, gain],
-            backgroundColor: ["#0d6efd", "#28a745"]
+            backgroundColor: [
+                "#1976D2",
+                "#4CAF50"
+            ],
+            borderWidth: 2
         }]
     },
     options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-        legend: {
-            position: "bottom"
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: "bottom"
+            }
         }
     }
-    }
-    }
 });
+
 }
-  function resetSIP() {
-    document.getElementById("amount").value = "";
-    document.getElementById("rate").value = "";
-    document.getElementById("years").value = "";
+  function resetSIP(){
 
-    document.getElementById("invested").innerHTML = "₹0";
-    document.getElementById("gain").innerHTML = "₹0";
-    document.getElementById("value").innerHTML = "₹0";
+document.getElementById("amount").value="";
+document.getElementById("rate").value="";
+document.getElementById("years").value="";
 
-    document.getElementById("result").style.display = "none";
- if (chart) {
-    chart.destroy();
-    chart = null;
- }
-  }
+document.getElementById("invested").innerHTML="₹0";
+document.getElementById("gain").innerHTML="₹0";
+document.getElementById("value").innerHTML="₹0";
+
+document.getElementById("result").style.display="none";
+
+if(chart){
+chart.destroy();
+chart=null;
+}
+
+}
+
 </script>
+
+</div>
+
 </body>
 </html>
