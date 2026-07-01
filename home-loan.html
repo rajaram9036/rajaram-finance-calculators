@@ -1,46 +1,116 @@
-<section class="hero">
-  <h1>💰 Rajaram Finance Hub</h1>
-  <p>Fast, Free & Easy Financial Calculators</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home Loan Calculator</title>
 
-  <input type="text" class="search-box" placeholder="🔍 Search Calculator...">
-</section>
+<link rel="stylesheet" href="style.css">
 
-<section class="cards">
+<style>
+.container{
+max-width:420px;
+margin:30px auto;
+background:#fff;
+padding:25px;
+border-radius:18px;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
+}
 
-<div class="card">
-<h2>💹 SIP Calculator</h2>
-<p>Plan your SIP investment.</p>
-<a href="sip.html"><button>Start</button></a>
+h1{
+text-align:center;
+color:#0d6efd;
+margin-bottom:20px;
+}
+
+label{
+display:block;
+font-size:18px;
+margin-top:15px;
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:14px;
+font-size:18px;
+border:1px solid #ccc;
+border-radius:8px;
+box-sizing:border-box;
+margin-top:6px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+font-size:20px;
+background:#0d6efd;
+color:#fff;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+button:hover{
+background:#0b5ed7;
+}
+
+#result{
+margin-top:20px;
+font-size:22px;
+font-weight:bold;
+text-align:center;
+color:green;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏠 Home Loan Calculator</h1>
+
+<label>Loan Amount (₹)</label>
+<input type="number" id="loan">
+
+<label>Interest Rate (%)</label>
+<input type="number" id="rate">
+
+<label>Loan Tenure (Years)</label>
+<input type="number" id="years">
+
+<button onclick="calculateEMI()">Calculate EMI</button>
+
+<div id="result"></div>
+<script>
+function calculateEMI(){
+
+let P = parseFloat(document.getElementById("loan").value);
+let annualRate = parseFloat(document.getElementById("rate").value);
+let years = parseFloat(document.getElementById("years").value);
+
+if(isNaN(P) || isNaN(annualRate) || isNaN(years)){
+document.getElementById("result").innerHTML="Please fill all fields";
+return;
+}
+
+let r = annualRate / 12 / 100;
+let n = years * 12;
+
+let emi = (P * r * Math.pow(1+r,n)) / (Math.pow(1+r,n)-1);
+let total = emi * n;
+let interest = total - P;
+
+document.getElementById("result").innerHTML =
+"Monthly EMI: ₹" + emi.toFixed(2) +
+"<br><br>Total Payment: ₹" + total.toFixed(2) +
+"<br><br>Total Interest: ₹" + interest.toFixed(2);
+
+}
+</script>
 </div>
 
-<div class="card">
-<h2>🏦 EMI Calculator</h2>
-<p>Calculate Loan EMI instantly.</p>
-<a href="emi.html"><button>Start</button></a>
-</div>
-
-<div class="card">
-<h2>🏠 Home Loan Calculator</h2>
-<p>Find your monthly Home Loan EMI.</p>
-<a href="home-loan.html"><button>Start</button></a>
-</div>
-
-<div class="card">
-<h2>🏛 FD Calculator</h2>
-<p>Estimate Fixed Deposit returns.</p>
-<a href="fd.html"><button>Start</button></a>
-</div>
-
-<div class="card">
-<h2>📈 PPF Calculator</h2>
-<p>Calculate your PPF maturity.</p>
-<a href="ppf.html"><button>Start</button></a>
-</div>
-
-<div class="card">
-<h2>🧾 GST Calculator</h2>
-<p>Add or Remove GST easily.</p>
-<a href="gst.html"><button>Start</button></a>
-</div>
-
-</section>
+</body>
+</html>
