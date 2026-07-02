@@ -114,6 +114,75 @@ transition:.3s;
 .action-buttons button:hover{
 background:#1259a8;
 }
+  .action-buttons{
+display:flex;
+flex-direction:column;
+gap:12px;
+margin-top:20px;
+}
+
+.action-buttons button{
+width:100%;
+padding:15px;
+font-size:18px;
+font-weight:bold;
+border:none;
+border-radius:12px;
+background:#1976D2;
+color:#fff;
+cursor:pointer;
+transition:.3s;
+}
+
+.action-buttons button:hover{
+background:#1259a8;
+}
+
+#yearlyTable{
+margin-top:25px;
+overflow-x:auto;
+}
+
+#yearlyTable table{
+width:100%;
+border-collapse:collapse;
+font-size:16px;
+}
+
+#yearlyTable th{
+background:#1976D2;
+color:#fff;
+padding:10px;
+}
+
+#yearlyTable td{
+border:1px solid #ddd;
+padding:10px;
+text-align:center;
+}
+
+canvas{
+max-width:320px;
+max-height:320px;
+margin:20px auto;
+display:block;
+}
+
+@media(max-width:600px){
+.container{
+padding:18px;
+}
+
+h1{
+font-size:34px;
+}
+
+input,
+select,
+button{
+font-size:18px;
+}
+}
 </style>
 </head>
 
@@ -150,6 +219,7 @@ background:#1259a8;
 <canvas id="sipChart" height="250" style="margin-top:20px;"></canvas>
 
 </div>
+  <div id="yearlyTable" style="margin-top:20px;overflow-x:auto;"></div>
 <div class="action-buttons">
 
 <button onclick="downloadPDF()">📄 Download PDF</button>
@@ -227,6 +297,34 @@ chart = new Chart(ctx, {
         }
     }
 });
+let table = `<h3>📊 Yearly Growth Table</h3>
+<table border="1" width="100%">
+<tr>
+<th>Year</th>
+<th>Invested</th>
+<th>Estimated Value</th>
+<th>Gain</th>
+</tr>`;
+
+for(let y=1; y<=years; y++){
+
+let months=y*12;
+let fv=P*(((Math.pow(1+r,months))-1)*(1+r))/r;
+let inv=P*months;
+let g=fv-inv;
+
+table+=`
+<tr>
+<td>${y}</td>
+<td>₹${Number(inv.toFixed(0)).toLocaleString("en-IN")}</td>
+<td>₹${Number(fv.toFixed(0)).toLocaleString("en-IN")}</td>
+<td>₹${Number(g.toFixed(0)).toLocaleString("en-IN")}</td>
+</tr>`;
+}
+
+table+="</table>";
+
+document.getElementById("yearlyTable").innerHTML=table;  
 
 }
   function resetSIP(){
