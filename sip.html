@@ -184,6 +184,7 @@ font-size:18px;
 }
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body>
@@ -375,8 +376,19 @@ alert("Sharing not supported on this device");
 }
 }
 
-function downloadPDF(){
-window.print();
+function downloadPDF() {
+  const element = document.querySelector(".container");
+
+  html2pdf()
+    .set({
+      margin: 10,
+      filename: "SIP-Calculator-Result.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+    })
+    .from(element)
+    .save();
 }
 </script>
 
