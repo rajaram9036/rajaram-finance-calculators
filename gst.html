@@ -3,48 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>GST Calculator</title>
 
-<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-.box{
-max-width:600px;
-margin:40px auto;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#eef3fb;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
 background:#fff;
 padding:25px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.15);
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
-.box h1{
+h1{
 text-align:center;
-color:#1565C0;
+color:#1976D2;
+margin-bottom:25px;
+font-size:34px;
 }
 
-.box input{
-width:100%;
-padding:15px;
-margin:10px 0 20px;
+label{
+display:block;
+margin-top:18px;
 font-size:18px;
+font-weight:bold;
 }
 
-.box button{
+input,select{
 width:100%;
 padding:15px;
-background:#1565C0;
+margin-top:8px;
+font-size:18px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+background:#1976D2;
 color:#fff;
 border:none;
-border-radius:8px;
+border-radius:10px;
 font-size:18px;
+cursor:pointer;
 }
 
-#result{
+button:hover{
+background:#1259a8;
+}
+
+.result{
+display:none;
 margin-top:20px;
-text-align:center;
-font-size:28px;
+padding:18px;
+background:#eefcf0;
+border-radius:12px;
+}
+
+.result p{
+font-size:22px;
+margin:10px 0;
 font-weight:bold;
+}
+
+.green{
 color:green;
+}
+
+canvas{
+max-width:300px;
+margin:20px auto;
+display:block;
 }
 </style>
 
@@ -52,42 +98,143 @@ color:green;
 
 <body>
 
-<div class="box">
+<div class="container">
 
 <h1>🧾 GST Calculator</h1>
-
 <label>Amount (₹)</label>
+<input type="number" id="amount" placeholder="10000">
 
-<input type="number" id="amount" value="1000">
+<label>GST Rate (%)</label>
+<select id="gstRate">
+<option value="3">3%</option>
+<option value="5">5%</option>
+<option value="12">12%</option>
+<option value="18" selected>18%</option>
+<option value="28">28%</option>
+</select>
 
-<label>GST %</label>
+<label>Calculation Type</label>
+<select id="gstType">
+<option value="exclusive">Add GST (Exclusive)</option>
+<option value="inclusive">Remove GST (Inclusive)</option>
+</select>
 
-<input type="number" id="gst" value="18">
+<button onclick="calculateGST()">🧮 Calculate GST</button>
 
-<button onclick="gstCalc()">Calculate GST</button>
+<div class="result" id="result">
 
-<div id="result"></div>
+<p>Original Amount:<br>
+<span class="green" id="original">₹0</span>
+</p>
+
+<p>GST Amount:<br>
+<span class="green" id="gstAmount">₹0</span>
+</p>
+
+<p>Final Amount:<br>
+<span class="green" id="finalAmount">₹0</span>
+</p>
+
+<canvas id="gstChart" height="250"></canvas>
 
 </div>
 
+<button onclick="resetGST()">🔄 Reset</button>
+
+<a href="index.html">
+<button type="button">🏠 Back to Home</button>
+</a>
+
 <script>
 
-function gstCalc(){
+let chart;
+  function calculateGST(){
 
-let amount=parseFloat(document.getElementById("amount").value);
+let amount = parseFloat(document.getElementById("amount").value);
+let rate = parseFloat(document.getElementById("gstRate").value);
+let type = document.getElementById("gstType").value;
 
-let gst=parseFloat(document.getElementById("gst").value);
+if(isNaN(amount)){
+alert("Please enter amount");
+return;
+}
 
-let gstAmount=(amount*gst)/100;
+let original, gst, finalAmount;
 
-let total=amount+gstAmount;
+if(type=="exclusive"){
 
-document.getElementById("result").innerHTML=
-"GST : ₹"+gstAmount.toFixed(2)+"<br>Total : ₹"+total.toFixed(2);
+original = amount;
+gst = amount * rate / 100;
+finalAmount = original + gst;
+
+}else{
+
+finalAmount = amount;
+original = amount * 100 / (100 + rate);
+gst = finalAmount - original;
+
+}
+
+document.getElementById("original").innerHTML =
+"₹" + Number(original.toFixed(2)).toLocaleString("en-IN");
+
+document.getElementById("gstAmount").innerHTML =
+"₹" + Number(gst.toFixed(2)).toLocaleString("en-IN");
+
+document.getElementById("finalAmount").innerHTML =
+"₹" + Number(finalAmount.toFixed(2)).toLocaleString("en-IN");
+
+document.getElementById("result").style.display="block";
+
+if(chart){
+chart.destroy();
+}
+
+let ctx = document.getElementById("gstChart").getContext("2d");
+
+chart = new Chart(ctx,{
+type:"doughnut",
+data:{
+labels:["Original Amount","GST"],
+datasets:[{
+data:[original,gst],
+backgroundColor:["#1976D2","#4CAF50"],
+borderWidth:2
+}]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{
+position:"bottom"
+}
+}
+}
+});
+
+  }
+  function resetGST(){
+
+document.getElementById("amount").value="";
+document.getElementById("gstRate").value="18";
+document.getElementById("gstType").value="exclusive";
+
+document.getElementById("original").innerHTML="₹0";
+document.getElementById("gstAmount").innerHTML="₹0";
+document.getElementById("finalAmount").innerHTML="₹0";
+
+document.getElementById("result").style.display="none";
+
+if(chart){
+chart.destroy();
+chart=null;
+}
 
 }
 
 </script>
+
+</div>
 
 </body>
 </html>
