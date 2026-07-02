@@ -156,9 +156,12 @@ let futureValue = P * (((Math.pow(1 + r, n)) - 1) * (1 + r)) / r;
 let invested = P * n;
 let gain = futureValue - invested;
 
-document.getElementById("invested").innerHTML = "₹" + invested.toFixed(0);
-document.getElementById("gain").innerHTML = "₹" + gain.toFixed(0);
-document.getElementById("value").innerHTML = "₹" + futureValue.toFixed(0);
+document.getElementById("invested").innerHTML =
+"₹" + Number(invested.toFixed(0)).toLocaleString("en-IN");
+document.getElementById("gain").innerHTML =
+"₹" + Number(gain.toFixed(0)).toLocaleString("en-IN");
+document.getElementById("value").innerHTML =
+"₹" + Number(futureValue.toFixed(0)).toLocaleString("en-IN");
 
 document.getElementById("result").style.display = "block";
   if (chart) {
@@ -184,9 +187,12 @@ chart = new Chart(ctx, {
         responsive: true,
         maintainAspectRatio: true,
         plugins: {
-            legend: {
-                position: "bottom"
-            }
+    legend: {
+        position: "bottom"
+    },
+    tooltip: {
+        enabled: true
+    }
         }
     }
 });
