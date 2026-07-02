@@ -3,67 +3,99 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Home Loan Calculator</title>
 
-<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#eef3fb;
+padding:20px;
+}
+
 .container{
-max-width:420px;
-margin:30px auto;
+max-width:500px;
+margin:auto;
 background:#fff;
 padding:25px;
-border-radius:18px;
+border-radius:20px;
 box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
 h1{
 text-align:center;
-color:#0d6efd;
-margin-bottom:20px;
+color:#1976D2;
+margin-bottom:25px;
+font-size:34px;
 }
 
 label{
 display:block;
+margin-top:18px;
 font-size:18px;
-margin-top:15px;
 font-weight:bold;
 }
 
 input{
 width:100%;
-padding:14px;
+padding:15px;
+margin-top:8px;
 font-size:18px;
 border:1px solid #ccc;
-border-radius:8px;
-box-sizing:border-box;
-margin-top:6px;
+border-radius:10px;
 }
 
 button{
 width:100%;
 padding:15px;
 margin-top:20px;
-font-size:20px;
-background:#0d6efd;
+background:#1976D2;
 color:#fff;
 border:none;
 border-radius:10px;
+font-size:18px;
 cursor:pointer;
 }
 
 button:hover{
-background:#0b5ed7;
+background:#1259a8;
 }
 
-#result{
+.result{
+display:none;
 margin-top:20px;
+padding:18px;
+background:#eefcf0;
+border-radius:12px;
+}
+
+.result p{
 font-size:22px;
+margin:10px 0;
 font-weight:bold;
-text-align:center;
+}
+
+.green{
 color:green;
 }
+
+canvas{
+max-width:300px;
+margin:20px auto;
+display:block;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -71,46 +103,126 @@ color:green;
 <div class="container">
 
 <h1>🏠 Home Loan Calculator</h1>
-
 <label>Loan Amount (₹)</label>
-<input type="number" id="loan">
+<input type="number" id="loan" placeholder="2500000">
 
-<label>Interest Rate (%)</label>
-<input type="number" id="rate">
+<label>Interest Rate (% Per Year)</label>
+<input type="number" id="rate" placeholder="8.5">
 
 <label>Loan Tenure (Years)</label>
-<input type="number" id="years">
+<input type="number" id="years" placeholder="20">
 
-<button onclick="calculateEMI()">Calculate EMI</button>
+<button onclick="calculateLoan()">🧮 Calculate Home Loan</button>
 
-<div id="result"></div>
+<div class="result" id="result">
+
+<p>Monthly EMI:<br>
+<span class="green" id="emi">₹0</span>
+</p>
+
+<p>Total Interest:<br>
+<span class="green" id="interest">₹0</span>
+</p>
+
+<p>Total Payment:<br>
+<span class="green" id="total">₹0</span>
+</p>
+
+<canvas id="loanChart" height="250"></canvas>
+
+</div>
+
+<button onclick="resetLoan()">🔄 Reset</button>
+
+<a href="index.html">
+<button type="button">🏠 Back to Home</button>
+</a>
+
 <script>
-function calculateEMI(){
+
+let chart;
+  function calculateLoan(){
 
 let P = parseFloat(document.getElementById("loan").value);
-let annualRate = parseFloat(document.getElementById("rate").value);
+let annual = parseFloat(document.getElementById("rate").value);
 let years = parseFloat(document.getElementById("years").value);
 
-if(isNaN(P) || isNaN(annualRate) || isNaN(years)){
-document.getElementById("result").innerHTML="Please fill all fields";
+if(isNaN(P) || isNaN(annual) || isNaN(years)){
+alert("Please fill all fields");
 return;
 }
 
-let r = annualRate / 12 / 100;
+let r = annual / 12 / 100;
 let n = years * 12;
 
-let emi = (P * r * Math.pow(1+r,n)) / (Math.pow(1+r,n)-1);
-let total = emi * n;
-let interest = total - P;
+let emi = (P * r * Math.pow(1+r,n)) /
+          (Math.pow(1+r,n)-1);
 
-document.getElementById("result").innerHTML =
-"Monthly EMI: ₹" + emi.toFixed(2) +
-"<br><br>Total Payment: ₹" + total.toFixed(2) +
-"<br><br>Total Interest: ₹" + interest.toFixed(2);
+let totalPayment = emi * n;
+let totalInterest = totalPayment - P;
+
+document.getElementById("emi").innerHTML =
+"₹" + Number(emi.toFixed(0)).toLocaleString("en-IN");
+
+document.getElementById("interest").innerHTML =
+"₹" + Number(totalInterest.toFixed(0)).toLocaleString("en-IN");
+
+document.getElementById("total").innerHTML =
+"₹" + Number(totalPayment.toFixed(0)).toLocaleString("en-IN");
+
+document.getElementById("result").style.display = "block";
+
+if(chart){
+chart.destroy();
+}
+
+let ctx = document.getElementById("loanChart").getContext("2d");
+
+chart = new Chart(ctx,{
+type:"doughnut",
+data:{
+labels:["Loan Amount","Interest"],
+datasets:[{
+data:[P,totalInterest],
+backgroundColor:["#1976D2","#4CAF50"],
+borderWidth:2
+}]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{
+position:"bottom"
+}
+}
+}
+});
+
+  }
+  function resetLoan(){
+
+document.getElementById("loan").value="";
+document.getElementById("rate").value="";
+document.getElementById("years").value="";
+
+document.getElementById("emi").innerHTML="₹0";
+document.getElementById("interest").innerHTML="₹0";
+document.getElementById("total").innerHTML="₹0";
+
+document.getElementById("result").style.display="none";
+
+if(chart){
+    chart.destroy();
+    chart = null;
+}
 
 }
+
 </script>
+
 </div>
 
 </body>
 </html>
+  
+  
