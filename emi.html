@@ -5,49 +5,115 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EMI Calculator</title>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
-body{
-font-family:Arial,sans-serif;
-background:#f5f5f5;
+*{
 margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#eef3ff;
 padding:20px;
 }
+
 .container{
-max-width:450px;
+max-width:520px;
 margin:auto;
 background:#fff;
-padding:20px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,.2);
+padding:25px;
+border-radius:18px;
+box-shadow:0 5px 20px rgba(0,0,0,.15);
 }
+
 h1{
 text-align:center;
-color:#1565C0;
+color:#1976D2;
+margin-bottom:20px;
+font-size:36px;
 }
+
+label{
+display:block;
+font-weight:bold;
+margin-top:15px;
+margin-bottom:8px;
+font-size:18px;
+}
+
 input{
 width:100%;
-padding:12px;
-margin:10px 0;
+padding:14px;
+border:1px solid #ccc;
+border-radius:10px;
 font-size:18px;
+outline:none;
 }
+
+input:focus{
+border-color:#1976D2;
+}
+
 button{
 width:100%;
-padding:12px;
-background:#1565C0;
-color:white;
+padding:15px;
+margin-top:18px;
 border:none;
-border-radius:6px;
+border-radius:10px;
+background:#1976D2;
+color:#fff;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#1259a8;
+}
+
+.result{
+display:none;
+margin-top:20px;
+background:#eefbea;
+padding:18px;
+border-radius:12px;
+border:1px solid #c8e6c9;
+}
+
+.result p{
+font-size:22px;
+margin:12px 0;
+font-weight:bold;
+}
+
+.green{
+color:green;
+}
+
+canvas{
+max-width:320px;
+margin:20px auto;
+display:block;
+}
+  @media(max-width:600px){
+.container{
+padding:18px;
+}
+
+h1{
+font-size:32px;
+}
+
+input,
+button{
 font-size:18px;
 }
-#result{
-margin-top:20px;
-font-size:22px;
-font-weight:bold;
-color:green;
-text-align:center;
 }
 </style>
-
 </head>
 
 <body>
@@ -57,39 +123,125 @@ text-align:center;
 <h1>🏦 EMI Calculator</h1>
 
 <label>Loan Amount (₹)</label>
-<input type="number" id="loan">
+<input type="number" id="loan" placeholder="500000">
 
-<label>Interest Rate (%)</label>
-<input type="number" id="rate">
+<label>Interest Rate (% Per Year)</label>
+<input type="number" id="rate" placeholder="8.5">
 
 <label>Loan Tenure (Years)</label>
-<input type="number" id="years">
+<input type="number" id="years" placeholder="20">
 
-<button onclick="calculateEMI()">Calculate EMI</button>
+<button onclick="calculateEMI()">🧮 Calculate EMI</button>
 
-<div id="result"></div>
+<div class="result" id="result">
+
+<p>Monthly EMI:<br>
+<span class="green" id="emi">₹0</span>
+</p>
+
+<p>Total Interest:<br>
+<span class="green" id="interest">₹0</span>
+</p>
+
+<p>Total Payment:<br>
+<span class="green" id="total">₹0</span>
+</p>
+
+<canvas id="emiChart" height="250"></canvas>
 
 </div>
 
+<button onclick="resetEMI()">🔄 Reset</button>
+
+<a href="index.html">
+<button>🏠 Back to Home</button>
+</a>
+
 <script>
-function calculateEMI(){
 
-let P=parseFloat(document.getElementById("loan").value);
+let chart;
+  function calculateEMI(){
 
-let annualRate=parseFloat(document.getElementById("rate").value);
+let P = parseFloat(document.getElementById("loan").value);
+let annual = parseFloat(document.getElementById("rate").value);
+let years = parseFloat(document.getElementById("years").value);
 
-let years=parseFloat(document.getElementById("years").value);
+if(isNaN(P) || isNaN(annual) || isNaN(years)){
+alert("Please fill all fields");
+return;
+}
 
-let r=annualRate/12/100;
+let r = annual / 12 / 100;
+let n = years * 12;
 
-let n=years*12;
+let emi = (P * r * Math.pow(1+r,n)) / (Math.pow(1+r,n)-1);
 
-let emi=(P*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+let totalPayment = emi * n;
+let totalInterest = totalPayment - P;
 
-document.getElementById("result").innerHTML="Monthly EMI : ₹"+emi.toFixed(0);
+document.getElementById("emi").innerHTML =
+"₹" + Number(emi.toFixed(0)).toLocaleString("en-IN");
+
+document.getElementById("interest").innerHTML =
+"₹" + Number(totalInterest.toFixed(0)).toLocaleString("en-IN");
+
+document.getElementById("total").innerHTML =
+"₹" + Number(totalPayment.toFixed(0)).toLocaleString("en-IN");
+
+document.getElementById("result").style.display="block";
+
+if(chart){
+chart.destroy();
+}
+
+let ctx=document.getElementById("emiChart").getContext("2d");
+
+chart=new Chart(ctx,{
+type:"doughnut",
+data:{
+labels:["Loan Amount","Interest"],
+datasets:[{
+data:[P,totalInterest],
+backgroundColor:[
+"#1976D2",
+"#4CAF50"
+],
+borderWidth:2
+}]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{
+position:"bottom"
+}
+}
+}
+});
+
+  }
+  function resetEMI(){
+
+document.getElementById("loan").value="";
+document.getElementById("rate").value="";
+document.getElementById("years").value="";
+
+document.getElementById("emi").innerHTML="₹0";
+document.getElementById("interest").innerHTML="₹0";
+document.getElementById("total").innerHTML="₹0";
+
+document.getElementById("result").style.display="none";
+
+if(chart){
+chart.destroy();
+chart=null;
+}
 
 }
+
 </script>
+
+</div>
 
 </body>
 </html>
