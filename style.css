@@ -247,3 +247,60 @@ border-top:5px solid #1976D2;
 .card h2{
 color:#1565C0;
 }
+/* Why Choose Us */
+
+.why-us{
+max-width:1100px;
+margin:50px auto;
+padding:20px;
+}
+
+.why-us h2{
+text-align:center;
+color:#1565C0;
+font-size:34px;
+margin-bottom:30px;
+}
+
+.why-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:20px;
+}
+
+.why-card{
+background:#fff;
+padding:25px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.12);
+border-top:5px solid #1976D2;
+transition:.3s;
+}
+
+.why-card:hover{
+transform:translateY(-6px);
+}
+
+.why-card h3{
+color:#1565C0;
+margin-bottom:12px;
+font-size:22px;
+}
+
+.why-card p{
+color:#555;
+line-height:1.7;
+font-size:16px;
+}
+
+@media(max-width:768px){
+
+.why-us h2{
+font-size:28px;
+}
+
+.why-card{
+padding:20px;
+}
+
+}
