@@ -3,48 +3,100 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>PPF Calculator</title>
 
-<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-.box{
-max-width:600px;
-margin:40px auto;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#eef3fb;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
 background:#fff;
 padding:25px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.15);
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
-.box h1{
+h1{
 text-align:center;
-color:#1565c0;
+color:#1976D2;
+margin-bottom:25px;
+font-size:34px;
 }
 
-.box input{
-width:100%;
-padding:15px;
+label{
+display:block;
+margin-top:18px;
 font-size:18px;
-margin:10px 0 20px;
+font-weight:bold;
 }
 
-.box button{
+input{
 width:100%;
 padding:15px;
-font-size:20px;
-background:#1565c0;
+margin-top:8px;
+font-size:18px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+background:#1976D2;
 color:#fff;
 border:none;
-border-radius:8px;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
 }
 
-#result{
-text-align:center;
-font-size:30px;
-font-weight:bold;
-color:green;
+button:hover{
+background:#1259a8;
+}
+
+.result{
+display:none;
 margin-top:20px;
+padding:18px;
+background:#eefcf0;
+border-radius:12px;
+}
+
+.result p{
+font-size:22px;
+margin:10px 0;
+font-weight:bold;
+}
+
+.green{
+color:green;
+}
+
+canvas{
+max-width:300px;
+margin:20px auto;
+display:block;
+}
+
+@media(max-width:600px){
+.container{
+padding:18px;
+}
 }
 </style>
 
@@ -52,45 +104,127 @@ margin-top:20px;
 
 <body>
 
-<div class="box">
+<div class="container">
 
-<h1>📈 PPF Calculator</h1>
-
+<h1>🏛️ PPF Calculator</h1>
 <label>Yearly Investment (₹)</label>
+<input type="number" id="amount" placeholder="150000">
 
-<input type="number" id="amount" value="150000">
+<label>Interest Rate (% Per Year)</label>
+<input type="number" id="rate" placeholder="7.1">
 
-<label>Interest Rate (%)</label>
+<label>Investment Period (Years)</label>
+<input type="number" id="years" placeholder="15">
 
-<input type="number" id="rate" value="7.1">
+<button onclick="calculatePPF()">🧮 Calculate PPF</button>
 
-<label>Years</label>
+<div class="result" id="result">
 
-<input type="number" id="years" value="15">
+<p>Total Investment:<br>
+<span class="green" id="investment">₹0</span>
+</p>
 
-<button onclick="ppf()">Calculate PPF</button>
+<p>Total Interest:<br>
+<span class="green" id="interest">₹0</span>
+</p>
 
-<div id="result"></div>
+<p>Maturity Amount:<br>
+<span class="green" id="maturity">₹0</span>
+</p>
+
+<canvas id="ppfChart" height="250"></canvas>
 
 </div>
 
+<button onclick="resetPPF()">🔄 Reset</button>
+
+<a href="index.html">
+<button type="button">🏠 Back to Home</button>
+</a>
+
 <script>
 
-function ppf(){
+let chart;
+  function calculatePPF(){
 
-let p=parseFloat(document.getElementById("amount").value);
+let yearly = parseFloat(document.getElementById("amount").value);
+let annual = parseFloat(document.getElementById("rate").value);
+let years = parseFloat(document.getElementById("years").value);
 
-let r=parseFloat(document.getElementById("rate").value)/100;
+if(isNaN(yearly) || isNaN(annual) || isNaN(years)){
+alert("Please fill all fields");
+return;
+}
 
-let t=parseFloat(document.getElementById("years").value);
+let totalInvestment = yearly * years;
+let maturity = 0;
 
-let total=p*((Math.pow(1+r,t)-1)/r);
+for(let i=1; i<=years; i++){
+    maturity = (maturity + yearly) * (1 + annual/100);
+}
 
-document.getElementById("result").innerHTML="Maturity Amount : ₹"+total.toFixed(0);
+let totalInterest = maturity - totalInvestment;
+
+document.getElementById("investment").innerHTML =
+"₹" + Number(totalInvestment.toFixed(0)).toLocaleString("en-IN");
+
+document.getElementById("interest").innerHTML =
+"₹" + Number(totalInterest.toFixed(0)).toLocaleString("en-IN");
+
+document.getElementById("maturity").innerHTML =
+"₹" + Number(maturity.toFixed(0)).toLocaleString("en-IN");
+
+document.getElementById("result").style.display = "block";
+
+if(chart){
+chart.destroy();
+}
+
+let ctx = document.getElementById("ppfChart").getContext("2d");
+
+chart = new Chart(ctx,{
+type:"doughnut",
+data:{
+labels:["Investment","Interest"],
+datasets:[{
+data:[totalInvestment,totalInterest],
+backgroundColor:["#1976D2","#4CAF50"],
+borderWidth:2
+}]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{
+position:"bottom"
+}
+}
+}
+});
+
+  }
+  function resetPPF(){
+
+document.getElementById("amount").value="";
+document.getElementById("rate").value="";
+document.getElementById("years").value="";
+
+document.getElementById("investment").innerHTML="₹0";
+document.getElementById("interest").innerHTML="₹0";
+document.getElementById("maturity").innerHTML="₹0";
+
+document.getElementById("result").style.display="none";
+
+if(chart){
+chart.destroy();
+chart=null;
+}
 
 }
 
 </script>
+
+</div>
 
 </body>
 </html>
