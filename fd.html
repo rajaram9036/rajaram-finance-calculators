@@ -3,94 +3,224 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>FD Calculator</title>
 
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-.fd-box{
-max-width:600px;
-margin:40px auto;
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#eef3fb;
+padding:20px;
+}
+
+.container{
+max-width:500px;
+margin:auto;
 background:#fff;
 padding:25px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.15);
+border-radius:20px;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
 }
 
-.fd-box h1{
+h1{
 text-align:center;
-color:#1565c0;
+color:#1976D2;
+margin-bottom:25px;
+font-size:34px;
 }
 
-.fd-box input{
-width:100%;
-padding:15px;
+label{
+display:block;
+margin-top:18px;
 font-size:18px;
-margin:10px 0 20px;
+font-weight:bold;
 }
 
-.fd-box button{
+input{
 width:100%;
 padding:15px;
-font-size:20px;
-background:#1565c0;
+margin-top:8px;
+font-size:18px;
+border:1px solid #ccc;
+border-radius:10px;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+background:#1976D2;
 color:#fff;
 border:none;
-border-radius:8px;
+border-radius:10px;
+font-size:18px;
+cursor:pointer;
 }
 
-#result{
-text-align:center;
-font-size:30px;
-font-weight:bold;
-color:green;
-margin-top:20px;
+button:hover{
+background:#1259a8;
 }
+
+.result{
+display:none;
+margin-top:20px;
+padding:18px;
+background:#eefcf0;
+border-radius:12px;
+}
+
+.result p{
+font-size:22px;
+margin:10px 0;
+font-weight:bold;
+}
+
+.green{
+color:green;
+}
+
+canvas{
+max-width:300px;
+margin:20px auto;
+display:block;
+}
+
+@media(max-width:600px){
+.container{
+padding:18px;
+}
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div class="fd-box">
+<div class="container">
 
 <h1>🏦 FD Calculator</h1>
-
 <label>Deposit Amount (₹)</label>
+<input type="number" id="principal" placeholder="100000">
 
-<input type="number" id="amount" value="100000">
-
-<label>Interest Rate (%)</label>
-
-<input type="number" id="rate" value="7">
+<label>Interest Rate (% Per Year)</label>
+<input type="number" id="rate" placeholder="7.5">
 
 <label>Time (Years)</label>
+<input type="number" id="years" placeholder="5">
 
-<input type="number" id="years" value="5">
+<button onclick="calculateFD()">🧮 Calculate FD</button>
 
-<button onclick="fd()">Calculate FD</button>
+<div class="result" id="result">
 
-<div id="result"></div>
+<p>Principal Amount:<br>
+<span class="green" id="principalResult">₹0</span>
+</p>
+
+<p>Interest Earned:<br>
+<span class="green" id="interest">₹0</span>
+</p>
+
+<p>Maturity Amount:<br>
+<span class="green" id="maturity">₹0</span>
+</p>
+
+<canvas id="fdChart" height="250"></canvas>
 
 </div>
 
+<button onclick="resetFD()">🔄 Reset</button>
+
+<a href="index.html">
+<button type="button">🏠 Back to Home</button>
+</a>
+
 <script>
 
-function fd(){
+let chart;
+  function calculateFD(){
 
-let p=parseFloat(document.getElementById("amount").value);
+let P = parseFloat(document.getElementById("principal").value);
+let annual = parseFloat(document.getElementById("rate").value);
+let years = parseFloat(document.getElementById("years").value);
 
-let r=parseFloat(document.getElementById("rate").value);
+if(isNaN(P) || isNaN(annual) || isNaN(years)){
+alert("Please fill all fields");
+return;
+}
 
-let t=parseFloat(document.getElementById("years").value);
+let maturity = P * Math.pow((1 + annual/100), years);
+let interest = maturity - P;
 
-let total=p*Math.pow((1+r/100),t);
+document.getElementById("principalResult").innerHTML =
+"₹" + Number(P.toFixed(0)).toLocaleString("en-IN");
 
-document.getElementById("result").innerHTML="Maturity Amount : ₹"+total.toFixed(0);
+document.getElementById("interest").innerHTML =
+"₹" + Number(interest.toFixed(0)).toLocaleString("en-IN");
+
+document.getElementById("maturity").innerHTML =
+"₹" + Number(maturity.toFixed(0)).toLocaleString("en-IN");
+
+document.getElementById("result").style.display="block";
+
+if(chart){
+chart.destroy();
+}
+
+let ctx = document.getElementById("fdChart").getContext("2d");
+
+chart = new Chart(ctx,{
+type:"doughnut",
+data:{
+labels:["Principal","Interest"],
+datasets:[{
+data:[P,interest],
+backgroundColor:["#1976D2","#4CAF50"],
+borderWidth:2
+}]
+},
+options:{
+responsive:true,
+plugins:{
+legend:{
+position:"bottom"
+}
+}
+}
+});
+
+  }
+  function resetFD(){
+
+document.getElementById("principal").value="";
+document.getElementById("rate").value="";
+document.getElementById("years").value="";
+
+document.getElementById("principalResult").innerHTML="₹0";
+document.getElementById("interest").innerHTML="₹0";
+document.getElementById("maturity").innerHTML="₹0";
+
+document.getElementById("result").style.display="none";
+
+if(chart){
+chart.destroy();
+chart=null;
+}
 
 }
 
 </script>
+
+</div>
 
 </body>
 </html>
