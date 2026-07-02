@@ -91,7 +91,29 @@ width:280px !important;
 height:280px !important;
 margin:20px auto;
 }
+.action-buttons{
+display:flex;
+flex-direction:column;
+gap:12px;
+margin:20px 0;
+}
 
+.action-buttons button{
+width:100%;
+padding:15px;
+font-size:18px;
+font-weight:bold;
+border:none;
+border-radius:12px;
+background:#1976D2;
+color:#fff;
+cursor:pointer;
+transition:.3s;
+}
+
+.action-buttons button:hover{
+background:#1259a8;
+}
 </style>
 </head>
 
@@ -128,7 +150,16 @@ margin:20px auto;
 <canvas id="sipChart" height="250" style="margin-top:20px;"></canvas>
 
 </div>
+<div class="action-buttons">
 
+<button onclick="downloadPDF()">📄 Download PDF</button>
+
+<button onclick="shareResult()">📤 Share Result</button>
+
+<button onclick="copyResult()">📋 Copy Result</button>
+
+</div>
+  
 <button onclick="resetSIP()">🔄 Reset</button>
 
 <a href="index.html">
@@ -216,7 +247,38 @@ chart=null;
 }
 
 }
+function copyResult(){
 
+let text =
+"Total Invested: " + document.getElementById("invested").innerText +
+"\nWealth Gain: " + document.getElementById("gain").innerText +
+"\nEstimated Value: " + document.getElementById("value").innerText;
+
+navigator.clipboard.writeText(text);
+
+alert("Result Copied Successfully");
+}
+
+function shareResult(){
+
+let text =
+"Total Invested: " + document.getElementById("invested").innerText +
+"\nWealth Gain: " + document.getElementById("gain").innerText +
+"\nEstimated Value: " + document.getElementById("value").innerText;
+
+if(navigator.share){
+navigator.share({
+title:"SIP Calculator",
+text:text
+});
+}else{
+alert("Sharing not supported on this device");
+}
+}
+
+function downloadPDF(){
+window.print();
+}
 </script>
 
 </div>
