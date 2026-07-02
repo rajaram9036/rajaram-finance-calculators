@@ -10,11 +10,16 @@
 
 <style>
 
-body{
+*{
 margin:0;
-padding:20px;
-background:#eef3fb;
+padding:0;
+box-sizing:border-box;
 font-family:Arial,sans-serif;
+}
+
+body{
+background:#eef3fb;
+padding:20px;
 }
 
 .container{
@@ -29,162 +34,92 @@ box-shadow:0 8px 25px rgba(0,0,0,.15);
 h1{
 text-align:center;
 color:#0d6efd;
-font-size:42px;
 margin-bottom:25px;
+font-size:36px;
 }
 
 label{
 display:block;
-font-size:22px;
-font-weight:bold;
 margin-top:18px;
+font-size:18px;
+font-weight:bold;
 }
 
 input{
 width:100%;
-padding:18px;
-font-size:28px;
+padding:16px;
+font-size:18px;
+margin-top:8px;
 border:1px solid #ccc;
 border-radius:10px;
-box-sizing:border-box;
-margin-top:8px;
+outline:none;
+}
+
+input:focus{
+border-color:#1976D2;
 }
 
 button{
 width:100%;
-padding:18px;
-margin-top:25px;
-font-size:28px;
-background:#0d6efd;
-color:white;
+padding:15px;
+margin-top:18px;
+background:#1976D2;
+color:#fff;
 border:none;
-border-radius:12px;
+border-radius:10px;
+font-size:18px;
 cursor:pointer;
+transition:.3s;
 }
 
 button:hover{
-background:#0b5ed7;
+background:#1259a8;
 }
 
 .result{
 display:none;
-margin-top:25px;
-background:#f3fff4;
-border:2px solid #c8f0cd;
+margin-top:20px;
+background:#eefcf0;
+border:1px solid #c8e6c9;
+padding:18px;
 border-radius:12px;
-padding:20px;
 }
 
 .result p{
-font-size:24px;
+font-size:22px;
+margin:10px 0;
 font-weight:bold;
-margin:12px 0;
 }
 
 .green{
 color:green;
 }
 
-#sipChart{
-display:block;
-width:280px !important;
-height:280px !important;
-margin:20px auto;
-}
-.action-buttons{
-display:flex;
-flex-direction:column;
-gap:12px;
-margin:20px 0;
-}
-
-.action-buttons button{
-width:100%;
-padding:15px;
-font-size:18px;
-font-weight:bold;
-border:none;
-border-radius:12px;
-background:#1976D2;
-color:#fff;
-cursor:pointer;
-transition:.3s;
-}
-
-.action-buttons button:hover{
-background:#1259a8;
-}
-  .action-buttons{
-display:flex;
-flex-direction:column;
-gap:12px;
-margin-top:20px;
-}
-
-.action-buttons button{
-width:100%;
-padding:15px;
-font-size:18px;
-font-weight:bold;
-border:none;
-border-radius:12px;
-background:#1976D2;
-color:#fff;
-cursor:pointer;
-transition:.3s;
-}
-
-.action-buttons button:hover{
-background:#1259a8;
-}
-
-#yearlyTable{
-margin-top:25px;
-overflow-x:auto;
-}
-
-#yearlyTable table{
-width:100%;
-border-collapse:collapse;
-font-size:16px;
-}
-
-#yearlyTable th{
-background:#1976D2;
-color:#fff;
-padding:10px;
-}
-
-#yearlyTable td{
-border:1px solid #ddd;
-padding:10px;
-text-align:center;
-}
-
 canvas{
-max-width:320px;
-max-height:320px;
+max-width:300px;
 margin:20px auto;
 display:block;
 }
 
 @media(max-width:600px){
+
 .container{
 padding:18px;
 }
 
 h1{
-font-size:34px;
+font-size:30px;
 }
 
 input,
-select,
 button{
 font-size:18px;
 }
+
 }
+
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -206,36 +141,29 @@ font-size:18px;
 <div class="result" id="result">
 
 <p>Total Invested:
+<br>
 <span class="green" id="invested">₹0</span>
 </p>
 
 <p>Wealth Gain:
+<br>
 <span class="green" id="gain">₹0</span>
 </p>
 
 <p>Estimated Value:
+<br>
 <span class="green" id="value">₹0</span>
 </p>
 
-<canvas id="sipChart" height="250" style="margin-top:20px;"></canvas>
+<canvas id="sipChart" height="250"></canvas>
 
-</div>
-  <div id="yearlyTable" style="margin-top:20px;overflow-x:auto;"></div>
-<div class="action-buttons">
-
-<button onclick="downloadPDF()">📄 Download PDF</button>
-
-<button onclick="shareResult()">📤 Share Result</button>
-
-<button onclick="copyResult()">📋 Copy Result</button>
-
-</div>
-  
 <button onclick="resetSIP()">🔄 Reset</button>
 
 <a href="index.html">
-<button>🏠 Back to Home</button>
+<button type="button">🏠 Back to Home</button>
 </a>
+
+</div>
 
 <script>
 
@@ -260,17 +188,20 @@ let gain = futureValue - invested;
 
 document.getElementById("invested").innerHTML =
 "₹" + Number(invested.toFixed(0)).toLocaleString("en-IN");
+
 document.getElementById("gain").innerHTML =
 "₹" + Number(gain.toFixed(0)).toLocaleString("en-IN");
+
 document.getElementById("value").innerHTML =
 "₹" + Number(futureValue.toFixed(0)).toLocaleString("en-IN");
 
 document.getElementById("result").style.display = "block";
-  if (chart) {
+
+if (chart) {
     chart.destroy();
 }
 
-let ctx = document.getElementById("sipChart").getContext("2d");
+const ctx = document.getElementById("sipChart").getContext("2d");
 
 chart = new Chart(ctx, {
     type: "doughnut",
@@ -278,55 +209,19 @@ chart = new Chart(ctx, {
         labels: ["Total Invested", "Wealth Gain"],
         datasets: [{
             data: [invested, gain],
-            backgroundColor: [
-                "#1976D2",
-                "#4CAF50"
-            ],
-            borderWidth: 2
+            backgroundColor: ["#1976D2", "#4CAF50"]
         }]
     },
     options: {
         responsive: true,
         maintainAspectRatio: true,
         plugins: {
-    legend: {
-        position: "bottom"
-    },
-    tooltip: {
-        enabled: true
-    }
+            legend: {
+                position: "bottom"
+            }
         }
     }
 });
-
-let table = `<h3>📊 Yearly Growth Table</h3>
-<table border="1" width="100%">
-<tr>
-<th>Year</th>
-<th>Invested</th>
-<th>Estimated Value</th>
-<th>Gain</th>
-</tr>`;
-
-for(let y=1; y<=years; y++){
-
-let months=y*12;
-let fv=P*(((Math.pow(1+r,months))-1)*(1+r))/r;
-let inv=P*months;
-let g=fv-inv;
-
-table+=`
-<tr>
-<td>${y}</td>
-<td>₹${Number(inv.toFixed(0)).toLocaleString("en-IN")}</td>
-<td>₹${Number(fv.toFixed(0)).toLocaleString("en-IN")}</td>
-<td>₹${Number(g.toFixed(0)).toLocaleString("en-IN")}</td>
-</tr>`;
-}
-
-table+="</table>";
-
-document.getElementById("yearlyTable").innerHTML=table;  
 
 }
   function resetSIP(){
@@ -347,49 +242,7 @@ chart=null;
 }
 
 }
-function copyResult(){
 
-let text =
-"Total Invested: " + document.getElementById("invested").innerText +
-"\nWealth Gain: " + document.getElementById("gain").innerText +
-"\nEstimated Value: " + document.getElementById("value").innerText;
-
-navigator.clipboard.writeText(text);
-
-alert("Result Copied Successfully");
-}
-
-function shareResult(){
-
-let text =
-"Total Invested: " + document.getElementById("invested").innerText +
-"\nWealth Gain: " + document.getElementById("gain").innerText +
-"\nEstimated Value: " + document.getElementById("value").innerText;
-
-if(navigator.share){
-navigator.share({
-title:"SIP Calculator",
-text:text
-});
-}else{
-alert("Sharing not supported on this device");
-}
-}
-
-function downloadPDF() {
-  const element = document.querySelector(".container");
-
-  html2pdf()
-    .set({
-      margin: 10,
-      filename: "SIP-Calculator-Result.pdf",
-      image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-    })
-    .from(element)
-    .save();
-}
 </script>
 
 </div>
