@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mutual Fund Calculator | Rajaram Finance Calculators</title>
+
+<meta name="description" content="Free Mutual Fund Calculator to calculate SIP and Lumpsum investment returns. Educational purpose only.">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef3fb;
+}
+
+header{
+background:#0d6efd;
+color:#fff;
+padding:18px;
+text-align:center;
+box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+
+header h1{
+margin:0;
+font-size:30px;
+}
+
+nav{
+margin-top:12px;
+}
+
+nav a{
+color:#fff;
+text-decoration:none;
+margin:0 10px;
+font-weight:bold;
+font-size:15px;
+}
+
+.container{
+max-width:700px;
+margin:25px auto;
+background:#fff;
+padding:25px;
+border-radius:16px;
+box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+h2{
+text-align:center;
+color:#0d6efd;
+margin-bottom:8px;
+}
+
+.desc{
+text-align:center;
+color:#555;
+margin-bottom:25px;
+line-height:1.6;
+}
+
+label{
+display:block;
+margin-top:15px;
+font-weight:bold;
+color:#333;
+}
+
+select,
+input{
+width:100%;
+padding:12px;
+margin-top:8px;
+border:1px solid #ccc;
+border-radius:8px;
+font-size:16px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:22px;
+background:#0d6efd;
+color:#fff;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0958cc;
+}
+
+.result{
+display:none;
+margin-top:25px;
+background:#f4f9ff;
+padding:18px;
+border-radius:12px;
+border-left:5px solid #0d6efd;
+}
+
+.result h3{
+margin-top:0;
+color:#0d6efd;
+}
+
+.result p{
+font-size:17px;
+margin:10px 0;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>📈 Mutual Fund Calculator</h1>
+
+<nav>
+<a href="index.html">🏠 Home</a>
+<a href="articles.html">📚 Articles</a>
+<a href="mutual-fund-guide.html">📖 Guide</a>
+<a href="contact.html">📞 Contact</a>
+</nav>
+
+</header>
+
+<div class="container">
+
+<h2>Calculate Mutual Fund Returns</h2>
+
+<p class="desc">
+Estimate your SIP or Lumpsum investment value using expected annual returns.
+This calculator is for educational purposes only.
+</p>
+<label for="investmentType">Investment Type</label>
+<select id="investmentType">
+<option value="sip">Monthly SIP</option>
+<option value="lumpsum">Lumpsum Investment</option>
+</select>
+
+<label for="amount">Investment Amount (₹)</label>
+<input
+type="number"
+id="amount"
+placeholder="Enter Amount"
+min="1">
+
+<label for="returnRate">Expected Annual Return (%)</label>
+<input
+type="number"
+id="returnRate"
+placeholder="Example: 12"
+step="0.1"
+min="1">
+
+<label for="years">Investment Period (Years)</label>
+<input
+type="number"
+id="years"
+placeholder="Example: 10"
+min="1">
+
+<button onclick="calculateMutualFund()">
+📊 Calculate
+</button>
+
+<div class="result" id="result">
+
+<h3>Calculation Result</h3>
+
+<p><strong>Total Investment:</strong><br>
+₹ <span id="investment"></span></p>
+
+<p><strong>Estimated Returns:</strong><br>
+₹ <span id="returns"></span></p>
+
+<p><strong>Total Value:</strong><br>
+₹ <span id="total"></span></p>
+
+</div>
+
+<p style="margin-top:25px;font-size:14px;color:#666;line-height:1.7;text-align:center;">
+<strong>Disclaimer:</strong>
+This calculator provides estimates for educational purposes only.
+Actual mutual fund returns depend on market performance and are not guaranteed.
+Mutual Fund investments are subject to market risks. Read all scheme-related documents carefully before investing.
+</p>
+<script>
+
+function calculateMutualFund(){
+
+let type=document.getElementById("investmentType").value;
+
+let amount=parseFloat(document.getElementById("amount").value);
+
+let rate=parseFloat(document.getElementById("returnRate").value);
+
+let years=parseFloat(document.getElementById("years").value);
+
+if(isNaN(amount)||isNaN(rate)||isNaN(years)||amount<=0||rate<=0||years<=0){
+
+alert("Please enter valid values.");
+
+return;
+
+}
+
+let invested,returns,total;
+
+if(type=="sip"){
+
+let r=rate/12/100;
+
+let n=years*12;
+
+total=amount*((Math.pow(1+r,n)-1)/r)*(1+r);
+
+invested=amount*n;
+
+returns=total-invested;
+
+}else{
+
+invested=amount;
+
+total=amount*Math.pow((1+rate/100),years);
+
+returns=total-invested;
+
+}
+
+document.getElementById("investment").innerHTML=Math.round(invested).toLocaleString("en-IN");
+
+document.getElementById("returns").innerHTML=Math.round(returns).toLocaleString("en-IN");
+
+document.getElementById("total").innerHTML=Math.round(total).toLocaleString("en-IN");
+
+document.getElementById("result").style.display="block";
+
+}
+
+</script>
+
+</div>
+<footer>
+
+<p>© 2026 Rajaram Finance Calculators. All Rights Reserved.</p>
+
+<p>
+This calculator is provided for educational and informational purposes only.
+It does not constitute financial, investment, tax or legal advice.
+Please consult a qualified financial advisor before making investment decisions.
+</p>
+
+<p>
+Mutual Fund investments are subject to market risks.
+Read all scheme-related documents carefully before investing.
+Calculator results are estimates only and should not be treated as guaranteed returns.
+</p>
+
+</footer>
+
+</body>
+
+</html>
