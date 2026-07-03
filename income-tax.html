@@ -1,18 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-  
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Income Tax Calculator | Rajaram Finance Calculators</title>
 
-<meta name="description"
-content="Free Income Tax Calculator for educational purposes.">
+<meta name="description" content="Free Income Tax Calculator India. Calculate estimated income tax under New and Old Tax Regime instantly.">
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#eef5ff;
+color:#222;
+}
+
+header{
+background:linear-gradient(135deg,#0d6efd,#0b5ed7);
+color:#fff;
+padding:20px;
+text-align:center;
+box-shadow:0 4px 15px rgba(0,0,0,.15);
+}
+
+header h1{
+margin:0;
+font-size:34px;
+}
+
+nav{
+margin-top:15px;
+}
+
+nav a{
+color:#fff;
+text-decoration:none;
+margin:0 10px;
+font-weight:bold;
+font-size:15px;
+}
+
+.hero{
+background:linear-gradient(135deg,#0d6efd,#0060d9);
+color:#fff;
+padding:55px 20px;
+text-align:center;
+border-bottom-left-radius:25px;
+border-bottom-right-radius:25px;
+box-shadow:0 5px 15px rgba(0,0,0,.15);
+}
+
+.hero h2{
+margin:0;
+font-size:40px;
+}
+
+.hero p{
+font-size:18px;
+margin-top:15px;
+line-height:1.7;
+}
+
+.container{
+max-width:900px;
+margin:35px auto;
+background:#fff;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 20px rgba(0,0,0,.12);
+}
+
+.container h2{
+text-align:center;
+color:#0d6efd;
+margin-top:0;
+font-size:32px;
+}
+
+.desc{
+text-align:center;
+color:#555;
+margin-bottom:30px;
+line-height:1.7;
+}
+
+label{
+display:block;
+margin-top:18px;
+font-weight:bold;
+}
+
+input,
+select{
+width:100%;
+padding:13px;
+margin-top:8px;
+font-size:16px;
+border:1px solid #ccc;
+border-radius:8px;
+box-sizing:border-box;
+}
+
+.button-group{
+display:flex;
+gap:15px;
+margin-top:25px;
+}
+
+button{
+flex:1;
+padding:15px;
+border:none;
+border-radius:10px;
+background:#0d6efd;
+color:#fff;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0958c8;
+}
+
+.reset-btn{
+background:#6c757d;
+}
+
+.reset-btn:hover{
+background:#555;
+}
+
+.result{
+display:none;
+margin-top:35px;
+background:#f8fbff;
+padding:20px;
+border-left:5px solid #0d6efd;
+border-radius:12px;
+}
+
+.result h3{
+margin-top:0;
+color:#0d6efd;
+}
+
+.result p{
+font-size:18px;
+margin:12px 0;
+}
+  </style>
 </head>
 
 <body>
@@ -22,260 +163,199 @@ content="Free Income Tax Calculator for educational purposes.">
 <h1>🧾 Income Tax Calculator</h1>
 
 <nav>
-
 <a href="index.html">🏠 Home</a>
-
 <a href="articles.html">📚 Articles</a>
-
-<a href="income-tax-guide.html">📖 Guide</a>
-
+<a href="income-tax-guide.html">📖 Tax Guide</a>
 <a href="contact.html">📞 Contact</a>
-
 </nav>
 
 </header>
+
+<section class="hero">
+
+<h2>🧾 Calculate Income Tax</h2>
+
+<p>
+Estimate your Income Tax using this educational calculator.<br>
+Results are estimates only and may differ from your actual tax liability.
+</p>
+
+</section>
 
 <div class="container">
 
 <h2>Calculate Income Tax</h2>
 
 <p class="desc">
-
-Estimate your Income Tax using this educational calculator.
-Results are estimates only and may differ from your actual tax liability.
-
+Calculate your estimated tax under the New or Old Tax Regime.
 </p>
 
-<label for="income">
-
-Annual Income (₹)
-
-</label>
+<label>Annual Income (₹)</label>
 
 <input
 type="number"
 id="income"
-placeholder="Example: 1200000">
+placeholder="Example: 1200000"
+min="0">
 
-<label for="deduction">
-
-Total Deductions (₹)
-
-</label>
+<label>Total Deductions (₹)</label>
 
 <input
 type="number"
 id="deduction"
-placeholder="Example: 150000">
+placeholder="Example: 150000"
+min="0">
 
-<label for="regime">
-
-Tax Regime
-
-</label>
+<label>Tax Regime</label>
 
 <select id="regime">
 
-<option value="new">
+<option value="new">New Tax Regime</option>
 
-New Tax Regime
-
-</option>
-
-<option value="old">
-
-Old Tax Regime
-
-</option>
+<option value="old">Old Tax Regime</option>
 
 </select>
 
-<br><br>
+<div class="button-group">
+
 <button onclick="calculateTax()">
-🧾 Calculate Tax
+🧮 Calculate Tax
 </button>
 
-<button onclick="resetCalculator()">
+<button
+class="reset-btn"
+onclick="location.reload();">
 🔄 Reset
 </button>
 
-<div class="result" id="result" style="display:none;">
+</div>
+
+<div class="result" id="result">
 
 <h3>Calculation Result</h3>
 
-<p>
-<strong>Annual Income:</strong><br>
-₹ <span id="annualIncome">0</span>
-</p>
+<p><strong>Annual Income:</strong><br>
+₹ <span id="annualIncome"></span></p>
 
-<p>
-<strong>Taxable Income:</strong><br>
-₹ <span id="taxableIncome">0</span>
-</p>
+<p><strong>Taxable Income:</strong><br>
+₹ <span id="taxableIncome"></span></p>
 
-<p>
-<strong>Estimated Income Tax:</strong><br>
-₹ <span id="estimatedTax">0</span>
-</p>
+<p><strong>Estimated Income Tax:</strong><br>
+₹ <span id="taxAmount"></span></p>
 
-<p>
-<strong>Effective Tax Rate:</strong><br>
-<span id="effectiveRate">0%</span>
-</p>
+<p><strong>Effective Tax Rate:</strong><br>
+<span id="taxRate"></span>%</p>
 
 </div>
 
-<p style="margin-top:25px;font-size:14px;color:#666;line-height:1.7;text-align:center;">
+<div style="margin-top:30px;
+background:#fff8e6;
+padding:18px;
+border-left:5px solid orange;
+border-radius:10px;
+line-height:1.7;">
 
-<strong>Disclaimer:</strong>
+<b>⚠ Note:</b><br>
 
 This calculator provides an estimated tax calculation for educational purposes only.
-Actual tax liability depends on applicable tax laws, deductions, exemptions and other individual circumstances.
-Please verify the latest tax rules before making financial decisions.
-
-</p>
-
-<br>
-<script>
-
-function calculateTax(){
-
-let income = parseFloat(document.getElementById("income").value);
-let deduction = parseFloat(document.getElementById("deduction").value) || 0;
-let regime = document.getElementById("regime").value;
-
-if(isNaN(income) || income <= 0){
-
-alert("Please enter a valid Annual Income.");
-
-return;
-
-}
-
-let taxable = income;
-
-if(regime == "old"){
-
-taxable = income - deduction;
-
-if(taxable < 0){
-
-taxable = 0;
-
-}
-
-}
-
-let tax = 0;
-
-if(regime == "new"){
-
-if(taxable <= 400000){
-
-tax = 0;
-
-}else if(taxable <= 800000){
-
-tax = (taxable - 400000) * 0.05;
-
-}else if(taxable <= 1200000){
-
-tax = 20000 + (taxable - 800000) * 0.10;
-
-}else if(taxable <= 1600000){
-
-tax = 60000 + (taxable - 1200000) * 0.15;
-
-}else if(taxable <= 2000000){
-
-tax = 120000 + (taxable - 1600000) * 0.20;
-
-}else if(taxable <= 2400000){
-
-tax = 200000 + (taxable - 2000000) * 0.25;
-
-}else{
-
-tax = 300000 + (taxable - 2400000) * 0.30;
-
-}
-
-}else{
-
-if(taxable <= 250000){
-
-tax = 0;
-
-}else if(taxable <= 500000){
-
-tax = (taxable - 250000) * 0.05;
-
-}else if(taxable <= 1000000){
-
-tax = 12500 + (taxable - 500000) * 0.20;
-
-}else{
-
-tax = 112500 + (taxable - 1000000) * 0.30;
-
-}
-
-}
-
-let rate = ((tax / income) * 100).toFixed(2);
-
-document.getElementById("annualIncome").innerHTML =
-income.toLocaleString("en-IN");
-
-document.getElementById("taxableIncome").innerHTML =
-taxable.toLocaleString("en-IN");
-
-document.getElementById("estimatedTax").innerHTML =
-tax.toLocaleString("en-IN", {maximumFractionDigits:2});
-
-document.getElementById("effectiveRate").innerHTML =
-rate + "%";
-
-document.getElementById("result").style.display = "block";
-
-}
-
-function resetCalculator(){
-
-document.getElementById("income").value = "";
-document.getElementById("deduction").value = "";
-document.getElementById("regime").selectedIndex = 0;
-
-document.getElementById("annualIncome").innerHTML = "0";
-document.getElementById("taxableIncome").innerHTML = "0";
-document.getElementById("estimatedTax").innerHTML = "0";
-document.getElementById("effectiveRate").innerHTML = "0%";
-
-document.getElementById("result").style.display = "none";
-
-}
-  </script>
+Actual tax liability depends on applicable tax laws, deductions,
+surcharge, cess and individual circumstances.
 
 </div>
-
-<footer>
-
-<p>© 2026 Rajaram Finance Calculators. All Rights Reserved.</p>
+<footer style="margin-top:40px;
+background:#0d6efd;
+color:#fff;
+text-align:center;
+padding:30px 20px;">
 
 <p>
+© 2026 Rajaram Finance Calculators. All Rights Reserved.
+</p>
+
+<p style="max-width:900px;
+margin:auto;
+line-height:1.8;
+font-size:15px;">
+
 This calculator is provided for educational and informational purposes only.
 It does not constitute tax, financial, legal or professional advice.
 Please consult a qualified tax professional before making tax-related decisions.
-</p>
-
-<p>
 Income tax laws, tax slabs, deductions, exemptions, surcharge and cess may
-change from time to time. Calculator results are estimates only and should
-not be treated as official tax calculations.
+change from time to time. Calculator results are estimates only.
+
 </p>
 
 </footer>
 
-</body>
+<script>
 
+function calculateTax(){
+
+let income=parseFloat(document.getElementById("income").value)||0;
+
+let deduction=parseFloat(document.getElementById("deduction").value)||0;
+
+let regime=document.getElementById("regime").value;
+
+let taxable;
+
+if(regime=="old"){
+
+taxable=Math.max(income-deduction,0);
+
+}else{
+
+taxable=income;
+
+}
+
+let tax=0;
+
+if(taxable<=400000){
+
+tax=0;
+
+}else if(taxable<=800000){
+
+tax=(taxable-400000)*0.05;
+
+}else if(taxable<=1200000){
+
+tax=20000+(taxable-800000)*0.10;
+
+}else if(taxable<=1600000){
+
+tax=60000+(taxable-1200000)*0.15;
+
+}else if(taxable<=2000000){
+
+tax=120000+(taxable-1600000)*0.20;
+
+}else if(taxable<=2400000){
+
+tax=200000+(taxable-2000000)*0.25;
+
+}else{
+
+tax=300000+(taxable-2400000)*0.30;
+
+}
+
+let rate=income>0?((tax/income)*100).toFixed(2):0;
+
+document.getElementById("annualIncome").innerHTML=income.toLocaleString("en-IN");
+
+document.getElementById("taxableIncome").innerHTML=taxable.toLocaleString("en-IN");
+
+document.getElementById("taxAmount").innerHTML=Math.round(tax).toLocaleString("en-IN");
+
+document.getElementById("taxRate").innerHTML=rate;
+
+document.getElementById("result").style.display="block";
+
+}
+
+</script>
+
+</body>
 </html>
