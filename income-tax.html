@@ -8,7 +8,7 @@
 
 <title>Income Tax Calculator | Rajaram Finance Calculators</title>
 
-<meta name="description" content="Free Income Tax Calculator for India. Estimate your income tax based on annual income. Educational purpose only.">
+<meta name="description" content="Free Income Tax Calculator for India">
 
 <link rel="stylesheet" href="style.css">
 
@@ -40,11 +40,7 @@
 
 <h1>🧾 Income Tax Calculator</h1>
 
-<p>
-
-Estimate your annual income tax quickly using this free calculator.
-
-</p>
+<p>Estimate your Income Tax instantly.</p>
 
 </section>
 
@@ -54,15 +50,19 @@ Estimate your annual income tax quickly using this free calculator.
 
 <h2>Calculate Income Tax</h2>
 
-<form id="taxForm">
-
 <label>Annual Income (₹)</label>
 
 <input
 type="number"
 id="income"
-placeholder="Enter Annual Income"
-required>
+placeholder="Enter Annual Income">
+
+<label>Total Deductions (₹)</label>
+
+<input
+type="number"
+id="deduction"
+placeholder="Enter Deductions">
 
 <label>Tax Regime</label>
 
@@ -73,47 +73,28 @@ required>
 <option value="old">Old Tax Regime</option>
 
 </select>
-<label>Age</label>
 
-<select id="age">
+<button onclick="calculateTax()">
 
-<option value="below60">Below 60 Years</option>
-
-<option value="60to80">Senior Citizen (60-80)</option>
-
-<option value="above80">Super Senior (80+)</option>
-
-</select>
-
-<label>Deductions (₹)</label>
-
-<input
-type="number"
-id="deduction"
-placeholder="Enter Total Deductions"
-value="0">
-
-<br><br>
-
-<button type="button" onclick="calculateTax()">
 Calculate Tax
+
 </button>
 
-<button type="reset">
+<button onclick="resetForm()">
+
 Reset
+
 </button>
 
-</form>
+<div class="result-box">
 
-<div id="result" class="result-box">
+<h3>Your Result</h3>
 
-<h3>Your Estimated Tax</h3>
+<p><strong>Taxable Income:</strong> <span id="taxable">₹0</span></p>
 
-<p><strong>Taxable Income:</strong> <span id="taxableIncome">₹0</span></p>
+<p><strong>Estimated Tax:</strong> <span id="tax">₹0</span></p>
 
-<p><strong>Estimated Tax:</strong> <span id="taxAmount">₹0</span></p>
-
-<p><strong>Effective Tax Rate:</strong> <span id="taxRate">0%</span></p>
+<p><strong>Effective Tax Rate:</strong> <span id="rate">0%</span></p>
 
 </div>
 
@@ -124,98 +105,103 @@ Reset
 <script>
   function calculateTax() {
 
-let income = parseFloat(document.getElementById("income").value) || 0;
-let deduction = parseFloat(document.getElementById("deduction").value) || 0;
+let income = Number(document.getElementById("income").value);
+let deduction = Number(document.getElementById("deduction").value);
 let regime = document.getElementById("regime").value;
 
-let taxableIncome = income;
-
-if (regime === "old") {
-    taxableIncome = income - deduction;
+if (income <= 0) {
+alert("Please enter Annual Income");
+return;
 }
 
-if (taxableIncome < 0) {
-    taxableIncome = 0;
+let taxable = income;
+
+if (regime == "old") {
+taxable = income - deduction;
+
+if (taxable < 0) {
+taxable = 0;
+}
 }
 
 let tax = 0;
 
-if (regime === "new") {
+if (taxable <= 400000) {
 
-    if (taxableIncome <= 400000) {
-        tax = 0;
-    }
-    else if (taxableIncome <= 800000) {
-        tax = (taxableIncome - 400000) * 0.05;
-    }
-    else if (taxableIncome <= 1200000) {
-        tax = 20000 + (taxableIncome - 800000) * 0.10;
-    }
-    else if (taxableIncome <= 1600000) {
-        tax = 60000 + (taxableIncome - 1200000) * 0.15;
-    }
-    else if (taxableIncome <= 2000000) {
-        tax = 120000 + (taxableIncome - 1600000) * 0.20;
-    }
-    else if (taxableIncome <= 2400000) {
-        tax = 200000 + (taxableIncome - 2000000) * 0.25;
-    }
-    else {
-        tax = 300000 + (taxableIncome - 2400000) * 0.30;
-    }
-
-} else {
-
-    if (taxableIncome <= 250000) {
-        tax = 0;
-    }
-    else if (taxableIncome <= 500000) {
-        tax = (taxableIncome - 250000) * 0.05;
-    }
-    else if (taxableIncome <= 1000000) {
-        tax = 12500 + (taxableIncome - 500000) * 0.20;
-    }
-    else {
-        tax = 112500 + (taxableIncome - 1000000) * 0.30;
-    }
+tax = 0;
 
 }
 
-let rate = 0;
+else if (taxable <= 800000) {
 
-if (income > 0) {
-    rate = ((tax / income) * 100).toFixed(2);
+tax = (taxable - 400000) * 0.05;
+
 }
 
-document.getElementById("taxableIncome").innerHTML =
-"₹" + taxableIncome.toLocaleString("en-IN");
+else if (taxable <= 1200000) {
 
-document.getElementById("taxAmount").innerHTML =
-"₹" + tax.toLocaleString("en-IN", {
-maximumFractionDigits: 2
-});
+tax = 20000 + (taxable - 800000) * 0.10;
 
-document.getElementById("taxRate").innerHTML =
+}
+
+else if (taxable <= 1600000) {
+
+tax = 60000 + (taxable - 1200000) * 0.15;
+
+}
+
+else if (taxable <= 2000000) {
+
+tax = 120000 + (taxable - 1600000) * 0.20;
+
+}
+
+else if (taxable <= 2400000) {
+
+tax = 200000 + (taxable - 2000000) * 0.25;
+
+}
+
+else {
+
+tax = 300000 + (taxable - 2400000) * 0.30;
+
+}
+
+let rate = ((tax / income) * 100).toFixed(2);
+
+document.getElementById("taxable").innerHTML =
+"₹" + taxable.toLocaleString("en-IN");
+
+document.getElementById("tax").innerHTML =
+"₹" + tax.toLocaleString("en-IN");
+
+document.getElementById("rate").innerHTML =
 rate + "%";
-  }
-  </script>
+
+}
+
+function resetForm(){
+
+document.getElementById("income").value="";
+
+document.getElementById("deduction").value="";
+
+document.getElementById("regime").selectedIndex=0;
+
+document.getElementById("taxable").innerHTML="₹0";
+
+document.getElementById("tax").innerHTML="₹0";
+
+document.getElementById("rate").innerHTML="0%";
+
+}
+
+</script>
 
 <footer>
 
 <p>© 2026 Rajaram Finance Calculators. All Rights Reserved.</p>
-
-<p>
-This calculator is provided for educational and informational purposes only.
-It is designed to provide an estimate and should not be considered financial,
-tax, legal or professional advice.
-</p>
-
-<p>
-Income tax laws, tax slabs, deductions, exemptions, surcharge and cess may
-change from time to time. Please verify the latest provisions from the
-Income Tax Department or consult a qualified tax professional before making
-any tax-related decisions.
-</p>
 
 </footer>
 
