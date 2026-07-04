@@ -228,3 +228,35 @@ background:#333;
 color:#fff;
 
 }
+/* Mobile Layout Fix */
+
+@media (max-width:768px){
+
+body{
+display:block;
+padding:20px;
+}
+
+.calculator{
+width:100%;
+max-width:380px;
+margin:0 auto;
+}
+
+.extras{
+display:flex;
+flex-direction:column;
+gap:12px;
+margin-top:20px;
+}
+
+.extras button{
+width:100%;
+}
+
+.history-box{
+width:100%;
+margin-top:20px;
+}
+
+}
