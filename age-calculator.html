@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Age Calculator | Rajaram Finance Calculators</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:#eef3ff;
+font-family:Arial,sans-serif;
+margin:0;
+}
+
+.container{
+max-width:420px;
+margin:40px auto;
+background:#fff;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.container h1{
+text-align:center;
+color:#1565C0;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+margin-top:18px;
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:14px;
+margin-top:8px;
+font-size:18px;
+border:1px solid #ccc;
+border-radius:10px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:18px;
+border:none;
+border-radius:10px;
+background:#1976D2;
+color:#fff;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0D47A1;
+}
+
+#result{
+display:none;
+margin-top:25px;
+padding:18px;
+background:#f5f9ff;
+border-radius:12px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎂 Age Calculator</h1>
+
+<label>Date of Birth</label>
+
+<input
+type="date"
+id="dob">
+
+<button onclick="calculateAge()">
+
+🎂 Calculate Age
+
+</button>
+
+<button onclick="resetCalculator()">
+
+🔄 Reset
+
+</button>
+
+<a href="index.html">
+
+<button type="button">
+
+🏠 Back to Home
+
+</button>
+
+</a>
+
+<div id="result"></div>
+
+</div>
+<script>
+
+function calculateAge(){
+
+let dob = document.getElementById("dob").value;
+
+if(dob==""){
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("result").innerHTML=
+"<p style='color:red;font-weight:bold;'>⚠ Please select your Date of Birth.</p>";
+
+return;
+
+}
+
+let birthDate = new Date(dob);
+let today = new Date();
+
+let years = today.getFullYear() - birthDate.getFullYear();
+let months = today.getMonth() - birthDate.getMonth();
+let days = today.getDate() - birthDate.getDate();
+
+if(days < 0){
+months--;
+let lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+days += lastMonth.getDate();
+}
+
+if(months < 0){
+years--;
+months += 12;
+}
+
+let totalDays = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24));
+let totalMonths = years * 12 + months;
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("result").innerHTML = `
+
+<h2 style="text-align:center;color:#1565C0;">
+🎉 Your Age
+</h2>
+
+<hr>
+
+<p><strong>Years:</strong> ${years}</p>
+
+<p><strong>Months:</strong> ${months}</p>
+
+<p><strong>Days:</strong> ${days}</p>
+
+<hr>
+
+<p><strong>Total Months:</strong> ${totalMonths}</p>
+
+<p><strong>Total Days:</strong> ${totalDays}</p>
+
+`;
+
+}
+
+function resetCalculator(){
+
+document.getElementById("dob").value="";
+
+document.getElementById("result").style.display="none";
+
+document.getElementById("result").innerHTML="";
+
+}
+
+</script>
+
+<div style="max-width:420px;margin:20px auto;">
+
+<div style="background:#f8fbff;
+padding:18px;
+border-radius:12px;
+border-left:5px solid #1976D2;">
+
+<h3 style="color:#1565C0;">
+🎂 Age Calculator Tips
+</h3>
+
+<ul style="line-height:1.8;">
+
+<li>✔ Enter your correct Date of Birth.</li>
+
+<li>✔ The calculator shows your age in Years, Months and Days.</li>
+
+<li>✔ Total Months and Total Days are approximate values based on the current date.</li>
+
+<li>✔ Useful for school, college, jobs and official forms.</li>
+
+<li>✔ 100% Free and Mobile Friendly.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<footer>
+
+<h3>🎂 Rajaram Finance Calculators</h3>
+
+<p>
+Free Online Age Calculator & Educational Tools
+</p>
+
+<p>
+This calculator is provided for educational and informational purposes only.
+The calculated age depends on the selected Date of Birth and the current date on your device.
+</p>
+
+<p>
+© 2026 Rajaram Finance Calculators. All Rights Reserved.
+</p>
+
+</footer>
+
+</body>
+
+</html>
+
+
+
+
