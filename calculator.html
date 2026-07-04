@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Calculator | Rajaram Finance Calculators</title>
+
+<meta name="description" content="Free Online Calculator for Addition, Subtraction, Multiplication and Division.">
 
 <link rel="stylesheet" href="calculator.css">
 
@@ -13,9 +17,41 @@
 
 <body>
 
-<div class="calculator">
+<header>
 
-<div class="screen">
+<div class="logo">
+
+🧮 Rajaram Finance Calculators
+
+</div>
+
+<nav>
+
+<a href="index.html">🏠 Home</a>
+
+<a href="articles.html">📚 Articles</a>
+
+<a href="contact.html">📞 Contact</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<h1>Professional Calculator</h1>
+
+<p>
+
+Perform Addition, Subtraction, Multiplication, Division and Percentage instantly.
+
+</p>
+
+</section>
+
+<div class="calculator-box">
+
+<div class="display-box">
 
 <input
 type="text"
@@ -25,49 +61,66 @@ placeholder="0">
 
 </div>
 
-<div class="keys">
+<div class="buttons">
 
 <button class="gray" onclick="clearDisplay()">AC</button>
+
 <button class="gray" onclick="backspace()">⌫</button>
+
 <button class="blue" onclick="press('%')">%</button>
+
 <button class="blue" onclick="press('/')">÷</button>
 
 <button onclick="press('7')">7</button>
+
 <button onclick="press('8')">8</button>
+
 <button onclick="press('9')">9</button>
+
 <button class="blue" onclick="press('*')">×</button>
 
 <button onclick="press('4')">4</button>
+
 <button onclick="press('5')">5</button>
+
 <button onclick="press('6')">6</button>
+
 <button class="blue" onclick="press('-')">−</button>
 
 <button onclick="press('1')">1</button>
+
 <button onclick="press('2')">2</button>
+
 <button onclick="press('3')">3</button>
+
 <button class="blue" onclick="press('+')">+</button>
 
 <button onclick="press('00')">00</button>
+
 <button onclick="press('0')">0</button>
+
 <button onclick="press('.')">.</button>
+
 <button class="equal" onclick="calculate()">=</button>
 
 </div>
-
 </div>
-<!-- Extra Features -->
 
 <div class="extras">
 
-<button onclick="copyResult()">📋 Copy Result</button>
+<button onclick="copyResult()">
+📋 Copy Result
+</button>
 
-<button onclick="toggleDarkMode()">🌙 Dark Mode</button>
+<button onclick="toggleDarkMode()">
+🌙 Dark Mode
+</button>
 
 </div>
 
 <div class="history-box">
 
-<h3>🕘 Calculation History</h3>
+<h2>🕘 Calculation History</h2>
 
 <ul id="historyList">
 
@@ -76,8 +129,39 @@ placeholder="0">
 </ul>
 
 </div>
+
+<div class="bottom-buttons">
+
+<a href="index.html">
+<button>🏠 Back to Home</button>
+</a>
+
+<a href="articles.html">
+<button>📚 Articles</button>
+</a>
+
+</div>
+
+<footer>
+
+<h2>🧮 Rajaram Finance Calculators</h2>
+
+<p>
+
+Fast • Accurate • Free • Mobile Friendly
+
+</p>
+
+<p>
+
+© 2026 Rajaram Finance Calculators.
+All Rights Reserved.
+
+</p>
+
+</footer>
+
 <script src="calculator.js"></script>
 
 </body>
 </html>
-
