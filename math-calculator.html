@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Math Calculator | Rajaram Finance Calculators</title>
+
+<meta name="description"
+content="Free Online Math Calculator for Addition, Subtraction, Multiplication, Division, Percentage, Square, Square Root and Power.">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#eef3ff;
+color:#222;
+}
+
+header{
+background:#071B47;
+color:#fff;
+padding:18px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.logo{
+font-size:34px;
+font-weight:bold;
+}
+
+.logo span{
+color:#FFD54F;
+}
+
+nav{
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
+
+nav a{
+color:#fff;
+text-decoration:none;
+font-weight:bold;
+padding:10px 16px;
+border-radius:8px;
+transition:.3s;
+}
+
+nav a:hover{
+background:#1565C0;
+}
+
+.hero{
+
+background:linear-gradient(135deg,#0D47A1,#1976D2);
+
+color:#fff;
+
+padding:60px 20px;
+
+}
+
+.hero-container{
+
+max-width:1200px;
+
+margin:auto;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:40px;
+
+align-items:center;
+
+}
+
+.hero h1{
+
+font-size:54px;
+
+line-height:1.2;
+
+margin-bottom:18px;
+
+}
+
+.hero h1 span{
+
+color:#FFD54F;
+
+}
+
+.hero p{
+
+font-size:22px;
+
+line-height:1.7;
+
+margin-bottom:30px;
+
+}
+
+.search-box{
+
+width:100%;
+
+padding:18px;
+
+font-size:20px;
+
+border:none;
+
+border-radius:40px;
+
+outline:none;
+
+}
+
+.hero-image{
+
+text-align:center;
+
+font-size:180px;
+
+}
+
+@media(max-width:768px){
+
+.hero-container{
+
+grid-template-columns:1fr;
+
+text-align:center;
+
+}
+
+.hero h1{
+
+font-size:38px;
+
+}
+
+.hero p{
+
+font-size:18px;
+
+}
+
+.hero-image{
+
+font-size:120px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+🧮 <span>Rajaram</span> Math Calculator
+
+</div>
+
+<nav>
+
+<a href="index.html">🏠 Home</a>
+
+<a href="index.html">🧮 Calculators</a>
+
+<a href="articles.html">📚 Articles</a>
+
+<a href="contact.html">📞 Contact</a>
+
+<a href="privacy.html">🔒 Privacy</a>
+
+</nav>
+
+</header>
+
+<section class="hero">
+
+<div class="hero-container">
+
+<div>
+
+<h1>
+
+Professional <span>Math Calculator</span>
+
+</h1>
+
+<p>
+
+Calculate Addition, Subtraction, Multiplication, Division, Percentage, Square, Square Root and Power instantly with our free online calculator.
+
+</p>
+
+<input
+type="text"
+class="search-box"
+placeholder="🔍 Search Calculator...">
+
+</div>
+
+<div class="hero-image">
+
+🧮
+
+</div>
+
+</div>
+
+</section>
+<section style="max-width:1200px;margin:40px auto;padding:20px;">
+
+<div style="
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+">
+
+<!-- Calculator -->
+
+<div style="
+background:#fff;
+padding:30px;
+border-radius:18px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+">
+
+<h2 style="color:#1565C0;margin-bottom:25px;">
+🧮 Enter Values
+</h2>
+
+<label><b>First Number</b></label>
+
+<input
+type="number"
+id="num1"
+placeholder="125"
+style="
+width:100%;
+padding:15px;
+margin:10px 0 20px;
+font-size:18px;
+border-radius:10px;
+border:1px solid #ccc;
+">
+
+<label><b>Select Operation</b></label>
+
+<select
+id="operation"
+style="
+width:100%;
+padding:15px;
+margin:10px 0 20px;
+font-size:18px;
+border-radius:10px;
+">
+
+<option value="+">➕ Addition</option>
+
+<option value="-">➖ Subtraction</option>
+
+<option value="*">✖ Multiplication</option>
+
+<option value="/">➗ Division</option>
+
+<option value="%">📊 Percentage</option>
+
+<option value="square">🔲 Square (x²)</option>
+
+<option value="sqrt">√ Square Root</option>
+
+<option value="power">xʸ Power</option>
+
+</select>
+
+<label><b>Second Number</b></label>
+
+<input
+type="number"
+id="num2"
+placeholder="75"
+style="
+width:100%;
+padding:15px;
+margin:10px 0 25px;
+font-size:18px;
+border-radius:10px;
+border:1px solid #ccc;
+">
+
+<div style="
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+">
+
+<button onclick="calculateMath()"
+style="
+padding:16px;
+background:#1565C0;
+color:#fff;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+">
+
+🧮 Calculate
+
+</button>
+
+<button onclick="resetCalculator()"
+style="
+padding:16px;
+background:#16A34A;
+color:#fff;
+border:none;
+border-radius:10px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+">
+
+🔄 Reset
+
+</button>
+
+</div>
+
+</div>
+
+<!-- Result -->
+
+<div
+id="resultCard"
+style="
+background:#fff;
+padding:30px;
+border-radius:18px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+">
+
+<h2 style="color:#16A34A;">
+✅ Result
+</h2>
+
+<hr style="margin:20px 0;">
+
+<h3>Answer</h3>
+
+<div
+id="result"
+style="
+font-size:60px;
+font-weight:bold;
+text-align:center;
+color:#16A34A;
+margin:30px 0;
+">
+
+0
+
+</div>
+
+<hr>
+
+<h3 style="margin-top:25px;">
+Calculation
+</h3>
+
+<p
+id="formula"
+style="
+font-size:22px;
+margin-top:15px;
+">
+
+Waiting...
+
+</p>
+
+<div style="
+margin-top:30px;
+padding:15px;
+background:#eef8ff;
+border-radius:10px;
+">
+
+ℹ Results are calculated instantly.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<!-- Popular Math Operations -->
+
+<section style="max-width:1200px;margin:30px auto;padding:20px;">
+
+<h2 style="
+text-align:center;
+font-size:38px;
+color:#0D47A1;
+margin-bottom:35px;
+">
+
+🧮 Popular Math Operations
+
+</h2>
+
+<div style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+">
+
+<div class="math-card">
+<h3>➕ Addition</h3>
+<p>125 + 75</p>
+<h1>= 200</h1>
+</div>
+
+<div class="math-card">
+<h3>➖ Subtraction</h3>
+<p>90 − 25</p>
+<h1>= 65</h1>
+</div>
+
+<div class="math-card">
+<h3>✖ Multiplication</h3>
+<p>15 × 6</p>
+<h1>= 90</h1>
+</div>
+
+<div class="math-card">
+<h3>➗ Division</h3>
+<p>100 ÷ 4</p>
+<h1>= 25</h1>
+</div>
+
+<div class="math-card">
+<h3>📊 Percentage</h3>
+<p>200 × 15%</p>
+<h1>= 30</h1>
+</div>
+
+<div class="math-card">
+<h3>🔲 Square</h3>
+<p>12²</p>
+<h1>= 144</h1>
+</div>
+
+<div class="math-card">
+<h3>√ Square Root</h3>
+<p>√144</p>
+<h1>= 12</h1>
+</div>
+
+<div class="math-card">
+<h3>🧮 Power</h3>
+<p>2⁵</p>
+<h1>= 32</h1>
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.math-card{
+
+background:#fff;
+padding:25px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+transition:.3s;
+
+}
+
+.math-card:hover{
+
+transform:translateY(-8px);
+
+}
+
+.math-card h3{
+
+color:#1565C0;
+font-size:28px;
+margin-bottom:15px;
+
+}
+
+.math-card p{
+
+font-size:20px;
+color:#666;
+
+}
+
+.math-card h1{
+
+margin-top:18px;
+color:#16A34A;
+font-size:42px;
+
+}
+
+</style>
+<!-- ===== Why Use Our Math Calculator ===== -->
+
+<section style="max-width:1200px;margin:60px auto;padding:20px;">
+
+<h2 style="
+text-align:center;
+font-size:40px;
+color:#0D47A1;
+margin-bottom:40px;">
+
+⭐ Why Use Our Math Calculator?
+
+</h2>
+
+<div style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;">
+
+<div class="feature-card">
+
+<div style="font-size:55px;">⚡</div>
+
+<h3>Fast Calculation</h3>
+
+<p>
+
+Get instant answers for all mathematical calculations within seconds.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<div style="font-size:55px;">🎯</div>
+
+<h3>Accurate Results</h3>
+
+<p>
+
+Advanced calculation logic provides highly accurate results every time.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<div style="font-size:55px;">📱</div>
+
+<h3>Mobile Friendly</h3>
+
+<p>
+
+Works perfectly on Mobile, Tablet and Desktop devices.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<div style="font-size:55px;">🔒</div>
+
+<h3>Safe & Secure</h3>
+
+<p>
+
+No registration required. All calculations happen instantly in your browser.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<div style="font-size:55px;">💯</div>
+
+<h3>100% Free</h3>
+
+<p>
+
+Unlimited calculations without any hidden charges.
+
+</p>
+
+</div>
+
+<div class="feature-card">
+
+<div style="font-size:55px;">🌍</div>
+
+<h3>Available Anytime</h3>
+
+<p>
+
+Use the calculator anytime from anywhere with an internet connection.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.feature-card{
+
+background:#fff;
+
+padding:30px;
+
+text-align:center;
+
+border-radius:18px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+transition:.3s;
+
+}
+
+.feature-card:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 15px 35px rgba(0,0,0,.18);
+
+}
+
+.feature-card h3{
+
+margin:18px 0;
+
+font-size:28px;
+
+color:#1565C0;
+
+}
+
+.feature-card p{
+
+font-size:18px;
+
+line-height:1.7;
+
+color:#555;
+
+}
+
+</style>
+<!-- ===== How to Use ===== -->
+
+<section style="max-width:1200px;margin:60px auto;padding:20px;">
+
+<h2 style="text-align:center;font-size:40px;color:#0D47A1;">
+📖 How to Use This Calculator
+</h2>
+
+<div style="
+background:#fff;
+padding:35px;
+margin-top:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.12);
+">
+
+<ol style="font-size:20px;line-height:2;">
+
+<li>Enter the first number.</li>
+
+<li>Select the required mathematical operation.</li>
+
+<li>Enter the second number (if needed).</li>
+
+<li>Click <b>🧮 Calculate</b>.</li>
+
+<li>Your answer will appear instantly.</li>
+
+</ol>
+
+</div>
+
+</section>
+
+<!-- ===== FAQ ===== -->
+
+<section style="max-width:1200px;margin:60px auto;padding:20px;">
+
+<h2 style="text-align:center;font-size:40px;color:#0D47A1;">
+❓ Frequently Asked Questions
+</h2>
+
+<div style="
+background:#fff;
+padding:35px;
+margin-top:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.12);
+line-height:2;
+">
+
+<h3>Is this calculator free?</h3>
+<p>✅ Yes, it is completely free.</p>
+
+<h3>Does it work on mobile?</h3>
+<p>✅ Yes, it works on Android, iPhone, Tablet and Desktop.</p>
+
+<h3>Is my data stored?</h3>
+<p>✅ No. All calculations happen in your browser.</p>
+
+<h3>Can I calculate percentages and powers?</h3>
+<p>✅ Yes. Percentage, Square, Square Root and Power are supported.</p>
+
+</div>
+
+</section>
+
+<!-- ===== CTA ===== -->
+
+<section style="
+background:linear-gradient(135deg,#1565C0,#0D47A1);
+color:#fff;
+padding:60px 20px;
+text-align:center;
+margin-top:60px;
+">
+
+<h2 style="font-size:42px;">
+🚀 Try More Free Calculators
+</h2>
+
+<p style="font-size:22px;margin:20px 0;">
+Explore Finance, Loan, Tax and Investment Calculators.
+</p>
+
+<a href="index.html">
+
+<button style="
+padding:18px 35px;
+font-size:20px;
+background:#FFD54F;
+color:#000;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-weight:bold;
+">
+
+🏠 Back to Home
+
+</button>
+
+</a>
+
+</section>
+
+<!-- ===== Footer ===== -->
+
+<footer style="
+background:#071B47;
+color:#fff;
+padding:40px 20px;
+text-align:center;
+">
+
+<h2>🧮 Rajaram Math Calculator</h2>
+
+<p style="margin-top:15px;">
+Fast • Accurate • Free • Mobile Friendly
+</p>
+
+<p style="margin-top:20px;">
+© 2026 Rajaram Finance Calculators. All Rights Reserved.
+</p>
+
+</footer>
+
+<script src="math.js"></script>
+
+</body>
+
+</html>
