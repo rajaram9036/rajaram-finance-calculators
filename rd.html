@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RD Calculator | Rajaram Finance Calculators</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:#eef3ff;
+font-family:Arial,sans-serif;
+margin:0;
+}
+
+.container{
+max-width:420px;
+margin:40px auto;
+background:#fff;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.container h1{
+text-align:center;
+color:#1565C0;
+font-size:34px;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+margin-top:18px;
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:14px;
+margin-top:8px;
+font-size:18px;
+border:1px solid #ccc;
+border-radius:10px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:18px;
+border:none;
+border-radius:10px;
+background:#1976D2;
+color:#fff;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0D47A1;
+}
+
+#result{
+display:none;
+margin-top:25px;
+background:#f5f9ff;
+padding:18px;
+border-radius:12px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🏦 RD Calculator</h1>
+
+<label>Monthly Deposit (₹)</label>
+
+<input
+type="number"
+id="deposit"
+placeholder="5000">
+
+<label>Interest Rate (% Per Year)</label>
+
+<input
+type="number"
+id="rate"
+placeholder="7">
+
+<label>Tenure (Months)</label>
+
+<input
+type="number"
+id="months"
+placeholder="60">
+
+<button onclick="calculateRD()">
+
+🏦 Calculate RD
+
+</button>
+
+<button onclick="resetCalculator()">
+
+🔄 Reset
+
+</button>
+
+<a href="index.html">
+
+<button type="button">
+
+🏠 Back to Home
+
+</button>
+
+</a>
+
+<div id="result"></div>
+
+</div>
+<script>
+
+function calculateRD(){
+
+let monthlyDeposit = parseFloat(document.getElementById("deposit").value);
+let annualRate = parseFloat(document.getElementById("rate").value);
+let months = parseInt(document.getElementById("months").value);
+
+if(!monthlyDeposit || !annualRate || !months){
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("result").innerHTML=
+"<p style='color:red;font-weight:bold;'>⚠ Please enter all values.</p>";
+
+return;
+
+}
+
+let r = annualRate / 100 / 12;
+
+let maturity =
+monthlyDeposit *
+((Math.pow(1+r,months)-1)/r) *
+(1+r);
+
+let totalInvestment =
+monthlyDeposit * months;
+
+let interest =
+maturity - totalInvestment;
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("result").innerHTML = `
+
+<h2 style="text-align:center;color:#1565C0;">
+🏦 RD Result
+</h2>
+
+<hr>
+
+<p><strong>💰 Total Investment</strong></p>
+
+<h3 style="color:#1976D2;">
+₹ ${totalInvestment.toFixed(2)}
+</h3>
+
+<p><strong>📈 Estimated Interest</strong></p>
+
+<h3 style="color:#1976D2;">
+₹ ${interest.toFixed(2)}
+</h3>
+
+<p><strong>🏆 Maturity Amount</strong></p>
+
+<h3 style="color:#1976D2;">
+₹ ${maturity.toFixed(2)}
+</h3>
+
+<hr>
+
+<table style="width:100%;border-collapse:collapse;">
+
+<tr>
+<td><strong>Monthly Deposit</strong></td>
+<td>₹ ${monthlyDeposit.toLocaleString("en-IN")}</td>
+</tr>
+
+<tr>
+<td><strong>Interest Rate</strong></td>
+<td>${annualRate}%</td>
+</tr>
+
+<tr>
+<td><strong>Tenure</strong></td>
+<td>${months} Months</td>
+</tr>
+
+</table>
+
+`;
+
+}
+
+function resetCalculator(){
+
+document.getElementById("deposit").value="";
+
+document.getElementById("rate").value="";
+
+document.getElementById("months").value="";
+
+document.getElementById("result").style.display="none";
+
+document.getElementById("result").innerHTML="";
+
+}
+
+</script>
+
+<div style="max-width:420px;margin:20px auto;">
+
+<div style="background:#f8fbff;
+padding:18px;
+border-radius:12px;
+border-left:5px solid #1976D2;">
+
+<h3 style="color:#1565C0;">
+🏦 RD Investment Tips
+</h3>
+
+<ul style="line-height:1.8;">
+
+<li>✔ Deposit the installment on time every month.</li>
+
+<li>✔ Compare RD interest rates offered by different banks.</li>
+
+<li>✔ Choose a tenure that matches your financial goals.</li>
+
+<li>✔ Continue the RD until maturity to receive the full benefit.</li>
+
+<li>✔ Review current RD interest rates before opening a new account.</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<footer>
+
+<h3>🏦 Rajaram Finance Calculators</h3>
+
+<p>
+Free Online Finance Calculators & Educational Finance Guides
+</p>
+
+<p>
+This RD Calculator is provided for educational and informational purposes only.
+Actual RD maturity amount may vary depending on the bank's interest rate,
+compounding method, tenure and applicable terms.
+Please verify the latest details with your bank before making investment decisions.
+</p>
+
+<p>
+© 2026 Rajaram Finance Calculators. All Rights Reserved.
+</p>
+
+</footer>
+
+</body>
+
+</html>
+
+
+
