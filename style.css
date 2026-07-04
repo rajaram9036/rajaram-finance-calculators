@@ -381,58 +381,27 @@ padding:20px;
 
 }
 /* ===== CTA Section ===== */
+.cta-section h2{
+    color:#ffffff;
+    font-size:34px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.cta-section p{
+    color:#ffffff;
+    font-size:19px;
+    line-height:1.8;
+    margin-bottom:25px;
+}
 
 .cta-section{
-max-width:1000px;
-margin:50px auto;
-padding:35px 20px;
-text-align:center;
-background:linear-gradient(135deg,#1976D2,#0D47A1);
-color:#fff;
-border-radius:18px;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-}
-
-.cta-section h2{
-font-size:32px;
-margin-bottom:15px;
-}
-
-.cta-section p{
-font-size:18px;
-line-height:1.7;
-margin-bottom:25px;
-}
-
-.cta-buttons{
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-}
-
-.cta-buttons button{
-min-width:220px;
-}
-
-@media(max-width:768px){
-
-.cta-section h2{
-font-size:26px;
-}
-
-.cta-section p{
-font-size:16px;
-}
-
-.cta-buttons{
-flex-direction:column;
-}
-
-.cta-buttons button{
-width:100%;
-}
-
+    max-width:1000px;
+    margin:50px auto;
+    padding:45px 30px;
+    border-radius:20px;
+    text-align:center;
+    background:linear-gradient(135deg,#1976D2,#0D47A1);
 }
 /* ===== Article Pages ===== */
 
