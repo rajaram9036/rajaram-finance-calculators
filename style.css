@@ -478,3 +478,35 @@ text-align:center;
 }
 
 }
+footer{
+    background:linear-gradient(135deg,#1565C0,#0D47A1);
+    color:#fff;
+    text-align:center;
+    padding:40px 20px;
+    margin-top:40px;
+}
+
+footer h3{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+footer p{
+    margin:8px 0;
+    font-size:17px;
+    color:#fff;
+}
+
+@media(max-width:768px){
+    footer{
+        padding:30px 15px;
+    }
+
+    footer h3{
+        font-size:24px;
+    }
+
+    footer p{
+        font-size:15px;
+    }
+}
