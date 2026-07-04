@@ -1,4 +1,5 @@
 const display = document.getElementById("display");
+const historyList = document.getElementById("historyList");
 
 function press(value){
     display.value += value;
@@ -14,7 +15,7 @@ function backspace(){
 
 function calculate(){
 
-    if(display.value===""){
+    if(display.value.trim()===""){
         return;
     }
 
@@ -22,20 +23,20 @@ function calculate(){
 
         let exp = display.value;
 
-        // Calculator Symbols को JavaScript Symbols में बदलें
         exp = exp.replace(/÷/g,"/");
         exp = exp.replace(/×/g,"*");
 
         let result = eval(exp);
 
-        // दशमलव होने पर 6 अंकों तक दिखाएँ
-        if(Number.isFinite(result)){
-            display.value = Number(result.toFixed(6)).toString();
-    
-        addHistory(exp, result);
-        }else{
-            display.value = "Error";
+        if(!Number.isFinite(result)){
+            throw "Error";
         }
+
+        result = Number(result.toFixed(8));
+
+        addHistory(display.value,result);
+
+        display.value = result;
 
     }catch(e){
 
@@ -45,66 +46,70 @@ function calculate(){
 
 }
 
-// Keyboard Support
-document.addEventListener("keydown",function(e){
+function addHistory(expression,result){
 
-    const key = e.key;
+    if(historyList.firstElementChild &&
+       historyList.firstElementChild.innerText==="No calculations yet."){
 
-    if(
-        (key>="0" && key<="9") ||
-        key==="+" ||
-        key==="-" ||
-        key==="*" ||
-        key==="/" ||
-        key==="." ||
-        key==="%"
-    ){
-        press(key);
+        historyList.innerHTML="";
     }
 
-    if(key==="Enter"){
-        e.preventDefault();
-        calculate();
-    }
+    const li=document.createElement("li");
 
-    if(key==="Backspace"){
-        backspace();
-    }
+    li.innerHTML=`${expression} = <b>${result}</b>`;
 
-    if(key==="Escape"){
-        clearDisplay();
-    }
+    historyList.prepend(li);
 
-});
+}
+
 function copyResult(){
 
-navigator.clipboard.writeText(display.value);
+    navigator.clipboard.writeText(display.value);
 
-alert("Result Copied!");
+    alert("Result Copied Successfully");
 
 }
 
 function toggleDarkMode(){
 
-document.body.classList.toggle("dark");
+    document.body.classList.toggle("dark");
 
 }
 
-function addHistory(exp,result){
+document.addEventListener("keydown",function(e){
 
-let list=document.getElementById("historyList");
+    const key=e.key;
 
-if(list.children.length==1 &&
-list.children[0].innerText=="No calculations yet."){
+    if((key>="0" && key<="9") ||
+       key==="+" ||
+       key==="-" ||
+       key==="*" ||
+       key==="/" ||
+       key==="." ||
+       key==="%"){
 
-list.innerHTML="";
+        press(key);
 
-}
+    }
 
-let li=document.createElement("li");
+    if(key==="Enter"){
 
-li.innerHTML=exp+" = <b>"+result+"</b>";
+        e.preventDefault();
 
-list.prepend(li);
+        calculate();
 
-}
+    }
+
+    if(key==="Backspace"){
+
+        backspace();
+
+    }
+
+    if(key==="Escape"){
+
+        clearDisplay();
+
+    }
+
+});
