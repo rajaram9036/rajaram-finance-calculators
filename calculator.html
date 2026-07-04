@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculator | Rajaram Finance Calculators</title>
+<title>Casio Style Calculator | Rajaram Finance Calculators</title>
 
-<meta name="description" content="Free Online Calculator for Addition, Subtraction, Multiplication and Division.">
+<meta name="description" content="Professional Casio Style Online Calculator with History, PDF Download and Dark Mode.">
 
 <link rel="stylesheet" href="calculator.css">
 
@@ -17,7 +15,7 @@
 
 <body>
 
-<header>
+<header class="top-header">
 
 <div class="logo">
 
@@ -39,19 +37,27 @@
 
 <section class="hero">
 
-<h1>Professional Calculator</h1>
+<h1>CASIO STYLE</h1>
+
+<h2>PREMIUM CALCULATOR</h2>
 
 <p>
 
-Perform Addition, Subtraction, Multiplication, Division and Percentage instantly.
+Professional • Accurate • Fast • Mobile Friendly
 
 </p>
 
 </section>
 
-<div class="calculator-box">
+<div class="main-container">
 
-<div class="display-box">
+<!-- Calculator -->
+
+<div class="calculator">
+
+<div class="solar-panel"></div>
+
+<div class="screen">
 
 <input
 type="text"
@@ -61,7 +67,15 @@ placeholder="0">
 
 </div>
 
-<div class="buttons">
+<div class="brand">
+
+<h2>CASIO</h2>
+
+<p>fx-991ES PLUS</p>
+
+</div>
+
+<div class="keys">
 
 <button class="gray" onclick="clearDisplay()">AC</button>
 
@@ -102,23 +116,74 @@ placeholder="0">
 <button onclick="press('.')">.</button>
 
 <button class="equal" onclick="calculate()">=</button>
+<!-- Scientific Keys -->
+
+<button class="gray" onclick="press('(')">(</button>
+
+<button class="gray" onclick="press(')')">)</button>
+
+<button class="orange" onclick="squareRoot()">√</button>
+
+<button class="orange" onclick="square()">x²</button>
+
+<button class="orange" onclick="power()">xʸ</button>
+
+<button class="orange" onclick="inverse()">1/x</button>
+
+<button class="orange" onclick="press('3.1415926535')">π</button>
+
+<button class="orange" onclick="insertAns()">Ans</button>
+
+<button class="memory" onclick="memoryClear()">MC</button>
+
+<button class="memory" onclick="memoryRecall()">MR</button>
+
+<button class="memory" onclick="memoryAdd()">M+</button>
+
+<button class="memory" onclick="memorySubtract()">M-</button>
 
 </div>
-</div>
-
-<div class="extras">
-
-<button onclick="copyResult()">
-📋 Copy Result
-</button>
-
-<button onclick="toggleDarkMode()">
-🌙 Dark Mode
-</button>
 
 </div>
 
-<div class="history-box">
+<!-- Right Side Panel -->
+
+<div class="side-panel">
+
+<div class="phone-preview">
+
+<h3>📱 Mobile View</h3>
+
+<div class="mini-screen">
+
+<span id="miniDisplay">15+50+585+845</span>
+
+<h1 id="miniResult">1495</h1>
+
+</div>
+
+</div>
+
+<div class="dark-preview">
+
+<h3>🌙 Dark Mode</h3>
+
+<div class="mini-screen dark-box">
+
+<span>15+50+585+845</span>
+
+<h1>1495</h1>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- ===== History Panel ===== -->
+
+<div class="history-panel">
 
 <h2>🕘 Calculation History</h2>
 
@@ -128,40 +193,352 @@ placeholder="0">
 
 </ul>
 
+<div class="history-buttons">
+
+<button onclick="copyResult()">
+
+📋 Copy Result
+
+</button>
+
+<button onclick="downloadPDF()">
+
+📄 Download PDF
+
+</button>
+
+<button onclick="printHistory()">
+
+🖨 Print
+
+</button>
+
+<button onclick="clearHistory()">
+
+🗑 Clear History
+
+</button>
+
+<button onclick="toggleDarkMode()">
+
+🌙 Dark Mode
+
+</button>
+
 </div>
 
-<div class="bottom-buttons">
+</div>
+
+<!-- ===== Quick Features ===== -->
+
+<section class="feature-strip">
+
+<div class="feature-card">
+
+🧮
+
+<h3>Full Expression</h3>
+
+<p>15+50+585+845 = 1495</p>
+
+</div>
+
+<div class="feature-card">
+
+🕘
+
+<h3>History</h3>
+
+<p>All calculations saved automatically.</p>
+
+</div>
+
+<div class="feature-card">
+
+📄
+
+<h3>PDF Export</h3>
+
+<p>Download complete calculation history.</p>
+
+</div>
+
+<div class="feature-card">
+
+⌨️
+
+<h3>Keyboard Support</h3>
+
+<p>Works with keyboard shortcuts.</p>
+
+</div>
+
+<div class="feature-card">
+
+🌙
+
+<h3>Dark Mode</h3>
+
+<p>One click night mode.</p>
+
+</div>
+
+</section>
+<!-- ===== How to Use ===== -->
+
+<section class="info-section">
+
+<h2>📖 How to Use This Calculator</h2>
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<span>1️⃣</span>
+
+<h3>Enter Numbers</h3>
+
+<p>Use your keyboard or the on-screen buttons to enter numbers.</p>
+
+</div>
+
+<div class="info-card">
+
+<span>2️⃣</span>
+
+<h3>Select Operation</h3>
+
+<p>Choose +, −, ×, ÷, %, √ or any scientific function.</p>
+
+</div>
+
+<div class="info-card">
+
+<span>3️⃣</span>
+
+<h3>Press =</h3>
+
+<p>Tap the equals button to instantly calculate your answer.</p>
+
+</div>
+
+<div class="info-card">
+
+<span>4️⃣</span>
+
+<h3>Save History</h3>
+
+<p>Your calculations are automatically added to the History panel.</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===== Features ===== -->
+
+<section class="info-section">
+
+<h2>⭐ Calculator Features</h2>
+
+<div class="info-grid">
+
+<div class="info-card">
+
+🧮
+
+<h3>Basic Calculator</h3>
+
+<p>Addition, Subtraction, Multiplication and Division.</p>
+
+</div>
+
+<div class="info-card">
+
+📐
+
+<h3>Scientific Functions</h3>
+
+<p>Square, Square Root, Power, Percentage and Brackets.</p>
+
+</div>
+
+<div class="info-card">
+
+📄
+
+<h3>Export PDF</h3>
+
+<p>Download your complete calculation history as a PDF.</p>
+
+</div>
+
+<div class="info-card">
+
+🌙
+
+<h3>Dark Mode</h3>
+
+<p>Switch between Light and Dark themes with one click.</p>
+
+</div>
+
+<div class="info-card">
+
+📱
+
+<h3>Responsive Design</h3>
+
+<p>Optimized for Mobile, Tablet and Desktop devices.</p>
+
+</div>
+
+<div class="info-card">
+
+⚡
+
+<h3>Fast Performance</h3>
+
+<p>Instant calculations with no page reload.</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ===== FAQ ===== -->
+
+<section class="info-section">
+
+<h2>❓ Frequently Asked Questions</h2>
+
+<div class="faq-box">
+
+<h3>Is this calculator free?</h3>
+
+<p>✅ Yes, it is completely free to use.</p>
+
+<h3>Can I download my history?</h3>
+
+<p>✅ Yes, you can download it as a PDF.</p>
+
+<h3>Does it work on mobile?</h3>
+
+<p>✅ Yes, it is fully responsive.</p>
+
+<h3>Can I use keyboard shortcuts?</h3>
+
+<p>✅ Yes, keyboard support is included.</p>
+
+</div>
+
+</section>
+<!-- ===== Call To Action ===== -->
+
+<section class="cta-section">
+
+<h2>🚀 More Free Calculators</h2>
+
+<p>
+
+Explore EMI, SIP, FD, PPF, GST, Income Tax and many more calculators.
+
+</p>
+
+<div class="cta-buttons">
 
 <a href="index.html">
-<button>🏠 Back to Home</button>
+<button>🏠 Home</button>
 </a>
 
 <a href="articles.html">
 <button>📚 Articles</button>
 </a>
 
+<a href="contact.html">
+<button>📞 Contact</button>
+</a>
+
 </div>
 
-<footer>
+</section>
+
+<!-- ===== Footer ===== -->
+
+<footer class="footer">
+
+<div class="footer-container">
+
+<div class="footer-about">
 
 <h2>🧮 Rajaram Finance Calculators</h2>
 
 <p>
 
-Fast • Accurate • Free • Mobile Friendly
+Free Online Calculators for Finance, Loans, Investment, Tax and Daily Mathematics.
 
 </p>
 
+</div>
+
+<div class="footer-links">
+
+<h3>Quick Links</h3>
+
+<ul>
+
+<li><a href="index.html">Home</a></li>
+
+<li><a href="articles.html">Articles</a></li>
+
+<li><a href="privacy.html">Privacy Policy</a></li>
+
+<li><a href="terms.html">Terms & Conditions</a></li>
+
+<li><a href="contact.html">Contact</a></li>
+
+</ul>
+
+</div>
+
+<div class="footer-disclaimer">
+
+<h3>Disclaimer</h3>
+
 <p>
 
-© 2026 Rajaram Finance Calculators.
-All Rights Reserved.
+This calculator is provided for educational and informational purposes only.
+Please verify important calculations before using them for financial,
+legal or professional decisions.
+
+</p>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="copyright">
+
+© 2026 Rajaram Finance Calculators. All Rights Reserved.
 
 </p>
 
 </footer>
 
+<!-- jsPDF Library -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<!-- Calculator Script -->
+
 <script src="calculator.js"></script>
 
 </body>
+
 </html>
