@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Personal Loan Calculator | Rajaram Finance Calculators</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:#eef3ff;
+font-family:Arial,sans-serif;
+margin:0;
+}
+
+.container{
+max-width:420px;
+margin:40px auto;
+background:#fff;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.container h1{
+text-align:center;
+color:#1565C0;
+font-size:34px;
+margin-bottom:25px;
+}
+
+label{
+display:block;
+margin-top:18px;
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:14px;
+margin-top:8px;
+font-size:18px;
+border:1px solid #ccc;
+border-radius:10px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:18px;
+border:none;
+border-radius:10px;
+background:#1976D2;
+color:#fff;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0D47A1;
+}
+
+#result{
+display:none;
+margin-top:25px;
+background:#f5f9ff;
+padding:18px;
+border-radius:12px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>💳 Personal Loan Calculator</h1>
+
+<label>Loan Amount (₹)</label>
+
+<input type="number"
+id="loan"
+placeholder="300000">
+
+<label>Interest Rate (% Per Year)</label>
+
+<input type="number"
+id="rate"
+placeholder="12">
+
+<label>Loan Tenure (Years)</label>
+
+<input type="number"
+id="years"
+placeholder="3">
+
+<button onclick="calculateLoan()">
+
+🧮 Calculate EMI
+
+</button>
+
+<button onclick="resetCalculator()">
+
+🔄 Reset
+
+</button>
+
+<a href="index.html">
+
+<button type="button">
+
+🏠 Back to Home
+
+</button>
+
+</a>
+
+<div id="result"></div>
+
+</div>
+<script>
+
+function calculateLoan(){
+
+let P = parseFloat(document.getElementById("loan").value);
+let annualRate = parseFloat(document.getElementById("rate").value);
+let years = parseFloat(document.getElementById("years").value);
+
+if(!P || !annualRate || !years){
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("result").innerHTML=
+"<p style='color:red;font-weight:bold;'>⚠ Please enter all values.</p>";
+
+return;
+
+}
+
+let r = annualRate / 12 / 100;
+
+let n = years * 12;
+
+let emi = (P * r * Math.pow(1+r,n)) /
+(Math.pow(1+r,n)-1);
+
+let totalPayment = emi * n;
+
+let totalInterest = totalPayment - P;
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("result").innerHTML = `
+
+<h2 style="text-align:center;color:#1565C0;">
+📊 Loan Result
+</h2>
+
+<hr>
+
+<p><strong>💳 Monthly EMI</strong></p>
+
+<h3 style="color:#1976D2;">
+₹ ${emi.toFixed(2)}
+</h3>
+
+<p><strong>📈 Total Interest</strong></p>
+
+<h3 style="color:#1976D2;">
+₹ ${totalInterest.toFixed(2)}
+</h3>
+
+<p><strong>💰 Total Payment</strong></p>
+
+<h3 style="color:#1976D2;">
+₹ ${totalPayment.toFixed(2)}
+</h3>
+
+<hr>
+
+<table style="width:100%;border-collapse:collapse;">
+
+<tr>
+<td><strong>Loan Amount</strong></td>
+<td>₹ ${P.toFixed(2)}</td>
+</tr>
+
+<tr>
+<td><strong>Interest Rate</strong></td>
+<td>${annualRate}%</td>
+</tr>
+
+<tr>
+<td><strong>Loan Tenure</strong></td>
+<td>${years} Years</td>
+</tr>
+
+</table>
+
+`;
+
+}
+
+function resetCalculator(){
+
+document.getElementById("loan").value="";
+
+document.getElementById("rate").value="";
+
+document.getElementById("years").value="";
+
+document.getElementById("result").style.display="none";
+
+document.getElementById("result").innerHTML="";
+
+}
+
+</script>
+
+</body>
+
+</html>
