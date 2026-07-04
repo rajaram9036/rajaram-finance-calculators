@@ -1,47 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Car Loan EMI Calculator | Rajaram Finance Calculators</title>
-
-<meta name="description" content="Free Car Loan EMI Calculator. Calculate monthly EMI, total interest and total payment instantly.">
+<title>Car Loan Calculator | Rajaram Finance Calculators</title>
 
 <link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+background:#eef3ff;
+font-family:Arial,sans-serif;
+}
+
+.container{
+max-width:420px;
+margin:40px auto;
+background:#fff;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.container h1{
+color:#1565C0;
+text-align:center;
+margin-bottom:25px;
+font-size:36px;
+}
+
+label{
+display:block;
+margin-top:18px;
+font-weight:bold;
+}
+
+input{
+width:100%;
+padding:14px;
+font-size:18px;
+border:1px solid #ccc;
+border-radius:10px;
+margin-top:8px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:18px;
+border:none;
+border-radius:10px;
+background:#1976D2;
+color:#fff;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+button:hover{
+background:#0D47A1;
+}
+
+#result{
+margin-top:25px;
+background:#f5f9ff;
+padding:18px;
+border-radius:12px;
+display:none;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<header class="header">
+<div class="container">
 
-<div class="logo">
-💰 Rajaram Finance Calculators
-</div>
-
-<nav>
-<a href="index.html">🏠 Home</a>
-<a href="calculators.html">🧮 Calculators</a>
-<a href="about.html">ℹ️ About</a>
-<a href="contact.html">📞 Contact</a>
-<a href="privacy.html">🔒 Privacy</a>
-<a href="disclaimer.html">📄 Disclaimer</a>
-<a href="terms.html">📜 Terms</a>
-</nav>
-
-</header>
-
-<section class="article-page">
-
-<div class="article-box">
-
-<h2>🚗 Car Loan EMI Calculator</h2>
-
-<p>
-Calculate your monthly Car Loan EMI instantly with our free calculator.
-Enter the Loan Amount, Interest Rate and Loan Tenure to know your EMI,
-Total Interest and Total Payment.
-</p>
+<h1>🚗 Car Loan Calculator</h1>
 
 <label>Loan Amount (₹)</label>
 
@@ -50,7 +90,7 @@ type="number"
 id="loan"
 placeholder="500000">
 
-<label>Interest Rate (%)</label>
+<label>Interest Rate (% Per Year)</label>
 
 <input
 type="number"
@@ -65,14 +105,22 @@ id="years"
 placeholder="5">
 
 <button onclick="calculateCarLoan()">
-Calculate EMI
+🧮 Calculate Car Loan
 </button>
+
+<button onclick="resetCalculator()">
+🔄 Reset
+</button>
+
+<a href="index.html">
+<button type="button">
+🏠 Back to Home
+</button>
+</a>
 
 <div id="result"></div>
 
 </div>
-
-</section>
 <script>
 
 function calculateCarLoan(){
@@ -81,82 +129,75 @@ let P = parseFloat(document.getElementById("loan").value);
 let annualRate = parseFloat(document.getElementById("rate").value);
 let years = parseFloat(document.getElementById("years").value);
 
-if(isNaN(P) || isNaN(annualRate) || isNaN(years)){
-document.getElementById("result").innerHTML =
-"<p style='color:red;font-weight:bold;'>Please enter all values.</p>";
+if(!P || !annualRate || !years){
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("result").innerHTML=
+"<p style='color:red;font-weight:bold;'>⚠ Please enter all values.</p>";
+
 return;
+
 }
 
 let r = annualRate / 12 / 100;
+
 let n = years * 12;
 
-let emi = (P * r * Math.pow(1+r,n)) /
+let emi = (P*r*Math.pow(1+r,n)) /
 (Math.pow(1+r,n)-1);
 
-let totalPayment = emi * n;
-let totalInterest = totalPayment - P;
+let totalPayment = emi*n;
 
-document.getElementById("result").innerHTML = `
+let totalInterest = totalPayment-P;
 
-<div style="margin-top:25px;
-padding:20px;
-background:#f4f9ff;
-border-radius:15px;
-box-shadow:0 4px 15px rgba(0,0,0,.12);">
+document.getElementById("result").style.display="block";
 
-<h3 style="color:#1565C0;">Result</h3>
+document.getElementById("result").innerHTML=`
 
-<p><strong>Monthly EMI:</strong><br>
-₹ ${emi.toFixed(2)}</p>
+<h2 style="color:#1565C0;text-align:center;">
+📊 Loan Result
+</h2>
 
-<p><strong>Total Interest:</strong><br>
-₹ ${totalInterest.toFixed(2)}</p>
+<hr>
 
-<p><strong>Total Payment:</strong><br>
-₹ ${totalPayment.toFixed(2)}</p>
+<p><strong>💵 Monthly EMI</strong></p>
 
-</div>
+<h3 style="color:#1976D2;">
+₹ ${emi.toFixed(2)}
+</h3>
+
+<p><strong>📈 Total Interest</strong></p>
+
+<h3 style="color:#1976D2;">
+₹ ${totalInterest.toFixed(2)}
+</h3>
+
+<p><strong>💰 Total Payment</strong></p>
+
+<h3 style="color:#1976D2;">
+₹ ${totalPayment.toFixed(2)}
+</h3>
 
 `;
 
 }
 
+function resetCalculator(){
+
+document.getElementById("loan").value="";
+
+document.getElementById("rate").value="";
+
+document.getElementById("years").value="";
+
+document.getElementById("result").style.display="none";
+
+document.getElementById("result").innerHTML="";
+
+}
+
 </script>
-<div class="article-buttons">
-
-<a href="car-loan-guide.html">
-<button>📖 Car Loan Guide</button>
-</a>
-
-<a href="index.html">
-<button>🏠 Home</button>
-</a>
-
-<a href="contact.html">
-<button>📞 Contact</button>
-</a>
-
-</div>
-
-<footer>
-
-<h3>🚗 Rajaram Finance Calculators</h3>
-
-<p>
-Free Online Car Loan EMI Calculator for educational and informational purposes.
-</p>
-
-<p>
-This calculator provides estimated EMI values only. Actual loan EMI, interest rate,
-processing fees and repayment amount may vary depending on your lender's terms and conditions.
-Please verify all loan details with your bank or financial institution before making any borrowing decision.
-</p>
-
-<p>
-© 2026 Rajaram Finance Calculators. All Rights Reserved.
-</p>
-
-</footer>
 
 </body>
 </html>
