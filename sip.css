@@ -1,0 +1,1351 @@
+/* =========================================
+   Rajaram Finance Calculators
+   SIP Calculator - Premium CSS
+   Part 1
+========================================= */
+
+/* Reset */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',Arial,sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:#f4f8fc;
+color:#222;
+line-height:1.6;
+}
+
+/* Links */
+
+a{
+text-decoration:none;
+color:inherit;
+}
+
+/* =========================================
+   Header
+========================================= */
+
+.header{
+
+position:sticky;
+top:0;
+z-index:999;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:18px 6%;
+
+background:#ffffff;
+
+box-shadow:0 4px 20px rgba(0,0,0,.08);
+
+}
+
+/* Logo */
+
+.logo a{
+
+display:flex;
+align-items:center;
+gap:15px;
+
+}
+
+.logo i{
+
+font-size:38px;
+color:#1565C0;
+
+}
+
+.logo h2{
+
+font-size:28px;
+color:#0D47A1;
+font-weight:700;
+
+}
+
+.logo p{
+
+font-size:14px;
+color:#666;
+
+}
+
+/* Navigation */
+
+.navbar ul{
+
+display:flex;
+align-items:center;
+gap:28px;
+
+list-style:none;
+
+}
+
+.navbar ul li a{
+
+font-size:17px;
+font-weight:600;
+color:#333;
+
+transition:.3s;
+
+}
+
+.navbar ul li a:hover{
+
+color:#1565C0;
+
+}
+
+/* Header Buttons */
+
+.header-right{
+
+display:flex;
+gap:12px;
+
+}
+
+.header-right button{
+
+width:46px;
+height:46px;
+
+border:none;
+border-radius:50%;
+
+background:#1565C0;
+color:#fff;
+
+cursor:pointer;
+
+font-size:18px;
+
+transition:.3s;
+
+}
+
+.header-right button:hover{
+
+transform:translateY(-3px);
+
+background:#0D47A1;
+
+}
+
+/* Share Button */
+
+#shareBtn{
+
+width:auto;
+
+padding:0 18px;
+
+border-radius:50px;
+
+display:flex;
+align-items:center;
+gap:8px;
+
+}
+
+/* =========================================
+   Hero Section
+========================================= */
+
+.hero{
+
+background:linear-gradient(135deg,#1565C0,#0D47A1);
+
+padding:70px 20px;
+
+text-align:center;
+
+color:#fff;
+
+}
+
+.hero-title h1{
+
+font-size:52px;
+
+margin-bottom:12px;
+
+font-weight:700;
+
+}
+
+.hero-title p{
+
+font-size:22px;
+
+opacity:.95;
+
+max-width:700px;
+
+margin:auto;
+
+}
+
+/* Container */
+
+.sip-container{
+
+max-width:1300px;
+
+margin:50px auto;
+
+padding:0 20px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:30px;
+
+}
+/* =========================================
+   Input Card
+========================================= */
+
+.input-card,
+.result-card{
+
+background:#fff;
+
+border-radius:20px;
+
+padding:30px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+border:1px solid #e8eef7;
+
+}
+
+/* Card Title */
+
+.card-title{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+margin-bottom:25px;
+
+}
+
+.card-title span{
+
+width:42px;
+height:42px;
+
+background:#1565C0;
+
+color:#fff;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+border-radius:50%;
+
+font-size:18px;
+font-weight:bold;
+
+}
+
+.card-title h3{
+
+font-size:28px;
+
+color:#0D47A1;
+
+}
+
+/* Input Group */
+
+.input-group{
+
+margin-bottom:22px;
+
+}
+
+.input-group label{
+
+display:block;
+
+font-size:16px;
+
+font-weight:600;
+
+margin-bottom:8px;
+
+color:#333;
+
+}
+
+.input-group input,
+.input-group select{
+
+width:100%;
+
+padding:16px;
+
+border:2px solid #d7e3f4;
+
+border-radius:12px;
+
+font-size:18px;
+
+background:#fff;
+
+transition:.3s;
+
+}
+
+.input-group input:focus,
+.input-group select:focus{
+
+outline:none;
+
+border-color:#1565C0;
+
+box-shadow:0 0 0 4px rgba(21,101,192,.15);
+
+}
+
+.input-group small{
+
+display:block;
+
+margin-top:6px;
+
+font-size:13px;
+
+color:#777;
+
+}
+
+/* Buttons */
+
+.button-group{
+
+display:flex;
+
+gap:15px;
+
+margin-top:25px;
+
+}
+
+.button-group button{
+
+flex:1;
+
+padding:16px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:17px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+#calculateBtn{
+
+background:#1565C0;
+
+color:#fff;
+
+}
+
+#calculateBtn:hover{
+
+background:#0D47A1;
+
+transform:translateY(-3px);
+
+}
+
+#resetBtn{
+
+background:#ECEFF1;
+
+color:#333;
+
+}
+
+#resetBtn:hover{
+
+background:#CFD8DC;
+
+transform:translateY(-3px);
+
+}
+
+/* =========================================
+   Result Cards
+========================================= */
+
+.result-grid{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:18px;
+
+margin-top:20px;
+
+}
+
+.result-box{
+
+background:#F8FBFF;
+
+border:1px solid #DCE9F8;
+
+border-radius:16px;
+
+padding:22px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.result-box:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.result-box h4{
+
+font-size:15px;
+
+color:#666;
+
+margin-bottom:10px;
+
+}
+
+.result-box h2{
+
+font-size:30px;
+
+color:#1565C0;
+
+margin-bottom:8px;
+
+}
+
+.result-box p{
+
+font-size:14px;
+
+color:#777;
+
+}
+
+.total{
+
+background:linear-gradient(135deg,#1565C0,#0D47A1);
+
+color:#fff;
+
+}
+
+.total h2,
+.total h4,
+.total p{
+
+color:#fff;
+
+}
+
+/* Investment Summary */
+
+.summary-chart{
+
+margin-top:30px;
+
+display:grid;
+
+grid-template-columns:1fr 280px;
+
+gap:20px;
+
+align-items:center;
+
+}
+
+.summary-left{
+
+background:#F8FBFF;
+
+padding:20px;
+
+border-radius:15px;
+
+border:1px solid #DCE9F8;
+
+}
+
+.summary-left p{
+
+margin:10px 0;
+
+font-size:17px;
+
+}
+
+.summary-left span{
+
+font-weight:bold;
+
+color:#1565C0;
+
+}
+
+.summary-right{
+
+background:#fff;
+
+padding:15px;
+
+border-radius:15px;
+
+border:1px solid #DCE9F8;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+}
+
+#sipChart{
+
+max-width:250px;
+
+max-height:250px;
+
+}
+/* =========================================
+   Quick Actions
+========================================= */
+
+.quick-actions{
+
+max-width:1300px;
+
+margin:40px auto;
+
+padding:0 20px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:30px;
+
+}
+
+/* Action Card */
+
+.action-card,
+.formula-card{
+
+background:#fff;
+
+padding:30px;
+
+border-radius:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+border:1px solid #e7eef8;
+
+}
+
+/* Action Grid */
+
+.action-grid{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:18px;
+
+margin-top:20px;
+
+}
+
+.action-grid button{
+
+padding:18px;
+
+border:none;
+
+border-radius:15px;
+
+background:#1565C0;
+
+color:#fff;
+
+cursor:pointer;
+
+font-size:17px;
+
+font-weight:600;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:10px;
+
+transition:.3s;
+
+}
+
+.action-grid button i{
+
+font-size:20px;
+
+}
+
+.action-grid button:hover{
+
+background:#0D47A1;
+
+transform:translateY(-5px);
+
+box-shadow:0 10px 20px rgba(21,101,192,.25);
+
+}
+
+/* Different Button Colors */
+
+#downloadPdf{
+
+background:#E53935;
+
+}
+
+#copyResult{
+
+background:#1565C0;
+
+}
+
+#printResult{
+
+background:#43A047;
+
+}
+
+#shareResult{
+
+background:#FB8C00;
+
+}
+
+#saveHistory{
+
+background:#6A1B9A;
+
+grid-column:1 / -1;
+
+}
+
+/* =========================================
+   Formula Card
+========================================= */
+
+.formula-box{
+
+margin:25px 0;
+
+padding:25px;
+
+background:#F8FBFF;
+
+border:2px dashed #1565C0;
+
+border-radius:15px;
+
+text-align:center;
+
+}
+
+.formula-box h2{
+
+font-size:30px;
+
+color:#0D47A1;
+
+font-weight:700;
+
+line-height:1.6;
+
+}
+
+/* Fraction */
+
+.fraction{
+
+display:inline-flex;
+
+flex-direction:column;
+
+align-items:center;
+
+margin:0 8px;
+
+}
+
+.line{
+
+width:100%;
+
+height:2px;
+
+background:#1565C0;
+
+margin:6px 0;
+
+}
+
+/* Formula Info */
+
+.formula-info{
+
+margin-top:25px;
+
+}
+
+.formula-info p{
+
+padding:10px 0;
+
+font-size:16px;
+
+border-bottom:1px solid #E3EAF6;
+
+}
+
+.formula-example{
+
+margin-top:25px;
+
+padding:20px;
+
+background:#F4F8FC;
+
+border-left:5px solid #1565C0;
+
+border-radius:10px;
+
+}
+
+.formula-example h4{
+
+color:#1565C0;
+
+margin-bottom:12px;
+
+}
+
+.formula-example p{
+
+line-height:1.8;
+
+color:#555;
+
+}
+
+/* =========================================
+   Hover Animation
+========================================= */
+
+.action-card:hover,
+.formula-card:hover{
+
+transform:translateY(-5px);
+
+transition:.3s;
+
+box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+}
+/* =========================================
+   Complete Guide Section
+========================================= */
+
+.guide-section{
+
+max-width:1300px;
+margin:50px auto;
+padding:0 20px;
+
+}
+
+.guide-card{
+
+background:#ffffff;
+
+padding:35px;
+
+border-radius:20px;
+
+box-shadow:0 12px 35px rgba(0,0,0,.08);
+
+border:1px solid #E4ECF7;
+
+}
+
+/* Guide Grid */
+
+.guide-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+gap:25px;
+
+margin-top:30px;
+
+}
+
+/* Guide Box */
+
+.guide-box{
+
+background:#F8FBFF;
+
+padding:25px;
+
+border-radius:18px;
+
+border:1px solid #D9E7F7;
+
+transition:.35s;
+
+}
+
+.guide-box:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 12px 25px rgba(21,101,192,.12);
+
+}
+
+/* Heading */
+
+.guide-box h4{
+
+font-size:22px;
+
+color:#1565C0;
+
+margin-bottom:15px;
+
+}
+
+/* Paragraph */
+
+.guide-box p{
+
+font-size:16px;
+
+line-height:1.8;
+
+color:#555;
+
+}
+
+/* Image */
+
+.guide-box img{
+
+width:100%;
+
+margin-top:20px;
+
+border-radius:14px;
+
+}
+
+/* List */
+
+.guide-box ul{
+
+margin-top:12px;
+
+padding-left:22px;
+
+}
+
+.guide-box ul li{
+
+margin-bottom:12px;
+
+line-height:1.8;
+
+color:#444;
+
+}
+
+/* =========================================
+   FAQ
+========================================= */
+
+.faq-box details{
+
+background:#fff;
+
+margin-bottom:14px;
+
+border-radius:12px;
+
+border:1px solid #E3EAF6;
+
+overflow:hidden;
+
+}
+
+.faq-box summary{
+
+padding:16px;
+
+font-size:17px;
+
+font-weight:600;
+
+cursor:pointer;
+
+color:#1565C0;
+
+list-style:none;
+
+}
+
+.faq-box summary::-webkit-details-marker{
+
+display:none;
+
+}
+
+.faq-box summary::after{
+
+content:"+";
+
+float:right;
+
+font-size:22px;
+
+font-weight:bold;
+
+}
+
+.faq-box details[open] summary::after{
+
+content:"−";
+
+}
+
+.faq-box details p{
+
+padding:0 16px 16px;
+
+}
+
+/* Button */
+
+.faq-btn{
+
+display:inline-block;
+
+margin-top:20px;
+
+background:#1565C0;
+
+color:#fff;
+
+padding:14px 28px;
+
+border-radius:12px;
+
+font-weight:700;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+.faq-btn:hover{
+
+background:#0D47A1;
+
+transform:translateY(-3px);
+
+}
+
+/* =========================================
+   Premium Highlight
+========================================= */
+
+.guide-box:nth-child(1){
+
+border-left:5px solid #1565C0;
+
+}
+
+.guide-box:nth-child(2){
+
+border-left:5px solid #43A047;
+
+}
+
+.guide-box:nth-child(3){
+
+border-left:5px solid #FB8C00;
+
+}
+
+.guide-box:nth-child(4){
+
+border-left:5px solid #8E24AA;
+
+}
+
+.guide-box:nth-child(5){
+
+border-left:5px solid #E53935;
+
+}
+/* =========================================
+   Related Calculators
+========================================= */
+
+.related-section{
+max-width:1300px;
+margin:60px auto;
+padding:0 20px;
+}
+
+.section-title{
+text-align:center;
+margin-bottom:35px;
+}
+
+.section-title h2{
+font-size:38px;
+color:#0D47A1;
+margin-bottom:10px;
+}
+
+.section-title p{
+font-size:18px;
+color:#666;
+}
+
+.related-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:22px;
+}
+
+.related-card{
+background:#fff;
+padding:28px 20px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+border:1px solid #E5EDF8;
+transition:.35s;
+}
+
+.related-card:hover{
+transform:translateY(-8px);
+box-shadow:0 15px 30px rgba(21,101,192,.15);
+}
+
+.related-card h3{
+margin:15px 0 10px;
+color:#1565C0;
+font-size:22px;
+}
+
+.related-card p{
+font-size:15px;
+color:#666;
+line-height:1.7;
+}
+
+/* =========================================
+   Guide Banner
+========================================= */
+
+.guide-banner{
+
+max-width:1300px;
+margin:70px auto;
+padding:40px;
+
+background:linear-gradient(135deg,#1565C0,#0D47A1);
+
+border-radius:25px;
+
+display:grid;
+grid-template-columns:1.2fr .8fr;
+
+align-items:center;
+
+gap:40px;
+
+color:#fff;
+
+}
+
+.guide-left h2{
+
+font-size:42px;
+
+margin-bottom:18px;
+
+}
+
+.guide-left p{
+
+font-size:18px;
+
+line-height:1.9;
+
+margin-bottom:25px;
+
+}
+
+.guide-left ul{
+
+padding-left:22px;
+
+margin-bottom:30px;
+
+}
+
+.guide-left li{
+
+margin-bottom:12px;
+
+font-size:17px;
+
+}
+
+.guide-button{
+
+display:inline-block;
+
+background:#fff;
+
+color:#1565C0;
+
+padding:16px 35px;
+
+border-radius:50px;
+
+font-size:18px;
+
+font-weight:bold;
+
+transition:.35s;
+
+}
+
+.guide-button:hover{
+
+background:#FFD54F;
+
+color:#000;
+
+transform:translateY(-4px);
+
+}
+
+.guide-right{
+
+text-align:center;
+
+}
+
+.guide-right img{
+
+width:100%;
+max-width:420px;
+
+border-radius:18px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.25);
+
+}
+
+/* =========================================
+   Feature Strip
+========================================= */
+
+.feature-strip{
+
+max-width:1300px;
+
+margin:60px auto;
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+gap:20px;
+
+padding:0 20px;
+
+}
+
+.feature-item{
+
+background:#fff;
+
+padding:25px;
+
+border-radius:18px;
+
+text-align:center;
+
+box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+transition:.3s;
+
+font-size:34px;
+
+}
+
+.feature-item:hover{
+
+transform:translateY(-8px);
+
+background:#1565C0;
+
+color:#fff;
+
+}
+
+.feature-item h4{
+
+margin-top:15px;
+
+font-size:18px;
+
+}
+
+/* =========================================
+   Trust Badges
+========================================= */
+
+.trust-strip{
+
+max-width:1300px;
+
+margin:40px auto;
+
+padding:20px;
+
+display:flex;
+
+justify-content:center;
+
+gap:25px;
+
+flex-wrap:wrap;
+
+}
+
+.trust-strip span{
+
+background:#fff;
+
+padding:12px 22px;
+
+border-radius:50px;
+
+box-shadow:0 6px 15px rgba(0,0,0,.08);
+
+font-weight:600;
+
+color:#1565C0;
+
+}
+
+/* =========================================
+   Animation
+========================================= */
+
+.related-card,
+.feature-item,
+.guide-banner{
+
+animation:fadeUp .6s ease;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+transform:translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
