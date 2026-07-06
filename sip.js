@@ -1,13 +1,13 @@
-/*=========================================
- SIP Calculator
- Part 1
-=========================================*/
+/*=================================================
+ RAJARAM FINANCE CALCULATORS
+ SIP Calculator JS - Part 1
+==================================================*/
 
 "use strict";
 
-// ======================================
+// ================================
 // INPUTS
-// ======================================
+// ================================
 
 const monthlyInvestment =
 document.getElementById("monthlyInvestment");
@@ -18,13 +18,12 @@ document.getElementById("annualReturn");
 const investmentYears =
 document.getElementById("investmentYears");
 
-const startDate =
-document.getElementById("startDate");
-
 const sipDate =
 document.getElementById("sipDate");
 
-// Sliders
+// ================================
+// RANGE SLIDERS
+// ================================
 
 const sipRange =
 document.getElementById("sipRange");
@@ -32,9 +31,12 @@ document.getElementById("sipRange");
 const returnRange =
 document.getElementById("returnRange");
 
-// ======================================
+const yearRange =
+document.getElementById("yearRange");
+
+// ================================
 // RESULT ELEMENTS
-// ======================================
+// ================================
 
 const investedAmount =
 document.getElementById("investedAmount");
@@ -42,21 +44,15 @@ document.getElementById("investedAmount");
 const estimatedReturns =
 document.getElementById("estimatedReturns");
 
+const maturityAmount =
+document.getElementById("maturityAmount");
+
 const totalValue =
 document.getElementById("totalValue");
 
-const summaryInvestment =
-document.getElementById("summaryInvestment");
-
-const summaryReturns =
-document.getElementById("summaryReturns");
-
-const summaryCorpus =
-document.getElementById("summaryCorpus");
-
-// ======================================
+// ================================
 // BUTTONS
-// ======================================
+// ================================
 
 const calculateBtn =
 document.getElementById("calculateBtn");
@@ -64,9 +60,24 @@ document.getElementById("calculateBtn");
 const resetBtn =
 document.getElementById("resetBtn");
 
-// ======================================
+const pdfBtn =
+document.getElementById("downloadPDF");
+
+const printBtn =
+document.getElementById("printResult");
+
+const copyBtn =
+document.getElementById("copyResult");
+
+const shareBtn =
+document.getElementById("shareResult");
+
+const saveBtn =
+document.getElementById("saveHistory");
+
+// ================================
 // FORMAT MONEY
-// ======================================
+// ================================
 
 function formatMoney(value){
 
@@ -82,21 +93,47 @@ maximumFractionDigits:0
 
 }
 
-// ======================================
+// ================================
 // RANGE SYNC
-// ======================================
+// ================================
+
+if(sipRange){
 
 sipRange.addEventListener("input",()=>{
 
 monthlyInvestment.value=sipRange.value;
 
+calculateSIP();
+
 });
+
+}
+
+if(returnRange){
 
 returnRange.addEventListener("input",()=>{
 
 annualReturn.value=returnRange.value;
 
+calculateSIP();
+
 });
+
+}
+
+if(yearRange){
+
+yearRange.addEventListener("input",()=>{
+
+investmentYears.value=yearRange.value;
+
+calculateSIP();
+
+});
+
+}
+
+// Manual Inputs
 
 monthlyInvestment.addEventListener("input",()=>{
 
@@ -110,150 +147,15 @@ returnRange.value=annualReturn.value;
 
 });
 
-// ======================================
+investmentYears.addEventListener("change",()=>{
+
+yearRange.value=investmentYears.value;
+
+});
+
+// ================================
 // DEFAULT VALUES
-// ======================================
-
-monthlyInvestment.value=5000;
-
-annualReturn.value=12;
-
-sipRange.value=5000;
-
-returnRange.value=12;
-/*=========================================
- SIP Calculator
- Part 2
- Professional Calculation Engine
-=========================================*/
-
-// ======================================
-// CALCULATE BUTTON
-// ======================================
-
-calculateBtn.addEventListener("click",calculateSIP);
-
-function calculateSIP(){
-
-const P=parseFloat(monthlyInvestment.value);
-
-const annual=parseFloat(annualReturn.value);
-
-const years=parseInt(investmentYears.value);
-
-// Validation
-
-if(isNaN(P)||isNaN(annual)||isNaN(years)){
-
-alert("Please enter valid values.");
-
-return;
-
-}
-
-if(P<=0||annual<=0||years<=0){
-
-alert("Values must be greater than zero.");
-
-return;
-
-}
-
-// Monthly Rate
-
-const r=annual/12/100;
-
-// Total Months
-
-const n=years*12;
-
-// SIP Formula
-
-const maturity=
-
-P*
-
-((Math.pow(1+r,n)-1)/r)
-
-*
-
-(1+r);
-
-// Total Investment
-
-const invested=P*n;
-
-// Estimated Returns
-
-const returns=maturity-invested;
-
-// ======================================
-// UPDATE RESULT CARDS
-// ======================================
-
-investedAmount.innerHTML=
-
-formatMoney(invested);
-
-estimatedReturns.innerHTML=
-
-formatMoney(returns);
-
-totalValue.innerHTML=
-
-formatMoney(maturity);
-
-// ======================================
-// UPDATE SUMMARY
-// ======================================
-
-summaryInvestment.innerHTML=
-
-formatMoney(invested);
-
-summaryReturns.innerHTML=
-
-formatMoney(returns);
-
-summaryCorpus.innerHTML=
-
-formatMoney(maturity);
-
-// ======================================
-// UPDATE CHART
-// ======================================
-
-updateChart(
-
-invested,
-
-returns,
-
-maturity
-
-);
-
-// ======================================
-// YEAR TABLE
-// ======================================
-
-generateGrowthTable(
-
-P,
-
-annual,
-
-years
-
-);
-
-}
-
-// ======================================
-// RESET BUTTON
-// ======================================
-
-resetBtn.addEventListener("click",()=>{
+// ================================
 
 monthlyInvestment.value=5000;
 
@@ -265,54 +167,202 @@ sipRange.value=5000;
 
 returnRange.value=12;
 
+if(yearRange){
+
+yearRange.value=20;
+
+}
+/*=================================================
+ SIP Calculator
+ Part 2
+ Calculation Engine
+==================================================*/
+
+// =====================================
+// CALCULATE BUTTON
+// =====================================
+
+calculateBtn.addEventListener("click", calculateSIP);
+
+function calculateSIP(){
+
+const P = parseFloat(monthlyInvestment.value);
+
+const annual = parseFloat(annualReturn.value);
+
+const years = parseFloat(investmentYears.value);
+
+// Validation
+
+if(isNaN(P) || isNaN(annual) || isNaN(years)){
+
+return;
+
+}
+
+const r = annual / 12 / 100;
+
+const n = years * 12;
+
+// SIP Formula
+
+const maturity =
+
+P *
+
+((Math.pow(1 + r, n) - 1) / r) *
+
+(1 + r);
+
+const invested = P * n;
+
+const returns = maturity - invested;
+
+// =============================
+// RESULT UPDATE
+// =============================
+
+investedAmount.innerHTML =
+
+formatMoney(invested);
+
+estimatedReturns.innerHTML =
+
+formatMoney(returns);
+
+maturityAmount.innerHTML =
+
+formatMoney(maturity);
+
+totalValue.innerHTML =
+
+formatMoney(maturity);
+
+// =============================
+// UPDATE CHART
+// =============================
+
+updateChart(
+
+invested,
+
+returns,
+
+maturity
+
+);
+
+// =============================
+// UPDATE TABLE
+// =============================
+
+generateProjection(
+
+P,
+
+annual,
+
+years
+
+);
+
+}
+
+// =====================================
+// RESET BUTTON
+// =====================================
+
+resetBtn.addEventListener("click",()=>{
+
+monthlyInvestment.value = 5000;
+
+annualReturn.value = 12;
+
+investmentYears.value = 20;
+
+sipRange.value = 5000;
+
+returnRange.value = 12;
+
+if(yearRange){
+
+yearRange.value = 20;
+
+}
+
 calculateSIP();
 
 });
 
-// ======================================
+// =====================================
 // AUTO CALCULATE
-// ======================================
+// =====================================
 
-monthlyInvestment.addEventListener("input",calculateSIP);
+monthlyInvestment.addEventListener(
 
-annualReturn.addEventListener("input",calculateSIP);
+"input",
 
-investmentYears.addEventListener("change",calculateSIP);
+calculateSIP
 
-// ======================================
-// INITIAL LOAD
-// ======================================
+);
 
-window.onload=()=>{
+annualReturn.addEventListener(
+
+"input",
+
+calculateSIP
+
+);
+
+investmentYears.addEventListener(
+
+"change",
+
+calculateSIP
+
+);
+
+// =====================================
+// FIRST LOAD
+// =====================================
+
+window.addEventListener(
+
+"load",
+
+()=>{
 
 calculateSIP();
 
-};
-/*=========================================
+}
+
+);
+/*=================================================
  SIP Calculator
  Part 3
- Chart.js + Growth Table
-=========================================*/
+ Growth Chart + Projection Table + Pie Chart
+==================================================*/
 
-let sipChart;
+let growthChart;
+let allocationChart;
 
-// ======================================
+// =====================================
 // GROWTH CHART
-// ======================================
+// =====================================
 
-function updateChart(invested,returns,maturity){
+function updateChart(invested, returns, maturity){
 
 const chartCanvas=document.getElementById("sipChart");
 
 if(!chartCanvas) return;
 
-if(sipChart){
+if(growthChart){
 
-sipChart.destroy();
+growthChart.destroy();
 
 }
 
-sipChart=new Chart(chartCanvas,{
+growthChart=new Chart(chartCanvas,{
 
 type:"line",
 
@@ -342,9 +392,9 @@ data:[
 
 maturity*0.18,
 
-maturity*0.42,
+maturity*0.43,
 
-maturity*0.71,
+maturity*0.72,
 
 maturity
 
@@ -358,11 +408,11 @@ fill:true,
 
 borderWidth:4,
 
+tension:.4,
+
 pointRadius:5,
 
-pointHoverRadius:7,
-
-tension:.40
+pointBackgroundColor:"#1565C0"
 
 }]
 
@@ -378,37 +428,7 @@ plugins:{
 
 legend:{
 
-display:true,
-
-position:"top"
-
-}
-
-},
-
-interaction:{
-
-mode:"index",
-
-intersect:false
-
-},
-
-scales:{
-
-y:{
-
-beginAtZero:true
-
-},
-
-x:{
-
-grid:{
-
-display:false
-
-}
+display:true
 
 }
 
@@ -418,37 +438,97 @@ display:false
 
 });
 
+// ===============================
+// PIE CHART
+// ===============================
+
+const pie=document.getElementById("allocationChart");
+
+if(!pie) return;
+
+if(allocationChart){
+
+allocationChart.destroy();
+
 }
 
-// ======================================
-// YEAR-WISE TABLE
-// ======================================
+allocationChart=new Chart(pie,{
 
-function generateGrowthTable(
+type:"doughnut",
+
+data:{
+
+labels:[
+
+"Investment",
+
+"Returns"
+
+],
+
+datasets:[{
+
+data:[
+
+invested,
+
+returns
+
+],
+
+backgroundColor:[
+
+"#1565C0",
+
+"#22C55E"
+
+],
+
+borderWidth:0
+
+}]
+
+},
+
+options:{
+
+responsive:true,
+
+maintainAspectRatio:false,
+
+cutout:"70%"
+
+}
+
+});
+
+}
+
+// =====================================
+// YEAR WISE PROJECTION
+// =====================================
+
+function generateProjection(
 
 P,
 
-annualRate,
+annual,
 
 years
 
 ){
 
-const table=document.getElementById("growthTable");
+const tbody=document.getElementById("growthTable");
 
-if(!table) return;
+if(!tbody) return;
 
-table.innerHTML="";
+tbody.innerHTML="";
 
-const r=annualRate/12/100;
+const r=annual/12/100;
 
-const points=[1,5,10,15,20];
+for(let y=1;y<=years;y++){
 
-points.forEach(year=>{
-
-if(year>years) return;
-
-const months=year*12;
+const months=y*12;
 
 const invested=P*months;
 
@@ -462,17 +542,19 @@ P*
 
 (1+r);
 
-const profit=maturity-invested;
+const returns=
 
-table.innerHTML+=`
+maturity-invested;
+
+tbody.innerHTML+=`
 
 <tr>
 
-<td>${year}</td>
+<td>${y}</td>
 
 <td>${formatMoney(invested)}</td>
 
-<td>${formatMoney(profit)}</td>
+<td>${formatMoney(returns)}</td>
 
 <td>${formatMoney(maturity)}</td>
 
@@ -480,91 +562,210 @@ table.innerHTML+=`
 
 `;
 
-});
+}
 
 }
-/*=========================================
+/*=================================================
  SIP Calculator
  Part 4
- PDF • Print • Share • Save History
-=========================================*/
+ PDF • Print • Copy • Share • Save
+==================================================*/
 
 // ======================================
-// BUTTONS
-// ======================================
-
-const pdfBtn=document.getElementById("downloadPDF");
-
-const printBtn=document.getElementById("printResult");
-
-const copyBtn=document.getElementById("copyResult");
-
-const shareBtn=document.getElementById("shareResult");
-
-const saveBtn=document.getElementById("saveHistory");
-
-// ======================================
-// DOWNLOAD REPORT
+// DOWNLOAD PDF
 // ======================================
 
 if(pdfBtn){
 
-pdfBtn.addEventListener("click",downloadReport);
+pdfBtn.addEventListener("click",downloadPDF);
 
 }
 
-function downloadReport(){
+async function downloadPDF(){
 
-const report=`
+const { jsPDF } = window.jspdf;
 
-SIP CALCULATOR REPORT
+const pdf=new jsPDF("p","mm","a4");
 
-===========================
+pdf.setFont("helvetica","bold");
 
-Monthly SIP :
-₹${monthlyInvestment.value}
+pdf.setFontSize(20);
 
-Expected Return :
-${annualReturn.value}%
+pdf.text("SIP Investment Report",20,20);
 
-Investment Period :
-${investmentYears.value} Years
+pdf.setFontSize(11);
 
----------------------------
+pdf.text(
 
-Invested Amount
+"Generated by Rajaram Finance Calculators",
 
-${investedAmount.innerText}
+20,
 
-Estimated Returns
+28
 
-${estimatedReturns.innerText}
+);
 
-Maturity Amount
+pdf.line(20,32,190,32);
 
-${totalValue.innerText}
+// Investment Details
 
-Generated On
+pdf.setFontSize(14);
 
-${new Date().toLocaleString()}
+pdf.text("Investment Details",20,42);
 
-`;
+pdf.setFontSize(11);
 
-const blob=new Blob([report],{
+pdf.text(
 
-type:"text/plain"
+"Monthly Investment : ₹"+
 
-});
+monthlyInvestment.value,
 
-const link=document.createElement("a");
+20,
 
-link.href=URL.createObjectURL(blob);
+52
 
-link.download="SIP_Report.txt";
+);
 
-link.click();
+pdf.text(
 
-showToast("Report Downloaded");
+"Expected Return : "+
+
+annualReturn.value+"%",
+
+20,
+
+60
+
+);
+
+pdf.text(
+
+"Investment Period : "+
+
+investmentYears.value+
+
+" Years",
+
+20,
+
+68
+
+);
+
+pdf.text(
+
+"SIP Date : "+
+
+sipDate.value,
+
+20,
+
+76
+
+);
+
+// Results
+
+pdf.setFontSize(14);
+
+pdf.text("Results",20,92);
+
+pdf.setFontSize(11);
+
+pdf.text(
+
+"Total Investment : "+
+
+investedAmount.innerText,
+
+20,
+
+102
+
+);
+
+pdf.text(
+
+"Estimated Returns : "+
+
+estimatedReturns.innerText,
+
+20,
+
+110
+
+);
+
+pdf.text(
+
+"Maturity Amount : "+
+
+maturityAmount.innerText,
+
+20,
+
+118
+
+);
+
+// Disclaimer
+
+pdf.setFontSize(12);
+
+pdf.text("Disclaimer",20,138);
+
+pdf.setFontSize(10);
+
+pdf.text(
+
+"The calculations shown in this report are estimates for educational purposes only.",
+
+20,
+
+146
+
+);
+
+pdf.text(
+
+"Mutual Fund investments are subject to market risks.",
+
+20,
+
+154
+
+);
+
+pdf.text(
+
+"Please read all scheme related documents carefully before investing.",
+
+20,
+
+162
+
+);
+
+// Footer
+
+pdf.setFontSize(10);
+
+pdf.text(
+
+"Generated on : "+
+
+new Date().toLocaleString(),
+
+20,
+
+280
+
+);
+
+pdf.save("SIP_Report.pdf");
+
+showToast("PDF Downloaded");
 
 }
 
@@ -590,31 +791,23 @@ if(copyBtn){
 
 copyBtn.onclick=()=>{
 
-const result=`
+const text=
 
-Monthly SIP : ₹${monthlyInvestment.value}
+`Monthly SIP : ₹${monthlyInvestment.value}
 
 Expected Return : ${annualReturn.value}%
 
-Investment Period : ${investmentYears.value} Years
+Years : ${investmentYears.value}
 
-Invested Amount
+Total Investment : ${investedAmount.innerText}
 
-${investedAmount.innerText}
+Estimated Returns : ${estimatedReturns.innerText}
 
-Estimated Returns
+Maturity Amount : ${maturityAmount.innerText}`;
 
-${estimatedReturns.innerText}
+navigator.clipboard.writeText(text);
 
-Maturity Amount
-
-${totalValue.innerText}
-
-`;
-
-navigator.clipboard.writeText(result);
-
-showToast("Result Copied");
+showToast("Copied Successfully");
 
 };
 
@@ -628,21 +821,17 @@ if(shareBtn){
 
 shareBtn.onclick=async()=>{
 
-const text=`
+const shareText=
 
-SIP Calculation
+`SIP Calculator Result
 
 Monthly SIP : ₹${monthlyInvestment.value}
 
 Expected Return : ${annualReturn.value}%
 
-Years : ${investmentYears.value}
+Investment Period : ${investmentYears.value} Years
 
-Maturity Amount
-
-${totalValue.innerText}
-
-`;
+Maturity Amount : ${maturityAmount.innerText}`;
 
 if(navigator.share){
 
@@ -650,7 +839,7 @@ await navigator.share({
 
 title:"SIP Calculator",
 
-text:text,
+text:shareText,
 
 url:location.href
 
@@ -658,7 +847,7 @@ url:location.href
 
 }else{
 
-navigator.clipboard.writeText(text);
+navigator.clipboard.writeText(shareText);
 
 showToast("Copied for Sharing");
 
@@ -690,15 +879,15 @@ date:new Date().toLocaleString(),
 
 sip:monthlyInvestment.value,
 
-returns:annualReturn.value,
+returnRate:annualReturn.value,
 
 years:investmentYears.value,
 
 investment:investedAmount.innerText,
 
-profit:estimatedReturns.innerText,
+returns:estimatedReturns.innerText,
 
-maturity:totalValue.innerText
+maturity:maturityAmount.innerText
 
 });
 
@@ -715,61 +904,32 @@ showToast("Saved Successfully");
 };
 
 }
-
-// ======================================
-// TOAST
-// ======================================
-
-function showToast(message){
-
-const toast=document.getElementById("toast");
-
-if(!toast) return;
-
-toast.innerHTML=message;
-
-toast.classList.add("show");
-
-setTimeout(()=>{
-
-toast.classList.remove("show");
-
-},2500);
-
-}
-/*=========================================
+/*=================================================
  SIP Calculator
  Part 5 (Final)
- History • Dark Mode • Back To Top
-=========================================*/
+ History • Dark Mode • Welcome • Back To Top
+==================================================*/
 
 // ======================================
 // HISTORY
 // ======================================
 
-const historyBtn=document.getElementById("saveHistory");
 const historyModal=document.getElementById("historyModal");
 const historyList=document.getElementById("historyList");
 const closeHistory=document.getElementById("closeHistory");
 const clearHistory=document.getElementById("clearHistory");
 
-// Load History
-
 function loadHistory(){
 
 if(!historyList) return;
 
-let data=JSON.parse(
-
-localStorage.getItem("sipHistory")
-
-)||[];
+const data=JSON.parse(localStorage.getItem("sipHistory"))||[];
 
 historyList.innerHTML="";
 
 if(data.length===0){
 
-historyList.innerHTML="<p>No Saved Calculations</p>";
+historyList.innerHTML="<p>No saved calculations found.</p>";
 
 return;
 
@@ -785,13 +945,9 @@ historyList.innerHTML+=`
 
 <p><b>Monthly SIP:</b> ₹${item.sip}</p>
 
-<p><b>Return:</b> ${item.returns}%</p>
+<p><b>Return:</b> ${item.returnRate}%</p>
 
 <p><b>Years:</b> ${item.years}</p>
-
-<p><b>Investment:</b> ${item.investment}</p>
-
-<p><b>Profit:</b> ${item.profit}</p>
 
 <p><b>Maturity:</b> ${item.maturity}</p>
 
@@ -805,11 +961,9 @@ historyList.innerHTML+=`
 
 }
 
-// Open History
+if(saveBtn){
 
-if(historyBtn){
-
-historyBtn.addEventListener("dblclick",()=>{
+saveBtn.addEventListener("dblclick",()=>{
 
 loadHistory();
 
@@ -818,8 +972,6 @@ historyModal.style.display="flex";
 });
 
 }
-
-// Close
 
 if(closeHistory){
 
@@ -841,21 +993,15 @@ historyModal.style.display="none";
 
 };
 
-// Clear
-
 if(clearHistory){
 
 clearHistory.onclick=()=>{
-
-if(confirm("Delete all saved history?")){
 
 localStorage.removeItem("sipHistory");
 
 loadHistory();
 
 showToast("History Cleared");
-
-}
 
 };
 
@@ -903,29 +1049,25 @@ document.body.classList.contains("dark")
 // BACK TO TOP
 // ======================================
 
-const topBtn=document.getElementById("backToTop");
+const backBtn=document.getElementById("backToTop");
 
 window.addEventListener("scroll",()=>{
 
-if(!topBtn) return;
+if(window.scrollY>300){
 
-topBtn.style.display=
+backBtn.style.display="block";
 
-window.scrollY>300
+}else{
 
-?
+backBtn.style.display="none";
 
-"block"
-
-:
-
-"none";
+}
 
 });
 
-if(topBtn){
+if(backBtn){
 
-topBtn.onclick=()=>{
+backBtn.onclick=()=>{
 
 window.scrollTo({
 
@@ -940,7 +1082,55 @@ behavior:"smooth"
 }
 
 // ======================================
-// KEYBOARD SHORTCUT
+// TOAST
+// ======================================
+
+function showToast(msg){
+
+const toast=document.getElementById("toast");
+
+if(!toast) return;
+
+toast.innerHTML=msg;
+
+toast.classList.add("show");
+
+setTimeout(()=>{
+
+toast.classList.remove("show");
+
+},2500);
+
+}
+
+// ======================================
+// WELCOME SCREEN
+// ======================================
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+const welcome=document.getElementById("welcomeScreen");
+
+if(welcome){
+
+welcome.style.opacity="0";
+
+setTimeout(()=>{
+
+welcome.style.display="none";
+
+},500);
+
+}
+
+},2500);
+
+});
+
+// ======================================
+// KEYBOARD SHORTCUTS
 // ======================================
 
 document.addEventListener("keydown",(e)=>{
@@ -960,37 +1150,13 @@ resetBtn.click();
 });
 
 // ======================================
-// AUTO CALCULATE
+// INITIAL LOAD
 // ======================================
 
-[
-monthlyInvestment,
-annualReturn,
-investmentYears
-].forEach(el=>{
-
-el.addEventListener("input",calculateSIP);
-
-});
-
-// ======================================
-// PAGE LOAD
-// ======================================
-
-window.addEventListener("load",()=>{
+window.onload=()=>{
 
 calculateSIP();
 
-showToast("Welcome to SIP Calculator");
+console.log("Rajaram Finance SIP Calculator Loaded");
 
-});
-
-// ======================================
-// CONSOLE
-// ======================================
-
-console.log(
-
-"Rajaram Finance SIP Calculator Loaded Successfully"
-
-);
+};
