@@ -799,7 +799,15 @@ margin-bottom:8px;
 
 .summary-total h2{
 
-font-size:34px;
+font-size:32px;
+
+color:#ffffff;
+
+font-weight:700;
+
+margin-top:8px;
+
+word-break:break-word;
 
 }
 
