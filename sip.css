@@ -767,9 +767,9 @@ font-weight:700;
 
 .summary-total{
 
-margin-top:25px;
+margin-top:20px;
 
-padding:20px;
+padding:18px;
 
 border-radius:18px;
 
@@ -778,6 +778,14 @@ background:linear-gradient(135deg,#1565C0,#0B3D91);
 color:#fff;
 
 text-align:center;
+
+min-height:130px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
 
 }
 
