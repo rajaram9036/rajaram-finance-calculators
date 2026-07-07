@@ -1,543 +1,1028 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Casio Style Calculator | Rajaram Finance Calculators</title>
+<title>All Finance Calculators | Rajaram Finance Calculators</title>
 
-<meta name="description" content="Professional Casio Style Online Calculator with History, PDF Download and Dark Mode.">
+<meta name="description"
+content="Free SIP, EMI, FD, RD, PPF, GST, Tax and Loan Calculators">
 
-<link rel="stylesheet" href="calculator.css">
+<meta name="theme-color"
+content="#1E40AF">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+:root{
+
+--primary:#1E40AF;
+--secondary:#10B981;
+--bg:#F5F7FB;
+--card:#ffffff;
+--text:#111827;
+--radius:20px;
+
+}
+
+body{
+
+background:var(--bg);
+color:var(--text);
+
+}
+
+/* Header */
+
+header{
+
+position:sticky;
+top:0;
+z-index:999;
+
+background:#fff;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:15px 18px;
+
+box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+}
+
+.logo{
+
+display:flex;
+align-items:center;
+gap:12px;
+
+}
+
+.logo-icon{
+
+width:48px;
+height:48px;
+
+border-radius:15px;
+
+background:linear-gradient(135deg,#1E40AF,#10B981);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+color:#fff;
+
+font-size:22px;
+
+}
+
+.logo h2{
+
+font-size:21px;
+color:#1E40AF;
+
+}
+
+.logo small{
+
+display:block;
+color:#64748B;
+
+}
+
+.actions{
+
+display:flex;
+gap:10px;
+
+}
+
+.actions button{
+
+width:44px;
+height:44px;
+
+border:none;
+
+border-radius:14px;
+
+background:#EEF4FF;
+
+cursor:pointer;
+
+font-size:18px;
+
+}
+
+/* Hero */
+
+.hero{
+
+margin:20px;
+
+padding:35px 22px;
+
+border-radius:28px;
+
+background:linear-gradient(135deg,#1E40AF,#10B981);
+
+color:#fff;
+
+text-align:center;
+
+}
+
+.hero h1{
+
+font-size:34px;
+
+font-weight:800;
+
+margin-bottom:12px;
+
+}
+
+.hero p{
+
+opacity:.95;
+
+margin-bottom:20px;
+
+}
+
+.hero a{
+
+display:inline-block;
+
+padding:14px 28px;
+
+border-radius:14px;
+
+background:#fff;
+
+color:#1E40AF;
+
+font-weight:700;
+
+text-decoration:none;
+
+}
+
+/* Search */
+
+.search{
+
+padding:0 20px 20px;
+
+}
+
+.search-box{
+
+background:#fff;
+
+display:flex;
+
+align-items:center;
+
+padding:16px;
+
+border-radius:18px;
+
+box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+.search-box i{
+
+margin-right:12px;
+
+color:#64748B;
+
+}
+
+.search-box input{
+
+width:100%;
+
+border:none;
+
+outline:none;
+
+font-size:16px;
+
+}
+
+/* Category Chips */
+
+.categories{
+
+display:flex;
+
+gap:12px;
+
+overflow:auto;
+
+padding:0 20px 20px;
+
+scrollbar-width:none;
+
+}
+
+.categories::-webkit-scrollbar{
+
+display:none;
+
+}
+
+.categories button{
+
+border:none;
+
+padding:12px 18px;
+
+border-radius:999px;
+
+background:#fff;
+
+font-weight:600;
+
+cursor:pointer;
+
+white-space:nowrap;
+
+box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+}
+
+.categories button.active{
+
+background:#1E40AF;
+
+color:#fff;
+
+}
+
+.section{
+
+padding:0 20px 25px;
+
+}
+
+.section h2{
+
+font-size:28px;
+
+margin-bottom:18px;
+
+}
+
+</style>
 
 </head>
 
 <body>
 
-<header class="top-header">
+<header>
 
 <div class="logo">
 
-🧮 Rajaram Finance Calculators
+<div class="logo-icon">
+
+<i class="fa-solid fa-calculator"></i>
 
 </div>
 
-<nav>
+<div>
 
-<a href="index.html">🏠 Home</a>
+<h2>Rajaram</h2>
 
-<a href="articles.html">📚 Articles</a>
+<small>All Calculators</small>
 
-<a href="contact.html">📞 Contact</a>
+</div>
 
-</nav>
+</div>
+
+<div class="actions">
+
+<button id="themeBtn">🌙</button>
+
+<button id="shareBtn">
+
+<i class="fa-solid fa-share-nodes"></i>
+
+</button>
+
+</div>
 
 </header>
 
 <section class="hero">
 
-<h1>CASIO STYLE</h1>
-
-<h2>PREMIUM CALCULATOR</h2>
+<h1>All Finance Calculators</h1>
 
 <p>
 
-Professional • Accurate • Fast • Mobile Friendly
+Find every financial calculator in one place.
 
 </p>
 
+<a href="index.html">
+
+🏠 Back to Home
+
+</a>
+
 </section>
 
-<div class="main-container">
+<div class="search">
 
-<!-- Calculator -->
+<div class="search-box">
 
-<div class="calculator">
-
-<div class="solar-panel"></div>
-
-<div class="screen">
+<i class="fa-solid fa-magnifying-glass"></i>
 
 <input
 type="text"
-id="display"
-readonly
-placeholder="0">
-
-</div>
-
-<div class="brand">
-
-<h2>CASIO</h2>
-
-<p>fx-991ES PLUS</p>
-
-</div>
-
-<div class="keys">
-
-<button class="gray" onclick="clearDisplay()">AC</button>
-
-<button class="gray" onclick="backspace()">⌫</button>
-
-<button class="blue" onclick="press('%')">%</button>
-
-<button class="blue" onclick="press('/')">÷</button>
-
-<button onclick="press('7')">7</button>
-
-<button onclick="press('8')">8</button>
-
-<button onclick="press('9')">9</button>
-
-<button class="blue" onclick="press('*')">×</button>
-
-<button onclick="press('4')">4</button>
-
-<button onclick="press('5')">5</button>
-
-<button onclick="press('6')">6</button>
-
-<button class="blue" onclick="press('-')">−</button>
-
-<button onclick="press('1')">1</button>
-
-<button onclick="press('2')">2</button>
-
-<button onclick="press('3')">3</button>
-
-<button class="blue" onclick="press('+')">+</button>
-
-<button onclick="press('00')">00</button>
-
-<button onclick="press('0')">0</button>
-
-<button onclick="press('.')">.</button>
-
-<button class="equal" onclick="calculate()">=</button>
-<!-- Scientific Keys -->
-
-<button class="gray" onclick="press('(')">(</button>
-
-<button class="gray" onclick="press(')')">)</button>
-
-<button class="orange" onclick="squareRoot()">√</button>
-
-<button class="orange" onclick="square()">x²</button>
-
-<button class="orange" onclick="power()">xʸ</button>
-
-<button class="orange" onclick="inverse()">1/x</button>
-
-<button class="orange" onclick="insertPi()">π</button>
-
-<button class="orange" onclick="insertAns()">Ans</button>
-
-<button class="memory" onclick="memoryClear()">MC</button>
-
-<button class="memory" onclick="memoryRecall()">MR</button>
-
-<button class="memory" onclick="memoryAdd()">M+</button>
-
-<button class="memory" onclick="memorySubtract()">M-</button>
+placeholder="Search calculator...">
 
 </div>
 
 </div>
 
-<!-- Right Side Panel -->
+<div class="categories">
 
-<div class="side-panel">
+<button class="active">All</button>
 
-<div class="phone-preview">
+<button>Investment</button>
 
-<h3>📱 Mobile View</h3>
+<button>Loan</button>
 
-<div class="mini-screen">
+<button>Tax</button>
 
-<span id="miniDisplay">15+50+585+845</span>
-
-<h1 id="miniResult">1495</h1>
+<button>Utility</button>
 
 </div>
 
+<section class="section">
+
+<h2>📊 Investment Calculators</h2>
+<div class="calculator-grid">
+
+<a href="sip.html" class="calc-card investment">
+
+<div class="icon blue">
+<i class="fa-solid fa-chart-line"></i>
 </div>
 
-<div class="dark-preview">
+<h3>SIP Calculator</h3>
 
-<h3>🌙 Dark Mode</h3>
+<p>Calculate future value of monthly SIP investment.</p>
 
-<div class="mini-screen dark-box">
+<span>Open Calculator →</span>
 
-<span>15+50+585+845</span>
+</a>
 
-<h1>1495</h1>
+<a href="mutual-fund.html" class="calc-card investment">
 
+<div class="icon green">
+<i class="fa-solid fa-sack-dollar"></i>
 </div>
 
+<h3>Mutual Fund</h3>
+
+<p>Estimate mutual fund investment returns.</p>
+
+<span>Open Calculator →</span>
+
+</a>
+
+<a href="fd.html" class="calc-card investment">
+
+<div class="icon orange">
+<i class="fa-solid fa-building-columns"></i>
 </div>
 
+<h3>FD Calculator</h3>
+
+<p>Know FD maturity amount and interest.</p>
+
+<span>Open Calculator →</span>
+
+</a>
+
+<a href="rd.html" class="calc-card investment">
+
+<div class="icon purple">
+<i class="fa-solid fa-piggy-bank"></i>
 </div>
 
-</div>
-<!-- ===== History Panel ===== -->
+<h3>RD Calculator</h3>
 
-<div class="history-panel">
+<p>Recurring Deposit maturity calculator.</p>
 
-<h2>🕘 Calculation History</h2>
+<span>Open Calculator →</span>
 
-<ul id="historyList">
+</a>
 
-<li>No calculations yet.</li>
+<a href="ppf.html" class="calc-card investment">
 
-</ul>
-
-<div class="history-buttons">
-
-<button onclick="copyResult()">
-
-📋 Copy Result
-
-</button>
-
-<button onclick="downloadPDF()">
-
-📄 Download PDF
-
-</button>
-
-<button onclick="printHistory()">
-
-🖨 Print
-
-</button>
-
-<button onclick="clearHistory()">
-
-🗑 Clear History
-
-</button>
-
-<button onclick="toggleDarkMode()">
-
-🌙 Dark Mode
-
-</button>
-
+<div class="icon teal">
+<i class="fa-solid fa-landmark"></i>
 </div>
 
-</div>
+<h3>PPF Calculator</h3>
 
-<!-- ===== Quick Features ===== -->
+<p>Public Provident Fund maturity calculator.</p>
 
-<section class="feature-strip">
+<span>Open Calculator →</span>
 
-<div class="feature-card">
-
-🧮
-
-<h3>Full Expression</h3>
-
-<p>15+50+585+845 = 1495</p>
-
-</div>
-
-<div class="feature-card">
-
-🕘
-
-<h3>History</h3>
-
-<p>All calculations saved automatically.</p>
-
-</div>
-
-<div class="feature-card">
-
-📄
-
-<h3>PDF Export</h3>
-
-<p>Download complete calculation history.</p>
-
-</div>
-
-<div class="feature-card">
-
-⌨️
-
-<h3>Keyboard Support</h3>
-
-<p>Works with keyboard shortcuts.</p>
-
-</div>
-
-<div class="feature-card">
-
-🌙
-
-<h3>Dark Mode</h3>
-
-<p>One click night mode.</p>
-
-</div>
-
-</section>
-<!-- ===== How to Use ===== -->
-
-<section class="info-section">
-
-<h2>📖 How to Use This Calculator</h2>
-
-<div class="info-grid">
-
-<div class="info-card">
-
-<span>1️⃣</span>
-
-<h3>Enter Numbers</h3>
-
-<p>Use your keyboard or the on-screen buttons to enter numbers.</p>
-
-</div>
-
-<div class="info-card">
-
-<span>2️⃣</span>
-
-<h3>Select Operation</h3>
-
-<p>Choose +, −, ×, ÷, %, √ or any scientific function.</p>
-
-</div>
-
-<div class="info-card">
-
-<span>3️⃣</span>
-
-<h3>Press =</h3>
-
-<p>Tap the equals button to instantly calculate your answer.</p>
-
-</div>
-
-<div class="info-card">
-
-<span>4️⃣</span>
-
-<h3>Save History</h3>
-
-<p>Your calculations are automatically added to the History panel.</p>
-
-</div>
+</a>
 
 </div>
 
 </section>
 
+<style>
 
-<!-- ===== Features ===== -->
+.calculator-grid{
 
-<section class="info-section">
+display:grid;
 
-<h2>⭐ Calculator Features</h2>
+grid-template-columns:repeat(2,1fr);
 
-<div class="info-grid">
+gap:18px;
 
-<div class="info-card">
+}
 
-🧮
+.calc-card{
 
-<h3>Basic Calculator</h3>
+background:#fff;
 
-<p>Addition, Subtraction, Multiplication and Division.</p>
+padding:22px 16px;
 
+border-radius:22px;
+
+text-align:center;
+
+text-decoration:none;
+
+color:#111827;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
+
+.calc-card:hover{
+
+transform:translateY(-5px);
+
+}
+
+.icon{
+
+width:64px;
+
+height:64px;
+
+margin:auto;
+
+margin-bottom:16px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+border-radius:18px;
+
+font-size:26px;
+
+color:#fff;
+
+}
+
+.blue{
+background:#2563EB;
+}
+
+.green{
+background:#10B981;
+}
+
+.orange{
+background:#F59E0B;
+}
+
+.purple{
+background:#8B5CF6;
+}
+
+.teal{
+background:#14B8A6;
+}
+
+.calc-card h3{
+
+font-size:20px;
+
+margin-bottom:10px;
+
+}
+
+.calc-card p{
+
+font-size:14px;
+
+line-height:1.6;
+
+color:#64748B;
+
+margin-bottom:15px;
+
+}
+
+.calc-card span{
+
+font-weight:700;
+
+color:#1E40AF;
+
+}
+
+@media(min-width:768px){
+
+.calculator-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+}
+
+</style>
+
+<!-- =========================
+LOAN CALCULATORS
+========================= -->
+
+<section class="section">
+
+<h2>🏠 Loan Calculators</h2>
+<div class="calculator-grid">
+
+<a href="emi.html" class="calc-card loan">
+
+<div class="icon blue">
+<i class="fa-solid fa-house"></i>
 </div>
 
-<div class="info-card">
+<h3>EMI Calculator</h3>
 
-📐
+<p>Calculate monthly EMI for any loan.</p>
 
-<h3>Scientific Functions</h3>
+<span>Open Calculator →</span>
 
-<p>Square, Square Root, Power, Percentage and Brackets.</p>
+</a>
 
+<a href="home-loan.html" class="calc-card loan">
+
+<div class="icon green">
+<i class="fa-solid fa-home"></i>
 </div>
 
-<div class="info-card">
+<h3>Home Loan</h3>
 
-📄
+<p>Estimate home loan EMI and interest.</p>
 
-<h3>Export PDF</h3>
+<span>Open Calculator →</span>
 
-<p>Download your complete calculation history as a PDF.</p>
+</a>
 
+<a href="car-loan.html" class="calc-card loan">
+
+<div class="icon orange">
+<i class="fa-solid fa-car"></i>
 </div>
 
-<div class="info-card">
+<h3>Car Loan</h3>
 
-🌙
+<p>Know your monthly car loan EMI.</p>
 
-<h3>Dark Mode</h3>
+<span>Open Calculator →</span>
 
-<p>Switch between Light and Dark themes with one click.</p>
+</a>
 
+<a href="personal-loan.html" class="calc-card loan">
+
+<div class="icon purple">
+<i class="fa-solid fa-wallet"></i>
 </div>
 
-<div class="info-card">
+<h3>Personal Loan</h3>
 
-📱
+<p>Calculate personal loan repayment.</p>
 
-<h3>Responsive Design</h3>
+<span>Open Calculator →</span>
 
-<p>Optimized for Mobile, Tablet and Desktop devices.</p>
+</a>
 
+<a href="education-loan.html" class="calc-card loan">
+
+<div class="icon teal">
+<i class="fa-solid fa-graduation-cap"></i>
 </div>
 
-<div class="info-card">
+<h3>Education Loan</h3>
 
-⚡
+<p>Plan education loan EMI easily.</p>
 
-<h3>Fast Performance</h3>
+<span>Open Calculator →</span>
 
-<p>Instant calculations with no page reload.</p>
+</a>
 
+<a href="gold-loan.html" class="calc-card loan">
+
+<div class="icon red">
+<i class="fa-solid fa-coins"></i>
 </div>
+
+<h3>Gold Loan</h3>
+
+<p>Estimate gold loan EMI & repayment.</p>
+
+<span>Open Calculator →</span>
+
+</a>
 
 </div>
 
 </section>
 
+<!-- =========================
+TAX CALCULATORS
+========================= -->
 
-<!-- ===== FAQ ===== -->
+<section class="section">
 
-<section class="info-section">
+<h2>🧾 Tax Calculators</h2>
 
-<h2>❓ Frequently Asked Questions</h2>
+<div class="calculator-grid">
 
-<div class="faq-box">
+<a href="income-tax.html" class="calc-card tax">
 
-<h3>Is this calculator free?</h3>
+<div class="icon blue">
+<i class="fa-solid fa-file-invoice-dollar"></i>
+</div>
 
-<p>✅ Yes, it is completely free to use.</p>
+<h3>Income Tax</h3>
 
-<h3>Can I download my history?</h3>
+<p>Estimate your income tax instantly.</p>
 
-<p>✅ Yes, you can download it as a PDF.</p>
+<span>Open Calculator →</span>
 
-<h3>Does it work on mobile?</h3>
+</a>
 
-<p>✅ Yes, it is fully responsive.</p>
+<a href="gst.html" class="calc-card tax">
 
-<h3>Can I use keyboard shortcuts?</h3>
+<div class="icon green">
+<i class="fa-solid fa-percent"></i>
+</div>
 
-<p>✅ Yes, keyboard support is included.</p>
+<h3>GST Calculator</h3>
+
+<p>Add or remove GST in one click.</p>
+
+<span>Open Calculator →</span>
+
+</a>
 
 </div>
 
 </section>
-<!-- ===== Call To Action ===== -->
 
-<section class="cta-section">
+<!-- =========================
+UTILITY CALCULATORS
+========================= -->
 
-<h2>🚀 More Free Calculators</h2>
+<section class="section">
+
+<h2>🛠 Utility Calculators</h2>
+<div class="calculator-grid">
+
+<a href="age-calculator.html" class="calc-card utility">
+
+<div class="icon blue">
+<i class="fa-solid fa-user-clock"></i>
+</div>
+
+<h3>Age Calculator</h3>
+
+<p>Calculate your exact age instantly.</p>
+
+<span>Open Calculator →</span>
+
+</a>
+
+<a href="math-calculator.html" class="calc-card utility">
+
+<div class="icon green">
+<i class="fa-solid fa-square-root-variable"></i>
+</div>
+
+<h3>Math Calculator</h3>
+
+<p>Basic and advanced math calculations.</p>
+
+<span>Open Calculator →</span>
+
+</a>
+
+</div>
+
+</section>
+
+<!-- =========================
+DISCLAIMER
+========================= -->
+
+<section class="section">
+
+<div class="disclaimer-box">
+
+<h3>⚠ Disclaimer</h3>
 
 <p>
 
-Explore EMI, SIP, FD, PPF, GST, Income Tax and many more calculators.
+All calculations are for educational and illustration purposes only.
+Results may vary depending on actual interest rates, tax rules and
+financial institution policies. Rajaram Finance Calculators does not
+provide financial, tax, investment or legal advice. Please consult a
+qualified professional before making financial decisions.
 
 </p>
-
-<div class="cta-buttons">
-
-<a href="index.html">
-<button>🏠 Home</button>
-</a>
-
-<a href="articles.html">
-<button>📚 Articles</button>
-</a>
-
-<a href="contact.html">
-<button>📞 Contact</button>
-</a>
 
 </div>
 
 </section>
 
-<!-- ===== Footer ===== -->
+<!-- =========================
+FOOTER
+========================= -->
 
-<footer class="footer">
+<footer>
 
-<div class="footer-container">
+<div class="footer-grid">
 
-<div class="footer-about">
+<div>
 
-<h2>🧮 Rajaram Finance Calculators</h2>
+<h3>Rajaram Finance</h3>
 
 <p>
 
-Free Online Calculators for Finance, Loans, Investment, Tax and Daily Mathematics.
+Professional Finance Calculators designed for smarter financial planning.
 
 </p>
 
 </div>
 
-<div class="footer-links">
+<div>
 
 <h3>Quick Links</h3>
 
-<ul>
+<a href="index.html">Home</a>
 
-<li><a href="index.html">Home</a></li>
+<a href="calculator.html">All Calculators</a>
 
-<li><a href="articles.html">Articles</a></li>
+<a href="articles.html">Articles</a>
 
-<li><a href="privacy.html">Privacy Policy</a></li>
-
-<li><a href="terms.html">Terms & Conditions</a></li>
-
-<li><a href="contact.html">Contact</a></li>
-
-</ul>
+<a href="contact.html">Contact</a>
 
 </div>
 
-<div class="footer-disclaimer">
+<div>
 
-<h3>Disclaimer</h3>
+<h3>Legal</h3>
 
-<p>
+<a href="about.html">About Us</a>
 
-This calculator is provided for educational and informational purposes only.
-Please verify important calculations before using them for financial,
-legal or professional decisions.
+<a href="privacy.html">Privacy Policy</a>
 
-</p>
+<a href="disclaimer.html">Disclaimer</a>
+
+<a href="terms.html">Terms & Conditions</a>
+
+</div>
+
+<div>
+
+<h3>Contact</h3>
+
+<p>📧 support@rajaramfinance.com</p>
+
+<p>🌐 Rajaram Finance Calculators</p>
 
 </div>
 
 </div>
 
-<hr>
+<div class="copyright">
 
-<p class="copyright">
+© 2026 Rajaram Finance Calculators • All Rights Reserved
 
-© 2026 Rajaram Finance Calculators. All Rights Reserved.
-
-</p>
+</div>
 
 </footer>
 
-<!-- jsPDF Library -->
+<button id="topBtn">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<i class="fa-solid fa-arrow-up"></i>
 
-<!-- Calculator Script -->
+</button>
 
-<script src="calculator.js"></script>
+<style>
+
+.disclaimer-box{
+
+background:#FFF8DB;
+
+border-left:6px solid #F59E0B;
+
+padding:22px;
+
+border-radius:20px;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.disclaimer-box h3{
+
+margin-bottom:10px;
+
+color:#B45309;
+
+}
+
+.disclaimer-box p{
+
+line-height:1.8;
+
+color:#444;
+
+}
+
+footer{
+
+margin-top:40px;
+
+background:#0F172A;
+
+color:#CBD5E1;
+
+padding:45px 20px;
+
+}
+
+.footer-grid{
+
+display:grid;
+
+grid-template-columns:1fr;
+
+gap:30px;
+
+}
+
+.footer-grid h3{
+
+color:#fff;
+
+margin-bottom:14px;
+
+}
+
+.footer-grid a{
+
+display:block;
+
+color:#CBD5E1;
+
+margin-bottom:10px;
+
+text-decoration:none;
+
+}
+
+.footer-grid a:hover{
+
+color:#10B981;
+
+}
+
+.copyright{
+
+margin-top:30px;
+
+padding-top:20px;
+
+border-top:1px solid rgba(255,255,255,.08);
+
+text-align:center;
+
+font-size:14px;
+
+}
+
+#topBtn{
+
+position:fixed;
+
+right:18px;
+
+bottom:20px;
+
+width:55px;
+
+height:55px;
+
+border:none;
+
+border-radius:50%;
+
+background:#1E40AF;
+
+color:#fff;
+
+font-size:20px;
+
+display:none;
+
+cursor:pointer;
+
+box-shadow:0 10px 25px rgba(0,0,0,.25);
+
+z-index:999;
+
+}
+
+@media(min-width:768px){
+
+.footer-grid{
+
+grid-template-columns:2fr 1fr 1fr 1fr;
+
+}
+
+}
+
+</style>
+
+<script>
+
+const topBtn=document.getElementById("topBtn");
+
+window.addEventListener("scroll",()=>{
+
+topBtn.style.display=window.scrollY>300?"block":"none";
+
+});
+
+topBtn.onclick=()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+</script>
 
 </body>
 
