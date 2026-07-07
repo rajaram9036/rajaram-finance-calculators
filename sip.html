@@ -6,75 +6,64 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-content="width=device-width,initial-scale=1.0">
+content="width=device-width, initial-scale=1.0">
 
 <title>SIP Calculator | Rajaram Finance Calculators</title>
 
 <meta name="description"
-content="Free SIP Calculator with Growth Chart, PDF Report, Year-wise Projection and Investment Planning.">
+content="Free SIP Calculator with Chart, PDF Report, Year Wise Projection and Investment Planning.">
 
 <meta name="keywords"
 content="SIP Calculator, Mutual Fund Calculator, SIP Return Calculator">
 
-<meta name="theme-color"
-content="#1565C0">
-
-<link rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-rel="stylesheet">
+<link rel="stylesheet"
+href="sip.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<link rel="stylesheet"
-href="sip.css">
 
 </head>
 
 <body>
 
-<!-- ===========================
+<!--==========================
 WELCOME SCREEN
-=========================== -->
+===========================-->
 
 <div id="welcomeScreen">
 
-<div class="welcome-card">
+<div class="welcome-box">
 
-<img src="logo.png"
-class="welcome-logo"
-alt="Rajaram Finance">
+<i class="fa-solid fa-chart-line"></i>
 
-<h1>Welcome to SIP Calculator</h1>
+<h1>Welcome</h1>
 
-<p>Plan Your Investments with Confidence</p>
+<h2>Rajaram Finance Calculators</h2>
 
-</div>
+<p>Professional SIP Calculator</p>
 
 </div>
 
-<!-- ===========================
+</div>
+
+<!--==========================
 HEADER
-=========================== -->
+===========================-->
 
 <header class="header">
 
 <div class="logo">
 
-<img src="logo.png"
+<a href="index.html">
+
+<img src="images/logo.png"
 alt="Rajaram">
+
+</a>
 
 <div>
 
@@ -88,19 +77,17 @@ alt="Rajaram">
 
 <div class="header-right">
 
-<button id="darkBtn"
-class="icon-btn">
+<button id="darkBtn">
 
 <i class="fa-solid fa-moon"></i>
 
 </button>
 
-<button id="shareResult"
-class="share-btn">
+<button id="shareResult">
 
 <i class="fa-solid fa-share-nodes"></i>
 
-<span>Share</span>
+Share
 
 </button>
 
@@ -108,46 +95,113 @@ class="share-btn">
 
 </header>
 
-<!-- ===========================
+<!--==========================
+BREADCRUMB
+===========================-->
+
+<section class="breadcrumb">
+
+<a href="index.html">
+
+Home
+
+</a>
+
+<i class="fa-solid fa-angle-right"></i>
+
+<a href="index.html">
+
+Calculators
+
+</a>
+
+<i class="fa-solid fa-angle-right"></i>
+
+<span>
+
+SIP Calculator
+
+</span>
+
+</section>
+
+<!--==========================
+PAGE TITLE
+===========================-->
+
+<section class="page-title">
+
+<h1>
+
+SIP Calculator
+
+</h1>
+
+<p>
+
+Calculate your SIP returns and plan your wealth easily.
+
+</p>
+
+<div class="feature-list">
+
+<span>
+
+<i class="fa-solid fa-circle-check"></i>
+
+Accurate Calculation
+
+</span>
+
+<span>
+
+<i class="fa-solid fa-chart-line"></i>
+
+Growth Chart
+
+</span>
+
+<span>
+
+<i class="fa-solid fa-table"></i>
+
+Year-wise Projection
+
+</span>
+
+</div>
+
+</section>
+
+<!--==========================
 MAIN CONTAINER
-=========================== -->
+===========================-->
 
 <div class="container">
 
 <div class="calculator-grid">
+  <!--====================================
+ SIP CALCULATOR CARD
+=====================================-->
 
-<!-- LEFT PANEL START -->
+<div class="calculator-card">
 
-<section class="calculator-card">
+<h2>SIP Inputs</h2>
 
-<h1>SIP Calculator</h1>
-
-<p class="subtitle">
-
-Plan your investments and secure your future.
-
-</p>
-<!-- ===========================
-SIP INPUT FORM
-=========================== -->
-
-<div class="form-grid">
+<form id="sipForm">
 
 <!-- Monthly Investment -->
 
 <div class="form-group">
 
-<label>
-
-Monthly Investment (₹)
-
-</label>
+<label>Monthly SIP Amount (₹)</label>
 
 <input
 type="number"
 id="monthlyInvestment"
 value="5000"
-min="500">
+min="500"
+step="500">
 
 <input
 type="range"
@@ -167,20 +221,18 @@ value="5000">
 
 </div>
 
-<!-- Expected Return -->
+<!-- Annual Return -->
 
 <div class="form-group">
 
-<label>
-
-Expected Annual Return (%)
-
-</label>
+<label>Expected Annual Return (%)</label>
 
 <input
 type="number"
 id="annualReturn"
 value="12"
+min="1"
+max="30"
 step="0.1">
 
 <input
@@ -205,11 +257,7 @@ value="12">
 
 <div class="form-group">
 
-<label>
-
-Investment Period (Years)
-
-</label>
+<label>Investment Period (Years)</label>
 
 <select id="investmentYears">
 
@@ -246,17 +294,15 @@ value="20">
 
 <div class="form-group">
 
-<label>
-
-SIP Date (Monthly)
-
-</label>
+<label>SIP Date (Monthly)</label>
 
 <select id="sipDate">
 
 <option>1st of every month</option>
 <option>5th of every month</option>
+<option>10th of every month</option>
 <option selected>15th of every month</option>
+<option>20th of every month</option>
 <option>25th of every month</option>
 
 </select>
@@ -268,20 +314,22 @@ SIP Date (Monthly)
 <div class="button-group">
 
 <button
+type="button"
 id="calculateBtn"
 class="primary-btn">
 
 <i class="fa-solid fa-calculator"></i>
 
-Calculate
+Calculate Now
 
 </button>
 
 <button
+type="reset"
 id="resetBtn"
 class="secondary-btn">
 
-<i class="fa-solid fa-rotate-right"></i>
+<i class="fa-solid fa-rotate-left"></i>
 
 Reset
 
@@ -289,116 +337,99 @@ Reset
 
 </div>
 
+</form>
+
 </div>
 
-</section>
+<!-- Calculator Card End -->
 
-<!-- RIGHT PANEL START -->
+<div class="result-section">
+ <!--====================================
+ RESULTS SUMMARY
+=====================================-->
 
-<section class="result-section">
-
-<h2>
-
-Results Summary
-
-</h2>
-<!-- ===========================
-RESULT CARDS
-=========================== -->
+<h2>Results Summary</h2>
 
 <div class="result-grid">
 
-<!-- Total Investment -->
+    <!-- Total Investment -->
+    <div class="result-card green">
 
-<div class="result-card green">
+        <div class="result-icon">
+            <i class="fa-solid fa-sack-dollar"></i>
+        </div>
 
-<div class="result-icon">
+        <div>
 
-<i class="fa-solid fa-sack-dollar"></i>
+            <h4>Total Investment</h4>
 
-</div>
+            <h3 id="investedAmount">
+                ₹12,00,000
+            </h3>
 
-<div>
+            <p>Your total invested amount</p>
 
-<h4>Total Investment</h4>
+        </div>
 
-<h3 id="investedAmount">
+    </div>
 
-₹12,00,000
+    <!-- Estimated Returns -->
+    <div class="result-card blue">
 
-</h3>
+        <div class="result-icon">
+            <i class="fa-solid fa-chart-line"></i>
+        </div>
 
-<p>Your total invested amount</p>
+        <div>
 
-</div>
+            <h4>Estimated Returns</h4>
 
-</div>
+            <h3 id="estimatedReturns">
+                ₹22,67,894
+            </h3>
 
-<!-- Estimated Returns -->
+            <p>Wealth gained</p>
 
-<div class="result-card blue">
+        </div>
 
-<div class="result-icon">
+    </div>
 
-<i class="fa-solid fa-chart-column"></i>
+    <!-- Maturity Amount -->
+    <div class="result-card orange">
 
-</div>
+        <div class="result-icon">
+            <i class="fa-solid fa-bullseye"></i>
+        </div>
 
-<div>
+        <div>
 
-<h4>Estimated Returns</h4>
+            <h4>Maturity Amount</h4>
 
-<h3 id="estimatedReturns">
+            <h3 id="maturityAmount">
+                ₹34,67,894
+            </h3>
 
-₹37,95,740
+            <p>Total value at maturity</p>
 
-</h3>
+        </div>
 
-<p>Wealth gained</p>
-
-</div>
-
-</div>
-
-<!-- Maturity Amount -->
-
-<div class="result-card orange">
-
-<div class="result-icon">
-
-<i class="fa-solid fa-bullseye"></i>
-
-</div>
-
-<div>
-
-<h4>Maturity Amount</h4>
-
-<h3 id="maturityAmount">
-
-₹49,95,740
-
-</h3>
-
-<p>Total value at maturity</p>
+    </div>
 
 </div>
 
-</div>
-
-</div>
-
-<!-- TOTAL VALUE CARD -->
+<!--====================================
+ TOTAL VALUE CARD
+=====================================-->
 
 <div class="summary-total">
 
-<div class="summary-left">
+<div>
 
 <h4>Total Value at Maturity</h4>
 
 <h2 id="totalValue">
 
-₹49,95,740
+₹34,67,894
 
 </h2>
 
@@ -412,19 +443,17 @@ RESULT CARDS
 
 </div>
 
-</section>
+<!--====================================
+ SIP GROWTH CHART
+=====================================-->
 
-<!-- ===========================
-GROWTH CHART
-=========================== -->
-
-<section class="chart-section">
+<div class="chart-section">
 
 <div class="chart-card">
 
 <h2>
 
-Growth Over Time
+SIP Growth Chart
 
 </h2>
 
@@ -432,17 +461,40 @@ Growth Over Time
 
 </div>
 
-<!-- YEAR TABLE -->
+<!-- Result Section End -->
+<!--====================================
+INVESTMENT ALLOCATION
+=====================================-->
+
+<div class="chart-card">
+
+<h2>
+
+Investment Allocation
+
+</h2>
+
+<canvas id="allocationChart"></canvas>
+
+</div>
+
+</div>
+
+<!--====================================
+YEAR-WISE PROJECTION
+=====================================-->
 
 <div class="projection-card">
 
 <h2>
 
-Year-wise Projection (Approx.)
+Year-wise Projection
 
 </h2>
 
-<table>
+<div class="table-responsive">
+
+<table class="projection-table">
 
 <thead>
 
@@ -450,9 +502,9 @@ Year-wise Projection (Approx.)
 
 <th>Year</th>
 
-<th>Total Investment</th>
+<th>Investment</th>
 
-<th>Estimated Returns</th>
+<th>Returns</th>
 
 <th>Total Value</th>
 
@@ -462,26 +514,87 @@ Year-wise Projection (Approx.)
 
 <tbody id="growthTable">
 
+<tr>
+
+<td>1</td>
+
+<td>₹60,000</td>
+
+<td>₹3,900</td>
+
+<td>₹63,900</td>
+
+</tr>
+
+<tr>
+
+<td>5</td>
+
+<td>₹3,00,000</td>
+
+<td>₹1,12,540</td>
+
+<td>₹4,12,540</td>
+
+</tr>
+
+<tr>
+
+<td>10</td>
+
+<td>₹6,00,000</td>
+
+<td>₹5,61,695</td>
+
+<td>₹11,61,695</td>
+
+</tr>
+
+<tr>
+
+<td>15</td>
+
+<td>₹9,00,000</td>
+
+<td>₹15,22,874</td>
+
+<td>₹24,22,874</td>
+
+</tr>
+
+<tr>
+
+<td>20</td>
+
+<td>₹12,00,000</td>
+
+<td>₹37,95,740</td>
+
+<td>₹49,95,740</td>
+
+</tr>
+
 </tbody>
 
 </table>
 
-<p class="table-note">
+</div>
+
+<p class="projection-note">
 
 <i class="fa-solid fa-circle-info"></i>
 
-The above results are estimates for illustration purposes only.
+Figures shown are estimated values based on the expected annual return entered in the calculator.
 
 </p>
 
 </div>
 
-</section>
-<!-- ===========================
+<!--====================================
 QUICK ACTIONS
-=========================== -->
+=====================================-->
 
-<section class="action-section">
+<section class="quick-actions">
 
 <h2>
 
@@ -495,7 +608,7 @@ Quick Actions
 
 <i class="fa-solid fa-file-pdf"></i>
 
-<span>Download PDF</span>
+<span>PDF</span>
 
 </button>
 
@@ -535,27 +648,31 @@ Quick Actions
 
 </section>
 
-<!-- ===========================
+<!--====================================
+NEXT SECTION
+=====================================-->
+
+<section class="about-sip">
+<!--====================================
 ABOUT SIP
-=========================== -->
+=====================================-->
 
 <section class="about-sip">
 
-<h2>
-
-What is SIP?
-
-</h2>
+<h2>What is SIP?</h2>
 
 <p>
 
-A Systematic Investment Plan (SIP) is a simple way to invest a fixed amount regularly in mutual funds. It encourages disciplined investing and helps build wealth over the long term through the power of compounding.
+A <strong>Systematic Investment Plan (SIP)</strong> allows you to
+invest a fixed amount regularly in mutual funds. It promotes
+disciplined investing and can help build wealth over the long term
+through the power of compounding.
 
 </p>
 
-<div class="about-grid">
+<div class="benefit-grid">
 
-<div class="about-card">
+<div class="benefit-card">
 
 <i class="fa-solid fa-seedling"></i>
 
@@ -563,13 +680,14 @@ A Systematic Investment Plan (SIP) is a simple way to invest a fixed amount regu
 
 <p>
 
-Small investments made consistently can grow significantly over time because returns may also generate returns.
+Returns earned over time may generate additional returns,
+helping investments grow over the long term.
 
 </p>
 
 </div>
 
-<div class="about-card">
+<div class="benefit-card">
 
 <i class="fa-solid fa-scale-balanced"></i>
 
@@ -577,13 +695,14 @@ Small investments made consistently can grow significantly over time because ret
 
 <p>
 
-Regular investing across different market conditions can reduce the impact of market volatility over time.
+Regular investments across different market conditions
+may reduce the impact of price fluctuations.
 
 </p>
 
 </div>
 
-<div class="about-card">
+<div class="benefit-card">
 
 <i class="fa-solid fa-calendar-check"></i>
 
@@ -591,7 +710,8 @@ Regular investing across different market conditions can reduce the impact of ma
 
 <p>
 
-A fixed monthly investment habit can help you stay focused on your long-term financial goals.
+Investing a fixed amount every month helps develop
+a consistent investment habit.
 
 </p>
 
@@ -601,47 +721,43 @@ A fixed monthly investment habit can help you stay focused on your long-term fin
 
 </section>
 
-<!-- ===========================
-SIP EXAMPLE
-=========================== -->
+<!--====================================
+EXAMPLE
+=====================================-->
 
-<section class="example-card">
+<section class="example-section">
 
-<h2>
-
-Example Calculation
-
-</h2>
+<h2>Example Calculation</h2>
 
 <div class="example-grid">
 
-<div>
+<div class="example-box">
 
-<p><strong>Monthly Investment</strong></p>
+<h4>Monthly SIP</h4>
 
 <h3>₹5,000</h3>
 
 </div>
 
-<div>
+<div class="example-box">
 
-<p><strong>Investment Period</strong></p>
+<h4>Investment Period</h4>
 
 <h3>20 Years</h3>
 
 </div>
 
-<div>
+<div class="example-box">
 
-<p><strong>Expected Return</strong></p>
+<h4>Expected Return</h4>
 
 <h3>12% p.a.</h3>
 
 </div>
 
-<div>
+<div class="example-box">
 
-<p><strong>Estimated Maturity</strong></p>
+<h4>Estimated Value</h4>
 
 <h3>₹49,95,740</h3>
 
@@ -651,36 +767,89 @@ Example Calculation
 
 <p class="example-note">
 
-This example is for educational purposes only. Actual investment outcomes may differ depending on market performance.
+This is only an illustrative example. Actual investment returns
+depend on market performance and other factors.
 
 </p>
 
 </section>
 
-<!-- ===========================
+<!--====================================
+FAQ
+=====================================-->
+
+<section class="faq-section">
+
+<h2>Frequently Asked Questions</h2>
+
+<details>
+
+<summary>What is SIP?</summary>
+
+<p>
+
+SIP is a method of investing a fixed amount regularly in mutual funds.
+
+</p>
+
+</details>
+
+<details>
+
+<summary>What is the minimum SIP amount?</summary>
+
+<p>
+
+Many mutual funds allow SIPs starting from ₹100 or ₹500,
+depending on the scheme.
+
+</p>
+
+</details>
+
+<details>
+
+<summary>Can I stop or pause my SIP?</summary>
+
+<p>
+
+Yes. Most platforms allow you to pause or stop future SIP
+installments according to their process.
+
+</p>
+
+</details>
+
+<details>
+
+<summary>Does SIP guarantee returns?</summary>
+
+<p>
+
+No. Mutual fund returns are market-linked and are not guaranteed.
+
+</p>
+
+</details>
+
+</section>
+
+<!--====================================
 NEXT SECTION
-=========================== -->
+=====================================-->
 
 <section class="articles-section">
-  <!-- ===========================
+<!--====================================
 RELATED ARTICLES
-=========================== -->
+=====================================-->
 
 <section class="articles-section">
 
-<div class="section-heading">
-
-<h2>📚 Investment Articles</h2>
-
-<p>Learn before you invest.</p>
-
-</div>
+<h2>Investment Articles</h2>
 
 <div class="article-grid">
 
-<!-- SIP -->
-
-<article class="article-card">
+<div class="article-card">
 
 <div class="article-icon">
 <i class="fa-solid fa-chart-line"></i>
@@ -688,206 +857,118 @@ RELATED ARTICLES
 
 <h3>What is SIP?</h3>
 
-<p>
+<p>Learn SIP basics and long-term investing.</p>
 
-Learn how Systematic Investment Plans work and how they can help build long-term wealth.
+<a href="sip-guide.html">Read Article →</a>
 
-</p>
+</div>
 
-<a href="sip-guide.html">
+<div class="article-card">
 
-Read Article →
-
-</a>
-
-</article>
-
-<!-- FD -->
-
-<article class="article-card">
-
-<img src="images/fd-guide.webp" alt="FD Guide">
+<div class="article-icon">
+<i class="fa-solid fa-building-columns"></i>
+</div>
 
 <h3>Fixed Deposit (FD)</h3>
 
-<p>
+<p>Understand FD interest, maturity and safety.</p>
 
-Understand FD interest rates, maturity and safety before investing.
+<a href="fd-guide.html">Read Article →</a>
 
-</p>
+</div>
 
-<a href="fd-guide.html">
+<div class="article-card">
 
-Read Article →
-
-</a>
-
-</article>
-
-<!-- RD -->
-
-<article class="article-card">
-
-<img src="images/rd-guide.webp" alt="RD Guide">
+<div class="article-icon">
+<i class="fa-solid fa-piggy-bank"></i>
+</div>
 
 <h3>Recurring Deposit (RD)</h3>
 
-<p>
+<p>Learn how RD helps build regular savings.</p>
 
-Know how monthly deposits can help you build savings steadily.
+<a href="rd-guide.html">Read Article →</a>
 
-</p>
+</div>
 
-<a href="rd-guide.html">
+<div class="article-card">
 
-Read Article →
-
-</a>
-
-</article>
-
-<!-- PPF -->
-
-<article class="article-card">
-
-<img src="images/ppf-guide.webp" alt="PPF Guide">
+<div class="article-icon">
+<i class="fa-solid fa-book"></i>
+</div>
 
 <h3>Public Provident Fund (PPF)</h3>
 
-<p>
+<p>Know PPF features, lock-in period and benefits.</p>
 
-Learn about PPF benefits, lock-in period and long-term savings.
-
-</p>
-
-<a href="ppf-guide.html">
-
-Read Article →
-
-</a>
-
-</article>
+<a href="ppf-guide.html">Read Article →</a>
 
 </div>
-
-<div class="view-all">
-
-<a href="articles.html" class="view-btn">
-
-View All Articles
-
-</a>
 
 </div>
 
 </section>
 
-<!-- ===========================
+<!--====================================
 MORE CALCULATORS
-=========================== -->
+=====================================-->
 
 <section class="calculator-section">
 
-<div class="section-heading">
-
-<h2>🧮 More Financial Calculators</h2>
-
-<p>Explore more free finance tools.</p>
-
-</div>
+<h2>More Financial Calculators</h2>
 
 <div class="calculator-list">
 
-<a href="sip.html" class="calc-box">
+<a href="sip.html" class="calc-box">📈 SIP Calculator</a>
 
-📈 SIP Calculator
+<a href="lumpsum.html" class="calc-box">💰 Lumpsum Calculator</a>
 
-</a>
+<a href="swp.html" class="calc-box">🔄 SWP Calculator</a>
 
-<a href="lumpsum.html" class="calc-box">
+<a href="fd.html" class="calc-box">🏦 FD Calculator</a>
 
-💰 Lumpsum Calculator
+<a href="rd.html" class="calc-box">💳 RD Calculator</a>
 
-</a>
+<a href="ppf.html" class="calc-box">📘 PPF Calculator</a>
 
-<a href="fd.html" class="calc-box">
+<a href="emi.html" class="calc-box">🏠 EMI Calculator</a>
 
-🏦 FD Calculator
-
-</a>
-
-<a href="rd.html" class="calc-box">
-
-💳 RD Calculator
-
-</a>
-
-<a href="ppf.html" class="calc-box">
-
-📘 PPF Calculator
-
-</a>
-
-<a href="swp.html" class="calc-box">
-
-🔄 SWP Calculator
-
-</a>
-
-<a href="emi.html" class="calc-box">
-
-🏠 EMI Calculator
-
-</a>
-
-<a href="gst.html" class="calc-box">
-
-🧾 GST Calculator
-
-</a>
+<a href="gst.html" class="calc-box">🧾 GST Calculator</a>
 
 </div>
 
 </section>
 
-<!-- ===========================
-NEXT SECTION START
-=========================== -->
-
-<section class="disclaimer-section">
-  <!-- ==========================================
+<!--====================================
 DISCLAIMER
-========================================== -->
+=====================================-->
 
 <section class="disclaimer-section">
 
 <div class="disclaimer-card">
 
-<h2>
-⚠️ Disclaimer
-</h2>
+<h2>⚠ Disclaimer</h2>
 
 <p>
 
-The calculations shown by this SIP Calculator are for
-educational and illustrative purposes only. Actual returns
-may vary depending on market performance, investment timing,
-fund selection, expenses and other factors.
+The calculations provided by this SIP Calculator are for educational
+and illustrative purposes only. Actual investment returns depend on
+market performance and other factors.
 
 </p>
 
 <p>
 
-This calculator should not be considered financial,
-investment, tax or legal advice. Please consult a qualified
-financial advisor before making investment decisions.
+This calculator does not provide financial, investment, tax or legal
+advice. Please consult a qualified financial advisor before making
+investment decisions.
 
 </p>
 
 <p>
 
-Mutual Fund investments are subject to market risks.
-Read all scheme related documents carefully before investing.
+Mutual Fund investments are subject to market risks. Read all scheme
+related documents carefully before investing.
 
 </p>
 
@@ -895,81 +976,19 @@ Read all scheme related documents carefully before investing.
 
 </section>
 
-<!-- ==========================================
-TRUST SECTION
-========================================== -->
-
-<section class="trust-section">
-
-<h2>
-
-Trusted by Thousands of Users
-
-</h2>
-
-<div class="trust-grid">
-
-<div class="trust-box">
-
-<i class="fa-solid fa-shield-halved"></i>
-
-<h3>Secure</h3>
-
-<p>Your calculation stays on your device.</p>
-
-</div>
-
-<div class="trust-box">
-
-<i class="fa-solid fa-bolt"></i>
-
-<h3>Fast</h3>
-
-<p>Instant calculation with live charts.</p>
-
-</div>
-
-<div class="trust-box">
-
-<i class="fa-solid fa-mobile-screen-button"></i>
-
-<h3>Mobile Friendly</h3>
-
-<p>Works smoothly on Android and iPhone.</p>
-
-</div>
-
-<div class="trust-box">
-
-<i class="fa-solid fa-chart-line"></i>
-
-<h3>Easy Planning</h3>
-
-<p>Understand investment growth visually.</p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ==========================================
+<!--====================================
 USEFUL LINKS
-========================================== -->
+=====================================-->
 
-<section class="links-section">
+<footer class="footer">
 
-<h2>
+<div class="footer-links">
 
-Useful Links
-
-</h2>
-
-<div class="links-grid">
+<a href="index.html">Home</a>
 
 <a href="about.html">About Us</a>
 
-<a href="contact.html">Contact Us</a>
+<a href="contact.html">Contact</a>
 
 <a href="privacy-policy.html">Privacy Policy</a>
 
@@ -977,52 +996,17 @@ Useful Links
 
 <a href="disclaimer.html">Disclaimer</a>
 
-<a href="articles.html">Finance Articles</a>
-
 </div>
 
-</section>
+<p class="copyright">
 
-<!-- ==========================================
-FOOTER
-========================================== -->
-
-<footer class="footer">
-
-<div class="footer-content">
-
-<h2>
-
-Rajaram Finance Calculators
-
-</h2>
-
-<p>
-
-Free financial calculators designed to help users
-understand investment planning with educational content
-and easy-to-use tools.
+© 2026 Rajaram Finance Calculators. All Rights Reserved.
 
 </p>
-
-</div>
-
-<div class="footer-bottom">
-
-<p>
-
-© 2026 Rajaram Finance Calculators.
-All Rights Reserved.
-
-</p>
-
-</div>
 
 </footer>
 
-<!-- ==========================================
-BACK TO TOP
-========================================== -->
+<!-- Back To Top -->
 
 <button id="backToTop">
 
@@ -1030,9 +1014,7 @@ BACK TO TOP
 
 </button>
 
-<!-- ==========================================
-HISTORY POPUP
-========================================== -->
+<!-- History Popup -->
 
 <div id="historyModal" class="history-modal">
 
@@ -1058,11 +1040,11 @@ Clear History
 
 <div id="toast"></div>
 
-<!-- JavaScript -->
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="sip.js"></script>
 
+</div>
+
 </body>
-</html>
+</html>  
