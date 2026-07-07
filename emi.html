@@ -1,247 +1,891 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>EMI Calculator</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>EMI Calculator | Rajaram Finance Calculators</title>
+
+<meta name="description"
+content="Free EMI Calculator with Amortization Schedule, Charts and PDF Report">
+
+<link rel="stylesheet" href="emi.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-body{
-background:#eef3ff;
-padding:20px;
-}
-
-.container{
-max-width:520px;
-margin:auto;
-background:#fff;
-padding:25px;
-border-radius:18px;
-box-shadow:0 5px 20px rgba(0,0,0,.15);
-}
-
-h1{
-text-align:center;
-color:#1976D2;
-margin-bottom:20px;
-font-size:36px;
-}
-
-label{
-display:block;
-font-weight:bold;
-margin-top:15px;
-margin-bottom:8px;
-font-size:18px;
-}
-
-input{
-width:100%;
-padding:14px;
-border:1px solid #ccc;
-border-radius:10px;
-font-size:18px;
-outline:none;
-}
-
-input:focus{
-border-color:#1976D2;
-}
-
-button{
-width:100%;
-padding:15px;
-margin-top:18px;
-border:none;
-border-radius:10px;
-background:#1976D2;
-color:#fff;
-font-size:20px;
-font-weight:bold;
-cursor:pointer;
-transition:.3s;
-}
-
-button:hover{
-background:#1259a8;
-}
-
-.result{
-display:none;
-margin-top:20px;
-background:#eefbea;
-padding:18px;
-border-radius:12px;
-border:1px solid #c8e6c9;
-}
-
-.result p{
-font-size:22px;
-margin:12px 0;
-font-weight:bold;
-}
-
-.green{
-color:green;
-}
-
-canvas{
-max-width:320px;
-margin:20px auto;
-display:block;
-}
-  @media(max-width:600px){
-.container{
-padding:18px;
-}
-
-h1{
-font-size:32px;
-}
-
-input,
-button{
-font-size:18px;
-}
-}
-</style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="logo">
+
+<div class="logo-icon">
+
+<i class="fa-solid fa-house"></i>
+
+</div>
+
+<div>
+
+<h2>Rajaram</h2>
+
+<p>Finance Calculators</p>
+
+</div>
+
+</div>
+
+<div class="header-btn">
+
+<button id="themeBtn">
+
+<i class="fa-solid fa-moon"></i>
+
+</button>
+
+<button id="shareBtn">
+
+<i class="fa-solid fa-share-nodes"></i>
+
+Share
+
+</button>
+
+</div>
+
+</header>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<h1>EMI Calculator</h1>
+
+<p>
+
+Calculate your Loan EMI instantly with detailed schedule and charts.
+
+</p>
+
+</section>
+
 <div class="container">
 
-<h1>🏦 EMI Calculator</h1>
+<div class="calculator-grid">
 
-<label>Loan Amount (₹)</label>
-<input type="number" id="loan" placeholder="500000">
+<!-- LEFT CARD -->
 
-<label>Interest Rate (% Per Year)</label>
-<input type="number" id="rate" placeholder="8.5">
+<div class="calculator-card">
 
-<label>Loan Tenure (Years)</label>
-<input type="number" id="years" placeholder="20">
+<h2>
 
-<button onclick="calculateEMI()">🧮 Calculate EMI</button>
+<i class="fa-solid fa-calculator"></i>
 
-<div class="result" id="result">
+Loan Details
 
-<p>Monthly EMI:<br>
-<span class="green" id="emi">₹0</span>
-</p>
+</h2>
 
-<p>Total Interest:<br>
-<span class="green" id="interest">₹0</span>
-</p>
+<label>
 
-<p>Total Payment:<br>
-<span class="green" id="total">₹0</span>
-</p>
+Loan Amount (₹)
 
-<canvas id="emiChart" height="250"></canvas>
+</label>
+
+<input
+type="number"
+id="loanAmount"
+value="500000">
+
+<input
+type="range"
+id="loanSlider"
+min="10000"
+max="10000000"
+step="10000"
+value="500000">
+
+<label>
+
+Interest Rate (%)
+
+</label>
+
+<input
+type="number"
+id="interestRate"
+value="8.5">
+
+<input
+type="range"
+id="interestSlider"
+min="1"
+max="20"
+step="0.1"
+value="8.5">
+
+<label>
+
+Loan Tenure (Years)
+
+</label>
+
+<input
+type="number"
+id="loanYears"
+value="20">
+
+<input
+type="range"
+id="yearSlider"
+min="1"
+max="30"
+value="20">
+
+<label>
+
+Processing Fee (%)
+
+</label>
+
+<input
+type="number"
+id="processingFee"
+value="1">
+
+<div class="button-group">
+
+<button id="calculateBtn">
+
+<i class="fa-solid fa-calculator"></i>
+
+Calculate EMI
+
+</button>
+
+<button id="resetBtn">
+
+<i class="fa-solid fa-rotate-left"></i>
+
+Reset
+
+</button>
 
 </div>
 
-<button onclick="resetEMI()">🔄 Reset</button>
+</div>
+<!-- ==========================
+ RIGHT SIDE
+========================== -->
 
-<a href="index.html">
-<button>🏠 Back to Home</button>
+<div class="result-section">
+
+<h2>
+
+<i class="fa-solid fa-chart-pie"></i>
+
+EMI Summary
+
+</h2>
+
+<div class="result-grid">
+
+<!-- Monthly EMI -->
+
+<div class="result-card emi">
+
+<div class="icon">
+
+<i class="fa-solid fa-wallet"></i>
+
+</div>
+
+<div>
+
+<h4>Monthly EMI</h4>
+
+<h3 id="monthlyEMI">
+
+₹0
+
+</h3>
+
+<p>Monthly payment</p>
+
+</div>
+
+</div>
+
+<!-- Interest -->
+
+<div class="result-card interest">
+
+<div class="icon">
+
+<i class="fa-solid fa-percent"></i>
+
+</div>
+
+<div>
+
+<h4>Total Interest</h4>
+
+<h3 id="totalInterest">
+
+₹0
+
+</h3>
+
+<p>Total interest payable</p>
+
+</div>
+
+</div>
+
+<!-- Total Payment -->
+
+<div class="result-card payment">
+
+<div class="icon">
+
+<i class="fa-solid fa-building-columns"></i>
+
+</div>
+
+<div>
+
+<h4>Total Payment</h4>
+
+<h3 id="totalPayment">
+
+₹0
+
+</h3>
+
+<p>Principal + Interest</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- TOTAL CARD -->
+
+<div class="total-card">
+
+<h3>Total Loan Repayment</h3>
+
+<h1 id="grandTotal">
+
+₹0
+
+</h1>
+
+</div>
+
+<!-- QUICK ACTIONS -->
+
+<div class="quick-actions">
+
+<button id="downloadPDF">
+
+<i class="fa-solid fa-file-pdf"></i>
+
+PDF Report
+
+</button>
+
+<button id="printResult">
+
+<i class="fa-solid fa-print"></i>
+
+Print
+
+</button>
+
+<button id="copyResult">
+
+<i class="fa-solid fa-copy"></i>
+
+Copy
+
+</button>
+
+<button id="shareResult">
+
+<i class="fa-solid fa-share-nodes"></i>
+
+Share
+
+</button>
+
+<button id="saveHistory">
+
+<i class="fa-solid fa-bookmark"></i>
+
+Save
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<!-- ==========================
+ EMI CHARTS
+========================== -->
+
+<section class="chart-section">
+
+<div class="chart-card">
+
+<h2>
+
+<i class="fa-solid fa-chart-line"></i>
+
+EMI Payment Chart
+
+</h2>
+
+<canvas id="emiChart"></canvas>
+
+</div>
+
+<div class="chart-card">
+
+<h2>
+
+<i class="fa-solid fa-chart-pie"></i>
+
+Principal vs Interest
+
+</h2>
+
+<canvas id="emiPieChart"></canvas>
+
+<div class="allocation-info">
+
+<div class="info-row">
+
+<span class="blue-dot"></span>
+
+<span>Principal Amount</span>
+
+<strong id="principalPercent">
+
+0%
+
+</strong>
+
+</div>
+
+<div class="info-row">
+
+<span class="green-dot"></span>
+
+<span>Interest Amount</span>
+
+<strong id="interestPercent">
+
+0%
+
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+ AMORTIZATION SCHEDULE
+========================== -->
+
+<section class="projection-section">
+
+<div class="projection-card">
+
+<h2>
+
+<i class="fa-solid fa-table"></i>
+
+Amortization Schedule
+
+</h2>
+
+<div class="table-responsive">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Month</th>
+
+<th>EMI</th>
+
+<th>Principal</th>
+
+<th>Interest</th>
+
+<th>Balance</th>
+
+</tr>
+
+</thead>
+
+<tbody id="emiTable">
+
+<tr>
+
+<td>1</td>
+
+<td>₹0</td>
+
+<td>₹0</td>
+
+<td>₹0</td>
+
+<td>₹0</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<button
+id="viewSchedule"
+class="outline-btn">
+
+View Full Schedule
+
+<i class="fa-solid fa-angle-down"></i>
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ==========================
+ NEXT SECTION
+========================== -->
+
+<section class="about-section">
+<!-- ==========================
+ABOUT EMI
+========================== -->
+
+<section class="about-section">
+
+<h2>
+<i class="fa-solid fa-circle-info"></i>
+What is EMI?
+</h2>
+
+<p>
+
+EMI (Equated Monthly Installment) is a fixed amount paid every month to repay a loan. Each EMI includes both the principal amount and the interest charged by the lender.
+
+</p>
+
+<div class="benefits-grid">
+
+<div class="benefit-card">
+
+<i class="fa-solid fa-wallet"></i>
+
+<h3>Easy Monthly Payments</h3>
+
+<p>
+
+Repay your loan in small monthly installments instead of making one large payment.
+
+</p>
+
+</div>
+
+<div class="benefit-card">
+
+<i class="fa-solid fa-calendar-check"></i>
+
+<h3>Better Financial Planning</h3>
+
+<p>
+
+Knowing your monthly EMI helps you plan your expenses and savings effectively.
+
+</p>
+
+</div>
+
+<div class="benefit-card">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<h3>Track Loan Progress</h3>
+
+<p>
+
+Monitor your outstanding balance and repayment schedule throughout the loan period.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+EMI EXAMPLE
+========================== -->
+
+<section class="example-section">
+
+<h2>
+
+<i class="fa-solid fa-lightbulb"></i>
+
+EMI Example
+
+</h2>
+
+<div class="example-card">
+
+<div>
+
+<h4>Loan Amount</h4>
+
+<h3>₹10,00,000</h3>
+
+</div>
+
+<div>
+
+<h4>Interest Rate</h4>
+
+<h3>8.5%</h3>
+
+</div>
+
+<div>
+
+<h4>Loan Tenure</h4>
+
+<h3>20 Years</h3>
+
+</div>
+
+<div>
+
+<h4>Monthly EMI</h4>
+
+<h3>₹8,678</h3>
+
+</div>
+
+</div>
+
+<p class="example-note">
+
+This is only an illustrative example. Actual EMI depends on the loan amount, interest rate and repayment tenure.
+
+</p>
+
+</section>
+
+<!-- ==========================
+EMI TIPS
+========================== -->
+
+<section class="tips-section">
+
+<h2>
+
+<i class="fa-solid fa-star"></i>
+
+Loan Repayment Tips
+
+</h2>
+
+<ul class="tips-list">
+
+<li>✔ Compare loan interest rates before borrowing.</li>
+
+<li>✔ Choose the shortest affordable loan tenure.</li>
+
+<li>✔ Make part-prepayments whenever possible.</li>
+
+<li>✔ Avoid missing EMI payments.</li>
+
+<li>✔ Maintain a good credit score for lower interest rates.</li>
+
+</ul>
+
+</section>
+
+<!-- ==========================
+FAQ
+========================== -->
+
+<section class="faq-section">
+
+<h2>
+
+<i class="fa-solid fa-circle-question"></i>
+
+Frequently Asked Questions
+
+</h2>
+
+<details>
+
+<summary>What is EMI?</summary>
+
+<p>
+
+EMI is the fixed monthly amount you pay to repay a loan.
+
+</p>
+
+</details>
+
+<details>
+
+<summary>Can I prepay my loan?</summary>
+
+<p>
+
+Yes. Many lenders allow part-prepayment or full prepayment, though charges may apply depending on the loan terms.
+
+</p>
+
+</details>
+
+<details>
+
+<summary>Does a longer tenure reduce EMI?</summary>
+
+<p>
+
+Yes. A longer tenure generally lowers the monthly EMI but increases the total interest paid.
+
+</p>
+
+</details>
+
+<details>
+
+<summary>Can I change my EMI amount later?</summary>
+
+<p>
+
+It depends on your lender. Some lenders allow restructuring or refinancing under certain conditions.
+
+</p>
+
+</details>
+
+</section>
+
+<!-- ==========================
+NEXT SECTION
+========================== -->
+
+<section class="related-section">
+<!-- ==========================
+RELATED ARTICLES
+========================== -->
+
+<section class="related-section">
+
+<h2>
+
+<i class="fa-solid fa-newspaper"></i>
+
+Related Articles
+
+</h2>
+
+<div class="article-grid">
+
+<a href="home-loan-guide.html" class="article-card">
+
+<i class="fa-solid fa-house"></i>
+
+<h3>Home Loan Guide</h3>
+
+<p>Complete guide to home loans and EMI.</p>
+
 </a>
 
-<script>
+<a href="personal-loan-guide.html" class="article-card">
 
-let chart;
-  function calculateEMI(){
+<i class="fa-solid fa-money-bill-wave"></i>
 
-let P = parseFloat(document.getElementById("loan").value);
-let annual = parseFloat(document.getElementById("rate").value);
-let years = parseFloat(document.getElementById("years").value);
+<h3>Personal Loan</h3>
 
-if(isNaN(P) || isNaN(annual) || isNaN(years)){
-alert("Please fill all fields");
-return;
-}
+<p>Learn everything about personal loans.</p>
 
-let r = annual / 12 / 100;
-let n = years * 12;
+</a>
 
-let emi = (P * r * Math.pow(1+r,n)) / (Math.pow(1+r,n)-1);
+<a href="car-loan-guide.html" class="article-card">
 
-let totalPayment = emi * n;
-let totalInterest = totalPayment - P;
+<i class="fa-solid fa-car"></i>
 
-document.getElementById("emi").innerHTML =
-"₹" + Number(emi.toFixed(0)).toLocaleString("en-IN");
+<h3>Car Loan Guide</h3>
 
-document.getElementById("interest").innerHTML =
-"₹" + Number(totalInterest.toFixed(0)).toLocaleString("en-IN");
+<p>Understand car loan EMI and interest.</p>
 
-document.getElementById("total").innerHTML =
-"₹" + Number(totalPayment.toFixed(0)).toLocaleString("en-IN");
+</a>
 
-document.getElementById("result").style.display="block";
+<a href="credit-score.html" class="article-card">
 
-if(chart){
-chart.destroy();
-}
+<i class="fa-solid fa-chart-line"></i>
 
-let ctx=document.getElementById("emiChart").getContext("2d");
+<h3>Credit Score</h3>
 
-chart=new Chart(ctx,{
-type:"doughnut",
-data:{
-labels:["Loan Amount","Interest"],
-datasets:[{
-data:[P,totalInterest],
-backgroundColor:[
-"#1976D2",
-"#4CAF50"
-],
-borderWidth:2
-}]
-},
-options:{
-responsive:true,
-plugins:{
-legend:{
-position:"bottom"
-}
-}
-}
-});
+<p>Improve your CIBIL score for better loans.</p>
 
-  }
-  function resetEMI(){
-
-document.getElementById("loan").value="";
-document.getElementById("rate").value="";
-document.getElementById("years").value="";
-
-document.getElementById("emi").innerHTML="₹0";
-document.getElementById("interest").innerHTML="₹0";
-document.getElementById("total").innerHTML="₹0";
-
-document.getElementById("result").style.display="none";
-
-if(chart){
-chart.destroy();
-chart=null;
-}
-
-}
-
-</script>
+</a>
 
 </div>
 
+</section>
+
+<!-- ==========================
+MORE CALCULATORS
+========================== -->
+
+<section class="calculator-section">
+
+<h2>
+
+<i class="fa-solid fa-calculator"></i>
+
+More Financial Calculators
+
+</h2>
+
+<div class="calculator-grid-small">
+
+<a href="sip.html">📈 SIP Calculator</a>
+
+<a href="fd.html">🏦 FD Calculator</a>
+
+<a href="rd.html">💳 RD Calculator</a>
+
+<a href="ppf.html">📘 PPF Calculator</a>
+
+<a href="swp.html">🔄 SWP Calculator</a>
+
+<a href="lumpsum.html">💰 Lumpsum Calculator</a>
+
+<a href="gst.html">🧾 GST Calculator</a>
+
+<a href="income-tax.html">📑 Income Tax Calculator</a>
+
+</div>
+
+</section>
+
+<!-- ==========================
+DISCLAIMER
+========================== -->
+
+<section class="disclaimer">
+
+<h2>
+
+⚠ Disclaimer
+
+</h2>
+
+<p>
+
+This EMI Calculator provides estimated values for educational purposes only. Actual EMI may vary depending on your lender's terms, processing fees, taxes, and repayment conditions.
+
+</p>
+
+<p>
+
+Please verify loan details with your bank or financial institution before making any financial decisions.
+
+</p>
+
+</section>
+
+<!-- ==========================
+FOOTER
+========================== -->
+
+<footer>
+
+<div class="footer-links">
+
+<a href="index.html">Home</a>
+
+<a href="about.html">About Us</a>
+
+<a href="contact.html">Contact</a>
+
+<a href="privacy-policy.html">Privacy Policy</a>
+
+<a href="terms.html">Terms & Conditions</a>
+
+<a href="disclaimer.html">Disclaimer</a>
+
+</div>
+
+<p>
+
+© 2026 Rajaram Finance Calculators. All Rights Reserved.
+
+</p>
+
+</footer>
+
+<!-- Back To Top -->
+
+<button id="backToTop">
+
+<i class="fa-solid fa-arrow-up"></i>
+
+</button>
+
+<!-- Toast -->
+
+<div id="toast"></div>
+
+<!-- Scripts -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="emi.js"></script>
+
 </body>
-</html>
+
+</html>  
