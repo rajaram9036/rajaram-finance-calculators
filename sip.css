@@ -375,25 +375,66 @@ background:#DCEBFF;
  Mobile Responsive
 ==================================*/
 
-@media(max-width:768px){
+@media (max-width:768px){
 
 .calculator-grid{
-
-grid-template-columns:1fr;
-
+display:flex;
+flex-direction:column;
+gap:20px;
 }
 
 .calculator-card{
-
+order:1;
 position:relative;
 top:0;
+}
 
+.result-section{
+order:2;
+}
+
+.chart-section{
+order:3;
+}
+
+.about-sip{
+order:4;
+}
+
+.articles-section{
+order:5;
+}
+
+.calculator-section{
+order:6;
+}
+
+.disclaimer-section{
+order:7;
+}
+
+.footer{
+order:8;
 }
 
 .button-group{
-
 grid-template-columns:1fr;
+}
 
+.result-grid{
+grid-template-columns:1fr;
+}
+
+.chart-section{
+display:block;
+}
+
+.article-grid{
+grid-template-columns:1fr;
+}
+
+.calculator-list{
+grid-template-columns:1fr;
 }
 
 }
