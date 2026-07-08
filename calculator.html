@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -8,7 +7,7 @@
 
 <title>All Finance Calculators | Rajaram Finance Calculators</title>
 
-<meta name="description" content="Free SIP, EMI, FD, RD, PPF, GST, Tax, Loan and many more Finance Calculators.">
+<meta name="description" content="Free SIP, EMI, FD, RD, PPF, GST, Tax and Loan Calculators.">
 
 <meta name="theme-color" content="#1E40AF">
 
@@ -34,6 +33,7 @@ font-family:'Poppins',sans-serif;
 --bg:#F5F7FB;
 --card:#fff;
 --text:#111827;
+--shadow:0 10px 25px rgba(0,0,0,.08);
 }
 
 body{
@@ -52,11 +52,11 @@ position:sticky;
 top:0;
 z-index:999;
 background:#fff;
+padding:16px 18px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:16px 18px;
-box-shadow:0 8px 25px rgba(0,0,0,.08);
+box-shadow:var(--shadow);
 }
 
 .logo{
@@ -71,24 +71,22 @@ height:56px;
 border-radius:18px;
 background:linear-gradient(135deg,#1E40AF,#10B981);
 display:flex;
-align-items:center;
 justify-content:center;
+align-items:center;
 color:#fff;
-font-size:26px;
+font-size:24px;
 }
 
 .logo h1{
 font-size:20px;
 font-weight:800;
 color:#1E40AF;
-line-height:1.2;
 }
 
 .logo small{
 display:block;
-font-size:15px;
 color:#64748B;
-margin-top:3px;
+font-size:13px;
 }
 
 .actions{
@@ -97,22 +95,23 @@ gap:10px;
 }
 
 .actions button{
-width:50px;
-height:50px;
+width:48px;
+height:48px;
 border:none;
-border-radius:16px;
+border-radius:15px;
 background:#EEF4FF;
-font-size:22px;
+font-size:20px;
 cursor:pointer;
 }
 
 .hero{
 margin:18px;
-padding:30px 20px;
+padding:35px 22px;
 border-radius:28px;
 background:linear-gradient(135deg,#1E40AF,#10B981);
-text-align:center;
 color:#fff;
+text-align:center;
+box-shadow:var(--shadow);
 }
 
 .hero h2{
@@ -122,18 +121,76 @@ margin-bottom:12px;
 }
 
 .hero p{
-font-size:16px;
 line-height:1.7;
 margin-bottom:22px;
 }
 
-.home-btn{
+.hero a{
 display:inline-block;
+padding:14px 28px;
 background:#fff;
 color:#1E40AF;
-padding:14px 28px;
-border-radius:16px;
+border-radius:15px;
 font-weight:700;
+}
+
+.search{
+padding:0 18px 20px;
+}
+
+.search-box{
+display:flex;
+align-items:center;
+background:#fff;
+padding:16px;
+border-radius:18px;
+box-shadow:var(--shadow);
+}
+
+.search-box i{
+margin-right:12px;
+color:#64748B;
+}
+
+.search-box input{
+width:100%;
+border:none;
+outline:none;
+font-size:16px;
+}
+
+.categories{
+display:flex;
+gap:12px;
+overflow:auto;
+padding:0 18px 20px;
+scrollbar-width:none;
+}
+
+.categories::-webkit-scrollbar{
+display:none;
+}
+
+.categories button{
+border:none;
+padding:12px 18px;
+border-radius:999px;
+background:#fff;
+font-weight:600;
+cursor:pointer;
+white-space:nowrap;
+box-shadow:var(--shadow);
+}
+
+.categories .active{
+background:#1E40AF;
+color:#fff;
+}
+
+.section-title{
+padding:0 18px 18px;
+font-size:28px;
+font-weight:800;
 }
 
 </style>
@@ -151,8 +208,11 @@ font-weight:700;
 </div>
 
 <div>
+
 <h1>Rajaram</h1>
-<small>All Calculators</small>
+
+<small>All Finance Calculators</small>
+
 </div>
 
 </div>
@@ -162,7 +222,9 @@ font-weight:700;
 <button id="themeBtn">🌙</button>
 
 <button id="shareBtn">
+
 <i class="fa-solid fa-share-nodes"></i>
+
 </button>
 
 </div>
@@ -174,18 +236,19 @@ font-weight:700;
 <h2>All Finance Calculators</h2>
 
 <p>
-Find every finance calculator in one place.
-Simple, Fast and Free.
+Find every Finance Calculator in one place.
+Simple • Fast • Free
 </p>
 
-<a href="index.html" class="home-btn">
+<a href="index.html">
+
 🏠 Back to Home
+
 </a>
 
 </section>
-<!-- Search -->
 
-<section class="search-section">
+<div class="search">
 
 <div class="search-box">
 
@@ -198,112 +261,50 @@ placeholder="Search calculator...">
 
 </div>
 
-</section>
-
-<!-- Categories -->
-
-<section class="category-section">
+</div>
 
 <div class="categories">
 
-<button class="cat-btn active" data-filter="all">All</button>
+<button class="active">All</button>
 
-<button class="cat-btn" data-filter="investment">Investment</button>
+<button>Investment</button>
 
-<button class="cat-btn" data-filter="loan">Loan</button>
+<button>Loan</button>
 
-<button class="cat-btn" data-filter="tax">Tax</button>
+<button>Tax</button>
 
-<button class="cat-btn" data-filter="utility">Utility</button>
+<button>Utility</button>
 
 </div>
+<!-- =========================
+POPULAR CALCULATORS
+========================= -->
 
-</section>
+<h2 class="section-title">
+🔥 Popular Calculators
+</h2>
 
 <style>
 
-.search-section{
-padding:0 18px 22px;
-}
-
-.search-box{
-display:flex;
-align-items:center;
-background:#fff;
-padding:16px 18px;
-border-radius:20px;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-}
-
-.search-box i{
-font-size:20px;
-color:#64748B;
-margin-right:12px;
-}
-
-.search-box input{
-width:100%;
-border:none;
-outline:none;
-font-size:17px;
-background:none;
-}
-
-.category-section{
-padding:0 18px 25px;
-}
-
-.categories{
-display:flex;
-gap:12px;
-overflow-x:auto;
-scrollbar-width:none;
-}
-
-.categories::-webkit-scrollbar{
-display:none;
-}
-
-.cat-btn{
-border:none;
-background:#fff;
-padding:13px 20px;
-border-radius:999px;
-font-weight:700;
-font-size:15px;
-white-space:nowrap;
-box-shadow:0 8px 20px rgba(0,0,0,.08);
-cursor:pointer;
-}
-
-.cat-btn.active{
-background:#1E40AF;
-color:#fff;
-}
-
-.section-title{
-padding:0 18px 18px;
-font-size:32px;
-font-weight:800;
-}
-
 .calculator-grid{
-padding:0 18px;
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:18px;
+padding:0 18px 25px;
 }
 
 .calc-card{
 background:#fff;
-border-radius:24px;
-padding:22px 16px;
+border-radius:22px;
+padding:20px 15px;
 text-align:center;
 box-shadow:0 10px 25px rgba(0,0,0,.08);
 transition:.3s;
 display:flex;
 flex-direction:column;
 align-items:center;
+justify-content:space-between;
+min-height:220px;
 }
 
 .calc-card:hover{
@@ -311,113 +312,93 @@ transform:translateY(-5px);
 }
 
 .icon{
-width:74px;
-height:74px;
-border-radius:20px;
+width:68px;
+height:68px;
+border-radius:18px;
 display:flex;
 align-items:center;
 justify-content:center;
-color:#fff;
 font-size:28px;
-margin-bottom:18px;
+color:#fff;
+margin-bottom:14px;
 }
 
 .blue{background:#2563EB;}
 .green{background:#10B981;}
 .orange{background:#F59E0B;}
 .purple{background:#8B5CF6;}
-.red{background:#EF4444;}
 .teal{background:#14B8A6;}
+.red{background:#EF4444;}
 
 .calc-card h3{
-font-size:22px;
-margin-bottom:10px;
+font-size:18px;
+margin-bottom:8px;
+color:#111827;
 }
 
 .calc-card p{
-font-size:15px;
-line-height:1.6;
+font-size:14px;
 color:#64748B;
-margin-bottom:16px;
+line-height:1.5;
+margin-bottom:14px;
 }
 
 .open-btn{
-display:inline-block;
 margin-top:auto;
 font-weight:700;
 color:#1E40AF;
 }
 
-</style>
+@media(min-width:768px){
+.calculator-grid{
+grid-template-columns:repeat(3,1fr);
+}
+}
 
-<h2 class="section-title">
-📊 Investment Calculators
-</h2>
+</style>
 
 <div class="calculator-grid">
 
 <a href="sip.html" class="calc-card investment">
-
-<div class="icon blue">
-<i class="fa-solid fa-chart-line"></i>
-</div>
-
+<div class="icon blue"><i class="fa-solid fa-chart-line"></i></div>
 <h3>SIP Calculator</h3>
-
-<p>Monthly SIP investment calculator.</p>
-
-<span class="open-btn">
-Open Calculator →
-</span>
-
+<p>Calculate SIP returns easily.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 <a href="mutual-fund.html" class="calc-card investment">
-
-<div class="icon green">
-<i class="fa-solid fa-sack-dollar"></i>
-</div>
-
+<div class="icon green"><i class="fa-solid fa-sack-dollar"></i></div>
 <h3>Mutual Fund</h3>
-
-<p>Estimate mutual fund returns.</p>
-
-<span class="open-btn">
-Open Calculator →
-</span>
-
+<p>Estimate mutual fund growth.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 <a href="fd.html" class="calc-card investment">
-
-<div class="icon orange">
-<i class="fa-solid fa-building-columns"></i>
-</div>
-
+<div class="icon orange"><i class="fa-solid fa-building-columns"></i></div>
 <h3>FD Calculator</h3>
-
-<p>Fixed Deposit maturity calculator.</p>
-
-<span class="open-btn">
-Open Calculator →
-</span>
-
+<p>Know FD maturity value.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 <a href="rd.html" class="calc-card investment">
-
-<div class="icon purple">
-<i class="fa-solid fa-piggy-bank"></i>
-</div>
-
+<div class="icon purple"><i class="fa-solid fa-piggy-bank"></i></div>
 <h3>RD Calculator</h3>
+<p>Recurring Deposit returns.</p>
+<span class="open-btn">Open →</span>
+</a>
 
-<p>Recurring Deposit calculator.</p>
+<a href="ppf.html" class="calc-card investment">
+<div class="icon teal"><i class="fa-solid fa-landmark"></i></div>
+<h3>PPF Calculator</h3>
+<p>PPF maturity calculator.</p>
+<span class="open-btn">Open →</span>
+</a>
 
-<span class="open-btn">
-Open Calculator →
-</span>
-
+<a href="lumpsum.html" class="calc-card investment">
+<div class="icon red"><i class="fa-solid fa-coins"></i></div>
+<h3>Lumpsum</h3>
+<p>One-time investment calculator.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 </div>
@@ -436,8 +417,8 @@ Open Calculator →
 <i class="fa-solid fa-house"></i>
 </div>
 <h3>EMI Calculator</h3>
-<p>Calculate monthly EMI instantly.</p>
-<span class="open-btn">Open Calculator →</span>
+<p>Calculate monthly loan EMI.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 <a href="home-loan.html" class="calc-card loan">
@@ -445,8 +426,8 @@ Open Calculator →
 <i class="fa-solid fa-home"></i>
 </div>
 <h3>Home Loan</h3>
-<p>Calculate Home Loan EMI.</p>
-<span class="open-btn">Open Calculator →</span>
+<p>Home loan EMI calculator.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 <a href="car-loan.html" class="calc-card loan">
@@ -454,8 +435,8 @@ Open Calculator →
 <i class="fa-solid fa-car"></i>
 </div>
 <h3>Car Loan</h3>
-<p>Know your Car Loan EMI.</p>
-<span class="open-btn">Open Calculator →</span>
+<p>Calculate car loan EMI.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 <a href="personal-loan.html" class="calc-card loan">
@@ -463,8 +444,8 @@ Open Calculator →
 <i class="fa-solid fa-wallet"></i>
 </div>
 <h3>Personal Loan</h3>
-<p>Personal Loan EMI calculator.</p>
-<span class="open-btn">Open Calculator →</span>
+<p>Personal loan calculator.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 <a href="education-loan.html" class="calc-card loan">
@@ -472,8 +453,8 @@ Open Calculator →
 <i class="fa-solid fa-graduation-cap"></i>
 </div>
 <h3>Education Loan</h3>
-<p>Education Loan EMI calculator.</p>
-<span class="open-btn">Open Calculator →</span>
+<p>Education loan EMI.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 <a href="gold-loan.html" class="calc-card loan">
@@ -481,8 +462,8 @@ Open Calculator →
 <i class="fa-solid fa-coins"></i>
 </div>
 <h3>Gold Loan</h3>
-<p>Gold Loan EMI calculator.</p>
-<span class="open-btn">Open Calculator →</span>
+<p>Gold loan calculator.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 </div>
@@ -498,12 +479,12 @@ Open Calculator →
 <div class="calculator-grid">
 
 <a href="income-tax.html" class="calc-card tax">
-<div class="icon red">
+<div class="icon blue">
 <i class="fa-solid fa-file-invoice-dollar"></i>
 </div>
 <h3>Income Tax</h3>
-<p>Estimate your Income Tax.</p>
-<span class="open-btn">Open Calculator →</span>
+<p>Estimate income tax.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 <a href="gst.html" class="calc-card tax">
@@ -511,8 +492,26 @@ Open Calculator →
 <i class="fa-solid fa-percent"></i>
 </div>
 <h3>GST Calculator</h3>
-<p>Add or Remove GST instantly.</p>
-<span class="open-btn">Open Calculator →</span>
+<p>Add or remove GST.</p>
+<span class="open-btn">Open →</span>
+</a>
+
+<a href="hra.html" class="calc-card tax">
+<div class="icon orange">
+<i class="fa-solid fa-file"></i>
+</div>
+<h3>HRA Calculator</h3>
+<p>Calculate HRA exemption.</p>
+<span class="open-btn">Open →</span>
+</a>
+
+<a href="salary.html" class="calc-card tax">
+<div class="icon purple">
+<i class="fa-solid fa-money-check-dollar"></i>
+</div>
+<h3>Salary Calculator</h3>
+<p>Estimate in-hand salary.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 </div>
@@ -533,64 +532,115 @@ Open Calculator →
 </div>
 <h3>Age Calculator</h3>
 <p>Calculate your exact age.</p>
-<span class="open-btn">Open Calculator →</span>
+<span class="open-btn">Open →</span>
+</a>
+
+<a href="bmi.html" class="calc-card utility">
+<div class="icon green">
+<i class="fa-solid fa-heart-pulse"></i>
+</div>
+<h3>BMI Calculator</h3>
+<p>Check Body Mass Index.</p>
+<span class="open-btn">Open →</span>
+</a>
+
+<a href="percentage.html" class="calc-card utility">
+<div class="icon orange">
+<i class="fa-solid fa-percent"></i>
+</div>
+<h3>Percentage</h3>
+<p>Percentage calculator.</p>
+<span class="open-btn">Open →</span>
+</a>
+
+<a href="currency.html" class="calc-card utility">
+<div class="icon purple">
+<i class="fa-solid fa-money-bill-transfer"></i>
+</div>
+<h3>Currency</h3>
+<p>Currency converter.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 <a href="math-calculator.html" class="calc-card utility">
-<div class="icon purple">
+<div class="icon teal">
 <i class="fa-solid fa-square-root-variable"></i>
 </div>
 <h3>Math Calculator</h3>
-<p>Basic & Advanced calculations.</p>
-<span class="open-btn">Open Calculator →</span>
+<p>Basic & advanced math.</p>
+<span class="open-btn">Open →</span>
+</a>
+
+<a href="unit-converter.html" class="calc-card utility">
+<div class="icon red">
+<i class="fa-solid fa-ruler-combined"></i>
+</div>
+<h3>Unit Converter</h3>
+<p>Convert units instantly.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 </div>
 <!-- =========================
-🚀 CTA SECTION
+⭐ FEATURED CALCULATORS
 ========================= -->
 
-<section class="cta-banner">
+<h2 class="section-title">
+⭐ Featured Calculators
+</h2>
 
-<h2>🚀 Start Planning Your Financial Future</h2>
+<div class="calculator-grid">
 
-<p>
-Use our free financial calculators to make smarter money decisions.
-</p>
-
-<div class="cta-buttons">
-
-<a href="calculator.html" class="btn-primary">
-View All Calculators
+<a href="sip.html" class="calc-card">
+<div class="icon blue">
+<i class="fa-solid fa-chart-line"></i>
+</div>
+<h3>SIP Planner</h3>
+<p>Plan your long-term wealth creation.</p>
+<span class="open-btn">Open →</span>
 </a>
 
-<a href="contact.html" class="btn-outline">
-Contact Us
+<a href="emi.html" class="calc-card">
+<div class="icon green">
+<i class="fa-solid fa-house"></i>
+</div>
+<h3>Loan EMI</h3>
+<p>Calculate EMI in seconds.</p>
+<span class="open-btn">Open →</span>
+</a>
+
+<a href="income-tax.html" class="calc-card">
+<div class="icon orange">
+<i class="fa-solid fa-file-invoice-dollar"></i>
+</div>
+<h3>Income Tax</h3>
+<p>Estimate your tax liability.</p>
+<span class="open-btn">Open →</span>
 </a>
 
 </div>
 
-</section>
-
-
 <!-- =========================
-⚠ DISCLAIMER
+DISCLAIMER
 ========================= -->
 
-<section class="disclaimer-box">
+<section style="padding:20px;">
 
-<h3>⚠ Disclaimer</h3>
+<div style="background:#FFF8DB;border-left:6px solid #F59E0B;padding:22px;border-radius:18px;">
 
-<p>
+<h3 style="color:#B45309;margin-bottom:10px;">
+⚠ Disclaimer
+</h3>
 
-All calculations are estimates only.
+<p style="line-height:1.8;color:#444;">
 
-Please consult a qualified financial advisor before making investment or financial decisions.
+The calculators provided on Rajaram Finance Calculators are for educational and informational purposes only. Results are estimates and should not be considered financial, investment, tax or legal advice. Please consult a qualified financial advisor before making financial decisions.
 
 </p>
 
-</section>
+</div>
 
+</section>
 
 <!-- =========================
 FOOTER
@@ -602,16 +652,15 @@ FOOTER
 
 <div>
 
-<h3>Rajaram Finance Calculators</h3>
+<h3>Rajaram Finance</h3>
 
 <p>
 
-Free financial calculators for smarter financial planning.
+Professional Finance Calculators for smarter financial planning.
 
 </p>
 
 </div>
-
 
 <div>
 
@@ -619,14 +668,13 @@ Free financial calculators for smarter financial planning.
 
 <a href="index.html">Home</a>
 
-<a href="calculator.html">Calculators</a>
+<a href="calculator.html">All Calculators</a>
 
 <a href="articles.html">Articles</a>
 
 <a href="contact.html">Contact</a>
 
 </div>
-
 
 <div>
 
@@ -642,33 +690,25 @@ Free financial calculators for smarter financial planning.
 
 </div>
 
-
 <div>
 
 <h3>Contact</h3>
 
-<p>
-📧
-<a href="mailto:supportrajarampatel880@gmail.com">
-
-supportrajarampatel880@gmail.com
-
+<p>📧
+<a href="mailto:rajarampatel880@gmail.com">
+rajarampatel880@gmail.com
 </a>
 </p>
 
-<p>
-🌐
+<p>🌐
 <a href="https://rajaram9036.github.io/rajaram-finance-calculators/" target="_blank">
-
 Rajaram Finance Calculators
-
 </a>
 </p>
 
 </div>
 
 </div>
-
 
 <div class="copyright">
 
@@ -678,94 +718,43 @@ Rajaram Finance Calculators
 
 </footer>
 
-
-<!-- Scroll Top -->
-
 <button id="topBtn">
 
 <i class="fa-solid fa-arrow-up"></i>
 
 </button>
 
-
-<!-- Bottom Navigation -->
-
 <nav class="bottom-nav">
 
-<a href="index.html" class="active">
-
+<a href="index.html">
 <i class="fa-solid fa-house"></i>
-
 <span>Home</span>
-
 </a>
 
-<a href="calculator.html">
-
+<a href="calculator.html" class="active">
 <i class="fa-solid fa-calculator"></i>
-
 <span>Tools</span>
-
 </a>
 
 <a href="articles.html">
-
 <i class="fa-solid fa-newspaper"></i>
-
-<span>Guides</span>
-
+<span>Articles</span>
 </a>
 
 <a href="contact.html">
-
 <i class="fa-solid fa-envelope"></i>
-
 <span>Contact</span>
-
 </a>
 
 </nav>
 <style>
 
-/* CTA */
-.cta-banner{
-margin:25px 18px;
-padding:35px 22px;
-border-radius:24px;
-background:linear-gradient(135deg,#1E40AF,#10B981);
-color:#fff;
-text-align:center;
-}
-
-.cta-buttons{
-display:flex;
-flex-direction:column;
-gap:12px;
-margin-top:20px;
-}
-
-.cta-buttons a{
-padding:14px;
-border-radius:14px;
-font-weight:700;
-text-decoration:none;
-}
-
-.btn-primary{
-background:#fff;
-color:#1E40AF;
-}
-
-.btn-outline{
-border:2px solid #fff;
-color:#fff;
-}
-
 /* Footer */
+
 footer{
 background:#0F172A;
 color:#CBD5E1;
-padding:45px 20px 90px;
+padding:45px 20px 95px;
 margin-top:40px;
 }
 
@@ -792,19 +781,20 @@ color:#10B981;
 }
 
 .copyright{
-margin-top:25px;
+margin-top:30px;
 padding-top:20px;
 border-top:1px solid rgba(255,255,255,.1);
 text-align:center;
 }
 
 /* Bottom Navigation */
+
 .bottom-nav{
 position:fixed;
-bottom:0;
 left:0;
+bottom:0;
 width:100%;
-height:70px;
+height:72px;
 background:#fff;
 display:flex;
 justify-content:space-around;
@@ -817,8 +807,8 @@ z-index:999;
 display:flex;
 flex-direction:column;
 align-items:center;
-font-size:12px;
 text-decoration:none;
+font-size:12px;
 color:#64748B;
 }
 
@@ -832,10 +822,11 @@ margin-bottom:4px;
 }
 
 /* Scroll Button */
+
 #topBtn{
 position:fixed;
 right:18px;
-bottom:85px;
+bottom:88px;
 width:55px;
 height:55px;
 border:none;
@@ -843,12 +834,11 @@ border-radius:50%;
 background:#1E40AF;
 color:#fff;
 font-size:20px;
-display:none;
 cursor:pointer;
-box-shadow:0 10px 25px rgba(0,0,0,.2);
+display:none;
+box-shadow:0 10px 25px rgba(0,0,0,.25);
 }
 
-/* Desktop */
 @media(min-width:768px){
 
 .calculator-grid{
@@ -857,11 +847,6 @@ grid-template-columns:repeat(3,1fr);
 
 .footer-grid{
 grid-template-columns:2fr 1fr 1fr 1fr;
-}
-
-.cta-buttons{
-flex-direction:row;
-justify-content:center;
 }
 
 .bottom-nav{
@@ -874,7 +859,8 @@ display:none;
 
 <script>
 
-/* Search */
+/* Live Search */
+
 const search=document.getElementById("searchInput");
 
 if(search){
@@ -885,12 +871,9 @@ const value=search.value.toLowerCase();
 
 document.querySelectorAll(".calc-card").forEach(card=>{
 
-card.style.display=
-card.innerText.toLowerCase().includes(value)
-?
-"flex"
-:
-"none";
+const text=card.innerText.toLowerCase();
+
+card.style.display=text.includes(value)?"flex":"none";
 
 });
 
@@ -904,19 +887,25 @@ document.getElementById("shareBtn").onclick=async()=>{
 
 if(navigator.share){
 
+try{
+
 await navigator.share({
 
 title:"Rajaram Finance Calculators",
+
+text:"Free Finance Calculators",
 
 url:location.href
 
 });
 
+}catch(e){}
+
 }else{
 
 navigator.clipboard.writeText(location.href);
 
-alert("Website Link Copied");
+alert("Website link copied.");
 
 }
 
@@ -924,7 +913,9 @@ alert("Website Link Copied");
 
 /* Dark Mode */
 
-document.getElementById("themeBtn").onclick=()=>{
+const theme=document.getElementById("themeBtn");
+
+theme.onclick=()=>{
 
 document.body.classList.toggle("dark");
 
@@ -936,12 +927,7 @@ const topBtn=document.getElementById("topBtn");
 
 window.addEventListener("scroll",()=>{
 
-topBtn.style.display=
-window.scrollY>300
-?
-"block"
-:
-"none";
+topBtn.style.display=window.scrollY>250?"block":"none";
 
 });
 
