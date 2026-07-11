@@ -38,7 +38,14 @@ table th,table td{border:1px solid #E2E8F0;padding:8px;text-align:right}
 table th{background:#F1F5F9}
 details{background:#F8FAFC;padding:12px;border-radius:8px;margin-bottom:10px}
 summary{font-weight:600;cursor:pointer}
-footer{background:#0F172A;color:#CBD5E1;text-align:center;padding:30px 20px;margin-top:40px}
+footer{background:#0F172A;color:#CBD5E1;padding:40px 20px;margin-top:40px}
+.footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;max-width:1200px;margin:0 auto}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.footer-grid{grid-template-columns:1fr}}
+.footer-grid h3{color:#fff;margin-bottom:15px;font-size:16px}
+.footer-grid a{color:#CBD5E1;text-decoration:none;display:block;margin-bottom:10px;font-size:14px}
+.footer-grid a:hover{color:#16A34A}
+.copyright{text-align:center;margin-top:30px;padding-top:20px;border-top:1px solid #334155;font-size:13px}
 .content{margin-top:30px;font-size:14px}
 </style>
 </head>
@@ -143,10 +150,37 @@ footer{background:#0F172A;color:#CBD5E1;text-align:center;padding:30px 20px;marg
   </div>
 </div>
 
+<!-- NEW FOOTER -->
 <footer>
-  <h2 style="color:#fff;margin-bottom:10px;">Rajaram Finance Calculator</h2>
-  <p>Free SIP • EMI • FD • RD • PPF • GST Calculators</p>
-  <p style="margin-top:20px;font-size:14px;">© 2026 Rajaram Finance Calculator. All Rights Reserved.</p>
+  <div class="footer-grid">
+    <div>
+      <h3>Rajaram Finance</h3>
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <div>
+      <h3>Legal</h3>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+      <a href="disclaimer.html">Disclaimer</a>
+    </div>
+    <div>
+      <h3>Recent Calculators</h3>
+      <a href="ppf-calculator.html">PPF Calculator</a>
+      <a href="mutual-fund-calculator.html">Mutual Fund Calculator</a>
+      <a href="fd-calculator.html">FD Calculator</a>
+      <a href="emi-calculator.html">EMI Calculator</a>
+    </div>
+    <div>
+      <h3>Contact</h3>
+      <a href="mailto:rajarampatel880@gmail.com">rajarampatel880@gmail.com</a>
+      <p>© 2026 Rajaram Finance Calculator</p>
+    </div>
+  </div>
+  <div class="copyright">
+    All Rights Reserved. | Made with ❤️ for Indian Investors
+  </div>
 </footer>
 
 <script>
@@ -209,19 +243,38 @@ function drawTable(data){
   document.getElementById('tableDiv').innerHTML = html;
 }
 
-// PDF + Share
-document.getElementById("downloadPdf").addEventListener("click",()=>window.print());
-document.getElementById("shareResult").addEventListener("click",async()=>{
-  if(navigator.share){
-    await navigator.share({
-      title:"SIP Calculator",
-      text:`Invested: ${document.getElementById("invested").innerText}\nReturns: ${document.getElementById("returns").innerText}\nMaturity: ${document.getElementById("maturity").innerText}`,
-      url:location.href
-    });
-  }else alert("Sharing not supported");
-});
+/* PDF + Share FIXED */
+function downloadPDF(){
+    let printContents = document.querySelector('.container').innerHTML;
+    let originalContents = document.body.innerHTML;
+    
+    document.body.innerHTML = `<style>body{font-family:Arial; padding:20px}.card{box-shadow:none; border:1px solid #ddd; margin-bottom:20px}button, footer, header{display:none !important}</style>${printContents}`;
+    
+    window.print();
+    
+    document.body.innerHTML = originalContents;
+    location.reload();
+}
 
-calculateSIP(); // Run on load
+async function shareResult(){
+    const text = `SIP Calculator Result - Rajaram Finance
+Invested: ${document.getElementById("invested").innerText}
+Returns: ${document.getElementById("returns").innerText}
+Maturity: ${document.getElementById("maturity").innerText}
+Calculate: ${location.href}`;
+
+    if(navigator.share){
+        await navigator.share({title:"SIP Calculator Result",text: text});
+    }else{
+        navigator.clipboard.writeText(text);
+        alert("Result copied! Ab kahin bhi paste kar do.");
+    }
+}
+
+document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
+document.getElementById("shareResult").addEventListener("click", shareResult);
+
+calculateSIP();
 </script>
 </body>
 </html>
