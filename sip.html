@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-<title>SIP Calculator | Rajaram Finance Calculators</title>
+<title>SIP Calculator | Rajaram Finance Calculator</title>
 
-<meta name="description"
-content="Free SIP Calculator with Chart, PDF, Share, History and Dark Mode">
+<meta name="description" content="Free SIP Calculator with Step-Up SIP, Chart, Investment Summary and Maturity Value. 100% Client Side.">
+
+<meta name="keywords" content="SIP Calculator, Mutual Fund Calculator, SIP Return Calculator, Rajaram Finance Calculator">
 
 <meta name="theme-color" content="#1E40AF">
 
@@ -18,12 +18,9 @@ content="Free SIP Calculator with Chart, PDF, Share, History and Dark Mode">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
 
@@ -40,9 +37,9 @@ font-family:'Poppins',sans-serif;
 --secondary:#10B981;
 --bg:#F4F7FC;
 --card:#FFFFFF;
---text:#111827;
---text2:#64748B;
---radius:22px;
+--text:#0F172A;
+--light:#64748B;
+--radius:18px;
 --shadow:0 10px 25px rgba(0,0,0,.08);
 
 }
@@ -52,571 +49,105 @@ scroll-behavior:smooth;
 }
 
 body{
-
 background:var(--bg);
 color:var(--text);
-padding-bottom:90px;
-
-}
-
-body.dark{
-
-background:#0F172A;
-color:#fff;
-
 }
 
 .container{
-
-width:min(1200px,94%);
+width:min(1100px,94%);
 margin:auto;
-
 }
 
-a{
-
-text-decoration:none;
-
-}
-
-img{
-
-max-width:100%;
-
-display:block;
-
-}
-
-/* HEADER */
-
-.header{
+header{
 
 position:sticky;
-
 top:0;
-
 z-index:999;
-
 background:#fff;
-
+padding:15px 18px;
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
-
-padding:16px 18px;
-
 box-shadow:var(--shadow);
-
-}
-
-body.dark .header{
-
-background:#111827;
 
 }
 
 .logo{
 
 display:flex;
-
 align-items:center;
-
-gap:14px;
+gap:12px;
 
 }
 
 .logo-icon{
 
-width:64px;
-
-height:64px;
-
-border-radius:20px;
-
+width:56px;
+height:56px;
+border-radius:16px;
 background:linear-gradient(135deg,#1E40AF,#10B981);
-
 display:flex;
-
 justify-content:center;
-
 align-items:center;
-
+font-size:24px;
 color:#fff;
-
-font-size:30px;
 
 }
 
-.logo h1{
+.logo h2{
 
-font-size:22px;
-
-color:var(--primary);
-
-font-weight:800;
+font-size:20px;
+font-weight:700;
+color:#1E40AF;
 
 }
 
 .logo p{
 
 font-size:13px;
-
-color:var(--text2);
-
-}
-
-.header-btns{
-
-display:flex;
-
-gap:10px;
+color:#64748B;
 
 }
-
-.icon-btn{
-
-width:50px;
-
-height:50px;
-
-border:none;
-
-border-radius:16px;
-
-background:#EEF4FF;
-
-font-size:20px;
-
-cursor:pointer;
-
-}
-
-/* HERO */
 
 .hero{
 
-margin:20px 18px;
-
-padding:36px 24px;
-
-border-radius:28px;
-
+margin:20px;
+padding:35px 24px;
+border-radius:24px;
 background:linear-gradient(135deg,#1E40AF,#10B981);
-
 color:#fff;
-
 text-align:center;
 
 }
 
-.hero h2{
+.hero h1{
 
 font-size:34px;
-
-font-weight:800;
-
-margin-bottom:14px;
+margin-bottom:12px;
 
 }
 
 .hero p{
 
 font-size:16px;
-
 line-height:1.8;
 
-margin-bottom:24px;
-
 }
 
-.hero-btns{
-
-display:flex;
-
-gap:12px;
-
-justify-content:center;
-
-flex-wrap:wrap;
-
-}
-
-.hero-btn{
-
-padding:15px 24px;
-
-border-radius:16px;
-
-font-weight:700;
-
-}
-
-.white-btn{
+.card{
 
 background:#fff;
-
-color:#1E40AF;
-
-}
-
-.outline-btn{
-
-border:2px solid #fff;
-
-color:#fff;
-
-}
-
-/* SEARCH */
-
-.search{
-
-margin:20px 18px;
-
-position:relative;
-
-}
-
-.search input{
-
-width:100%;
-
-padding:18px 18px 18px 54px;
-
-border:none;
-
+padding:16px;
 border-radius:18px;
-
-background:#fff;
-
-font-size:16px;
-
 box-shadow:var(--shadow);
-
-outline:none;
-
-}
-
-.search i{
-
-position:absolute;
-
-left:18px;
-
-top:20px;
-
-color:#64748B;
+margin:20px 0;
 
 }
 
-@media(max-width:768px){
+.card h2{
 
-.hero h2{
-
-font-size:28px;
-
-}
-
-.hero-btns{
-
-flex-direction:column;
-
-}
-
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header class="header">
-
-<div class="logo">
-
-<div class="logo-icon">
-
-<i class="fa-solid fa-chart-line"></i>
-
-</div>
-
-<div>
-
-<h1>Rajaram</h1>
-
-<p>Finance Calculators</p>
-
-</div>
-
-</div>
-
-<div class="header-btns">
-
-<button id="themeBtn" class="icon-btn">🌙</button>
-
-<button id="shareBtn" class="icon-btn">
-
-<i class="fa-solid fa-share-nodes"></i>
-
-</button>
-
-</div>
-
-</header>
-
-<section class="hero">
-
-<h2>📈 SIP Calculator</h2>
-
-<p>
-
-Calculate your SIP returns with beautiful charts and detailed reports.
-
-</p>
-
-<div class="hero-btns">
-
-<a href="#calculator" class="hero-btn white-btn">
-
-Start Calculation
-
-</a>
-
-<a href="calculator.html" class="hero-btn outline-btn">
-
-All Calculators
-
-</a>
-
-</div>
-
-</section>
-
-<div class="search">
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-<input
-type="text"
-placeholder="Search Calculator...">
-
-</div>
-<!-- ===========================
-STATISTICS
-=========================== -->
-
-<section class="container">
-
-<div class="stats-grid">
-
-<div class="stat-card">
-<h2>15+</h2>
-<p>Finance Calculators</p>
-</div>
-
-<div class="stat-card">
-<h2>100%</h2>
-<p>Free to Use</p>
-</div>
-
-<div class="stat-card">
-<h2>Fast</h2>
-<p>Instant Results</p>
-</div>
-
-<div class="stat-card">
-<h2>Secure</h2>
-<p>Privacy First</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- ===========================
-CALCULATOR
-=========================== -->
-
-<section class="container" id="calculator">
-
-<div class="calculator-card">
-
-<h2>
-<i class="fa-solid fa-calculator"></i>
-SIP Calculator
-</h2>
-
-<p class="sub-title">
-Calculate your SIP maturity amount instantly.
-</p>
-
-<div class="input-group">
-
-<label>Monthly Investment (₹)</label>
-
-<input
-type="number"
-id="amount"
-placeholder="5000"
-min="500">
-
-</div>
-
-<div class="input-group">
-
-<label>Expected Annual Return (%)</label>
-
-<input
-type="number"
-id="rate"
-placeholder="12"
-step="0.1">
-
-</div>
-
-<div class="input-group">
-
-<label>Investment Period (Years)</label>
-
-<input
-type="number"
-id="years"
-placeholder="20"
-min="1">
-
-</div>
-
-<button id="calculateBtn" class="calculate-btn">
-
-<i class="fa-solid fa-chart-line"></i>
-
-Calculate SIP
-
-</button>
-
-</div>
-
-</section>
-
-<!-- ===========================
-RESULT CARDS
-=========================== -->
-
-<section class="container">
-
-<div class="result-grid">
-
-<div class="result-card">
-
-<span>Monthly SIP</span>
-
-<h2 id="monthlyResult">₹0</h2>
-
-</div>
-
-<div class="result-card">
-
-<span>Total Investment</span>
-
-<h2 id="investmentResult">₹0</h2>
-
-</div>
-
-<div class="result-card">
-
-<span>Total Returns</span>
-
-<h2 id="returnResult">₹0</h2>
-
-</div>
-
-<div class="result-card total-card">
-
-<span>Maturity Value</span>
-
-<h2 id="maturityResult">₹0</h2>
-
-</div>
-
-</div>
-
-</section>
-
-<style>
-
-/* ===== Statistics ===== */
-
-.stats-grid{
-
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:18px;
-margin-bottom:24px;
-
-}
-
-.stat-card{
-
-background:#fff;
-padding:24px;
-border-radius:22px;
-text-align:center;
-box-shadow:var(--shadow);
-
-}
-
-body.dark .stat-card{
-
-background:#1E293B;
-
-}
-
-.stat-card h2{
-
-font-size:30px;
-color:var(--primary);
-margin-bottom:8px;
-
-}
-
-.stat-card p{
-
-color:var(--text2);
-
-}
-
-/* ===== Calculator ===== */
-
-.calculator-card{
-
-background:#fff;
-padding:28px;
-border-radius:24px;
-box-shadow:var(--shadow);
-margin-bottom:24px;
-
-}
-
-body.dark .calculator-card{
-
-background:#1E293B;
-
-}
-
-.calculator-card h2{
-
-margin-bottom:8px;
-color:var(--primary);
-
-}
-
-.sub-title{
-
-margin-bottom:22px;
-color:var(--text2);
+margin-bottom:18px;
+color:#1E40AF;
 
 }
 
@@ -634,20 +165,35 @@ margin-bottom:8px;
 
 }
 
-.input-group input{
+.input-box{
+
+position:relative;
+
+}
+
+.input-box i{
+
+position:absolute;
+left:16px;
+top:17px;
+color:#64748B;
+
+}
+
+.input-box input{
 
 width:100%;
-padding:16px;
+padding:16px 16px 16px 45px;
 border:2px solid #E5E7EB;
-border-radius:16px;
+border-radius:14px;
 font-size:16px;
 outline:none;
 
 }
 
-.input-group input:focus{
+.input-box input:focus{
 
-border-color:var(--primary);
+border-color:#1E40AF;
 
 }
 
@@ -656,577 +202,476 @@ border-color:var(--primary);
 width:100%;
 padding:18px;
 border:none;
-border-radius:18px;
+border-radius:16px;
 background:linear-gradient(135deg,#1E40AF,#10B981);
 color:#fff;
 font-size:18px;
 font-weight:700;
 cursor:pointer;
-transition:.3s;
 
 }
 
-.calculate-btn:hover{
+.ads-box{
 
-transform:translateY(-2px);
+height:120px;
+background:#F8FAFC;
+border:2px dashed #CBD5E1;
+border-radius:16px;
+display:flex;
+justify-content:center;
+align-items:center;
+color:#94A3B8;
+margin:20px 0;
 
 }
-
-/* ===== Results ===== */
 
 .result-grid{
 
 display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:18px;
-margin-bottom:24px;
+grid-template-columns:1fr;
+gap:16px;
 
 }
 
 .result-card{
 
 background:#fff;
-padding:24px;
-border-radius:22px;
-text-align:center;
+padding:18px;
+border-radius:18px;
 box-shadow:var(--shadow);
 
 }
 
-body.dark .result-card{
+.result-card h3{
 
-background:#1E293B;
-
-}
-
-.result-card span{
-
-display:block;
-margin-bottom:10px;
-color:var(--text2);
+font-size:15px;
+color:#64748B;
 
 }
 
 .result-card h2{
 
+margin-top:8px;
 font-size:28px;
-color:var(--primary);
+color:#1E40AF;
 
 }
 
-.total-card{
+.result-card.primary{
 
 background:linear-gradient(135deg,#1E40AF,#10B981);
 
 }
 
-.total-card span,
-.total-card h2{
+.result-card.primary h3,
+.result-card.primary h2{
 
 color:#fff;
 
 }
 
-@media(max-width:768px){
+@media(min-width:768px){
 
-.stats-grid,
 .result-grid{
 
-grid-template-columns:1fr;
-
-}
-
-}
-
-  </style>
-  <!-- ===========================
-INVESTMENT SUMMARY
-=========================== -->
-
-<section class="container">
-
-<div class="summary-card">
-
-<h2>
-<i class="fa-solid fa-chart-pie"></i>
-Investment Summary
-</h2>
-
-<div class="summary-grid">
-
-<div class="summary-box">
-<p>Monthly SIP</p>
-<h3 id="sumMonthly">₹0</h3>
-</div>
-
-<div class="summary-box">
-<p>Total Investment</p>
-<h3 id="sumInvestment">₹0</h3>
-</div>
-
-<div class="summary-box">
-<p>Total Returns</p>
-<h3 id="sumReturn">₹0</h3>
-</div>
-
-<div class="summary-box total-summary">
-<p>Maturity Value</p>
-<h2 id="sumValue">₹0</h2>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ===========================
-LIVE CHART
-=========================== -->
-
-<section class="container">
-
-<div class="chart-card">
-
-<h2>
-📊 Investment Growth
-</h2>
-
-<canvas id="sipChart" height="250"></canvas>
-
-</div>
-
-</section>
-
-<style>
-
-/* Summary */
-
-.summary-card{
-
-background:#fff;
-padding:28px;
-border-radius:24px;
-box-shadow:var(--shadow);
-margin-bottom:24px;
-
-}
-
-body.dark .summary-card{
-
-background:#1E293B;
-
-}
-
-.summary-card h2{
-
-margin-bottom:22px;
-color:var(--primary);
-
-}
-
-.summary-grid{
-
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:18px;
-
-}
-
-.summary-box{
-
-background:#F8FAFC;
-padding:22px;
-border-radius:18px;
-text-align:center;
-
-}
-
-body.dark .summary-box{
-
-background:#334155;
-
-}
-
-.summary-box p{
-
-color:var(--text2);
-margin-bottom:10px;
-
-}
-
-.summary-box h3{
-
-font-size:26px;
-color:var(--primary);
-
-}
-
-.total-summary{
-
-background:linear-gradient(135deg,#1E40AF,#10B981);
-
-}
-
-.total-summary p,
-.total-summary h2{
-
-color:#fff;
-
-}
-
-/* Chart */
-
-.chart-card{
-
-background:#fff;
-padding:28px;
-border-radius:24px;
-box-shadow:var(--shadow);
-margin-bottom:24px;
-
-}
-
-body.dark .chart-card{
-
-background:#1E293B;
-
-}
-
-.chart-card h2{
-
-margin-bottom:22px;
-color:var(--primary);
-
-}
-
-canvas{
-
-width:100%!important;
-
-}
-
-@media(max-width:768px){
-
-.summary-grid{
-
-grid-template-columns:1fr;
+grid-template-columns:repeat(3,1fr);
 
 }
 
 }
 
 </style>
-<!-- ===========================
-YEAR WISE GROWTH
-=========================== -->
 
-<section class="container">
+</head>
 
-<div class="table-card">
+<body>
 
-<h2>
-📅 Year-wise Growth
-</h2>
+<header>
 
-<div class="table-wrapper">
+<div class="logo">
 
-<table>
+<div class="logo-icon">
 
-<thead>
+<i class="fa-solid fa-chart-line"></i>
 
-<tr>
+</div>
 
-<th>Year</th>
+<div>
 
-<th>Investment</th>
+<h2>Rajaram Finance</h2>
 
-<th>Returns</th>
-
-<th>Total Value</th>
-
-</tr>
-
-</thead>
-
-<tbody id="growthTable">
-
-<tr>
-
-<td colspan="4">
-
-Click "Calculate SIP" to generate yearly report.
-
-</td>
-
-</tr>
-
-</tbody>
-
-</table>
+<p>Calculator</p>
 
 </div>
 
 </div>
+
+</header>
+
+<section class="hero">
+
+<h1>SIP Calculator</h1>
+
+<p>
+
+Calculate your Mutual Fund SIP returns instantly with Step-Up SIP support.
+
+</p>
 
 </section>
 
+<div class="container">
+
+<div class="card">
+
+<h2>SIP Calculator</h2>
 <!-- ===========================
-ACTION BUTTONS
+INPUT FORM
 =========================== -->
 
-<section class="container">
+<div class="input-group">
 
-<div class="action-grid">
+<label>Monthly Investment Amount</label>
 
-<button id="downloadPdf" class="action-btn pdf-btn">
+<div class="input-box">
 
-<i class="fa-solid fa-file-pdf"></i>
+<i class="fa-solid fa-indian-rupee-sign"></i>
 
-Download PDF
+<input
+type="number"
+id="monthlyInvestment"
+placeholder="5000"
+min="500">
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>Expected Annual Return (%)</label>
+
+<div class="input-box">
+
+<i class="fa-solid fa-percent"></i>
+
+<input
+type="number"
+id="annualReturn"
+value="12"
+step="0.1">
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>Time Period (Years)</label>
+
+<div class="input-box">
+
+<i class="fa-solid fa-calendar"></i>
+
+<input
+type="number"
+id="investmentYears"
+value="10"
+min="1">
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<label>Step-Up SIP (% Per Year)</label>
+
+<div class="input-box">
+
+<i class="fa-solid fa-arrow-trend-up"></i>
+
+<input
+type="number"
+id="stepUp"
+value="0"
+min="0">
+
+</div>
+
+</div>
+
+<!-- AdSense Ad Slot -->
+
+<div class="ads-box">
+
+<!-- AdSense Ad Slot -->
+
+Advertisement Area
+
+</div>
+
+<button
+id="calculateBtn"
+class="calculate-btn">
+
+Calculate SIP
 
 </button>
 
-<button id="shareResult" class="action-btn share-btn">
-
-<i class="fa-solid fa-share-nodes"></i>
-
-Share Result
-
-</button>
-
 </div>
 
-</section>
-
 <!-- ===========================
-RECENT HISTORY
+RESULTS
 =========================== -->
 
-<section class="container">
+<div class="result-grid">
 
-<div class="history-card">
+<div class="result-card">
 
-<h2>
+<h3>Total Investment</h3>
 
-🕒 Recent Calculations
+<h2 id="totalInvestment">
+
+₹0
 
 </h2>
 
-<div id="historyList">
+</div>
 
-<p>No calculations available.</p>
+<div class="result-card">
+
+<h3>Estimated Returns</h3>
+
+<h2 id="estimatedReturns">
+
+₹0
+
+</h2>
+
+</div>
+
+<div class="result-card primary">
+
+<h3>Maturity Value</h3>
+
+<h2 id="maturityValue">
+
+₹0
+
+</h2>
 
 </div>
 
 </div>
 
-</section>
+<!-- ===========================
+CHART
+=========================== -->
 
-<style>
+<div class="card">
 
-/* Table */
+<h2>Investment vs Returns</h2>
 
-.table-card{
+<canvas id="sipChart" height="260"></canvas>
 
-background:#fff;
+</div>
 
-padding:28px;
+<!-- AdSense Ad Slot -->
 
-border-radius:24px;
+<div class="ads-box">
 
-box-shadow:var(--shadow);
+<!-- AdSense Ad Slot -->
 
-margin-bottom:24px;
+Advertisement Area
 
-}
+</div>
 
-body.dark .table-card{
+<!-- ===========================
+FORMULA
+=========================== -->
 
-background:#1E293B;
+<div class="card">
 
-}
+<h2>Formula Used</h2>
 
-.table-card h2{
+<div style="background:#F8FAFC;padding:16px;border-radius:12px;color:#475569;font-size:15px;line-height:1.8">
 
-margin-bottom:20px;
+<strong>M = P × ({[1 + r]^n − 1} / r) × (1 + r)</strong>
 
-color:var(--primary);
+<br><br>
 
-}
+<b>M</b> = Maturity Value
 
-.table-wrapper{
+<br>
 
-overflow-x:auto;
+<b>P</b> = Monthly Investment
 
-}
+<br>
 
-table{
+<b>r</b> = Monthly Rate of Return
 
-width:100%;
+<br>
 
-border-collapse:collapse;
+<b>n</b> = Total Number of Months
 
-}
+</div>
 
-th{
+</div>
 
-background:#1E40AF;
+<!-- ===========================
+DISCLAIMER
+=========================== -->
 
-color:#fff;
+<div class="card">
 
-padding:14px;
+<p style="font-size:14px;color:#64748B;line-height:1.8">
 
-font-weight:600;
+<strong>Disclaimer:</strong>
 
-}
+This is an estimate only. Actual returns may vary based on market conditions. This calculator is for educational purposes only and should not be considered financial advice.
 
-td{
+</p>
 
-padding:14px;
-
-text-align:center;
-
-border-bottom:1px solid #E5E7EB;
-
-}
-
-body.dark td{
-
-border-color:#334155;
-
-}
-
-/* Buttons */
-
-.action-grid{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:18px;
-
-margin-bottom:24px;
-
-}
-
-.action-btn{
-
-padding:18px;
-
-border:none;
-
-border-radius:18px;
-
-font-size:17px;
-
-font-weight:700;
-
-cursor:pointer;
-
-color:#fff;
-
-}
-
-.pdf-btn{
-
-background:#DC2626;
-
-}
-
-.share-btn{
-
-background:#10B981;
-
-}
-
-/* History */
-
-.history-card{
-
-background:#fff;
-
-padding:28px;
-
-border-radius:24px;
-
-box-shadow:var(--shadow);
-
-margin-bottom:24px;
-
-}
-
-body.dark .history-card{
-
-background:#1E293B;
-
-}
-
-.history-card h2{
-
-margin-bottom:18px;
-
-color:var(--primary);
-
-}
-
-.history-item{
-
-padding:16px;
-
-background:#F8FAFC;
-
-border-left:5px solid #10B981;
-
-border-radius:14px;
-
-margin-bottom:14px;
-
-}
-
-body.dark .history-item{
-
-background:#334155;
-
-}
-
-@media(max-width:768px){
-
-.action-grid{
-
-grid-template-columns:1fr;
-
-}
-
-}
-
-</style>
+</div>
 <script>
 
 /* ===========================
-GLOBAL CHART
+GLOBAL VARIABLES
 =========================== */
 
 let sipChart=null;
 
-/* ===========================
-FORMAT CURRENCY
-=========================== */
-
-function money(value){
+function formatCurrency(value){
 
 return "₹"+Math.round(value).toLocaleString("en-IN");
 
 }
 
 /* ===========================
+CALCULATE SIP
+=========================== */
+
+document.getElementById("calculateBtn").addEventListener("click",calculateSIP);
+
+function calculateSIP(){
+
+const monthly=
+parseFloat(document.getElementById("monthlyInvestment").value);
+
+const annualRate=
+parseFloat(document.getElementById("annualReturn").value);
+
+const years=
+parseInt(document.getElementById("investmentYears").value);
+
+const stepUp=
+parseFloat(document.getElementById("stepUp").value);
+
+if(isNaN(monthly)||monthly<=0){
+
+alert("Enter Monthly Investment");
+
+return;
+
+}
+
+const monthlyRate=
+annualRate/12/100;
+
+let totalInvestment=0;
+
+let maturityValue=0;
+
+let yearlyData=[];
+
+/* ===========================
+STEP-UP SIP
+=========================== */
+
+for(let y=1;y<=years;y++){
+
+let sip=
+monthly*Math.pow(1+stepUp/100,y-1);
+
+for(let m=1;m<=12;m++){
+
+let monthsLeft=
+(years-y)*12+(12-m);
+
+maturityValue+=
+
+sip*Math.pow(1+monthlyRate,monthsLeft);
+
+totalInvestment+=sip;
+
+}
+
+yearlyData.push({
+
+year:y,
+
+sip:sip
+
+});
+
+}
+
+const estimatedReturns=
+
+maturityValue-totalInvestment;
+
+/* ===========================
+RESULTS
+=========================== */
+
+document.getElementById("totalInvestment").innerHTML=
+
+formatCurrency(totalInvestment);
+
+document.getElementById("estimatedReturns").innerHTML=
+
+formatCurrency(estimatedReturns);
+
+document.getElementById("maturityValue").innerHTML=
+
+formatCurrency(maturityValue);
+
+/* ===========================
 UPDATE CHART
 =========================== */
 
-function updateChart(investment,returns){
+updateChart(
 
-const ctx=document.getElementById("sipChart");
+totalInvestment,
+
+estimatedReturns
+
+);
+
+/* ===========================
+YEAR DATA
+=========================== */
+
+console.log(yearlyData);
+
+}
+
+/* ===========================
+PIE CHART
+=========================== */
+
+function updateChart(
+
+investment,
+
+returns
+
+){
+
+const ctx=
+
+document.getElementById("sipChart");
 
 if(sipChart){
 
@@ -1236,15 +681,27 @@ sipChart.destroy();
 
 sipChart=new Chart(ctx,{
 
-type:"doughnut",
+type:"pie",
 
 data:{
 
-labels:["Investment","Returns"],
+labels:[
+
+"Investment",
+
+"Returns"
+
+],
 
 datasets:[{
 
-data:[investment,returns],
+data:[
+
+investment,
+
+returns
+
+],
 
 backgroundColor:[
 
@@ -1280,216 +737,12 @@ position:"bottom"
 
 }
 
-/* ===========================
-CALCULATE SIP
-=========================== */
-
-document.getElementById("calculateBtn").addEventListener("click",function(){
-
-const monthly=parseFloat(document.getElementById("amount").value);
-
-const annual=parseFloat(document.getElementById("rate").value);
-
-const years=parseInt(document.getElementById("years").value);
-
-if(isNaN(monthly)||isNaN(annual)||isNaN(years)){
-
-alert("Please fill all fields.");
-
-return;
-
-}
-
-const r=annual/12/100;
-
-const n=years*12;
-
-const maturity=
-
-monthly*
-
-((Math.pow(1+r,n)-1)/r)*
-
-(1+r);
-
-const investment=
-
-monthly*n;
-
-const returns=
-
-maturity-investment;
-
-/* RESULT */
-
-monthlyResult.textContent=money(monthly);
-
-investmentResult.textContent=money(investment);
-
-returnResult.textContent=money(returns);
-
-maturityResult.textContent=money(maturity);
-
-/* SUMMARY */
-
-sumMonthly.textContent=money(monthly);
-
-sumInvestment.textContent=money(investment);
-
-sumReturn.textContent=money(returns);
-
-sumValue.textContent=money(maturity);
-
-/* CHART */
-
-updateChart(investment,returns);
-
-/* TABLE */
-
-let html="";
-
-for(let y=1;y<=years;y++){
-
-const invest=
-
-monthly*12*y;
-
-const value=
-
-monthly*
-
-((Math.pow(1+r,y*12)-1)/r)*(1+r);
-
-const gain=
-
-value-invest;
-
-html+=`
-
-<tr>
-
-<td>${y}</td>
-
-<td>${money(invest)}</td>
-
-<td>${money(gain)}</td>
-
-<td>${money(value)}</td>
-
-</tr>
-
-`;
-
-}
-
-growthTable.innerHTML=html;
-
-/* SAVE HISTORY */
-
-saveHistory({
-
-sip:monthly,
-
-years:years,
-
-value:Math.round(maturity)
-
-});
-
-});
-
-/* ===========================
-SAVE HISTORY
-=========================== */
-
-function saveHistory(item){
-
-let history=
-
-JSON.parse(
-
-localStorage.getItem("sipHistory")||"[]"
-
-);
-
-history.unshift(item);
-
-history=history.slice(0,10);
-
-localStorage.setItem(
-
-"sipHistory",
-
-JSON.stringify(history)
-
-);
-
-loadHistory();
-
-}
-
-/* ===========================
-LOAD HISTORY
-=========================== */
-
-function loadHistory(){
-
-const history=
-
-JSON.parse(
-
-localStorage.getItem("sipHistory")||"[]"
-
-);
-
-historyList.innerHTML="";
-
-if(history.length===0){
-
-historyList.innerHTML=
-
-"<p>No calculations available.</p>";
-
-return;
-
-}
-
-history.forEach(item=>{
-
-historyList.innerHTML+=`
-
-<div class="history-item">
-
-<b>SIP ${money(item.sip)}</b>
-
-<br>
-
-${item.years} Years
-
-<br>
-
-Final Value
-
-<b>${money(item.value)}</b>
-
-</div>
-
-`;
-
-});
-
-}
-
-loadHistory();
-
   </script>
-  <!-- ===========================
+<!-- ===========================
 FAQ
 =========================== -->
 
-<section class="container">
-
-<div class="faq-card">
+<div class="card">
 
 <h2>Frequently Asked Questions</h2>
 
@@ -1500,257 +753,106 @@ FAQ
 
 <details>
 <summary>Can I start SIP with ₹500?</summary>
-<p>Yes. Most Mutual Funds allow SIP from ₹500 per month.</p>
+<p>Yes. Many Mutual Funds allow SIP investments starting from ₹500.</p>
 </details>
 
 <details>
-<summary>Is SIP Safe?</summary>
-<p>Mutual Fund investments are subject to market risks. SIP helps average investment cost over time.</p>
+<summary>What is Step-Up SIP?</summary>
+<p>Step-Up SIP lets you increase your SIP amount every year to build a larger investment corpus over time.</p>
 </details>
 
 </div>
 
-</section>
-
-<footer class="footer">
+<footer style="margin-top:30px;background:#0F172A;color:#CBD5E1;padding:40px 20px;text-align:center;">
 
 <div class="container">
 
-<h2>Rajaram Finance Calculators</h2>
+<h2 style="color:#fff;margin-bottom:10px;">
 
-<p>Free SIP • EMI • FD • RD • GST • PPF Calculators</p>
+Rajaram Finance Calculator
 
-<p>© 2026 Rajaram Finance Calculators</p>
+</h2>
+
+<p>
+
+Free SIP • EMI • FD • RD • PPF • GST Calculators
+
+</p>
+
+<p style="margin-top:20px;font-size:14px;">
+
+© 2026 Rajaram Finance Calculator. All Rights Reserved.
+
+</p>
 
 </div>
 
 </footer>
 
-<nav class="bottom-nav">
-
-<a href="index.html">
-<i class="fa-solid fa-house"></i>
-<span>Home</span>
-</a>
-
-<a href="calculator.html" class="active">
-<i class="fa-solid fa-calculator"></i>
-<span>Tools</span>
-</a>
-
-<a href="articles.html">
-<i class="fa-solid fa-book"></i>
-<span>Guides</span>
-</a>
-
-<a href="contact.html">
-<i class="fa-solid fa-envelope"></i>
-<span>Contact</span>
-</a>
-
-</nav>
-
-<button id="topBtn">
-<i class="fa-solid fa-arrow-up"></i>
-</button>
-
-<style>
-
-.footer{
-background:#0F172A;
-color:#CBD5E1;
-padding:40px 20px 90px;
-text-align:center;
-margin-top:30px;
-}
-
-.footer h2{
-color:#fff;
-margin-bottom:10px;
-}
-
-.faq-card{
-background:#fff;
-padding:28px;
-border-radius:22px;
-box-shadow:var(--shadow);
-margin-bottom:24px;
-}
-
-body.dark .faq-card{
-background:#1E293B;
-}
-
-details{
-background:#F8FAFC;
-padding:16px;
-border-radius:14px;
-margin-bottom:12px;
-cursor:pointer;
-}
-
-.bottom-nav{
-position:fixed;
-bottom:0;
-left:0;
-width:100%;
-height:72px;
-background:#fff;
-display:flex;
-justify-content:space-around;
-align-items:center;
-box-shadow:0 -5px 20px rgba(0,0,0,.08);
-z-index:999;
-}
-
-.bottom-nav a{
-display:flex;
-flex-direction:column;
-align-items:center;
-text-decoration:none;
-font-size:12px;
-color:#64748B;
-}
-
-.bottom-nav .active{
-color:#1E40AF;
-}
-
-#topBtn{
-position:fixed;
-right:18px;
-bottom:90px;
-width:55px;
-height:55px;
-border:none;
-border-radius:50%;
-background:#1E40AF;
-color:#fff;
-display:none;
-font-size:20px;
-cursor:pointer;
-}
-
-</style>
-
 <script>
 
-/* Scroll Top */
+/* ===========================
+PDF DOWNLOAD
+=========================== */
 
-window.addEventListener("scroll",()=>{
+function downloadPDF(){
 
-topBtn.style.display=
-window.scrollY>300?"block":"none";
-
-});
-
-topBtn.onclick=()=>{
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-};
-
-/* Dark Mode */
-
-if(localStorage.getItem("theme")=="dark"){
-
-document.body.classList.add("dark");
+window.print();
 
 }
 
-themeBtn.onclick=()=>{
+/* ===========================
+SHARE RESULT
+=========================== */
 
-document.body.classList.toggle("dark");
-
-localStorage.setItem(
-"theme",
-document.body.classList.contains("dark")?"dark":"light"
-);
-
-};
-
-/* Share */
-
-shareBtn.onclick=async()=>{
+async function shareResult(){
 
 if(navigator.share){
 
 await navigator.share({
 
-title:"Rajaram SIP Calculator",
-
-text:"Free SIP Calculator",
-
-url:location.href
-
-});
-
-}
-
-};
-
-shareResult.onclick=async()=>{
-
-if(navigator.share){
-
-await navigator.share({
-
-title:"My SIP Result",
+title:"SIP Calculator",
 
 text:
-"Monthly SIP : "+monthlyResult.innerText+
-"\nInvestment : "+investmentResult.innerText+
-"\nReturns : "+returnResult.innerText+
-"\nMaturity : "+maturityResult.innerText,
+
+"Total Investment : "+
+
+document.getElementById("totalInvestment").innerText+
+
+"\nEstimated Returns : "+
+
+document.getElementById("estimatedReturns").innerText+
+
+"\nMaturity Value : "+
+
+document.getElementById("maturityValue").innerText,
 
 url:location.href
 
 });
 
+}else{
+
+alert("Sharing is not supported.");
+
 }
 
-};
-
-/* PDF */
-
-downloadPdf.onclick=function(){
-
-html2pdf()
-
-.set({
-
-margin:8,
-
-filename:"SIP-Calculator.pdf",
-
-image:{
-type:"jpeg",
-quality:1
-},
-
-html2canvas:{
-scale:2
-},
-
-jsPDF:{
-unit:"mm",
-format:"a4",
-orientation:"portrait"
 }
 
-})
+/* Button Events */
 
-.from(document.querySelector(".container"))
+document.getElementById("downloadPdf")
 
-.save();
+.addEventListener("click",downloadPDF);
 
-};
+document.getElementById("shareResult")
+
+.addEventListener("click",shareResult);
 
 </script>
 
 </body>
 
 </html>
+  
+  
