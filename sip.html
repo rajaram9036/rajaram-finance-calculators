@@ -6,6 +6,8 @@
 <title>SIP Calculator - Rajaram Finance Calculator</title>
 <meta name="description" content="Free SIP Calculator to estimate maturity value of your mutual fund investments. Calculate returns with step-up option. 100% free & accurate.">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,sans-serif}
 body{background:#F8FAFC;color:#1E293B;line-height:1.6}
@@ -56,7 +58,7 @@ footer{background:#0F172A;color:#CBD5E1;padding:40px 20px;margin-top:40px}
   <p>Free SIP • EMI • FD • RD • PPF Calculators</p>
 </header>
 
-<div class="container">
+<div class="container" id="pdfContent">
   <div class="grid">
     
     <!-- LEFT: INPUT -->
@@ -150,7 +152,7 @@ footer{background:#0F172A;color:#CBD5E1;padding:40px 20px;margin-top:40px}
   </div>
 </div>
 
-<!-- NEW FOOTER -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div>
@@ -184,6 +186,7 @@ footer{background:#0F172A;color:#CBD5E1;padding:40px 20px;margin-top:40px}
 </footer>
 
 <script>
+const { jsPDF } = window.jspdf;
 let pieChart, lineChart;
 
 function format(num){return '₹' + Math.round(num).toLocaleString('en-IN')}
@@ -243,19 +246,28 @@ function drawTable(data){
   document.getElementById('tableDiv').innerHTML = html;
 }
 
-/* PDF + Share FIXED */
-function downloadPDF(){
-    let printContents = document.querySelector('.container').innerHTML;
-    let originalContents = document.body.innerHTML;
+/* REAL PDF DOWNLOAD */
+async function downloadPDF(){
+    const btn = document.getElementById("downloadPdf");
+    btn.innerText = "Generating PDF...";
+    btn.disabled = true;
     
-    document.body.innerHTML = `<style>body{font-family:Arial; padding:20px}.card{box-shadow:none; border:1px solid #ddd; margin-bottom:20px}button, footer, header{display:none !important}</style>${printContents}`;
+    const element = document.getElementById("pdfContent");
+    const canvas = await html2canvas(element, {scale: 2});
+    const imgData = canvas.toDataURL('image/png');
     
-    window.print();
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
     
-    document.body.innerHTML = originalContents;
-    location.reload();
+    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+    pdf.save('SIP-Calculator-RajaramFinance.pdf');
+    
+    btn.innerText = "Download PDF";
+    btn.disabled = false;
 }
 
+/* SHARE */
 async function shareResult(){
     const text = `SIP Calculator Result - Rajaram Finance
 Invested: ${document.getElementById("invested").innerText}
