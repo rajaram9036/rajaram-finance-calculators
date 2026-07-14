@@ -4,59 +4,48 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SIP Calculator - Rajaram Finance</title>
-<meta name="description" content="Calculate SIP returns like ET Money. Free SIP Calculator with step-up, charts, and PDF download.">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter', 'Segoe UI', sans-serif}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter', sans-serif}
 body{background:#F5F7FA;color:#1A202C}
 header{background:#fff;padding:15px 20px;box-shadow:0 2px 4px rgba(0,0,0,0.05)}
 header h1{color:#2563EB;font-size:20px;font-weight:700}
 .container{max-width:1100px;margin:20px auto;padding:0 15px}
-.top-card{background:#fff;border-radius:16px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.06);margin-bottom:20px}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 @media(max-width:900px){.grid-2{grid-template-columns:1fr}}
-.input-box{background:#fff;border-radius:16px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.06)}
-.result-box{background:linear-gradient(135deg,#2563EB,#16A34A);color:#fff;border-radius:16px;padding:25px;text-align:center}
-.result-box h2{font-size:14px;opacity:0.9;margin-bottom:8px}
-.result-box .big{font-size:36px;font-weight:800;margin-bottom:20px}
+.card{background:#fff;border-radius:16px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.06)}
+.result{background:linear-gradient(135deg,#2563EB,#16A34A);color:#fff;text-align:center}
+.result h2{font-size:14px;opacity:0.9;margin-bottom:8px}
+.result .big{font-size:36px;font-weight:800;margin-bottom:20px}
 .mini-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
 .mini-card{background:rgba(255,255,255,0.15);padding:12px;border-radius:10px}
-.mini-card h3{font-size:12px;opacity:0.8}
-.mini-card p{font-size:16px;font-weight:700}
 .input-group{margin-bottom:18px}
-.input-group label{display:block;font-weight:600;margin-bottom:8px;font-size:14px;color:#4A5568}
+.input-group label{font-weight:600;margin-bottom:8px;font-size:14px;color:#4A5568;display:block}
 .input-wrapper{position:relative}
 .input-wrapper span{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#718096;font-weight:600}
 .input-wrapper input{width:100%;padding:14px 14px 14px 40px;border:1px solid #E2E8F0;border-radius:10px;font-size:16px}
-.btn-calc{background:linear-gradient(135deg,#2563EB,#16A34A);color:#fff;border:none;padding:16px;width:100%;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin-top:10px}
+.btn{background:linear-gradient(135deg,#2563EB,#16A34A);color:#fff;border:none;padding:16px;width:100%;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer}
 .btn-row{display:flex;gap:10px;margin:20px 0}
 .btn-row button{width:50%;background:#1A202C;color:#fff;border:none;padding:12px;border-radius:8px;font-weight:600;cursor:pointer}
-.card-white{background:#fff;border-radius:16px;padding:25px;box-shadow:0 4px 12px rgba(0,0,0,0.06);margin-top:20px}
-.card-white h2{color:#2563EB;margin-bottom:15px;font-size:18px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-table th,table td{border:1px solid #E2E8F0;padding:10px;text-align:right}
-table th{background:#F7FAFC}
-.content-section{background:#fff;border-radius:16px;padding:25px;margin-top:20px;line-height:1.8}
-.content-section h2{color:#2563EB;margin-bottom:12px}
-.content-section p{margin-bottom:12px;color:#4A5568}
+.content{background:#fff;border-radius:16px;padding:25px;margin-top:20px;line-height:1.8}
+.content h2{color:#2563EB;margin-bottom:12px}
 footer{background:#1A202C;color:#A0AEC0;padding:40px 20px;margin-top:40px}
 .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;max-width:1100px;margin:0 auto}
 @media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr}}
-.footer-grid h3{color:#fff;margin-bottom:15px;font-size:16px}
-.footer-grid a{color:#A0AEC0;text-decoration:none;display:block;margin-bottom:10px;font-size:14px}
+.footer-grid h3{color:#fff;margin-bottom:15px}
+.footer-grid a{color:#A0AEC0;text-decoration:none;display:block;margin-bottom:10px}
 </style>
 </head>
 <body>
 
 <header><h1>Rajaram Finance</h1></header>
 
-<div class="container" id="pdfContent">
+<div class="container">
   
   <div class="grid-2">
     <!-- INPUT -->
-    <div class="input-box">
+    <div class="card">
       <h2 style="margin-bottom:20px;color:#2563EB">SIP Calculator</h2>
       <div class="input-group">
         <label>Monthly Investment</label>
@@ -67,22 +56,22 @@ footer{background:#1A202C;color:#A0AEC0;padding:40px 20px;margin-top:40px}
         <div class="input-wrapper"><span>%</span><input type="number" id="rate" value="12" step="0.1"></div>
       </div>
       <div class="input-group">
-        <label>Time Period</label>
+        <label>Time Period Years</label>
         <div class="input-wrapper"><span>Y</span><input type="number" id="years" value="10"></div>
       </div>
       <div class="input-group">
         <label>Annual Step-Up %</label>
         <div class="input-wrapper"><span>%</span><input type="number" id="stepup" value="0" step="0.1"></div>
       </div>
-      <button class="btn-calc" onclick="calculateSIP()">CALCULATE</button>
+      <button class="btn" onclick="calculateSIP()">CALCULATE</button>
     </div>
 
-    <!-- RESULT ET MONEY STYLE -->
-    <div class="result-box">
+    <!-- RESULT -->
+    <div class="card result">
       <h2>INVESTED AMOUNT</h2>
-      <p style="font-size:18px;margin-bottom:5px" id="invested">₹0</p>
+      <p style="font-size:18px" id="invested">₹0</p>
       <h2>ESTIMATED RETURNS</h2>
-      <p style="font-size:18px;margin-bottom:15px" id="returns">₹0</p>
+      <p style="font-size:18px" id="returns">₹0</p>
       <h2>TOTAL VALUE</h2>
       <p class="big" id="maturity">₹0</p>
       <div class="mini-grid">
@@ -94,41 +83,36 @@ footer{background:#1A202C;color:#A0AEC0;padding:40px 20px;margin-top:40px}
   </div>
 
   <!-- CHART -->
-  <div class="card-white">
-    <h2>Investment Growth Over Time</h2>
+  <div class="card">
+    <h2 style="color:#2563EB;margin-bottom:15px">Investment Growth</h2>
     <canvas id="lineChart"></canvas>
     <div class="btn-row">
       <button id="downloadPdf">📄 Download PDF</button>
       <button id="shareResult">🔗 Share</button>
     </div>
-    <div id="tableDiv"></div>
   </div>
 
-  <!-- SIP KE BAARE ME - 500 WORDS -->
-  <div class="content-section">
-    <h2>SIP Calculator kya hai? - ET Money Style</h2>
-    <p><b>Systematic Investment Plan (SIP)</b> mutual fund me invest karne ka sabse popular tarika hai. Isme aap har mahine ek fixed amount invest karte hain. Jaise RD hota hai, waise hi SIP hai, lekin returns market par depend karte hain.</p>
-    <p>Hamara <b>Rajaram Finance SIP Calculator</b> aapko batata hai ki agar aap ₹10000 mahine 12% return par 10 saal tak invest karte hain to aapko kitna milega. Calculator compounding ka use karta hai, isliye chota amount bhi badi wealth bana deta hai.</p>
-    <p><b>Step-Up SIP</b> ka feature sabse khaas hai. Agar aapki salary har saal 10% badhti hai to aap SIP bhi 10% bada sakte hain. Isse aap 10 saal me 2x zyada paisa bana sakte hain. Ye calculator wahi calculation karta hai.</p>
-    <p><b>Power of Compounding:</b> Pehle 5 saal me aapka paisa dheere badhega, lekin agle 5 saal me bahut tez. Isliye jaldi shuru karna zaroori hai. ₹5000 mahine 20 saal tak 12% par lagao to ₹50 Lakh se zyada ban jata hai.</p>
-    <p><b>FD vs SIP:</b> FD me 6-7% fixed milta hai aur safe hai. SIP me risk hai lekin 12-15% long term return mil sakta hai. Agar aapka goal 5 saal se zyada ka hai to SIP behtar option hai.</p>
-    <p>Is calculator ko use karke aap apne ghar, shaadi, baccho ki padhai, retirement ke liye planning kar sakte hain. PDF download karke apne financial advisor ko bhi dikha sakte hain. Investment shuru karne se pehle ek baar expert se salah zaroor lein.</p>
+  <!-- CONTENT -->
+  <div class="content">
+    <h2>SIP Calculator kya hai?</h2>
+    <p><b>Systematic Investment Plan (SIP)</b> mutual fund me har mahine fixed amount invest karne ka tarika hai. Ye chote amount se badi wealth banane me help karta hai. Hamara calculator compounding ke sath step-up SIP bhi calculate karta hai. Agar aap 10 saal tak ₹10000 mahine 12% par invest karte hain to aap ₹23 Lakh se zyada bana sakte hain. Jitni jaldi shuru karenge utna fayda hoga kyunki compounding time ke sath badhta hai. Ye tool 100% free hai aur koi data save nahi karta.</p>
   </div>
 
 </div>
 
 <footer>
   <div class="footer-grid">
-    <div><h3>Rajaram Finance</h3><a href="index.html">Home</a><a href="about.html">About Us</a></div>
-    <div><h3>Legal</h3><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div>
-    <div><h3>Calculators</h3><a href="ppf-calculator.html">PPF Calculator</a><a href="fd-calculator.html">FD Calculator</a><a href="emi-calculator.html">EMI Calculator</a></div>
-    <div><h3>Contact</h3><a href="mailto:rajarampatel880@gmail.com">rajarampatel880@gmail.com</a></div>
+    <div><h3>Rajaram Finance</h3><a href="index.html">Home</a><a href="about.html">About</a></div>
+    <div><h3>Legal</h3><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div>
+    <div><h3>Calculators</h3><a href="ppf-calculator.html">PPF</a><a href="fd-calculator.html">FD</a><a href="emi-calculator.html">EMI</a></div>
+    <div><h3>Contact</h3><a href="mailto:rajarampatel880@gmail.com">Email</a></div>
   </div>
 </footer>
 
 <script>
 const { jsPDF } = window.jspdf;
 let lineChart;
+let lastResult = {};
 
 function format(num){return '₹' + Math.round(num).toLocaleString('en-IN')}
 
@@ -150,11 +134,14 @@ function calculateSIP(){
       yearInvest += currentP;
     }
     totalInvested += yearInvest;
-    data.push({year:y, total:totalValue});
+    data.push(totalValue);
     currentP = currentP * (1 + step);
   }
   
   let returns = totalValue - totalInvested;
+  
+  lastResult = {P, r_annual, years, step, totalInvested, returns, totalValue, data};
+  
   document.getElementById('invested').innerText = format(totalInvested);
   document.getElementById('returns').innerText = format(returns);
   document.getElementById('maturity').innerText = format(totalValue);
@@ -163,58 +150,59 @@ function calculateSIP(){
   document.getElementById('rateTxt').innerText = (r_annual*100)+'%';
   
   drawChart(data);
-  drawTable(data, totalInvested);
 }
 
 function drawChart(data){
   if(lineChart) lineChart.destroy();
   lineChart = new Chart(document.getElementById('lineChart'),{
     type:'line',
-    data:{labels:data.map(d=>`Year ${d.year}`),datasets:[{label:'Total Value',data:data.map(d=>d.total),borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,0.1)',fill:true,tension:0.4}]},
-    options:{responsive:true}
+    data:{labels:data.map((_,i)=>`Year ${i+1}`),datasets:[{label:'Total Value',data:data,borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,0.1)',fill:true,tension:0.4}]},
+    options:{responsive:true, plugins:{legend:{display:false}}}
   });
 }
 
-function drawTable(data, invested){
-  let html = '<h2 style="margin-top:20px">Year-wise Breakdown</h2><table><tr><th>Year</th><th>Total Value</th></tr>';
-  data.forEach(d=>{html+=`<tr><td>${d.year}</td><td>${format(d.total)}</td></tr>`});
-  html+='</table>';
-  document.getElementById('tableDiv').innerHTML = html;
-}
-
-/* MULTI-PAGE PDF DOWNLOAD */
-async function downloadPDF(){
+/* DIRECT PDF - NO HTML2CANVAS */
+function downloadPDF(){
     const btn = document.getElementById("downloadPdf");
     btn.innerText = "Generating PDF...";
-    const element = document.getElementById("pdfContent");
-    const canvas = await html2canvas(element, {scale: 2, scrollY: -window.scrollY});
-    const imgData = canvas.toDataURL('image/png');
     
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-    const ratio = pdfWidth / canvas.width;
-    const imgHeight = canvas.height * ratio;
+    const doc = new jsPDF();
+    let y = 20;
     
-    let heightLeft = imgHeight;
-    let position = 0;
+    doc.setFontSize(18);
+    doc.text("SIP Calculator Report - Rajaram Finance", 14, y);
+    y += 15;
     
-    pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
-    heightLeft -= pdfHeight;
+    doc.setFontSize(12);
+    doc.text(`Monthly Investment: ${format(lastResult.P)}`, 14, y); y+=8;
+    doc.text(`Annual Return: ${(lastResult.r_annual*100)}%`, 14, y); y+=8;
+    doc.text(`Time Period: ${lastResult.years} Years`, 14, y); y+=8;
+    doc.text(`Step-Up: ${(lastResult.step*100)}%`, 14, y); y+=12;
     
-    while (heightLeft > 0) {
-      position = heightLeft - imgHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, imgHeight);
-      heightLeft -= pdfHeight;
-    }
+    doc.setFontSize(14);
+    doc.text("Result Summary", 14, y); y+=10;
+    doc.setFontSize(12);
+    doc.text(`Total Invested: ${format(lastResult.totalInvested)}`, 14, y); y+=8;
+    doc.text(`Estimated Returns: ${format(lastResult.returns)}`, 14, y); y+=8;
+    doc.text(`Maturity Value: ${format(lastResult.totalValue)}`, 14, y); y+=12;
     
-    pdf.save('SIP-Calculator-RajaramFinance.pdf');
+    doc.setFontSize(10);
+    doc.text("Year-wise Growth:", 14, y); y+=8;
+    lastResult.data.forEach((val, i) => {
+      if(y > 270){ doc.addPage(); y=20; }
+      doc.text(`Year ${i+1}: ${format(val)}`, 14, y); y+=7;
+    });
+    
+    y+=10;
+    doc.setFontSize(9);
+    doc.text("Disclaimer: This is an estimate. Mutual funds are subject to market risks.", 14, y);
+    
+    doc.save('SIP-Report-RajaramFinance.pdf');
     btn.innerText = "📄 Download PDF";
 }
 
 async function shareResult(){
-    const text = `My SIP Result: ${document.getElementById("maturity").innerText}\nCalculate yours: ${location.href}`;
+    const text = `My SIP Result: ${document.getElementById("maturity").innerText}\nCalculate: ${location.href}`;
     if(navigator.share){await navigator.share({title:"SIP Calculator",text: text});}
     else{navigator.clipboard.writeText(text); alert("Copied!");}
 }
