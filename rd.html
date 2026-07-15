@@ -1,290 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>RD Calculator | Rajaram Finance Calculators</title>
-
-<link rel="stylesheet" href="style.css">
-
+<title>RD Calculator 2026 - Calculate Recurring Deposit Returns | Rajaram Finance</title>
+<meta name="description" content="Free RD Calculator. Calculate Recurring Deposit maturity amount, interest earned. Download PDF report. Learn about RD benefits.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-
-body{
-background:#eef3ff;
-font-family:Arial,sans-serif;
-margin:0;
+:root{
+  --primary:#2563EB;
+  --accent:#10B981;
+  --dark:#0F172A;
+  --light:#F8FAFC;
+  --border:#E2E8F0;
 }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
+body{background:var(--light);color:var(--dark)}
+header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);text-align:center}
+.logo{font-size:24px;font-weight:700}
+.logo .blue{color:var(--primary)}
+.logo .green{color:var(--accent)}
 
-.container{
-max-width:420px;
-margin:40px auto;
-background:#fff;
-padding:30px;
-border-radius:18px;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-}
+.container{width:100%;max-width:700px;margin:0 auto;padding:20px}
 
-.container h1{
-text-align:center;
-color:#1565C0;
-font-size:34px;
-margin-bottom:25px;
-}
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.card h2{font-size:20px;font-weight:700;color:#1E293B;margin-bottom:18px}
 
-label{
-display:block;
-margin-top:18px;
-font-weight:bold;
-}
+.input-group{margin-bottom:16px}
+.input-group label{font-weight:600;margin-bottom:8px;font-size:14px;color:#475569;display:block}
+.input-wrapper{position:relative}
+.input-wrapper span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748B;font-weight:600;font-size:15px}
+.input-wrapper input{width:100%;padding:14px 14px 14px 45px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-weight:500;background:#fff}
+.input-wrapper input:focus{border-color:var(--primary);outline:none}
 
-input{
-width:100%;
-padding:14px;
-margin-top:8px;
-font-size:18px;
-border:1px solid #ccc;
-border-radius:10px;
-box-sizing:border-box;
-}
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.5px}
+.btn-primary:hover{background:#1D4ED8}
 
-button{
-width:100%;
-padding:15px;
-margin-top:18px;
-border:none;
-border-radius:10px;
-background:#1976D2;
-color:#fff;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-}
+.result-card{background:linear-gradient(135deg,#2563EB,#10B981);color:#fff;text-align:center;border:none}
+.result-card .label{font-size:12px;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.result-card .value{font-size:28px;font-weight:700;margin-bottom:16px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:15px}
+.result-mini{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px}
+.result-mini .label{font-size:11px}
+.result-mini .value{font-size:15px;font-weight:700;margin-top:2px}
 
-button:hover{
-background:#0D47A1;
-}
+.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px}
+.btn-download:hover{background:#1E293B}
 
-#result{
-display:none;
-margin-top:25px;
-background:#f5f9ff;
-padding:18px;
-border-radius:12px;
-}
+.content h2{font-size:22px;color:var(--primary);margin-bottom:12px}
+.content p{line-height:1.8;color:#475569;margin-bottom:12px;font-size:15px}
+.example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
+.example-box b{color:var(--primary)}
 
+.why-sip-grid{display:grid;gap:12px;margin:15px 0}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-item .num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.why-item p{margin:0;color:#475569}
+
+.guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
+.guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
+.guide-box p{margin-bottom:15px;color:#475569}
+.guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
+.guide-btn:hover{background:#1D4ED8}
+
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+.tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
+.tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
+.tool-card .icon{font-size:24px;margin-bottom:8px}
+
+.disclaimer-box{background:#FEF3C7;border:1px solid #FBBF24;padding:16px;border-radius:8px;margin-top:15px;font-size:13px;line-height:1.6}
+.disclaimer-box b{color:#92400E}
+
+footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
+.footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:#94A3B8;text-decoration:none;font-size:14px}
+.footer-links a:hover{color:#fff}
+.copyright{font-size:13px;color:#64748B}
 </style>
-
 </head>
-
 <body>
 
+<header><div class="logo"><span class="blue">Rajaram</span> <span class="green">Finance</span></div></header>
+
 <div class="container">
-
-<h1>🏦 RD Calculator</h1>
-
-<label>Monthly Deposit (₹)</label>
-
-<input
-type="number"
-id="deposit"
-placeholder="5000">
-
-<label>Interest Rate (% Per Year)</label>
-
-<input
-type="number"
-id="rate"
-placeholder="7">
-
-<label>Tenure (Months)</label>
-
-<input
-type="number"
-id="months"
-placeholder="60">
-
-<button onclick="calculateRD()">
-
-🏦 Calculate RD
-
-</button>
-
-<button onclick="resetCalculator()">
-
-🔄 Reset
-
-</button>
-
-<a href="index.html">
-
-<button type="button">
-
-🏠 Back to Home
-
-</button>
-
-</a>
-
-<div id="result"></div>
-
-</div>
-<script>
-
-function calculateRD(){
-
-let monthlyDeposit = parseFloat(document.getElementById("deposit").value);
-let annualRate = parseFloat(document.getElementById("rate").value);
-let months = parseInt(document.getElementById("months").value);
-
-if(!monthlyDeposit || !annualRate || !months){
-
-document.getElementById("result").style.display="block";
-
-document.getElementById("result").innerHTML=
-"<p style='color:red;font-weight:bold;'>⚠ Please enter all values.</p>";
-
-return;
-
-}
-
-let r = annualRate / 100 / 12;
-
-let maturity =
-monthlyDeposit *
-((Math.pow(1+r,months)-1)/r) *
-(1+r);
-
-let totalInvestment =
-monthlyDeposit * months;
-
-let interest =
-maturity - totalInvestment;
-
-document.getElementById("result").style.display="block";
-
-document.getElementById("result").innerHTML = `
-
-<h2 style="text-align:center;color:#1565C0;">
-🏦 RD Result
-</h2>
-
-<hr>
-
-<p><strong>💰 Total Investment</strong></p>
-
-<h3 style="color:#1976D2;">
-₹ ${totalInvestment.toFixed(2)}
-</h3>
-
-<p><strong>📈 Estimated Interest</strong></p>
-
-<h3 style="color:#1976D2;">
-₹ ${interest.toFixed(2)}
-</h3>
-
-<p><strong>🏆 Maturity Amount</strong></p>
-
-<h3 style="color:#1976D2;">
-₹ ${maturity.toFixed(2)}
-</h3>
-
-<hr>
-
-<table style="width:100%;border-collapse:collapse;">
-
-<tr>
-<td><strong>Monthly Deposit</strong></td>
-<td>₹ ${monthlyDeposit.toLocaleString("en-IN")}</td>
-</tr>
-
-<tr>
-<td><strong>Interest Rate</strong></td>
-<td>${annualRate}%</td>
-</tr>
-
-<tr>
-<td><strong>Tenure</strong></td>
-<td>${months} Months</td>
-</tr>
-
-</table>
-
-`;
-
-}
-
-function resetCalculator(){
-
-document.getElementById("deposit").value="";
-
-document.getElementById("rate").value="";
-
-document.getElementById("months").value="";
-
-document.getElementById("result").style.display="none";
-
-document.getElementById("result").innerHTML="";
-
-}
-
-</script>
-
-<div style="max-width:420px;margin:20px auto;">
-
-<div style="background:#f8fbff;
-padding:18px;
-border-radius:12px;
-border-left:5px solid #1976D2;">
-
-<h3 style="color:#1565C0;">
-🏦 RD Investment Tips
-</h3>
-
-<ul style="line-height:1.8;">
-
-<li>✔ Deposit the installment on time every month.</li>
-
-<li>✔ Compare RD interest rates offered by different banks.</li>
-
-<li>✔ Choose a tenure that matches your financial goals.</li>
-
-<li>✔ Continue the RD until maturity to receive the full benefit.</li>
-
-<li>✔ Review current RD interest rates before opening a new account.</li>
-
-</ul>
+  
+  <!-- 1. INPUT - RD -->
+  <div class="card">
+    <h2>RD Calculator - Recurring Deposit Calculator</h2>
+    <div class="input-group">
+      <label>Monthly Investment</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="amount" value="5000" oninput="calculateRD()"></div>
+    </div>
+    <div class="input-group">
+      <label>Interest Rate %</label>
+      <div class="input-wrapper"><span>%</span><input type="number" id="rate" value="7.5" step="0.1" oninput="calculateRD()"></div>
+    </div>
+    <div class="input-group">
+      <label>Tenure Years</label>
+      <div class="input-wrapper"><span>Yrs</span><input type="number" id="years" value="5" oninput="calculateRD()"></div>
+    </div>
+    <button class="btn-primary" onclick="calculateRD()">CALCULATE NOW</button>
+  </div>
+
+  <!-- 2. RESULT -->
+  <div class="card result-card">
+    <div class="label">TOTAL INVESTED</div>
+    <div class="value" id="invested">₹0</div>
+    <div class="label">INTEREST EARNED</div>
+    <div class="value" id="returns">₹0</div>
+    <div class="label">MATURITY VALUE</div>
+    <div class="value" id="maturity">₹0</div>
+    <div class="result-grid">
+      <div class="result-mini"><div class="label">MONTHS</div><div class="value" id="monthsTxt">60</div></div>
+      <div class="result-mini"><div class="label">YEARS</div><div class="value" id="yearTxt">5</div></div>
+      <div class="result-mini"><div class="label">RATE</div><div class="value" id="rateTxt">7.5%</div></div>
+    </div>
+    <button class="btn-download" id="downloadPdf">📄 Download PDF Report</button>
+  </div>
+
+  <!-- 3. GRAPH -->
+  <div class="card">
+    <h2>RD Growth Chart</h2>
+    <canvas id="lineChart" height="120"></canvas>
+  </div>
+
+  <!-- 4. RD CONTENT -->
+  <div class="card content">
+    <h2>What is Recurring Deposit RD?</h2>
+    <p>A <b>Recurring Deposit or RD</b> is like FD but you invest a small amount every month. It's perfect for salaried people who want to save regularly. Interest is compounded quarterly and paid at maturity. Tenure ranges from 6 months to 10 years.</p>
+    
+    <div class="example-box">
+      <b>RD Example:</b> If you invest ₹5,000 per month for 5 years at 7.5% interest, your maturity amount will be ₹3,57,695. Total investment = ₹3,00,000. Interest = ₹57,695.
+    </div>
+
+    <h2 style="margin-top:20px;font-size:18px">Why Choose RD Investment?</h2>
+    <div class="why-sip-grid">
+      <div class="why-item"><div class="num">1</div><p><b>Disciplined Saving:</b> Builds saving habit by investing fixed amount every month.</p></div>
+      <div class="why-item"><div class="num">2</div><p><b>Guaranteed Returns:</b> Like FD, RD also gives fixed and guaranteed returns. No market risk.</p></div>
+      <div class="why-item"><div class="num">3</div><p><b>Low Entry Amount:</b> Start RD with just ₹500 per month. Good for beginners.</p></div>
+      <div class="why-item"><div class="num">4</div><p><b>Flexible Tenure:</b> Choose from 6 months to 10 years based on your goal.</p></div>
+    </div>
+    <p><b>Key Insight:</b> RD is best for short to medium term goals like vacation, gadget, downpayment. Interest is taxable.</p>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <b>Disclaimer:</b> RD rates vary from bank to bank. Interest earned is taxable. Penalty for missed installments. This calculator is for illustration only.
+    </div>
+  </div>
+
+  <!-- 5. RD GUIDE -->
+  <div class="guide-box">
+    <h2>Want to Learn More About RD?</h2>
+    <p>Read our complete guide to understand RD vs FD, tax rules, and best bank RD rates in 2026.</p>
+    <a href="rd-guide.html" class="guide-btn">📖 Read Complete RD Guide</a>
+  </div>
+
+  <!-- 6. MORE CALCULATORS - TUMHARE BANAYE HUE -->
+  <div class="card">
+    <h2>More Financial Calculators</h2>
+    <div class="tools-grid">
+      <a href="sip.html" class="tool-card"><div class="icon">📅</div>SIP Calculator</a>
+      <a href="mutual-fund.html" class="tool-card"><div class="icon">📊</div>Mutual Fund</a>
+      <a href="fd.html" class="tool-card"><div class="icon">🏦</div>FD Calculator</a>
+      <a href="ppf.html" class="tool-card"><div class="icon">🏛️</div>PPF Calculator</a>
+      <a href="emi.html" class="tool-card"><div class="icon">💳</div>EMI Calculator</a>
+      <a href="home-loan.html" class="tool-card"><div class="icon">🏠</div>Home Loan EMI</a>
+    </div>
+  </div>
 
 </div>
 
-</div>
-
+<!-- 7. FOOTER -->
 <footer>
-
-<h3>🏦 Rajaram Finance Calculators</h3>
-
-<p>
-Free Online Finance Calculators & Educational Finance Guides
-</p>
-
-<p>
-This RD Calculator is provided for educational and informational purposes only.
-Actual RD maturity amount may vary depending on the bank's interest rate,
-compounding method, tenure and applicable terms.
-Please verify the latest details with your bank before making investment decisions.
-</p>
-
-<p>
-© 2026 Rajaram Finance Calculators. All Rights Reserved.
-</p>
-
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="articles.html">Article</a>
+  </div>
+  <div class="copyright">© 2026 Rajaram Finance. All Rights Reserved. | Made for Smart Investors</div>
 </footer>
 
+<script>
+const { jsPDF } = window.jspdf;
+let lineChart;
+let lastResult = {};
+
+function format(num){return '₹' + Math.round(num).toLocaleString('en-IN')}
+
+function calculateRD(){
+  const P = parseFloat(document.getElementById('amount').value) || 5000;
+  const r_monthly = (parseFloat(document.getElementById('rate').value)/100)/12 || 0.075/12;
+  const years = parseInt(document.getElementById('years').value) || 5;
+  const months = years * 12;
+  
+  let data = [];
+  let maturity = P * (((Math.pow(1 + r_monthly, months) - 1) / r_monthly) * (1 + r_monthly));
+  let invested = P * months;
+  let returns = maturity - invested;
+  
+  for(let m=1;m<=months;m++){
+    let val = P * (((Math.pow(1 + r_monthly, m) - 1) / r_monthly) * (1 + r_monthly));
+    if(m % 12 == 0) data.push(val); // yearly data for chart
+  }
+  
+  lastResult = {P, r_monthly, years, months, maturity, invested, returns, data};
+  
+  document.getElementById('invested').innerText = format(invested);
+  document.getElementById('returns').innerText = format(returns);
+  document.getElementById('maturity').innerText = format(maturity);
+  document.getElementById('monthsTxt').innerText = months;
+  document.getElementById('yearTxt').innerText = years;
+  document.getElementById('rateTxt').innerText = (r_monthly*12*100).toFixed(1)+'%';
+  
+  drawChart(data);
+}
+
+function drawChart(data){
+  if(lineChart) lineChart.destroy();
+  lineChart = new Chart(document.getElementById('lineChart'),{
+    type:'line',
+    data:{labels:data.map((_,i)=>`Year ${i+1}`),datasets:[{label:'Maturity Value',data:data,borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,0.1)',fill:true,tension:0.4,pointBackgroundColor:'#2563EB',pointRadius:3}]},
+    options:{responsive:true, plugins:{legend:{display:false}}}
+  });
+}
+
+function downloadPDF(){
+    const doc = new jsPDF();
+    doc.setFontSize(18); doc.text("RD Investment Report", 14, 20);
+    doc.setFontSize(10); doc.text("Rajaram Finance", 14, 27);
+    let y=40;
+    doc.setFontSize(12);
+    doc.text(`Monthly Investment: ${format(lastResult.P)}`, 14, y); y+=10;
+    doc.text(`Interest Rate: ${(lastResult.r_monthly*12*100).toFixed(1)}%`, 14, y); y+=10;
+    doc.text(`Tenure: ${lastResult.years} Years`, 14, y); y+=10;
+    doc.text(`Total Invested: ${format(lastResult.invested)}`, 14, y); y+=10;
+    doc.text(`Interest Earned: ${format(lastResult.returns)}`, 14, y); y+=10;
+    doc.text(`Maturity Value: ${format(lastResult.maturity)}`, 14, y); y+=15;
+    doc.setFontSize(9);
+    doc.text("Disclaimer: RD rates vary. Interest is taxable.", 14, y);
+    doc.save('RD-Report.pdf');
+}
+
+document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
+window.onload = calculateRD;
+</script>
 </body>
-
 </html>
-
-
-
