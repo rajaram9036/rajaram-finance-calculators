@@ -3,359 +3,310 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Income Tax Calculator | Rajaram Finance Calculators</title>
-
-<meta name="description" content="Free Income Tax Calculator India. Calculate estimated income tax under New and Old Tax Regime instantly.">
-
-<link rel="stylesheet" href="style.css">
-
+<title>Income Tax Calculator 2026 - Calculate Income Tax Old vs New Regime | Rajaram Finance</title>
+<meta name="description" content="Free Income Tax Calculator FY 2025-26. Calculate tax Old Regime vs New Regime. Check deductions 80C 80D. Download PDF report.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#eef5ff;
-color:#222;
+:root{
+  --primary:#2563EB;
+  --accent:#10B981;
+  --dark:#0F172A;
+  --light:#F8FAFC;
+  --border:#E2E8F0;
 }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
+body{background:var(--light);color:var(--dark)}
+header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);text-align:center}
+.logo{font-size:24px;font-weight:700}
+.logo.blue{color:var(--primary)}
+.logo.green{color:var(--accent)}
 
-header{
-background:linear-gradient(135deg,#0d6efd,#0b5ed7);
-color:#fff;
-padding:20px;
-text-align:center;
-box-shadow:0 4px 15px rgba(0,0,0,.15);
-}
+.container{width:100%;max-width:700px;margin:0 auto;padding:20px}
 
-header h1{
-margin:0;
-font-size:34px;
-}
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.card h2{font-size:20px;font-weight:700;color:#1E293B;margin-bottom:18px}
 
-nav{
-margin-top:15px;
-}
+.input-group{margin-bottom:16px}
+.input-group label{font-weight:600;margin-bottom:8px;font-size:14px;color:#475569;display:block}
+.input-wrapper{position:relative}
+.input-wrapper span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748B;font-weight:600;font-size:15px}
+.input-wrapper input{width:100%;padding:14px 14px 14px 45px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-weight:500;background:#fff}
+.input-wrapper input:focus{border-color:var(--primary);outline:none}
 
-nav a{
-color:#fff;
-text-decoration:none;
-margin:0 10px;
-font-weight:bold;
-font-size:15px;
-}
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.5px}
+.btn-primary:hover{background:#1D4ED8}
 
-.hero{
-background:linear-gradient(135deg,#0d6efd,#0060d9);
-color:#fff;
-padding:55px 20px;
-text-align:center;
-border-bottom-left-radius:25px;
-border-bottom-right-radius:25px;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
-}
+.result-card{background:linear-gradient(135deg,#2563EB,#10B981);color:#fff;text-align:center;border:none}
+.result-card.label{font-size:12px;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.result-card.value{font-size:26px;font-weight:700;margin-bottom:16px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:15px}
+.result-mini{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px}
+.result-mini.label{font-size:11px}
+.result-mini.value{font-size:15px;font-weight:700;margin-top:2px}
 
-.hero h2{
-margin:0;
-font-size:40px;
-}
+.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px}
+.btn-download:hover{background:#1E293B}
 
-.hero p{
-font-size:18px;
-margin-top:15px;
-line-height:1.7;
-}
+.content h2{font-size:22px;color:var(--primary);margin-bottom:12px}
+.content p{line-height:1.8;color:#475569;margin-bottom:12px;font-size:15px}
+.example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
+.example-box b{color:var(--primary)}
 
-.container{
-max-width:900px;
-margin:35px auto;
-background:#fff;
-padding:30px;
-border-radius:15px;
-box-shadow:0 5px 20px rgba(0,0,0,.12);
-}
+.why-sip-grid{display:grid;gap:12px;margin:15px 0}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-item.num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.why-item p{margin:0;color:#475569}
 
-.container h2{
-text-align:center;
-color:#0d6efd;
-margin-top:0;
-font-size:32px;
-}
+.guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
+.guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
+.guide-box p{margin-bottom:15px;color:#475569}
+.guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
+.guide-btn:hover{background:#1D4ED8}
 
-.desc{
-text-align:center;
-color:#555;
-margin-bottom:30px;
-line-height:1.7;
-}
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+.tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
+.tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
+.tool-card.icon{font-size:24px;margin-bottom:8px}
 
-label{
-display:block;
-margin-top:18px;
-font-weight:bold;
-}
+.disclaimer-box{background:#FEF3C7;border:1px solid #FBBF24;padding:16px;border-radius:8px;margin-top:15px;font-size:13px;line-height:1.6}
+.disclaimer-box b{color:#92400E}
 
-input,
-select{
-width:100%;
-padding:13px;
-margin-top:8px;
-font-size:16px;
-border:1px solid #ccc;
-border-radius:8px;
-box-sizing:border-box;
-}
+.tax-table{width:100%;border-collapse:collapse;margin:15px 0;font-size:14px}
+.tax-table th{background:var(--primary);color:#fff;padding:10px;text-align:left}
+.tax-table td{padding:10px;border-bottom:1px solid var(--border)}
 
-.button-group{
-display:flex;
-gap:15px;
-margin-top:25px;
-}
-
-button{
-flex:1;
-padding:15px;
-border:none;
-border-radius:10px;
-background:#0d6efd;
-color:#fff;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-}
-
-button:hover{
-background:#0958c8;
-}
-
-.reset-btn{
-background:#6c757d;
-}
-
-.reset-btn:hover{
-background:#555;
-}
-
-.result{
-display:none;
-margin-top:35px;
-background:#f8fbff;
-padding:20px;
-border-left:5px solid #0d6efd;
-border-radius:12px;
-}
-
-.result h3{
-margin-top:0;
-color:#0d6efd;
-}
-
-.result p{
-font-size:18px;
-margin:12px 0;
-}
-  </style>
+footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
+.footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:#94A3B8;text-decoration:none;font-size:14px}
+.footer-links a:hover{color:#fff}
+.copyright{font-size:13px;color:#64748B}
+</style>
 </head>
-
 <body>
 
-<header>
-
-<h1>🧾 Income Tax Calculator</h1>
-
-<nav>
-<a href="index.html">🏠 Home</a>
-<a href="articles.html">📚 Articles</a>
-<a href="income-tax-guide.html">📖 Tax Guide</a>
-<a href="contact.html">📞 Contact</a>
-</nav>
-
-</header>
-
-<section class="hero">
-
-<h2>🧾 Calculate Income Tax</h2>
-
-<p>
-Estimate your Income Tax using this educational calculator.<br>
-Results are estimates only and may differ from your actual tax liability.
-</p>
-
-</section>
+<header><div class="logo"><span class="blue">Rajaram</span> <span class="green">Finance</span></div></header>
 
 <div class="container">
 
-<h2>Calculate Income Tax</h2>
+  <!-- 1. INPUT - INCOME TAX -->
+  <div class="card">
+    <h2>Income Tax Calculator FY 2025-26</h2>
+    <div class="input-group">
+      <label>Annual Salary Income</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="salary" value="1200000" oninput="calculateTax()"></div>
+    </div>
+    <div class="input-group">
+      <label>80C Deductions - PPF, ELSS, LIC</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="deduction80c" value="150000" oninput="calculateTax()"></div>
+    </div>
+    <div class="input-group">
+      <label>80D Deductions - Medical Insurance</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="deduction80d" value="25000" oninput="calculateTax()"></div>
+    </div>
+    <div class="input-group">
+      <label>Home Loan Interest 80C + 24</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="homeLoan" value="0" oninput="calculateTax()"></div>
+    </div>
+    <button class="btn-primary" onclick="calculateTax()">CALCULATE TAX</button>
+  </div>
 
-<p class="desc">
-Calculate your estimated tax under the New or Old Tax Regime.
-</p>
+  <!-- 2. RESULT -->
+  <div class="card result-card">
+    <div class="label">RECOMMENDED REGIME</div>
+    <div class="value" id="bestRegime">New Regime</div>
+    <div class="label">OLD REGIME TAX</div>
+    <div class="value" id="oldTax">₹0</div>
+    <div class="label">NEW REGIME TAX</div>
+    <div class="value" id="newTax">₹0</div>
+    <div class="result-grid">
+      <div class="result-mini"><div class="label">YOU SAVE</div><div class="value" id="savings">₹0</div></div>
+      <div class="result-mini"><div class="label">TAXABLE INCOME</div><div class="value" id="taxable">₹0</div></div>
+    </div>
+    <button class="btn-download" id="downloadPdf">📄 Download PDF Report</button>
+  </div>
 
-<label>Annual Income (₹)</label>
+  <!-- 3. GRAPH -->
+  <div class="card">
+    <h2>Tax Comparison Chart</h2>
+    <canvas id="barChart" height="120"></canvas>
+  </div>
 
-<input
-type="number"
-id="income"
-placeholder="Example: 1200000"
-min="0">
+  <!-- 4. INCOME TAX CONTENT -->
+  <div class="card content">
+    <h2>Old Regime vs New Regime FY 2025-26</h2>
+    <p>From FY 2025-26, <b>New Regime is default</b> but you can choose Old Regime if deductions are more. Standard deduction ₹75,000 in New Regime and ₹50,000 in Old Regime.</p>
 
-<label>Total Deductions (₹)</label>
+    <table class="tax-table">
+      <tr><th>Income Slab</th><th>Old Regime</th><th>New Regime</th></tr>
+      <tr><td>Up to ₹2.5 Lakh</td><td>Nil</td><td>Nil</td></tr>
+      <tr><td>₹2.5L - ₹5L</td><td>5%</td><td>5%</td></tr>
+      <tr><td>₹5L - ₹7.5L</td><td>20%</td><td>10%</td></tr>
+      <tr><td>₹7.5L - ₹10L</td><td>20%</td><td>15%</td></tr>
+      <tr><td>₹10L - ₹12.5L</td><td>30%</td><td>20%</td></tr>
+      <tr><td>₹12.5L - ₹15L</td><td>30%</td><td>25%</td></tr>
+      <tr><td>Above ₹15L</td><td>30%</td><td>30%</td></tr>
+    </table>
 
-<input
-type="number"
-id="deduction"
-placeholder="Example: 150000"
-min="0">
+    <div class="example-box">
+      <b>Example:</b> Salary ₹12 Lakh, 80C ₹1.5L, 80D ₹25K.
+      Old Regime Tax = ₹65,000. New Regime Tax = ₹54,600.
+      You save ₹10,400 in New Regime.
+    </div>
 
-<label>Tax Regime</label>
+    <h2 style="margin-top:20px;font-size:18px">Key Deductions in Old Regime</h2>
+    <div class="why-sip-grid">
+      <div class="why-item"><div class="num">1</div><p><b>80C:</b> Up to ₹1.5 Lakh - PPF, ELSS, LIC, Home Loan Principal</p></div>
+      <div class="why-item"><div class="num">2</div><p><b>80D:</b> Up to ₹25K for self, ₹50K for senior parents</p></div>
+      <div class="why-item"><div class="num">3</div><p><b>80E:</b> Education Loan Interest - No Limit</p></div>
+      <div class="why-item"><div class="num">4</div><p><b>24B:</b> Home Loan Interest - Up to ₹2 Lakh</p></div>
+      <div class="why-item"><div class="num">5</div><p><b>Standard Deduction:</b> ₹50,000 for salaried in Old Regime</p></div>
+    </div>
+    <p><b>Key Insight:</b> If total deductions > ₹3.75 Lakh, Old Regime is better. Otherwise choose New Regime.</p>
 
-<select id="regime">
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <b>Disclaimer:</b> This calculator is for salaried individuals only. 4% Cess included. Tax slabs as per Budget 2025. Consult CA for exact filing.
+    </div>
+  </div>
 
-<option value="new">New Tax Regime</option>
+  <!-- 5. TAX GUIDE -->
+  <div class="guide-box">
+    <h2>Want to Learn More About Income Tax?</h2>
+    <p>Read our complete guide on tax saving tips, deductions and how to file ITR for FY 2025-26.</p>
+    <a href="income-tax-guide.html" class="guide-btn">📖 Read Complete Tax Guide</a>
+  </div>
 
-<option value="old">Old Tax Regime</option>
-
-</select>
-
-<div class="button-group">
-
-<button onclick="calculateTax()">
-🧮 Calculate Tax
-</button>
-
-<button
-class="reset-btn"
-onclick="location.reload();">
-🔄 Reset
-</button>
+  <!-- 6. MORE CALCULATORS - TUMHARE BANAYE HUE -->
+  <div class="card">
+    <h2>More Financial Calculators</h2>
+    <div class="tools-grid">
+      <a href="sip.html" class="tool-card"><div class="icon">📅</div>SIP Calculator</a>
+      <a href="mutual-fund.html" class="tool-card"><div class="icon">📊</div>Mutual Fund</a>
+      <a href="fd.html" class="tool-card"><div class="icon">🏦</div>FD Calculator</a>
+      <a href="ppf.html" class="tool-card"><div class="icon">🏛️</div>PPF Calculator</a>
+      <a href="home-loan.html" class="tool-card"><div class="icon">🏠</div>Home Loan EMI</a>
+      <a href="personal-loan.html" class="tool-card"><div class="icon">💳</div>Personal Loan EMI</a>
+    </div>
+  </div>
 
 </div>
 
-<div class="result" id="result">
-
-<h3>Calculation Result</h3>
-
-<p><strong>Annual Income:</strong><br>
-₹ <span id="annualIncome"></span></p>
-
-<p><strong>Taxable Income:</strong><br>
-₹ <span id="taxableIncome"></span></p>
-
-<p><strong>Estimated Income Tax:</strong><br>
-₹ <span id="taxAmount"></span></p>
-
-<p><strong>Effective Tax Rate:</strong><br>
-<span id="taxRate"></span>%</p>
-
-</div>
-
-<div style="margin-top:30px;
-background:#fff8e6;
-padding:18px;
-border-left:5px solid orange;
-border-radius:10px;
-line-height:1.7;">
-
-<b>⚠ Note:</b><br>
-
-This calculator provides an estimated tax calculation for educational purposes only.
-Actual tax liability depends on applicable tax laws, deductions,
-surcharge, cess and individual circumstances.
-
-</div>
-<footer style="margin-top:40px;
-background:#0d6efd;
-color:#fff;
-text-align:center;
-padding:30px 20px;">
-
-<p>
-© 2026 Rajaram Finance Calculators. All Rights Reserved.
-</p>
-
-<p style="max-width:900px;
-margin:auto;
-line-height:1.8;
-font-size:15px;">
-
-This calculator is provided for educational and informational purposes only.
-It does not constitute tax, financial, legal or professional advice.
-Please consult a qualified tax professional before making tax-related decisions.
-Income tax laws, tax slabs, deductions, exemptions, surcharge and cess may
-change from time to time. Calculator results are estimates only.
-
-</p>
-
+<!-- 7. FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="articles.html">Article</a>
+  </div>
+  <div class="copyright">© 2026 Rajaram Finance. All Rights Reserved. | Made for Smart Investors</div>
 </footer>
 
 <script>
+const { jsPDF } = window.jspdf;
+let barChart;
+let lastResult = {};
+
+function format(num){return '₹' + Math.round(num).toLocaleString('en-IN')}
+
+function calculateTaxSlab(income, slabs){
+  let tax = 0;
+  for(let i=0; i<slabs.length; i++){
+    let slab = slabs[i];
+    if(income > slab.min){
+      let taxableInSlab = Math.min(income, slab.max) - slab.min;
+      tax += taxableInSlab * slab.rate;
+    }
+  }
+  return tax * 1.04; // 4% cess
+}
 
 function calculateTax(){
+  const salary = parseFloat(document.getElementById('salary').value) || 1200000;
+  const d80c = parseFloat(document.getElementById('deduction80c').value) || 150000;
+  const d80d = parseFloat(document.getElementById('deduction80d').value) || 25000;
+  const homeLoan = parseFloat(document.getElementById('homeLoan').value) || 0;
 
-let income=parseFloat(document.getElementById("income").value)||0;
+  // Old Regime
+  let oldDeductions = 50000 + Math.min(d80c,150000) + Math.min(d80d,25000) + Math.min(homeLoan,200000);
+  let oldTaxable = salary - oldDeductions;
+  let oldSlabs = [
+    {min:0,max:250000,rate:0},
+    {min:250000,max:500000,rate:0.05},
+    {min:500000,max:1000000,rate:0.20},
+    {min:1000000,max:Infinity,rate:0.30}
+  ];
+  let oldTax = oldTaxable > 0? calculateTaxSlab(oldTaxable, oldSlabs) : 0;
 
-let deduction=parseFloat(document.getElementById("deduction").value)||0;
+  // New Regime FY 2025-26
+  let newDeductions = 75000; // Standard deduction
+  let newTaxable = salary - newDeductions;
+  let newSlabs = [
+    {min:0,max:400000,rate:0},
+    {min:400000,max:800000,rate:0.05},
+    {min:800000,max:1200000,rate:0.10},
+    {min:1200000,max:1600000,rate:0.15},
+    {min:1600000,max:2000000,rate:0.20},
+    {min:2000000,max:2400000,rate:0.25},
+    {min:2400000,max:Infinity,rate:0.30}
+  ];
+  let newTax = newTaxable > 0? calculateTaxSlab(newTaxable, newSlabs) : 0;
 
-let regime=document.getElementById("regime").value;
+  let savings = Math.abs(oldTax - newTax);
+  let bestRegime = newTax < oldTax? "New Regime" : "Old Regime";
 
-let taxable;
+  lastResult = {salary, oldTax, newTax, savings, bestRegime, oldTaxable};
 
-if(regime=="old"){
+  document.getElementById('oldTax').innerText = format(oldTax);
+  document.getElementById('newTax').innerText = format(newTax);
+  document.getElementById('savings').innerText = format(savings);
+  document.getElementById('taxable').innerText = format(oldTaxable);
+  document.getElementById('bestRegime').innerText = bestRegime;
 
-taxable=Math.max(income-deduction,0);
-
-}else{
-
-taxable=income;
-
+  drawChart(oldTax, newTax);
 }
 
-let tax=0;
-
-if(taxable<=400000){
-
-tax=0;
-
-}else if(taxable<=800000){
-
-tax=(taxable-400000)*0.05;
-
-}else if(taxable<=1200000){
-
-tax=20000+(taxable-800000)*0.10;
-
-}else if(taxable<=1600000){
-
-tax=60000+(taxable-1200000)*0.15;
-
-}else if(taxable<=2000000){
-
-tax=120000+(taxable-1600000)*0.20;
-
-}else if(taxable<=2400000){
-
-tax=200000+(taxable-2000000)*0.25;
-
-}else{
-
-tax=300000+(taxable-2400000)*0.30;
-
+function drawChart(oldTax, newTax){
+  if(barChart) barChart.destroy();
+  barChart = new Chart(document.getElementById('barChart'),{
+    type:'bar',
+    data:{
+      labels:['Old Regime', 'New Regime'],
+      datasets:[{
+        label:'Tax Amount',
+        data:[oldTax, newTax],
+        backgroundColor:['#2563EB','#10B981'],
+        borderWidth:0
+      }]
+    },
+    options:{responsive:true, plugins:{legend:{display:false}}}
+  });
 }
 
-let rate=income>0?((tax/income)*100).toFixed(2):0;
-
-document.getElementById("annualIncome").innerHTML=income.toLocaleString("en-IN");
-
-document.getElementById("taxableIncome").innerHTML=taxable.toLocaleString("en-IN");
-
-document.getElementById("taxAmount").innerHTML=Math.round(tax).toLocaleString("en-IN");
-
-document.getElementById("taxRate").innerHTML=rate;
-
-document.getElementById("result").style.display="block";
-
+function downloadPDF(){
+    const doc = new jsPDF();
+    doc.setFontSize(18); doc.text("Income Tax Report FY 2025-26", 14, 20);
+    doc.setFontSize(10); doc.text("Rajaram Finance", 14, 27);
+    let y=40;
+    doc.setFontSize(12);
+    doc.text(`Annual Salary: ${format(lastResult.salary)}`, 14, y); y+=10;
+    doc.text(`Old Regime Tax: ${format(lastResult.oldTax)}`, 14, y); y+=10;
+    doc.text(`New Regime Tax: ${format(lastResult.newTax)}`, 14, y); y+=10;
+    doc.text(`Recommended: ${lastResult.bestRegime}`, 14, y); y+=10;
+    doc.text(`You Save: ${format(lastResult.savings)}`, 14, y); y+=15;
+    doc.setFontSize(9);
+    doc.text("Disclaimer: For illustration only. Consult CA.", 14, y);
+    doc.save('Income-Tax-Report.pdf');
 }
 
+document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
+window.onload = calculateTax;
 </script>
-
 </body>
 </html>
