@@ -1,828 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Math Calculator | Rajaram Finance Calculators</title>
-
-<meta name="description"
-content="Free Online Math Calculator for Addition, Subtraction, Multiplication, Division, Percentage, Square, Square Root and Power.">
-
-<link rel="stylesheet" href="style.css">
-
+<title>Math Calculator 2026 - Basic & Scientific Calculator | Rajaram Finance</title>
+<meta name="description" content="Free Online Math Calculator. Basic + - * / and Advanced Scientific functions. Percentage, Power, Square Root, Trigonometry. Download PDF report.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+:root{
+  --primary:#2563EB;
+  --accent:#10B981;
+  --dark:#0F172A;
+  --light:#F8FAFC;
+  --border:#E2E8F0;
 }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
+body{background:var(--light);color:var(--dark)}
+header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);text-align:center}
+.logo{font-size:24px;font-weight:700}
+.logo .blue{color:var(--primary)}
+.logo .green{color:var(--accent)}
 
-body{
-background:#eef3ff;
-color:#222;
-}
+.container{width:100%;max-width:700px;margin:0 auto;padding:20px}
 
-header{
-background:#071B47;
-color:#fff;
-padding:18px 5%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-flex-wrap:wrap;
-}
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.card h2{font-size:20px;font-weight:700;color:#1E293B;margin-bottom:18px}
 
-.logo{
-font-size:34px;
-font-weight:bold;
-}
+.display{background:#0F172A;color:#fff;padding:20px;border-radius:10px;margin-bottom:15px;text-align:right}
+.display .expression{font-size:14px;opacity:0.7;min-height:20px;word-wrap:break-word}
+.display .result{font-size:32px;font-weight:700;margin-top:5px;word-wrap:break-word}
 
-.logo span{
-color:#FFD54F;
-}
+.calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.btn-calc{padding:16px;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;transition:0.2s;background:#F8FAFC;color:var(--dark)}
+.btn-calc:hover{background:#E2E8F0}
+.btn-operator{background:var(--primary);color:#fff}
+.btn-operator:hover{background:#1D4ED8}
+.btn-equal{background:var(--accent);color:#fff;grid-column:span 2}
+.btn-equal:hover{background:#059669}
+.btn-clear{background:#EF4444;color:#fff}
+.btn-clear:hover{background:#DC2626}
 
-nav{
-display:flex;
-gap:18px;
-flex-wrap:wrap;
-}
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-top:15px}
+.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;margin-top:15px}
 
-nav a{
-color:#fff;
-text-decoration:none;
-font-weight:bold;
-padding:10px 16px;
-border-radius:8px;
-transition:.3s;
-}
+.content h2{font-size:22px;color:var(--primary);margin-bottom:12px}
+.content p{line-height:1.8;color:#475569;margin-bottom:12px;font-size:15px}
+.example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
+.example-box b{color:var(--primary)}
 
-nav a:hover{
-background:#1565C0;
-}
+.why-sip-grid{display:grid;gap:12px;margin:15px 0}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-item .num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.why-item p{margin:0;color:#475569}
 
-.hero{
+.guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
+.guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
+.guide-box p{margin-bottom:15px;color:#475569}
+.guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
+.guide-btn:hover{background:#1D4ED8}
 
-background:linear-gradient(135deg,#0D47A1,#1976D2);
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+.tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
+.tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
+.tool-card .icon{font-size:24px;margin-bottom:8px}
 
-color:#fff;
+.disclaimer-box{background:#FEF3C7;border:1px solid #FBBF24;padding:16px;border-radius:8px;margin-top:15px;font-size:13px;line-height:1.6}
+.disclaimer-box b{color:#92400E}
 
-padding:60px 20px;
-
-}
-
-.hero-container{
-
-max-width:1200px;
-
-margin:auto;
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:40px;
-
-align-items:center;
-
-}
-
-.hero h1{
-
-font-size:54px;
-
-line-height:1.2;
-
-margin-bottom:18px;
-
-}
-
-.hero h1 span{
-
-color:#FFD54F;
-
-}
-
-.hero p{
-
-font-size:22px;
-
-line-height:1.7;
-
-margin-bottom:30px;
-
-}
-
-.search-box{
-
-width:100%;
-
-padding:18px;
-
-font-size:20px;
-
-border:none;
-
-border-radius:40px;
-
-outline:none;
-
-}
-
-.hero-image{
-
-text-align:center;
-
-font-size:180px;
-
-}
-
-@media(max-width:768px){
-
-.hero-container{
-
-grid-template-columns:1fr;
-
-text-align:center;
-
-}
-
-.hero h1{
-
-font-size:38px;
-
-}
-
-.hero p{
-
-font-size:18px;
-
-}
-
-.hero-image{
-
-font-size:120px;
-
-}
-
-}
-
+footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
+.footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:#94A3B8;text-decoration:none;font-size:14px}
+.footer-links a:hover{color:#fff}
+.copyright{font-size:13px;color:#64748B}
 </style>
-
 </head>
-
 <body>
 
-<header>
+<header><div class="logo"><span class="blue">Rajaram</span> <span class="green">Finance</span></div></header>
 
-<div class="logo">
+<div class="container">
+  
+  <!-- 1. MATH CALCULATOR -->
+  <div class="card">
+    <h2>Math Calculator - Basic & Scientific</h2>
+    
+    <div class="display">
+      <div class="expression" id="expression">0</div>
+      <div class="result" id="result">0</div>
+    </div>
 
-🧮 <span>Rajaram</span> Math Calculator
+    <div class="calc-grid">
+      <button class="btn-calc btn-clear" onclick="clearAll()">AC</button>
+      <button class="btn-calc" onclick="del()">DEL</button>
+      <button class="btn-calc" onclick="append('%')">%</button>
+      <button class="btn-calc btn-operator" onclick="append('/')">÷</button>
 
-</div>
+      <button class="btn-calc" onclick="append('7')">7</button>
+      <button class="btn-calc" onclick="append('8')">8</button>
+      <button class="btn-calc" onclick="append('9')">9</button>
+      <button class="btn-calc btn-operator" onclick="append('*')">×</button>
 
-<nav>
+      <button class="btn-calc" onclick="append('4')">4</button>
+      <button class="btn-calc" onclick="append('5')">5</button>
+      <button class="btn-calc" onclick="append('6')">6</button>
+      <button class="btn-calc btn-operator" onclick="append('-')">-</button>
 
-<a href="index.html">🏠 Home</a>
+      <button class="btn-calc" onclick="append('1')">1</button>
+      <button class="btn-calc" onclick="append('2')">2</button>
+      <button class="btn-calc" onclick="append('3')">3</button>
+      <button class="btn-calc btn-operator" onclick="append('+')">+</button>
 
-<a href="index.html">🧮 Calculators</a>
+      <button class="btn-calc" onclick="append('0')">0</button>
+      <button class="btn-calc" onclick="append('.')">.</button>
+      <button class="btn-calc btn-equal" onclick="calculate()">=</button>
+    </div>
 
-<a href="articles.html">📚 Articles</a>
+    <h3 style="margin:15px 0 10px;font-size:16px;color:#475569">Scientific Functions</h3>
+    <div class="calc-grid">
+      <button class="btn-calc" onclick="append('Math.sqrt(')">√</button>
+      <button class="btn-calc" onclick="append('**2')">x²</button>
+      <button class="btn-calc" onclick="append('**3')">x³</button>
+      <button class="btn-calc" onclick="append('**')">x^y</button>
 
-<a href="contact.html">📞 Contact</a>
+      <button class="btn-calc" onclick="append('Math.sin(')">sin</button>
+      <button class="btn-calc" onclick="append('Math.cos(')">cos</button>
+      <button class="btn-calc" onclick="append('Math.tan(')">tan</button>
+      <button class="btn-calc" onclick="append('Math.log(')">log</button>
 
-<a href="privacy.html">🔒 Privacy</a>
+      <button class="btn-calc" onclick="append('(')">(</button>
+      <button class="btn-calc" onclick="append(')')">)</button>
+      <button class="btn-calc" onclick="append('Math.PI')">π</button>
+      <button class="btn-calc" onclick="append('Math.E')">e</button>
+    </div>
 
-</nav>
+    <button class="btn-download" id="downloadPdf">📄 Download Calculation History</button>
+  </div>
 
-</header>
+  <!-- 2. MATH CONTENT -->
+  <div class="card content">
+    <h2>What is Math Calculator?</h2>
+    <p>This <b>Math Calculator</b> supports both Basic and Advanced Scientific calculations. Use it for school, college, finance and daily calculations.</p>
+    
+    <div class="example-box">
+      <b>Examples:</b><br>
+      Basic: 25 + 35 × 2 = 95<br>
+      Percentage: 20% of 500 = 100<br>
+      Power: 5² = 25, 2³ = 8<br>
+      Scientific: √16 = 4, sin(90) = 1
+    </div>
 
-<section class="hero">
+    <h2 style="margin-top:20px;font-size:18px">Key Features</h2>
+    <div class="why-sip-grid">
+      <div class="why-item"><div class="num">1</div><p><b>Basic Math:</b> Addition, Subtraction, Multiplication, Division, Percentage</p></div>
+      <div class="why-item"><div class="num">2</div><p><b>Scientific:</b> Square, Cube, Power, Square Root, Log, Trigonometry</p></div>
+      <div class="why-item"><div class="num">3</div><p><b>Constants:</b> Pi (π), Euler (e) for advanced calculations</p></div>
+      <div class="why-item"><div class="num">4</div><p><b>History:</b> Download your calculation history as PDF</p></div>
+    </div>
+    <p><b>Keyboard Support:</b> You can also type directly using keyboard: 0-9, +, -, *, /, Enter for =</p>
 
-<div class="hero-container">
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <b>Disclaimer:</b> This calculator uses standard JavaScript Math library. For engineering use verify results with scientific calculator.
+    </div>
+  </div>
 
-<div>
+  <!-- 3. MATH GUIDE -->
+  <div class="guide-box">
+    <h2>Need Help with Formulas?</h2>
+    <p>Read our complete guide on math formulas, BODMAS rule and tips for faster calculations.</p>
+    <a href="math-guide.html" class="guide-btn">📖 Read Complete Math Guide</a>
+  </div>
 
-<h1>
-
-Professional <span>Math Calculator</span>
-
-</h1>
-
-<p>
-
-Calculate Addition, Subtraction, Multiplication, Division, Percentage, Square, Square Root and Power instantly with our free online calculator.
-
-</p>
-
-<input
-type="text"
-class="search-box"
-placeholder="🔍 Search Calculator...">
-
-</div>
-
-<div class="hero-image">
-
-🧮
-
-</div>
-
-</div>
-
-</section>
-<section style="max-width:1200px;margin:40px auto;padding:20px;">
-
-<div style="
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:30px;
-">
-
-<!-- Calculator -->
-
-<div style="
-background:#fff;
-padding:30px;
-border-radius:18px;
-box-shadow:0 8px 20px rgba(0,0,0,.12);
-">
-
-<h2 style="color:#1565C0;margin-bottom:25px;">
-🧮 Enter Values
-</h2>
-
-<label><b>First Number</b></label>
-
-<input
-type="number"
-id="num1"
-placeholder="125"
-style="
-width:100%;
-padding:15px;
-margin:10px 0 20px;
-font-size:18px;
-border-radius:10px;
-border:1px solid #ccc;
-">
-
-<label><b>Select Operation</b></label>
-
-<select
-id="operation"
-style="
-width:100%;
-padding:15px;
-margin:10px 0 20px;
-font-size:18px;
-border-radius:10px;
-">
-
-<option value="+">➕ Addition</option>
-
-<option value="-">➖ Subtraction</option>
-
-<option value="*">✖ Multiplication</option>
-
-<option value="/">➗ Division</option>
-
-<option value="%">📊 Percentage</option>
-
-<option value="square">🔲 Square (x²)</option>
-
-<option value="sqrt">√ Square Root</option>
-
-<option value="power">xʸ Power</option>
-
-</select>
-
-<label><b>Second Number</b></label>
-
-<input
-type="number"
-id="num2"
-placeholder="75"
-style="
-width:100%;
-padding:15px;
-margin:10px 0 25px;
-font-size:18px;
-border-radius:10px;
-border:1px solid #ccc;
-">
-
-<div style="
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:15px;
-">
-
-<button onclick="calculateMath()"
-style="
-padding:16px;
-background:#1565C0;
-color:#fff;
-border:none;
-border-radius:10px;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-">
-
-🧮 Calculate
-
-</button>
-
-<button onclick="resetCalculator()"
-style="
-padding:16px;
-background:#16A34A;
-color:#fff;
-border:none;
-border-radius:10px;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-">
-
-🔄 Reset
-
-</button>
+  <!-- 4. MORE CALCULATORS - TUMHARE BANAYE HUE -->
+  <div class="card">
+    <h2>More Useful Calculators</h2>
+    <div class="tools-grid">
+      <a href="gst.html" class="tool-card"><div class="icon">🧾</div>GST Calculator</a>
+      <a href="income-tax.html" class="tool-card"><div class="icon">💰</div>Income Tax</a>
+      <a href="age-calculator.html" class="tool-card"><div class="icon">🎂</div>Age Calculator</a>
+      <a href="sip.html" class="tool-card"><div class="icon">📅</div>SIP Calculator</a>
+      <a href="home-loan.html" class="tool-card"><div class="icon">🏠</div>Home Loan EMI</a>
+      <a href="ppf.html" class="tool-card"><div class="icon">🏛️</div>PPF Calculator</a>
+    </div>
+  </div>
 
 </div>
 
-</div>
-
-<!-- Result -->
-
-<div
-id="resultCard"
-style="
-background:#fff;
-padding:30px;
-border-radius:18px;
-box-shadow:0 8px 20px rgba(0,0,0,.12);
-">
-
-<h2 style="color:#16A34A;">
-✅ Result
-</h2>
-
-<hr style="margin:20px 0;">
-
-<h3>Answer</h3>
-
-<div
-id="result"
-style="
-font-size:60px;
-font-weight:bold;
-text-align:center;
-color:#16A34A;
-margin:30px 0;
-">
-
-0
-
-</div>
-
-<hr>
-
-<h3 style="margin-top:25px;">
-Calculation
-</h3>
-
-<p
-id="formula"
-style="
-font-size:22px;
-margin-top:15px;
-">
-
-Waiting...
-
-</p>
-
-<div style="
-margin-top:30px;
-padding:15px;
-background:#eef8ff;
-border-radius:10px;
-">
-
-ℹ Results are calculated instantly.
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-<!-- Popular Math Operations -->
-
-<section style="max-width:1200px;margin:30px auto;padding:20px;">
-
-<h2 style="
-text-align:center;
-font-size:38px;
-color:#0D47A1;
-margin-bottom:35px;
-">
-
-🧮 Popular Math Operations
-
-</h2>
-
-<div style="
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-">
-
-<div class="math-card">
-<h3>➕ Addition</h3>
-<p>125 + 75</p>
-<h1>= 200</h1>
-</div>
-
-<div class="math-card">
-<h3>➖ Subtraction</h3>
-<p>90 − 25</p>
-<h1>= 65</h1>
-</div>
-
-<div class="math-card">
-<h3>✖ Multiplication</h3>
-<p>15 × 6</p>
-<h1>= 90</h1>
-</div>
-
-<div class="math-card">
-<h3>➗ Division</h3>
-<p>100 ÷ 4</p>
-<h1>= 25</h1>
-</div>
-
-<div class="math-card">
-<h3>📊 Percentage</h3>
-<p>200 × 15%</p>
-<h1>= 30</h1>
-</div>
-
-<div class="math-card">
-<h3>🔲 Square</h3>
-<p>12²</p>
-<h1>= 144</h1>
-</div>
-
-<div class="math-card">
-<h3>√ Square Root</h3>
-<p>√144</p>
-<h1>= 12</h1>
-</div>
-
-<div class="math-card">
-<h3>🧮 Power</h3>
-<p>2⁵</p>
-<h1>= 32</h1>
-</div>
-
-</div>
-
-</section>
-
-<style>
-
-.math-card{
-
-background:#fff;
-padding:25px;
-border-radius:18px;
-text-align:center;
-box-shadow:0 8px 20px rgba(0,0,0,.12);
-transition:.3s;
-
-}
-
-.math-card:hover{
-
-transform:translateY(-8px);
-
-}
-
-.math-card h3{
-
-color:#1565C0;
-font-size:28px;
-margin-bottom:15px;
-
-}
-
-.math-card p{
-
-font-size:20px;
-color:#666;
-
-}
-
-.math-card h1{
-
-margin-top:18px;
-color:#16A34A;
-font-size:42px;
-
-}
-
-</style>
-<!-- ===== Why Use Our Math Calculator ===== -->
-
-<section style="max-width:1200px;margin:60px auto;padding:20px;">
-
-<h2 style="
-text-align:center;
-font-size:40px;
-color:#0D47A1;
-margin-bottom:40px;">
-
-⭐ Why Use Our Math Calculator?
-
-</h2>
-
-<div style="
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:25px;">
-
-<div class="feature-card">
-
-<div style="font-size:55px;">⚡</div>
-
-<h3>Fast Calculation</h3>
-
-<p>
-
-Get instant answers for all mathematical calculations within seconds.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<div style="font-size:55px;">🎯</div>
-
-<h3>Accurate Results</h3>
-
-<p>
-
-Advanced calculation logic provides highly accurate results every time.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<div style="font-size:55px;">📱</div>
-
-<h3>Mobile Friendly</h3>
-
-<p>
-
-Works perfectly on Mobile, Tablet and Desktop devices.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<div style="font-size:55px;">🔒</div>
-
-<h3>Safe & Secure</h3>
-
-<p>
-
-No registration required. All calculations happen instantly in your browser.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<div style="font-size:55px;">💯</div>
-
-<h3>100% Free</h3>
-
-<p>
-
-Unlimited calculations without any hidden charges.
-
-</p>
-
-</div>
-
-<div class="feature-card">
-
-<div style="font-size:55px;">🌍</div>
-
-<h3>Available Anytime</h3>
-
-<p>
-
-Use the calculator anytime from anywhere with an internet connection.
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<style>
-
-.feature-card{
-
-background:#fff;
-
-padding:30px;
-
-text-align:center;
-
-border-radius:18px;
-
-box-shadow:0 10px 25px rgba(0,0,0,.12);
-
-transition:.3s;
-
-}
-
-.feature-card:hover{
-
-transform:translateY(-8px);
-
-box-shadow:0 15px 35px rgba(0,0,0,.18);
-
-}
-
-.feature-card h3{
-
-margin:18px 0;
-
-font-size:28px;
-
-color:#1565C0;
-
-}
-
-.feature-card p{
-
-font-size:18px;
-
-line-height:1.7;
-
-color:#555;
-
-}
-
-</style>
-<!-- ===== How to Use ===== -->
-
-<section style="max-width:1200px;margin:60px auto;padding:20px;">
-
-<h2 style="text-align:center;font-size:40px;color:#0D47A1;">
-📖 How to Use This Calculator
-</h2>
-
-<div style="
-background:#fff;
-padding:35px;
-margin-top:30px;
-border-radius:18px;
-box-shadow:0 10px 25px rgba(0,0,0,.12);
-">
-
-<ol style="font-size:20px;line-height:2;">
-
-<li>Enter the first number.</li>
-
-<li>Select the required mathematical operation.</li>
-
-<li>Enter the second number (if needed).</li>
-
-<li>Click <b>🧮 Calculate</b>.</li>
-
-<li>Your answer will appear instantly.</li>
-
-</ol>
-
-</div>
-
-</section>
-
-<!-- ===== FAQ ===== -->
-
-<section style="max-width:1200px;margin:60px auto;padding:20px;">
-
-<h2 style="text-align:center;font-size:40px;color:#0D47A1;">
-❓ Frequently Asked Questions
-</h2>
-
-<div style="
-background:#fff;
-padding:35px;
-margin-top:30px;
-border-radius:18px;
-box-shadow:0 10px 25px rgba(0,0,0,.12);
-line-height:2;
-">
-
-<h3>Is this calculator free?</h3>
-<p>✅ Yes, it is completely free.</p>
-
-<h3>Does it work on mobile?</h3>
-<p>✅ Yes, it works on Android, iPhone, Tablet and Desktop.</p>
-
-<h3>Is my data stored?</h3>
-<p>✅ No. All calculations happen in your browser.</p>
-
-<h3>Can I calculate percentages and powers?</h3>
-<p>✅ Yes. Percentage, Square, Square Root and Power are supported.</p>
-
-</div>
-
-</section>
-
-<!-- ===== CTA ===== -->
-
-<section style="
-background:linear-gradient(135deg,#1565C0,#0D47A1);
-color:#fff;
-padding:60px 20px;
-text-align:center;
-margin-top:60px;
-">
-
-<h2 style="font-size:42px;">
-🚀 Try More Free Calculators
-</h2>
-
-<p style="font-size:22px;margin:20px 0;">
-Explore Finance, Loan, Tax and Investment Calculators.
-</p>
-
-<a href="index.html">
-
-<button style="
-padding:18px 35px;
-font-size:20px;
-background:#FFD54F;
-color:#000;
-border:none;
-border-radius:12px;
-cursor:pointer;
-font-weight:bold;
-">
-
-🏠 Back to Home
-
-</button>
-
-</a>
-
-</section>
-
-<!-- ===== Footer ===== -->
-
-<footer style="
-background:#071B47;
-color:#fff;
-padding:40px 20px;
-text-align:center;
-">
-
-<h2>🧮 Rajaram Math Calculator</h2>
-
-<p style="margin-top:15px;">
-Fast • Accurate • Free • Mobile Friendly
-</p>
-
-<p style="margin-top:20px;">
-© 2026 Rajaram Finance Calculators. All Rights Reserved.
-</p>
-
+<!-- 5. FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="articles.html">Article</a>
+  </div>
+  <div class="copyright">© 2026 Rajaram Finance. All Rights Reserved. | Made for Students & Professionals</div>
 </footer>
 
-<script src="math.js"></script>
+<script>
+const { jsPDF } = window.jspdf;
+let expression = '';
+let result = 0;
+let history = [];
 
+function updateDisplay(){
+  document.getElementById('expression').innerText = expression || '0';
+  document.getElementById('result').innerText = result || '0';
+}
+
+function append(value){
+  expression += value;
+  updateDisplay();
+}
+
+function clearAll(){
+  expression = '';
+  result = 0;
+  updateDisplay();
+}
+
+function del(){
+  expression = expression.slice(0, -1);
+  updateDisplay();
+}
+
+function calculate(){
+  try{
+    let exp = expression.replace(/%/g, '/100');
+    result = eval(exp);
+    result = Math.round(result * 1000000) / 1000000; // 6 decimal
+    history.push(`${expression} = ${result}`);
+    expression = result.toString();
+  } catch(e){
+    result = 'Error';
+  }
+  updateDisplay();
+}
+
+// Keyboard support
+document.addEventListener('keydown', (e) => {
+  if((e.key >= '0' && e.key <= '9') || ['+', '-', '*', '/', '.', '(', ')'].includes(e.key)){
+    append(e.key);
+  }
+  if(e.key === 'Enter') calculate();
+  if(e.key === 'Backspace') del();
+  if(e.key === 'Escape') clearAll();
+});
+
+function downloadPDF(){
+    const doc = new jsPDF();
+    doc.setFontSize(18); doc.text("Math Calculation History", 14, 20);
+    doc.setFontSize(10); doc.text("Rajaram Finance", 14, 27);
+    let y=40;
+    doc.setFontSize(12);
+    if(history.length == 0){
+      doc.text("No calculations yet", 14, y);
+    } else {
+      history.slice(-15).forEach((item) => {
+        doc.text(item, 14, y); y+=10;
+      });
+    }
+    doc.save('Math-Calculation-History.pdf');
+}
+
+document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
+updateDisplay();
+</script>
 </body>
-
 </html>
