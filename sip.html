@@ -54,21 +54,30 @@ header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);t
 .example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
 .example-box b{color:var(--primary)}
 
+/* PROFESSIONAL WHY SIP */
+.why-sip-grid{display:grid;gap:12px;margin:15px 0}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-item .num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.why-item p{margin:0;color:#475569}
+
 .guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
 .guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
 .guide-box p{margin-bottom:15px;color:#475569}
 .guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
 .guide-btn:hover{background:#1D4ED8}
 
-/* NEW: MORE CALCULATORS GRID */
 .tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
 .tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
 .tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
 .tool-card .icon{font-size:24px;margin-bottom:8px}
 
+/* DISCLAIMER BOX */
+.disclaimer-box{background:#FEF3C7;border:1px solid #FBBF24;padding:16px;border-radius:8px;margin-top:15px;font-size:13px;line-height:1.6}
+.disclaimer-box b{color:#92400E}
+
 footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
-.footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
 .footer-links a{color:#94A3B8;text-decoration:none;font-size:14px}
 .footer-links a:hover{color:#fff}
 .copyright{font-size:13px;color:#64748B}
@@ -123,14 +132,25 @@ footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;
   <!-- 4. SIP CONTENT -->
   <div class="card content">
     <h2>What is SIP? Systematic Investment Plan Explained</h2>
-    <p>A <b>Systematic Investment Plan (SIP)</b> is a disciplined way of investing in mutual funds. Instead of investing a lump sum, you invest a fixed amount every month. This helps you benefit from <b>rupee cost averaging</b> and the <b>power of compounding</b>.</p>
+    <p>A <b>Systematic Investment Plan (SIP)</b> is a disciplined approach to investing in mutual funds. Instead of a lump sum, you invest a fixed amount monthly. This strategy helps investors benefit from <b>rupee cost averaging</b> and the <b>power of compounding</b> over the long term.</p>
     
     <div class="example-box">
       <b>SIP Example:</b> If you invest ₹5,000 per month for 10 years at 12% annual return, your total investment will be ₹6,00,000. But due to compounding, your maturity value can grow to approximately ₹11,61,695. That means a wealth gain of ₹5,61,695!
     </div>
 
-    <p><b>Why SIP?</b> 1. Start with small amounts like ₹500. 2. No need to time the market. 3. Builds financial discipline. 4. Ideal for long-term goals like retirement, child education, or buying a house.</p>
-    <p>The earlier you start, the bigger your corpus. Delaying by just 5 years can reduce your final amount by 50%.</p>
+    <h2 style="margin-top:20px;font-size:18px">Why Choose SIP for Wealth Creation?</h2>
+    <div class="why-sip-grid">
+      <div class="why-item"><div class="num">1</div><p><b>Start Small:</b> Begin investing with as little as ₹500 per month and build wealth gradually.</p></div>
+      <div class="why-item"><div class="num">2</div><p><b>Market Volatility Advantage:</b> Rupee cost averaging reduces the impact of market fluctuations.</p></div>
+      <div class="why-item"><div class="num">3</div><p><b>Power of Compounding:</b> The earlier you start, the more your money grows due to reinvested returns.</p></div>
+      <div class="why-item"><div class="num">4</div><p><b>Goal Based Investing:</b> Ideal for long-term financial goals like child education, marriage, or buying a house.</p></div>
+    </div>
+    <p><b>Key Insight:</b> Delaying your investment by just 5 years can reduce your final corpus by nearly 50%. Time in the market is more important than timing the market.</p>
+
+    <!-- DISCLAIMER ADDED -->
+    <div class="disclaimer-box">
+      <b>Disclaimer:</b> The results shown by this SIP Calculator are for illustration purposes only and do not guarantee returns. Mutual Fund investments are subject to market risks. Please read all scheme related documents carefully before investing. Consult a SEBI registered financial advisor for personalized advice.
+    </div>
   </div>
 
   <!-- 5. SIP GUIDE -->
@@ -140,7 +160,7 @@ footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;
     <a href="sip-guide.html" class="guide-btn">📖 Read Complete SIP Guide</a>
   </div>
 
-  <!-- 6. NEW: MORE CALCULATORS SECTION -->
+  <!-- 6. MORE CALCULATORS - RETIREMENT HATA DIYA -->
   <div class="card">
     <h2>More Financial Calculators</h2>
     <div class="tools-grid">
@@ -148,21 +168,22 @@ footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;
       <a href="ppf.html" class="tool-card"><div class="icon">📊</div>PPF Calculator</a>
       <a href="emi.html" class="tool-card"><div class="icon">💳</div>EMI Calculator</a>
       <a href="home-loan.html" class="tool-card"><div class="icon">🏠</div>Home Loan EMI</a>
-      <a href="retirement-calculator.html" class="tool-card"><div class="icon">👴</div>Retirement Calculator</a>
       <a href="mutual-fund.html" class="tool-card"><div class="icon">📈</div>Mutual Fund Return</a>
+      <a href="sip-vs-lumpsum.html" class="tool-card"><div class="icon">⚖️</div>SIP vs Lumpsum</a>
     </div>
   </div>
 
 </div>
 
-<!-- 7. FOOTER -->
+<!-- 7. FOOTER UPDATED -->
 <footer>
   <div class="footer-links">
     <a href="index.html">Home</a>
-    <a href="legal.html">Legal</a>
-    <a href="disclaimer.html">Disclaimer</a>
-    <a href="privacy.html">Privacy Policy</a>
+    <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="article.html">Article</a>
   </div>
   <div class="copyright">© 2026 Rajaram Finance. All Rights Reserved. | Made for Smart Investors</div>
 </footer>
@@ -225,7 +246,9 @@ function downloadPDF(){
     doc.text(`Investment Period: ${lastResult.years} Years`, 14, y); y+=15;
     doc.text(`Total Invested: ${format(lastResult.totalInvested)}`, 14, y); y+=10;
     doc.text(`Estimated Returns: ${format(lastResult.returns)}`, 14, y); y+=10;
-    doc.text(`Maturity Value: ${format(lastResult.totalValue)}`, 14, y);
+    doc.text(`Maturity Value: ${format(lastResult.totalValue)}`, 14, y); y+=15;
+    doc.setFontSize(9);
+    doc.text("Disclaimer: This is an estimate. Mutual funds are subject to market risks.", 14, y);
     doc.save('SIP-Report.pdf');
 }
 
