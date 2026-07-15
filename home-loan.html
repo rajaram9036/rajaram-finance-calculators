@@ -3,226 +3,255 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Home Loan Calculator</title>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<title>Home Loan EMI Calculator 2026 - Calculate Home Loan EMI | Rajaram Finance</title>
+<meta name="description" content="Free Home Loan EMI Calculator. Calculate Home Loan EMI, Interest, Processing Fee. Download PDF report. Check eligibility and tips.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+:root{
+  --primary:#2563EB;
+  --accent:#10B981;
+  --dark:#0F172A;
+  --light:#F8FAFC;
+  --border:#E2E8F0;
 }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
+body{background:var(--light);color:var(--dark)}
+header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);text-align:center}
+.logo{font-size:24px;font-weight:700}
+.logo .blue{color:var(--primary)}
+.logo .green{color:var(--accent)}
 
-body{
-background:#eef3fb;
-padding:20px;
-}
+.container{width:100%;max-width:700px;margin:0 auto;padding:20px}
 
-.container{
-max-width:500px;
-margin:auto;
-background:#fff;
-padding:25px;
-border-radius:20px;
-box-shadow:0 8px 25px rgba(0,0,0,.15);
-}
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.card h2{font-size:20px;font-weight:700;color:#1E293B;margin-bottom:18px}
 
-h1{
-text-align:center;
-color:#1976D2;
-margin-bottom:25px;
-font-size:34px;
-}
+.input-group{margin-bottom:16px}
+.input-group label{font-weight:600;margin-bottom:8px;font-size:14px;color:#475569;display:block}
+.input-wrapper{position:relative}
+.input-wrapper span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748B;font-weight:600;font-size:15px}
+.input-wrapper input{width:100%;padding:14px 14px 14px 45px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-weight:500;background:#fff}
+.input-wrapper input:focus{border-color:var(--primary);outline:none}
 
-label{
-display:block;
-margin-top:18px;
-font-size:18px;
-font-weight:bold;
-}
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.5px}
+.btn-primary:hover{background:#1D4ED8}
 
-input{
-width:100%;
-padding:15px;
-margin-top:8px;
-font-size:18px;
-border:1px solid #ccc;
-border-radius:10px;
-}
+.result-card{background:linear-gradient(135deg,#2563EB,#10B981);color:#fff;text-align:center;border:none}
+.result-card .label{font-size:12px;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.result-card .value{font-size:28px;font-weight:700;margin-bottom:16px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:15px}
+.result-mini{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px}
+.result-mini .label{font-size:11px}
+.result-mini .value{font-size:15px;font-weight:700;margin-top:2px}
 
-button{
-width:100%;
-padding:15px;
-margin-top:20px;
-background:#1976D2;
-color:#fff;
-border:none;
-border-radius:10px;
-font-size:18px;
-cursor:pointer;
-}
+.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px}
+.btn-download:hover{background:#1E293B}
 
-button:hover{
-background:#1259a8;
-}
+.content h2{font-size:22px;color:var(--primary);margin-bottom:12px}
+.content p{line-height:1.8;color:#475569;margin-bottom:12px;font-size:15px}
+.example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
+.example-box b{color:var(--primary)}
 
-.result{
-display:none;
-margin-top:20px;
-padding:18px;
-background:#eefcf0;
-border-radius:12px;
-}
+.why-sip-grid{display:grid;gap:12px;margin:15px 0}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-item .num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.why-item p{margin:0;color:#475569}
 
-.result p{
-font-size:22px;
-margin:10px 0;
-font-weight:bold;
-}
+.guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
+.guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
+.guide-box p{margin-bottom:15px;color:#475569}
+.guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
+.guide-btn:hover{background:#1D4ED8}
 
-.green{
-color:green;
-}
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+.tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
+.tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
+.tool-card .icon{font-size:24px;margin-bottom:8px}
 
-canvas{
-max-width:300px;
-margin:20px auto;
-display:block;
-}
+.disclaimer-box{background:#FEF3C7;border:1px solid #FBBF24;padding:16px;border-radius:8px;margin-top:15px;font-size:13px;line-height:1.6}
+.disclaimer-box b{color:#92400E}
 
+footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
+.footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:#94A3B8;text-decoration:none;font-size:14px}
+.footer-links a:hover{color:#fff}
+.copyright{font-size:13px;color:#64748B}
 </style>
-
 </head>
-
 <body>
 
+<header><div class="logo"><span class="blue">Rajaram</span> <span class="green">Finance</span></div></header>
+
 <div class="container">
+  
+  <!-- 1. INPUT - HOME LOAN -->
+  <div class="card">
+    <h2>Home Loan EMI Calculator</h2>
+    <div class="input-group">
+      <label>Loan Amount</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="amount" value="5000000" oninput="calculateHomeLoan()"></div>
+    </div>
+    <div class="input-group">
+      <label>Interest Rate %</label>
+      <div class="input-wrapper"><span>%</span><input type="number" id="rate" value="8.5" step="0.1" oninput="calculateHomeLoan()"></div>
+    </div>
+    <div class="input-group">
+      <label>Loan Tenure Years</label>
+      <div class="input-wrapper"><span>Yrs</span><input type="number" id="years" value="20" oninput="calculateHomeLoan()"></div>
+    </div>
+    <button class="btn-primary" onclick="calculateHomeLoan()">CALCULATE NOW</button>
+  </div>
 
-<h1>🏠 Home Loan Calculator</h1>
-<label>Loan Amount (₹)</label>
-<input type="number" id="loan" placeholder="2500000">
+  <!-- 2. RESULT -->
+  <div class="card result-card">
+    <div class="label">MONTHLY EMI</div>
+    <div class="value" id="emi">₹0</div>
+    <div class="label">TOTAL INTEREST</div>
+    <div class="value" id="interest">₹0</div>
+    <div class="label">TOTAL PAYMENT</div>
+    <div class="value" id="total">₹0</div>
+    <div class="result-grid">
+      <div class="result-mini"><div class="label">LOAN</div><div class="value" id="loanTxt">₹0</div></div>
+      <div class="result-mini"><div class="label">YEARS</div><div class="value" id="yearTxt">20</div></div>
+      <div class="result-mini"><div class="label">RATE</div><div class="value" id="rateTxt">8.5%</div></div>
+    </div>
+    <button class="btn-download" id="downloadPdf">📄 Download PDF Report</button>
+  </div>
 
-<label>Interest Rate (% Per Year)</label>
-<input type="number" id="rate" placeholder="8.5">
+  <!-- 3. GRAPH -->
+  <div class="card">
+    <h2>Home Loan Breakdown</h2>
+    <canvas id="pieChart" height="120"></canvas>
+  </div>
 
-<label>Loan Tenure (Years)</label>
-<input type="number" id="years" placeholder="20">
+  <!-- 4. HOME LOAN CONTENT -->
+  <div class="card content">
+    <h2>What is Home Loan EMI Calculator?</h2>
+    <p>A <b>Home Loan EMI Calculator</b> helps you calculate monthly installment for your dream home. It shows EMI, total interest and total amount payable. Most banks offer home loan from 8.25% to 9.5% for 20-30 years tenure.</p>
+    
+    <div class="example-box">
+      <b>Home Loan Example:</b> For ₹50,00,000 loan at 8.5% for 20 years, your EMI = ₹43,391. Total Interest = ₹54,13,840. Total Payment = ₹1,04,13,840.
+    </div>
 
-<button onclick="calculateLoan()">🧮 Calculate Home Loan</button>
+    <h2 style="margin-top:20px;font-size:18px">5 Tips to Get Best Home Loan</h2>
+    <div class="why-sip-grid">
+      <div class="why-item"><div class="num">1</div><p><b>Check CIBIL Score:</b> Score above 750 gets you lowest interest rate.</p></div>
+      <div class="why-item"><div class="num">2</div><p><b>Higher Down Payment:</b> Pay 20-30% down payment to reduce loan burden.</p></div>
+      <div class="why-item"><div class="num">3</div><p><b>Tax Benefit:</b> Get deduction up to ₹2 Lakh on interest u/s 24 and ₹1.5 Lakh on principal u/s 80C.</p></div>
+      <div class="why-item"><div class="num">4</div><p><b>Prepayment:</b> Prepay whenever you have extra money to save lakhs in interest.</p></div>
+      <div class="why-item"><div class="num">5</div><p><b>Compare Banks:</b> Compare SBI, HDFC, ICICI, Axis before finalizing.</p></div>
+    </div>
+    <p><b>Key Insight:</b> 20 year tenure is sweet spot. 30 year EMI is low but you pay double interest. Try to close loan in 15 years.</p>
 
-<div class="result" id="result">
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <b>Disclaimer:</b> Home Loan rates change based on bank, CIBIL and property. Processing fee 0.5% to 1% extra. This calculator is for illustration only.
+    </div>
+  </div>
 
-<p>Monthly EMI:<br>
-<span class="green" id="emi">₹0</span>
-</p>
+  <!-- 5. HOME LOAN GUIDE -->
+  <div class="guide-box">
+    <h2>Want to Learn More About Home Loan?</h2>
+    <p>Read our complete guide on home loan eligibility, documents, tax benefits and how to save interest.</p>
+    <a href="home-loan-guide.html" class="guide-btn">📖 Read Complete Home Loan Guide</a>
+  </div>
 
-<p>Total Interest:<br>
-<span class="green" id="interest">₹0</span>
-</p>
-
-<p>Total Payment:<br>
-<span class="green" id="total">₹0</span>
-</p>
-
-<canvas id="loanChart" height="250"></canvas>
+  <!-- 6. MORE CALCULATORS - TUMHARE BANAYE HUE -->
+  <div class="card">
+    <h2>More Financial Calculators</h2>
+    <div class="tools-grid">
+      <a href="sip.html" class="tool-card"><div class="icon">📅</div>SIP Calculator</a>
+      <a href="mutual-fund.html" class="tool-card"><div class="icon">📊</div>Mutual Fund</a>
+      <a href="fd.html" class="tool-card"><div class="icon">🏦</div>FD Calculator</a>
+      <a href="rd.html" class="tool-card"><div class="icon">📆</div>RD Calculator</a>
+      <a href="ppf.html" class="tool-card"><div class="icon">🏛️</div>PPF Calculator</a>
+      <a href="emi.html" class="tool-card"><div class="icon">💳</div>EMI Calculator</a>
+    </div>
+  </div>
 
 </div>
 
-<button onclick="resetLoan()">🔄 Reset</button>
-
-<a href="index.html">
-<button type="button">🏠 Back to Home</button>
-</a>
+<!-- 7. FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="articles.html">Article</a>
+  </div>
+  <div class="copyright">© 2026 Rajaram Finance. All Rights Reserved. | Made for Smart Investors</div>
+</footer>
 
 <script>
+const { jsPDF } = window.jspdf;
+let pieChart;
+let lastResult = {};
 
-let chart;
-  function calculateLoan(){
+function format(num){return '₹' + Math.round(num).toLocaleString('en-IN')}
 
-let P = parseFloat(document.getElementById("loan").value);
-let annual = parseFloat(document.getElementById("rate").value);
-let years = parseFloat(document.getElementById("years").value);
-
-if(isNaN(P) || isNaN(annual) || isNaN(years)){
-alert("Please fill all fields");
-return;
+function calculateHomeLoan(){
+  const P = parseFloat(document.getElementById('amount').value) || 5000000;
+  const r = (parseFloat(document.getElementById('rate').value)/100)/12 || 0.085/12;
+  const n = parseInt(document.getElementById('years').value) * 12 || 240;
+  
+  // EMI Formula = [P * r * (1+r)^n] / [(1+r)^n - 1]
+  let emi = (P * r * Math.pow(1+r, n)) / (Math.pow(1+r, n) - 1);
+  let totalPayment = emi * n;
+  let totalInterest = totalPayment - P;
+  
+  lastResult = {P, r, n, emi, totalPayment, totalInterest};
+  
+  document.getElementById('emi').innerText = format(emi);
+  document.getElementById('interest').innerText = format(totalInterest);
+  document.getElementById('total').innerText = format(totalPayment);
+  document.getElementById('loanTxt').innerText = format(P);
+  document.getElementById('yearTxt').innerText = n/12;
+  document.getElementById('rateTxt').innerText = (r*12*100).toFixed(1)+'%';
+  
+  drawChart(P, totalInterest);
 }
 
-let r = annual / 12 / 100;
-let n = years * 12;
-
-let emi = (P * r * Math.pow(1+r,n)) /
-          (Math.pow(1+r,n)-1);
-
-let totalPayment = emi * n;
-let totalInterest = totalPayment - P;
-
-document.getElementById("emi").innerHTML =
-"₹" + Number(emi.toFixed(0)).toLocaleString("en-IN");
-
-document.getElementById("interest").innerHTML =
-"₹" + Number(totalInterest.toFixed(0)).toLocaleString("en-IN");
-
-document.getElementById("total").innerHTML =
-"₹" + Number(totalPayment.toFixed(0)).toLocaleString("en-IN");
-
-document.getElementById("result").style.display = "block";
-
-if(chart){
-chart.destroy();
+function drawChart(principal, interest){
+  if(pieChart) pieChart.destroy();
+  pieChart = new Chart(document.getElementById('pieChart'),{
+    type:'pie',
+    data:{
+      labels:['Principal', 'Interest'],
+      datasets:[{
+        data:[principal, interest],
+        backgroundColor:['#2563EB','#10B981'],
+        borderWidth:0
+      }]
+    },
+    options:{responsive:true, plugins:{legend:{position:'bottom'}}}
+  });
 }
 
-let ctx = document.getElementById("loanChart").getContext("2d");
-
-chart = new Chart(ctx,{
-type:"doughnut",
-data:{
-labels:["Loan Amount","Interest"],
-datasets:[{
-data:[P,totalInterest],
-backgroundColor:["#1976D2","#4CAF50"],
-borderWidth:2
-}]
-},
-options:{
-responsive:true,
-plugins:{
-legend:{
-position:"bottom"
-}
-}
-}
-});
-
-  }
-  function resetLoan(){
-
-document.getElementById("loan").value="";
-document.getElementById("rate").value="";
-document.getElementById("years").value="";
-
-document.getElementById("emi").innerHTML="₹0";
-document.getElementById("interest").innerHTML="₹0";
-document.getElementById("total").innerHTML="₹0";
-
-document.getElementById("result").style.display="none";
-
-if(chart){
-    chart.destroy();
-    chart = null;
+function downloadPDF(){
+    const doc = new jsPDF();
+    doc.setFontSize(18); doc.text("Home Loan EMI Report", 14, 20);
+    doc.setFontSize(10); doc.text("Rajaram Finance", 14, 27);
+    let y=40;
+    doc.setFontSize(12);
+    doc.text(`Loan Amount: ${format(lastResult.P)}`, 14, y); y+=10;
+    doc.text(`Interest Rate: ${(lastResult.r*12*100).toFixed(1)}%`, 14, y); y+=10;
+    doc.text(`Loan Tenure: ${lastResult.n/12} Years`, 14, y); y+=15;
+    doc.text(`Monthly EMI: ${format(lastResult.emi)}`, 14, y); y+=10;
+    doc.text(`Total Interest: ${format(lastResult.totalInterest)}`, 14, y); y+=10;
+    doc.text(`Total Payment: ${format(lastResult.totalPayment)}`, 14, y); y+=15;
+    doc.setFontSize(9);
+    doc.text("Disclaimer: Rates vary by bank and CIBIL.", 14, y);
+    doc.save('Home-Loan-Report.pdf');
 }
 
-}
-
+document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
+window.onload = calculateHomeLoan;
 </script>
-
-</div>
-
 </body>
 </html>
-  
-  
