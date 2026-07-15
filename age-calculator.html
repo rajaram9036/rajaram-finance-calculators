@@ -1,248 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Age Calculator | Rajaram Finance Calculators</title>
-
-<link rel="stylesheet" href="style.css">
-
+<title>Age Calculator 2026 - Calculate Exact Age | Rajaram Finance</title>
+<meta name="description" content="Free Age Calculator. Calculate exact age in years, months, days. Check next birthday, total days lived. Download PDF report.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-
-body{
-background:#eef3ff;
-font-family:Arial,sans-serif;
-margin:0;
+:root{
+  --primary:#2563EB;
+  --accent:#10B981;
+  --dark:#0F172A;
+  --light:#F8FAFC;
+  --border:#E2E8F0;
 }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
+body{background:var(--light);color:var(--dark)}
+header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);text-align:center}
+.logo{font-size:24px;font-weight:700}
+.logo .blue{color:var(--primary)}
+.logo .green{color:var(--accent)}
 
-.container{
-max-width:420px;
-margin:40px auto;
-background:#fff;
-padding:30px;
-border-radius:18px;
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-}
+.container{width:100%;max-width:700px;margin:0 auto;padding:20px}
 
-.container h1{
-text-align:center;
-color:#1565C0;
-margin-bottom:25px;
-}
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.card h2{font-size:20px;font-weight:700;color:#1E293B;margin-bottom:18px}
 
-label{
-display:block;
-margin-top:18px;
-font-weight:bold;
-}
+.input-group{margin-bottom:16px}
+.input-group label{font-weight:600;margin-bottom:8px;font-size:14px;color:#475569;display:block}
+.input-wrapper{position:relative}
+.input-wrapper span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748B;font-weight:600;font-size:15px}
+.input-wrapper input{width:100%;padding:14px 14px 14px 45px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-weight:500;background:#fff}
+.input-wrapper input:focus{border-color:var(--primary);outline:none}
 
-input{
-width:100%;
-padding:14px;
-margin-top:8px;
-font-size:18px;
-border:1px solid #ccc;
-border-radius:10px;
-box-sizing:border-box;
-}
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.5px}
+.btn-primary:hover{background:#1D4ED8}
 
-button{
-width:100%;
-padding:15px;
-margin-top:18px;
-border:none;
-border-radius:10px;
-background:#1976D2;
-color:#fff;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-}
+.result-card{background:linear-gradient(135deg,#2563EB,#10B981);color:#fff;text-align:center;border:none}
+.result-card .label{font-size:12px;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.result-card .value{font-size:28px;font-weight:700;margin-bottom:16px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:15px}
+.result-mini{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px}
+.result-mini .label{font-size:11px}
+.result-mini .value{font-size:15px;font-weight:700;margin-top:2px}
 
-button:hover{
-background:#0D47A1;
-}
+.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px}
+.btn-download:hover{background:#1E293B}
 
-#result{
-display:none;
-margin-top:25px;
-padding:18px;
-background:#f5f9ff;
-border-radius:12px;
-}
+.content h2{font-size:22px;color:var(--primary);margin-bottom:12px}
+.content p{line-height:1.8;color:#475569;margin-bottom:12px;font-size:15px}
+.example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
+.example-box b{color:var(--primary)}
 
+.why-sip-grid{display:grid;gap:12px;margin:15px 0}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-item .num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.why-item p{margin:0;color:#475569}
+
+.guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
+.guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
+.guide-box p{margin-bottom:15px;color:#475569}
+.guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
+.guide-btn:hover{background:#1D4ED8}
+
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+.tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
+.tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
+.tool-card .icon{font-size:24px;margin-bottom:8px}
+
+.disclaimer-box{background:#FEF3C7;border:1px solid #FBBF24;padding:16px;border-radius:8px;margin-top:15px;font-size:13px;line-height:1.6}
+.disclaimer-box b{color:#92400E}
+
+footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
+.footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:#94A3B8;text-decoration:none;font-size:14px}
+.footer-links a:hover{color:#fff}
+.copyright{font-size:13px;color:#64748B}
 </style>
-
 </head>
-
 <body>
 
+<header><div class="logo"><span class="blue">Rajaram</span> <span class="green">Finance</span></div></header>
+
 <div class="container">
+  
+  <!-- 1. INPUT - AGE -->
+  <div class="card">
+    <h2>Age Calculator - Calculate Exact Age</h2>
+    <div class="input-group">
+      <label>Date of Birth</label>
+      <div class="input-wrapper"><span>📅</span><input type="date" id="dob" value="1995-08-15" oninput="calculateAge()"></div>
+    </div>
+    <div class="input-group">
+      <label>Calculate Age As On</label>
+      <div class="input-wrapper"><span>📅</span><input type="date" id="today" oninput="calculateAge()"></div>
+    </div>
+    <button class="btn-primary" onclick="calculateAge()">CALCULATE AGE</button>
+  </div>
 
-<h1>🎂 Age Calculator</h1>
+  <!-- 2. RESULT -->
+  <div class="card result-card">
+    <div class="label">YOUR EXACT AGE</div>
+    <div class="value" id="exactAge">0 Years 0 Months 0 Days</div>
+    <div class="label">TOTAL DAYS LIVED</div>
+    <div class="value" id="totalDays">0</div>
+    <div class="label">NEXT BIRTHDAY</div>
+    <div class="value" id="nextBday">0 Days Left</div>
+    <div class="result-grid">
+      <div class="result-mini"><div class="label">MONTHS</div><div class="value" id="months">0</div></div>
+      <div class="result-mini"><div class="label">WEEKS</div><div class="value" id="weeks">0</div></div>
+      <div class="result-mini"><div class="label">HOURS</div><div class="value" id="hours">0</div></div>
+    </div>
+    <button class="btn-download" id="downloadPdf">📄 Download PDF Report</button>
+  </div>
 
-<label>Date of Birth</label>
+  <!-- 3. GRAPH -->
+  <div class="card">
+    <h2>Age Breakdown</h2>
+    <canvas id="barChart" height="120"></canvas>
+  </div>
 
-<input
-type="date"
-id="dob">
+  <!-- 4. AGE CONTENT -->
+  <div class="card content">
+    <h2>What is Age Calculator?</h2>
+    <p>An <b>Age Calculator</b> helps you find your exact age in years, months and days. It also shows total days lived, next birthday countdown and age in months, weeks, hours.</p>
+    
+    <div class="example-box">
+      <b>Example:</b> If DOB is 15-Aug-1995 and today is 04-Apr-2026, 
+      Your Age = 30 Years 7 Months 20 Days.
+      Total Days Lived = 11,195 Days. Next Birthday in 133 Days.
+    </div>
 
-<button onclick="calculateAge()">
+    <h2 style="margin-top:20px;font-size:18px">Why Use Age Calculator?</h2>
+    <div class="why-sip-grid">
+      <div class="why-item"><div class="num">1</div><p><b>Official Use:</b> School admission, Job application, Passport, PAN, Aadhar age proof.</p></div>
+      <div class="why-item"><div class="num">2</div><p><b>Birthday Reminder:</b> Know exactly how many days left for next birthday.</p></div>
+      <div class="why-item"><div class="num">3</div><p><b>Retirement Planning:</b> Calculate years left for retirement at age 60.</p></div>
+      <div class="why-item"><div class="num">4</div><p><b>Insurance & Loans:</b> Most policies and loans have age eligibility criteria.</p></div>
+    </div>
+    <p><b>Key Insight:</b> Age is calculated from DOB to current date. Leap years are automatically adjusted.</p>
 
-🎂 Calculate Age
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <b>Disclaimer:</b> Age calculated based on Gregorian calendar. For legal documents always refer to birth certificate.
+    </div>
+  </div>
 
-</button>
+  <!-- 5. AGE GUIDE -->
+  <div class="guide-box">
+    <h2>Want to Plan Your Future?</h2>
+    <p>Use our retirement and investment calculators to plan your financial future based on your current age.</p>
+    <a href="retirement-planner.html" class="guide-btn">📖 Retirement Planning Guide</a>
+  </div>
 
-<button onclick="resetCalculator()">
-
-🔄 Reset
-
-</button>
-
-<a href="index.html">
-
-<button type="button">
-
-🏠 Back to Home
-
-</button>
-
-</a>
-
-<div id="result"></div>
-
-</div>
-<script>
-
-function calculateAge(){
-
-let dob = document.getElementById("dob").value;
-
-if(dob==""){
-
-document.getElementById("result").style.display="block";
-
-document.getElementById("result").innerHTML=
-"<p style='color:red;font-weight:bold;'>⚠ Please select your Date of Birth.</p>";
-
-return;
-
-}
-
-let birthDate = new Date(dob);
-let today = new Date();
-
-let years = today.getFullYear() - birthDate.getFullYear();
-let months = today.getMonth() - birthDate.getMonth();
-let days = today.getDate() - birthDate.getDate();
-
-if(days < 0){
-months--;
-let lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
-days += lastMonth.getDate();
-}
-
-if(months < 0){
-years--;
-months += 12;
-}
-
-let totalDays = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24));
-let totalMonths = years * 12 + months;
-
-document.getElementById("result").style.display="block";
-
-document.getElementById("result").innerHTML = `
-
-<h2 style="text-align:center;color:#1565C0;">
-🎉 Your Age
-</h2>
-
-<hr>
-
-<p><strong>Years:</strong> ${years}</p>
-
-<p><strong>Months:</strong> ${months}</p>
-
-<p><strong>Days:</strong> ${days}</p>
-
-<hr>
-
-<p><strong>Total Months:</strong> ${totalMonths}</p>
-
-<p><strong>Total Days:</strong> ${totalDays}</p>
-
-`;
-
-}
-
-function resetCalculator(){
-
-document.getElementById("dob").value="";
-
-document.getElementById("result").style.display="none";
-
-document.getElementById("result").innerHTML="";
-
-}
-
-</script>
-
-<div style="max-width:420px;margin:20px auto;">
-
-<div style="background:#f8fbff;
-padding:18px;
-border-radius:12px;
-border-left:5px solid #1976D2;">
-
-<h3 style="color:#1565C0;">
-🎂 Age Calculator Tips
-</h3>
-
-<ul style="line-height:1.8;">
-
-<li>✔ Enter your correct Date of Birth.</li>
-
-<li>✔ The calculator shows your age in Years, Months and Days.</li>
-
-<li>✔ Total Months and Total Days are approximate values based on the current date.</li>
-
-<li>✔ Useful for school, college, jobs and official forms.</li>
-
-<li>✔ 100% Free and Mobile Friendly.</li>
-
-</ul>
+  <!-- 6. MORE CALCULATORS - TUMHARE BANAYE HUE -->
+  <div class="card">
+    <h2>More Useful Calculators</h2>
+    <div class="tools-grid">
+      <a href="income-tax.html" class="tool-card"><div class="icon">💰</div>Income Tax</a>
+      <a href="gst.html" class="tool-card"><div class="icon">🧾</div>GST Calculator</a>
+      <a href="sip.html" class="tool-card"><div class="icon">📅</div>SIP Calculator</a>
+      <a href="ppf.html" class="tool-card"><div class="icon">🏛️</div>PPF Calculator</a>
+      <a href="home-loan.html" class="tool-card"><div class="icon">🏠</div>Home Loan EMI</a>
+      <a href="fd.html" class="tool-card"><div class="icon">🏦</div>FD Calculator</a>
+    </div>
+  </div>
 
 </div>
 
-</div>
-
+<!-- 7. FOOTER -->
 <footer>
-
-<h3>🎂 Rajaram Finance Calculators</h3>
-
-<p>
-Free Online Age Calculator & Educational Tools
-</p>
-
-<p>
-This calculator is provided for educational and informational purposes only.
-The calculated age depends on the selected Date of Birth and the current date on your device.
-</p>
-
-<p>
-© 2026 Rajaram Finance Calculators. All Rights Reserved.
-</p>
-
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="articles.html">Article</a>
+  </div>
+  <div class="copyright">© 2026 Rajaram Finance. All Rights Reserved. | Made for Everyone</div>
 </footer>
 
+<script>
+const { jsPDF } = window.jspdf;
+let barChart;
+let lastResult = {};
+
+// Set today's date as default
+document.getElementById('today').valueAsDate = new Date();
+
+function calculateAge(){
+  const dob = new Date(document.getElementById('dob').value);
+  const today = new Date(document.getElementById('today').value);
+  
+  if(!dob || !today) return;
+  
+  let years = today.getFullYear() - dob.getFullYear();
+  let months = today.getMonth() - dob.getMonth();
+  let days = today.getDate() - dob.getDate();
+  
+  if(days < 0){
+    months--;
+    days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+  }
+  if(months < 0){
+    years--;
+    months += 12;
+  }
+  
+  const diffTime = Math.abs(today - dob);
+  const totalDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const totalMonths = years * 12 + months;
+  const totalWeeks = Math.floor(totalDays / 7);
+  const totalHours = totalDays * 24;
+  
+  // Next Birthday
+  let nextBday = new Date(today.getFullYear(), dob.getMonth(), dob.getDate());
+  if(nextBday < today) nextBday.setFullYear(today.getFullYear() + 1);
+  const daysToBday = Math.floor((nextBday - today) / (1000 * 60 * 60 * 24));
+  
+  lastResult = {years, months, days, totalDays, totalMonths, totalWeeks, totalHours, daysToBday};
+  
+  document.getElementById('exactAge').innerText = `${years} Years ${months} Months ${days} Days`;
+  document.getElementById('totalDays').innerText = totalDays.toLocaleString('en-IN');
+  document.getElementById('nextBday').innerText = `${daysToBday} Days Left`;
+  document.getElementById('months').innerText = totalMonths.toLocaleString('en-IN');
+  document.getElementById('weeks').innerText = totalWeeks.toLocaleString('en-IN');
+  document.getElementById('hours').innerText = totalHours.toLocaleString('en-IN');
+  
+  drawChart(years, months, days);
+}
+
+function drawChart(y, m, d){
+  if(barChart) barChart.destroy();
+  barChart = new Chart(document.getElementById('barChart'),{
+    type:'bar',
+    data:{
+      labels:['Years', 'Months', 'Days'],
+      datasets:[{
+        label:'Age',
+        data:[y, m, d],
+        backgroundColor:['#2563EB','#10B981','#F59E0B'],
+        borderWidth:0
+      }]
+    },
+    options:{responsive:true, plugins:{legend:{display:false}}}
+  });
+}
+
+function downloadPDF(){
+    const doc = new jsPDF();
+    doc.setFontSize(18); doc.text("Age Calculation Report", 14, 20);
+    doc.setFontSize(10); doc.text("Rajaram Finance", 14, 27);
+    let y=40;
+    doc.setFontSize(12);
+    doc.text(`Exact Age: ${lastResult.years} Years ${lastResult.months} Months ${lastResult.days} Days`, 14, y); y+=10;
+    doc.text(`Total Days Lived: ${lastResult.totalDays}`, 14, y); y+=10;
+    doc.text(`Total Months: ${lastResult.totalMonths}`, 14, y); y+=10;
+    doc.text(`Total Weeks: ${lastResult.totalWeeks}`, 14, y); y+=10;
+    doc.text(`Next Birthday: ${lastResult.daysToBday} Days Left`, 14, y); y+=15;
+    doc.setFontSize(9);
+    doc.text("Disclaimer: For informational purpose only.", 14, y);
+    doc.save('Age-Report.pdf');
+}
+
+document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
+window.onload = calculateAge;
+</script>
 </body>
-
 </html>
-
-
-
-
