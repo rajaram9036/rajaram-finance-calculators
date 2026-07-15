@@ -3,224 +3,249 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>FD Calculator</title>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<title>FD Calculator 2026 - Calculate Fixed Deposit Returns | Rajaram Finance</title>
+<meta name="description" content="Free FD Calculator. Calculate Fixed Deposit maturity amount, interest earned. Download PDF report. Learn about FD rates and benefits.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+:root{
+  --primary:#2563EB;
+  --accent:#10B981;
+  --dark:#0F172A;
+  --light:#F8FAFC;
+  --border:#E2E8F0;
 }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
+body{background:var(--light);color:var(--dark)}
+header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);text-align:center}
+.logo{font-size:24px;font-weight:700}
+.logo .blue{color:var(--primary)}
+.logo .green{color:var(--accent)}
 
-body{
-background:#eef3fb;
-padding:20px;
-}
+.container{width:100%;max-width:700px;margin:0 auto;padding:20px}
 
-.container{
-max-width:500px;
-margin:auto;
-background:#fff;
-padding:25px;
-border-radius:20px;
-box-shadow:0 8px 25px rgba(0,0,0,.15);
-}
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.card h2{font-size:20px;font-weight:700;color:#1E293B;margin-bottom:18px}
 
-h1{
-text-align:center;
-color:#1976D2;
-margin-bottom:25px;
-font-size:34px;
-}
+.input-group{margin-bottom:16px}
+.input-group label{font-weight:600;margin-bottom:8px;font-size:14px;color:#475569;display:block}
+.input-wrapper{position:relative}
+.input-wrapper span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748B;font-weight:600;font-size:15px}
+.input-wrapper input{width:100%;padding:14px 14px 14px 45px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-weight:500;background:#fff}
+.input-wrapper input:focus{border-color:var(--primary);outline:none}
 
-label{
-display:block;
-margin-top:18px;
-font-size:18px;
-font-weight:bold;
-}
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.5px}
+.btn-primary:hover{background:#1D4ED8}
 
-input{
-width:100%;
-padding:15px;
-margin-top:8px;
-font-size:18px;
-border:1px solid #ccc;
-border-radius:10px;
-}
+.result-card{background:linear-gradient(135deg,#2563EB,#10B981);color:#fff;text-align:center;border:none}
+.result-card .label{font-size:12px;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.result-card .value{font-size:28px;font-weight:700;margin-bottom:16px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:15px}
+.result-mini{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px}
+.result-mini .label{font-size:11px}
+.result-mini .value{font-size:15px;font-weight:700;margin-top:2px}
 
-button{
-width:100%;
-padding:15px;
-margin-top:20px;
-background:#1976D2;
-color:#fff;
-border:none;
-border-radius:10px;
-font-size:18px;
-cursor:pointer;
-}
+.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px}
+.btn-download:hover{background:#1E293B}
 
-button:hover{
-background:#1259a8;
-}
+.content h2{font-size:22px;color:var(--primary);margin-bottom:12px}
+.content p{line-height:1.8;color:#475569;margin-bottom:12px;font-size:15px}
+.example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
+.example-box b{color:var(--primary)}
 
-.result{
-display:none;
-margin-top:20px;
-padding:18px;
-background:#eefcf0;
-border-radius:12px;
-}
+.why-sip-grid{display:grid;gap:12px;margin:15px 0}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-item .num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.why-item p{margin:0;color:#475569}
 
-.result p{
-font-size:22px;
-margin:10px 0;
-font-weight:bold;
-}
+.guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
+.guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
+.guide-box p{margin-bottom:15px;color:#475569}
+.guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
+.guide-btn:hover{background:#1D4ED8}
 
-.green{
-color:green;
-}
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+.tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
+.tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
+.tool-card .icon{font-size:24px;margin-bottom:8px}
 
-canvas{
-max-width:300px;
-margin:20px auto;
-display:block;
-}
+.disclaimer-box{background:#FEF3C7;border:1px solid #FBBF24;padding:16px;border-radius:8px;margin-top:15px;font-size:13px;line-height:1.6}
+.disclaimer-box b{color:#92400E}
 
-@media(max-width:600px){
-.container{
-padding:18px;
-}
-}
-
+footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
+.footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:#94A3B8;text-decoration:none;font-size:14px}
+.footer-links a:hover{color:#fff}
+.copyright{font-size:13px;color:#64748B}
 </style>
-
 </head>
-
 <body>
 
+<header><div class="logo"><span class="blue">Rajaram</span> <span class="green">Finance</span></div></header>
+
 <div class="container">
+  
+  <!-- 1. INPUT - FD -->
+  <div class="card">
+    <h2>FD Calculator - Fixed Deposit Calculator</h2>
+    <div class="input-group">
+      <label>Deposit Amount</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="amount" value="100000" oninput="calculateFD()"></div>
+    </div>
+    <div class="input-group">
+      <label>Interest Rate %</label>
+      <div class="input-wrapper"><span>%</span><input type="number" id="rate" value="7.5" step="0.1" oninput="calculateFD()"></div>
+    </div>
+    <div class="input-group">
+      <label>Tenure Years</label>
+      <div class="input-wrapper"><span>Yrs</span><input type="number" id="years" value="5" oninput="calculateFD()"></div>
+    </div>
+    <button class="btn-primary" onclick="calculateFD()">CALCULATE NOW</button>
+  </div>
 
-<h1>🏦 FD Calculator</h1>
-<label>Deposit Amount (₹)</label>
-<input type="number" id="principal" placeholder="100000">
+  <!-- 2. RESULT -->
+  <div class="card result-card">
+    <div class="label">PRINCIPAL AMOUNT</div>
+    <div class="value" id="invested">₹0</div>
+    <div class="label">INTEREST EARNED</div>
+    <div class="value" id="returns">₹0</div>
+    <div class="label">MATURITY VALUE</div>
+    <div class="value" id="maturity">₹0</div>
+    <div class="result-grid">
+      <div class="result-mini"><div class="label">INTEREST</div><div class="value" id="gain">₹0</div></div>
+      <div class="result-mini"><div class="label">YEARS</div><div class="value" id="yearTxt">5</div></div>
+      <div class="result-mini"><div class="label">RATE</div><div class="value" id="rateTxt">7.5%</div></div>
+    </div>
+    <button class="btn-download" id="downloadPdf">📄 Download PDF Report</button>
+  </div>
 
-<label>Interest Rate (% Per Year)</label>
-<input type="number" id="rate" placeholder="7.5">
+  <!-- 3. GRAPH -->
+  <div class="card">
+    <h2>FD Growth Chart</h2>
+    <canvas id="lineChart" height="120"></canvas>
+  </div>
 
-<label>Time (Years)</label>
-<input type="number" id="years" placeholder="5">
+  <!-- 4. FD CONTENT -->
+  <div class="card content">
+    <h2>What is Fixed Deposit FD?</h2>
+    <p>A <b>Fixed Deposit or FD</b> is one of the safest investment options in India. You deposit a lump sum amount for a fixed period and earn guaranteed interest. Banks offer FD for 7 days to 10 years. Interest is paid monthly, quarterly or at maturity.</p>
+    
+    <div class="example-box">
+      <b>FD Example:</b> If you invest ₹1,00,000 in FD for 5 years at 7.5% interest, your maturity amount will be ₹1,43,562. Total interest earned = ₹43,562.
+    </div>
 
-<button onclick="calculateFD()">🧮 Calculate FD</button>
+    <h2 style="margin-top:20px;font-size:18px">Why Choose FD Investment?</h2>
+    <div class="why-sip-grid">
+      <div class="why-item"><div class="num">1</div><p><b>Guaranteed Returns:</b> FD offers fixed and guaranteed returns. No market risk involved.</p></div>
+      <div class="why-item"><div class="num">2</div><p><b>Safe Investment:</b> Bank FDs up to ₹5 Lakh are insured by DICGC. Best for risk-averse investors.</p></div>
+      <div class="why-item"><div class="num">3</div><p><b>Flexible Tenure:</b> Choose tenure from 7 days to 10 years as per your goal.</p></div>
+      <div class="why-item"><div class="num">4</div><p><b>Loan Facility:</b> You can take loan up to 90% of FD amount without breaking it.</p></div>
+    </div>
+    <p><b>Key Insight:</b> FD is best for emergency fund and short term goals. For long term wealth creation, combine FD with Mutual Funds.</p>
 
-<div class="result" id="result">
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <b>Disclaimer:</b> FD rates vary from bank to bank. Interest earned is taxable as per your income slab. TDS is deducted if interest > ₹40,000 in a year. This calculator is for illustration only.
+    </div>
+  </div>
 
-<p>Principal Amount:<br>
-<span class="green" id="principalResult">₹0</span>
-</p>
+  <!-- 5. FD GUIDE -->
+  <div class="guide-box">
+    <h2>Want to Learn More About FD?</h2>
+    <p>Read our complete guide to understand FD types, tax rules, and best bank FD rates in 2026.</p>
+    <a href="fd-guide.html" class="guide-btn">📖 Read Complete FD Guide</a>
+  </div>
 
-<p>Interest Earned:<br>
-<span class="green" id="interest">₹0</span>
-</p>
-
-<p>Maturity Amount:<br>
-<span class="green" id="maturity">₹0</span>
-</p>
-
-<canvas id="fdChart" height="250"></canvas>
+  <!-- 6. MORE CALCULATORS -->
+  <div class="card">
+    <h2>More Financial Calculators</h2>
+    <div class="tools-grid">
+      <a href="sip.html" class="tool-card"><div class="icon">📅</div>SIP Calculator</a>
+      <a href="mutual-fund.html" class="tool-card"><div class="icon">📊</div>Mutual Fund</a>
+      <a href="ppf.html" class="tool-card"><div class="icon">🏛️</div>PPF Calculator</a>
+      <a href="emi.html" class="tool-card"><div class="icon">💳</div>EMI Calculator</a>
+      <a href="home-loan.html" class="tool-card"><div class="icon">🏠</div>Home Loan EMI</a>
+      <a href="fd-vs-mf.html" class="tool-card"><div class="icon">⚖️</div>FD vs Mutual Fund</a>
+    </div>
+  </div>
 
 </div>
 
-<button onclick="resetFD()">🔄 Reset</button>
-
-<a href="index.html">
-<button type="button">🏠 Back to Home</button>
-</a>
+<!-- 7. FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="articles.html">Article</a>
+  </div>
+  <div class="copyright">© 2026 Rajaram Finance. All Rights Reserved. | Made for Smart Investors</div>
+</footer>
 
 <script>
+const { jsPDF } = window.jspdf;
+let lineChart;
+let lastResult = {};
 
-let chart;
-  function calculateFD(){
+function format(num){return '₹' + Math.round(num).toLocaleString('en-IN')}
 
-let P = parseFloat(document.getElementById("principal").value);
-let annual = parseFloat(document.getElementById("rate").value);
-let years = parseFloat(document.getElementById("years").value);
-
-if(isNaN(P) || isNaN(annual) || isNaN(years)){
-alert("Please fill all fields");
-return;
-}
-
-let maturity = P * Math.pow((1 + annual/100), years);
-let interest = maturity - P;
-
-document.getElementById("principalResult").innerHTML =
-"₹" + Number(P.toFixed(0)).toLocaleString("en-IN");
-
-document.getElementById("interest").innerHTML =
-"₹" + Number(interest.toFixed(0)).toLocaleString("en-IN");
-
-document.getElementById("maturity").innerHTML =
-"₹" + Number(maturity.toFixed(0)).toLocaleString("en-IN");
-
-document.getElementById("result").style.display="block";
-
-if(chart){
-chart.destroy();
-}
-
-let ctx = document.getElementById("fdChart").getContext("2d");
-
-chart = new Chart(ctx,{
-type:"doughnut",
-data:{
-labels:["Principal","Interest"],
-datasets:[{
-data:[P,interest],
-backgroundColor:["#1976D2","#4CAF50"],
-borderWidth:2
-}]
-},
-options:{
-responsive:true,
-plugins:{
-legend:{
-position:"bottom"
-}
-}
-}
-});
-
+function calculateFD(){
+  const P = parseFloat(document.getElementById('amount').value) || 100000;
+  const r_annual = parseFloat(document.getElementById('rate').value)/100 || 0.075;
+  const years = parseInt(document.getElementById('years').value) || 5;
+  
+  let data = [];
+  let maturity = P * Math.pow(1 + r_annual, years);
+  let returns = maturity - P;
+  
+  for(let y=1;y<=years;y++){
+    data.push(P * Math.pow(1 + r_annual, y));
   }
-  function resetFD(){
-
-document.getElementById("principal").value="";
-document.getElementById("rate").value="";
-document.getElementById("years").value="";
-
-document.getElementById("principalResult").innerHTML="₹0";
-document.getElementById("interest").innerHTML="₹0";
-document.getElementById("maturity").innerHTML="₹0";
-
-document.getElementById("result").style.display="none";
-
-if(chart){
-chart.destroy();
-chart=null;
+  
+  lastResult = {P, r_annual, years, maturity, returns, data};
+  
+  document.getElementById('invested').innerText = format(P);
+  document.getElementById('returns').innerText = format(returns);
+  document.getElementById('maturity').innerText = format(maturity);
+  document.getElementById('gain').innerText = format(returns);
+  document.getElementById('yearTxt').innerText = years;
+  document.getElementById('rateTxt').innerText = (r_annual*100).toFixed(1)+'%';
+  
+  drawChart(data);
 }
 
+function drawChart(data){
+  if(lineChart) lineChart.destroy();
+  lineChart = new Chart(document.getElementById('lineChart'),{
+    type:'line',
+    data:{labels:data.map((_,i)=>`Year ${i+1}`),datasets:[{label:'Maturity Value',data:data,borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,0.1)',fill:true,tension:0.4,pointBackgroundColor:'#2563EB',pointRadius:3}]},
+    options:{responsive:true, plugins:{legend:{display:false}}}
+  });
 }
 
+function downloadPDF(){
+    const doc = new jsPDF();
+    doc.setFontSize(18); doc.text("FD Investment Report", 14, 20);
+    doc.setFontSize(10); doc.text("Rajaram Finance", 14, 27);
+    let y=40;
+    doc.setFontSize(12);
+    doc.text(`Deposit Amount: ${format(lastResult.P)}`, 14, y); y+=10;
+    doc.text(`Interest Rate: ${(lastResult.r_annual*100).toFixed(1)}%`, 14, y); y+=10;
+    doc.text(`Tenure: ${lastResult.years} Years`, 14, y); y+=15;
+    doc.text(`Interest Earned: ${format(lastResult.returns)}`, 14, y); y+=10;
+    doc.text(`Maturity Value: ${format(lastResult.maturity)}`, 14, y); y+=15;
+    doc.setFontSize(9);
+    doc.text("Disclaimer: FD rates vary. Interest is taxable.", 14, y);
+    doc.save('FD-Report.pdf');
+}
+
+document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
+window.onload = calculateFD;
 </script>
-
-</div>
-
 </body>
 </html>
