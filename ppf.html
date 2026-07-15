@@ -3,228 +3,256 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>PPF Calculator</title>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
+<title>PPF Calculator 2026 - Calculate PPF Maturity Amount | Rajaram Finance</title>
+<meta name="description" content="Free PPF Calculator. Calculate Public Provident Fund maturity amount, tax free returns. Download PDF report. Current PPF rate 7.1%">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+:root{
+  --primary:#2563EB;
+  --accent:#10B981;
+  --dark:#0F172A;
+  --light:#F8FAFC;
+  --border:#E2E8F0;
 }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
+body{background:var(--light);color:var(--dark)}
+header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);text-align:center}
+.logo{font-size:24px;font-weight:700}
+.logo .blue{color:var(--primary)}
+.logo .green{color:var(--accent)}
 
-body{
-background:#eef3fb;
-padding:20px;
-}
+.container{width:100%;max-width:700px;margin:0 auto;padding:20px}
 
-.container{
-max-width:500px;
-margin:auto;
-background:#fff;
-padding:25px;
-border-radius:20px;
-box-shadow:0 8px 25px rgba(0,0,0,.15);
-}
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.card h2{font-size:20px;font-weight:700;color:#1E293B;margin-bottom:18px}
 
-h1{
-text-align:center;
-color:#1976D2;
-margin-bottom:25px;
-font-size:34px;
-}
+.input-group{margin-bottom:16px}
+.input-group label{font-weight:600;margin-bottom:8px;font-size:14px;color:#475569;display:block}
+.input-wrapper{position:relative}
+.input-wrapper span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748B;font-weight:600;font-size:15px}
+.input-wrapper input{width:100%;padding:14px 14px 14px 45px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-weight:500;background:#fff}
+.input-wrapper input:focus{border-color:var(--primary);outline:none}
 
-label{
-display:block;
-margin-top:18px;
-font-size:18px;
-font-weight:bold;
-}
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.5px}
+.btn-primary:hover{background:#1D4ED8}
 
-input{
-width:100%;
-padding:15px;
-margin-top:8px;
-font-size:18px;
-border:1px solid #ccc;
-border-radius:10px;
-}
+.result-card{background:linear-gradient(135deg,#2563EB,#10B981);color:#fff;text-align:center;border:none}
+.result-card .label{font-size:12px;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.result-card .value{font-size:28px;font-weight:700;margin-bottom:16px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:15px}
+.result-mini{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px}
+.result-mini .label{font-size:11px}
+.result-mini .value{font-size:15px;font-weight:700;margin-top:2px}
 
-button{
-width:100%;
-padding:15px;
-margin-top:20px;
-background:#1976D2;
-color:#fff;
-border:none;
-border-radius:10px;
-font-size:18px;
-cursor:pointer;
-}
+.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px}
+.btn-download:hover{background:#1E293B}
 
-button:hover{
-background:#1259a8;
-}
+.content h2{font-size:22px;color:var(--primary);margin-bottom:12px}
+.content p{line-height:1.8;color:#475569;margin-bottom:12px;font-size:15px}
+.example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
+.example-box b{color:var(--primary)}
 
-.result{
-display:none;
-margin-top:20px;
-padding:18px;
-background:#eefcf0;
-border-radius:12px;
-}
+.why-sip-grid{display:grid;gap:12px;margin:15px 0}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-item .num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.why-item p{margin:0;color:#475569}
 
-.result p{
-font-size:22px;
-margin:10px 0;
-font-weight:bold;
-}
+.guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
+.guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
+.guide-box p{margin-bottom:15px;color:#475569}
+.guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
+.guide-btn:hover{background:#1D4ED8}
 
-.green{
-color:green;
-}
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+.tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
+.tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
+.tool-card .icon{font-size:24px;margin-bottom:8px}
 
-canvas{
-max-width:300px;
-margin:20px auto;
-display:block;
-}
+.disclaimer-box{background:#FEF3C7;border:1px solid #FBBF24;padding:16px;border-radius:8px;margin-top:15px;font-size:13px;line-height:1.6}
+.disclaimer-box b{color:#92400E}
 
-@media(max-width:600px){
-.container{
-padding:18px;
-}
-}
+footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
+.footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:#94A3B8;text-decoration:none;font-size:14px}
+.footer-links a:hover{color:#fff}
+.copyright{font-size:13px;color:#64748B}
 </style>
-
 </head>
-
 <body>
 
+<header><div class="logo"><span class="blue">Rajaram</span> <span class="green">Finance</span></div></header>
+
 <div class="container">
+  
+  <!-- 1. INPUT - PPF -->
+  <div class="card">
+    <h2>PPF Calculator - Public Provident Fund</h2>
+    <div class="input-group">
+      <label>Yearly Investment</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="amount" value="150000" max="150000" oninput="calculatePPF()"></div>
+    </div>
+    <div class="input-group">
+      <label>Interest Rate %</label>
+      <div class="input-wrapper"><span>%</span><input type="number" id="rate" value="7.1" step="0.1" oninput="calculatePPF()"></div>
+    </div>
+    <div class="input-group">
+      <label>Investment Period Years</label>
+      <div class="input-wrapper"><span>Yrs</span><input type="number" id="years" value="15" max="30" oninput="calculatePPF()"></div>
+    </div>
+    <button class="btn-primary" onclick="calculatePPF()">CALCULATE NOW</button>
+  </div>
 
-<h1>🏛️ PPF Calculator</h1>
-<label>Yearly Investment (₹)</label>
-<input type="number" id="amount" placeholder="150000">
+  <!-- 2. RESULT -->
+  <div class="card result-card">
+    <div class="label">TOTAL INVESTED</div>
+    <div class="value" id="invested">₹0</div>
+    <div class="label">INTEREST EARNED</div>
+    <div class="value" id="returns">₹0</div>
+    <div class="label">MATURITY VALUE</div>
+    <div class="value" id="maturity">₹0</div>
+    <div class="result-grid">
+      <div class="result-mini"><div class="label">YEARS</div><div class="value" id="yearTxt">15</div></div>
+      <div class="result-mini"><div class="label">RATE</div><div class="value" id="rateTxt">7.1%</div></div>
+      <div class="result-mini"><div class="label">TAX</div><div class="value">FREE</div></div>
+    </div>
+    <button class="btn-download" id="downloadPdf">📄 Download PDF Report</button>
+  </div>
 
-<label>Interest Rate (% Per Year)</label>
-<input type="number" id="rate" placeholder="7.1">
+  <!-- 3. GRAPH -->
+  <div class="card">
+    <h2>PPF Growth Chart</h2>
+    <canvas id="lineChart" height="120"></canvas>
+  </div>
 
-<label>Investment Period (Years)</label>
-<input type="number" id="years" placeholder="15">
+  <!-- 4. PPF CONTENT -->
+  <div class="card content">
+    <h2>What is Public Provident Fund PPF?</h2>
+    <p><b>PPF</b> is a government backed long term savings scheme. Lock-in period is 15 years. Investment up to ₹1.5 Lakh per year is tax free under 80C. Interest earned and maturity amount both are tax free. Current PPF rate is 7.1% compounded yearly.</p>
+    
+    <div class="example-box">
+      <b>PPF Example:</b> If you invest ₹1,50,000 every year for 15 years at 7.1%, your total investment = ₹22,50,000. Maturity amount = ₹40,68,209. Tax free gain = ₹18,18,209.
+    </div>
 
-<button onclick="calculatePPF()">🧮 Calculate PPF</button>
+    <h2 style="margin-top:20px;font-size:18px">Why Choose PPF Investment?</h2>
+    <div class="why-sip-grid">
+      <div class="why-item"><div class="num">1</div><p><b>Tax Free Returns:</b> EEE benefit. Investment, Interest and Maturity all tax free.</p></div>
+      <div class="why-item"><div class="num">2</div><p><b>Govt Guaranteed:</b> 100% safe. No market risk. Backed by Govt of India.</p></div>
+      <div class="why-item"><div class="num">3</div><p><b>Long Term Wealth:</b> 15 year compounding creates huge corpus for retirement.</p></div>
+      <div class="why-item"><div class="num">4</div><p><b>Loan & Withdrawal:</b> Loan available from 3rd year. Partial withdrawal from 7th year.</p></div>
+    </div>
+    <p><b>Key Insight:</b> Max investment ₹1.5 Lakh per year. You can extend PPF in blocks of 5 years after 15 years. Best for retirement planning.</p>
 
-<div class="result" id="result">
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <b>Disclaimer:</b> PPF interest rate is decided by Govt every quarter. Current rate 7.1% for Q1 2026. This calculator is for illustration only. Max investment limit ₹1.5 Lakh per financial year.
+    </div>
+  </div>
 
-<p>Total Investment:<br>
-<span class="green" id="investment">₹0</span>
-</p>
+  <!-- 5. PPF GUIDE -->
+  <div class="guide-box">
+    <h2>Want to Learn More About PPF?</h2>
+    <p>Read our complete guide to understand PPF rules, tax benefits, withdrawal and extension rules.</p>
+    <a href="ppf-guide.html" class="guide-btn">📖 Read Complete PPF Guide</a>
+  </div>
 
-<p>Total Interest:<br>
-<span class="green" id="interest">₹0</span>
-</p>
-
-<p>Maturity Amount:<br>
-<span class="green" id="maturity">₹0</span>
-</p>
-
-<canvas id="ppfChart" height="250"></canvas>
+  <!-- 6. MORE CALCULATORS - TUMHARE BANAYE HUE -->
+  <div class="card">
+    <h2>More Financial Calculators</h2>
+    <div class="tools-grid">
+      <a href="sip.html" class="tool-card"><div class="icon">📅</div>SIP Calculator</a>
+      <a href="mutual-fund.html" class="tool-card"><div class="icon">📊</div>Mutual Fund</a>
+      <a href="fd.html" class="tool-card"><div class="icon">🏦</div>FD Calculator</a>
+      <a href="rd.html" class="tool-card"><div class="icon">📆</div>RD Calculator</a>
+      <a href="emi.html" class="tool-card"><div class="icon">💳</div>EMI Calculator</a>
+      <a href="home-loan.html" class="tool-card"><div class="icon">🏠</div>Home Loan EMI</a>
+    </div>
+  </div>
 
 </div>
 
-<button onclick="resetPPF()">🔄 Reset</button>
-
-<a href="index.html">
-<button type="button">🏠 Back to Home</button>
-</a>
+<!-- 7. FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="articles.html">Article</a>
+  </div>
+  <div class="copyright">© 2026 Rajaram Finance. All Rights Reserved. | Made for Smart Investors</div>
+</footer>
 
 <script>
+const { jsPDF } = window.jspdf;
+let lineChart;
+let lastResult = {};
 
-let chart;
-  function calculatePPF(){
+function format(num){return '₹' + Math.round(num).toLocaleString('en-IN')}
 
-let yearly = parseFloat(document.getElementById("amount").value);
-let annual = parseFloat(document.getElementById("rate").value);
-let years = parseFloat(document.getElementById("years").value);
-
-if(isNaN(yearly) || isNaN(annual) || isNaN(years)){
-alert("Please fill all fields");
-return;
-}
-
-let totalInvestment = yearly * years;
-let maturity = 0;
-
-for(let i=1; i<=years; i++){
-    maturity = (maturity + yearly) * (1 + annual/100);
-}
-
-let totalInterest = maturity - totalInvestment;
-
-document.getElementById("investment").innerHTML =
-"₹" + Number(totalInvestment.toFixed(0)).toLocaleString("en-IN");
-
-document.getElementById("interest").innerHTML =
-"₹" + Number(totalInterest.toFixed(0)).toLocaleString("en-IN");
-
-document.getElementById("maturity").innerHTML =
-"₹" + Number(maturity.toFixed(0)).toLocaleString("en-IN");
-
-document.getElementById("result").style.display = "block";
-
-if(chart){
-chart.destroy();
-}
-
-let ctx = document.getElementById("ppfChart").getContext("2d");
-
-chart = new Chart(ctx,{
-type:"doughnut",
-data:{
-labels:["Investment","Interest"],
-datasets:[{
-data:[totalInvestment,totalInterest],
-backgroundColor:["#1976D2","#4CAF50"],
-borderWidth:2
-}]
-},
-options:{
-responsive:true,
-plugins:{
-legend:{
-position:"bottom"
-}
-}
-}
-});
-
+function calculatePPF(){
+  let P = parseFloat(document.getElementById('amount').value) || 150000;
+  if(P > 150000) P = 150000; // PPF limit
+  document.getElementById('amount').value = P;
+  
+  const r = parseFloat(document.getElementById('rate').value)/100 || 0.071;
+  const years = parseInt(document.getElementById('years').value) || 15;
+  
+  let data = [];
+  let maturity = 0;
+  
+  // PPF formula: yearly investment at start of year
+  for(let y=1; y<=years; y++){
+    maturity = (maturity + P) * (1 + r);
+    if(y % 1 == 0) data.push(maturity);
   }
-  function resetPPF(){
-
-document.getElementById("amount").value="";
-document.getElementById("rate").value="";
-document.getElementById("years").value="";
-
-document.getElementById("investment").innerHTML="₹0";
-document.getElementById("interest").innerHTML="₹0";
-document.getElementById("maturity").innerHTML="₹0";
-
-document.getElementById("result").style.display="none";
-
-if(chart){
-chart.destroy();
-chart=null;
+  
+  let invested = P * years;
+  let returns = maturity - invested;
+  
+  lastResult = {P, r, years, maturity, invested, returns, data};
+  
+  document.getElementById('invested').innerText = format(invested);
+  document.getElementById('returns').innerText = format(returns);
+  document.getElementById('maturity').innerText = format(maturity);
+  document.getElementById('yearTxt').innerText = years;
+  document.getElementById('rateTxt').innerText = (r*100).toFixed(1)+'%';
+  
+  drawChart(data);
 }
 
+function drawChart(data){
+  if(lineChart) lineChart.destroy();
+  lineChart = new Chart(document.getElementById('lineChart'),{
+    type:'line',
+    data:{labels:data.map((_,i)=>`Year ${i+1}`),datasets:[{label:'Maturity Value',data:data,borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,0.1)',fill:true,tension:0.4,pointBackgroundColor:'#2563EB',pointRadius:3}]},
+    options:{responsive:true, plugins:{legend:{display:false}}}
+  });
 }
 
+function downloadPDF(){
+    const doc = new jsPDF();
+    doc.setFontSize(18); doc.text("PPF Investment Report", 14, 20);
+    doc.setFontSize(10); doc.text("Rajaram Finance", 14, 27);
+    let y=40;
+    doc.setFontSize(12);
+    doc.text(`Yearly Investment: ${format(lastResult.P)}`, 14, y); y+=10;
+    doc.text(`Interest Rate: ${(lastResult.r*100).toFixed(1)}%`, 14, y); y+=10;
+    doc.text(`Investment Period: ${lastResult.years} Years`, 14, y); y+=10;
+    doc.text(`Total Invested: ${format(lastResult.invested)}`, 14, y); y+=10;
+    doc.text(`Interest Earned: ${format(lastResult.returns)}`, 14, y); y+=10;
+    doc.text(`Maturity Value: ${format(lastResult.maturity)}`, 14, y); y+=15;
+    doc.setFontSize(9);
+    doc.text("Disclaimer: PPF rate revised quarterly. Tax Free.", 14, y);
+    doc.save('PPF-Report.pdf');
+}
+
+document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
+window.onload = calculatePPF;
 </script>
-
-</div>
-
 </body>
 </html>
