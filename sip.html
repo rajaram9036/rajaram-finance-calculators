@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIP Calculator - Estimate Returns & Download PDF | Rajaram Finance</title>
-<meta name="description" content="Calculate SIP returns with professional SIP Calculator. Download PDF report. Learn about SIP with examples and guide.">
+<title>SIP Calculator 2026 - Calculate Mutual Fund Returns | Rajaram Finance</title>
+<meta name="description" content="Free SIP Calculator. Calculate SIP returns, download PDF report. Learn SIP with examples and complete guide.">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -19,45 +19,53 @@
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
 body{background:var(--light);color:var(--dark)}
 header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);text-align:center}
-.logo{font-size:24px;font-weight:700;color:var(--primary)}
-.logo span{color:var(--accent)}
+.logo{font-size:24px;font-weight:700}
+.logo .blue{color:var(--primary)}
+.logo .green{color:var(--accent)}
 
-.container{width:100%;max-width:100%;padding:20px}
-@media(min-width:1100px){.container{padding:30px 80px}}
+.container{width:100%;max-width:700px;margin:0 auto;padding:20px}
 
 .card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
-.card h2{font-size:20px;font-weight:700;color:var(--dark);margin-bottom:18px}
-
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-@media(max-width:980px){.grid-2{grid-template-columns:1fr}}
+.card h2{font-size:20px;font-weight:700;color:#1E293B;margin-bottom:18px}
 
 .input-group{margin-bottom:16px}
 .input-group label{font-weight:600;margin-bottom:8px;font-size:14px;color:#475569;display:block}
 .input-wrapper{position:relative}
 .input-wrapper span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748B;font-weight:600;font-size:15px}
-.input-wrapper input{width:100%;padding:14px 14px 14px 45px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-weight:500}
+.input-wrapper input{width:100%;padding:14px 14px 14px 45px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-weight:500;background:#fff}
 .input-wrapper input:focus{border-color:var(--primary);outline:none}
 
-.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer}
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.5px}
 .btn-primary:hover{background:#1D4ED8}
 
-.result-card{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;text-align:center}
-.result-card .label{font-size:12px;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px}
-.result-card .value{font-size:30px;font-weight:700;margin:4px 0 16px 0}
-.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.result-card{background:linear-gradient(135deg,#2563EB,#10B981);color:#fff;text-align:center;border:none}
+.result-card .label{font-size:12px;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.result-card .value{font-size:28px;font-weight:700;margin-bottom:16px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:15px}
 .result-mini{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px}
+.result-mini .label{font-size:11px}
 .result-mini .value{font-size:15px;font-weight:700;margin-top:2px}
 
-.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;margin-top:15px;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px}
+.btn-download:hover{background:#1E293B}
 
 .content h2{font-size:22px;color:var(--primary);margin-bottom:12px}
 .content p{line-height:1.8;color:#475569;margin-bottom:12px;font-size:15px}
 .example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
 .example-box b{color:var(--primary)}
 
-.guide-box{background:#fff;border:1.5px dashed var(--primary);padding:18px;border-radius:10px;text-align:center;margin-top:20px}
-.guide-box a{background:var(--primary);color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block}
-.guide-box a:hover{background:#1D4ED8}
+.guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
+.guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
+.guide-box p{margin-bottom:15px;color:#475569}
+.guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
+.guide-btn:hover{background:#1D4ED8}
+
+/* NEW: MORE CALCULATORS GRID */
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+.tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
+.tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
+.tool-card .icon{font-size:24px;margin-bottom:8px}
 
 footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
 .footer-links{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
@@ -68,54 +76,51 @@ footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;
 </head>
 <body>
 
-<header><div class="logo">Rajaram <span>Finance</span></div></header>
+<header><div class="logo"><span class="blue">Rajaram</span> <span class="green">Finance</span></div></header>
 
 <div class="container">
   
-  <!-- 1. ONLY CALCULATOR + GRAPH + DOWNLOAD -->
-  <div class="grid-2">
-    <!-- INPUT -->
-    <div class="card">
-      <h2>SIP Calculator</h2>
-      <div class="input-group">
-        <label>Monthly Investment</label>
-        <div class="input-wrapper"><span>₹</span><input type="number" id="monthly" value="5000" oninput="calculateSIP()"></div>
-      </div>
-      <div class="input-group">
-        <label>Expected Annual Return %</label>
-        <div class="input-wrapper"><span>%</span><input type="number" id="rate" value="12" step="0.1" oninput="calculateSIP()"></div>
-      </div>
-      <div class="input-group">
-        <label>Investment Period Years</label>
-        <div class="input-wrapper"><span>Yrs</span><input type="number" id="years" value="10" oninput="calculateSIP()"></div>
-      </div>
-      <button class="btn-primary" onclick="calculateSIP()">CALCULATE NOW</button>
+  <!-- 1. INPUT -->
+  <div class="card">
+    <h2>SIP Calculator</h2>
+    <div class="input-group">
+      <label>Monthly Investment</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="monthly" value="1000" oninput="calculateSIP()"></div>
     </div>
-
-    <!-- RESULT -->
-    <div class="card result-card">
-      <div class="label">Invested Amount</div>
-      <div class="value" style="font-size:18px" id="invested">₹0</div>
-      <div class="label">Estimated Returns</div>
-      <div class="value" style="font-size:18px" id="returns">₹0</div>
-      <div class="label">Total Maturity Value</div>
-      <div class="value" id="maturity">₹0</div>
-      <div class="result-grid">
-        <div class="result-mini"><div class="label">Gain</div><div class="value" id="gain">₹0</div></div>
-        <div class="result-mini"><div class="label">Years</div><div class="value" id="yearTxt">10</div></div>
-        <div class="result-mini"><div class="label">Rate</div><div class="value" id="rateTxt">12%</div></div>
-      </div>
-      <button class="btn-download" id="downloadPdf">📄 Download PDF Report</button>
+    <div class="input-group">
+      <label>Expected Annual Return %</label>
+      <div class="input-wrapper"><span>%</span><input type="number" id="rate" value="12" step="0.1" oninput="calculateSIP()"></div>
     </div>
+    <div class="input-group">
+      <label>Investment Period Years</label>
+      <div class="input-wrapper"><span>Yrs</span><input type="number" id="years" value="20" oninput="calculateSIP()"></div>
+    </div>
+    <button class="btn-primary" onclick="calculateSIP()">CALCULATE NOW</button>
   </div>
 
-  <!-- GRAPH -->
+  <!-- 2. RESULT -->
+  <div class="card result-card">
+    <div class="label">INVESTED AMOUNT</div>
+    <div class="value" id="invested">₹0</div>
+    <div class="label">ESTIMATED RETURNS</div>
+    <div class="value" id="returns">₹0</div>
+    <div class="label">TOTAL MATURITY VALUE</div>
+    <div class="value" id="maturity">₹0</div>
+    <div class="result-grid">
+      <div class="result-mini"><div class="label">GAIN</div><div class="value" id="gain">₹0</div></div>
+      <div class="result-mini"><div class="label">YEARS</div><div class="value" id="yearTxt">20</div></div>
+      <div class="result-mini"><div class="label">RATE</div><div class="value" id="rateTxt">12.0%</div></div>
+    </div>
+    <button class="btn-download" id="downloadPdf">📄 Download PDF Report</button>
+  </div>
+
+  <!-- 3. GRAPH -->
   <div class="card">
     <h2>Investment Growth Chart</h2>
-    <canvas id="lineChart" height="100"></canvas>
+    <canvas id="lineChart" height="120"></canvas>
   </div>
 
-  <!-- 2. SIP KE BARE ME -->
+  <!-- 4. SIP CONTENT -->
   <div class="card content">
     <h2>What is SIP? Systematic Investment Plan Explained</h2>
     <p>A <b>Systematic Investment Plan (SIP)</b> is a disciplined way of investing in mutual funds. Instead of investing a lump sum, you invest a fixed amount every month. This helps you benefit from <b>rupee cost averaging</b> and the <b>power of compounding</b>.</p>
@@ -128,19 +133,33 @@ footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;
     <p>The earlier you start, the bigger your corpus. Delaying by just 5 years can reduce your final amount by 50%.</p>
   </div>
 
-  <!-- 3. SIP GUIDE LINK -->
-  <div class="card guide-box">
-    <h2 style="margin-bottom:10px">Want to Learn More About SIP?</h2>
-    <p style="margin-bottom:15px;color:#475569">Read our complete step-by-step guide to understand SIP strategies, benefits, and best mutual funds.</p>
-    <a href="sip-guide.html">📖 Read Complete SIP Guide</a>
+  <!-- 5. SIP GUIDE -->
+  <div class="guide-box">
+    <h2>Want to Learn More About SIP?</h2>
+    <p>Read our complete step-by-step guide to understand SIP strategies, benefits, and best mutual funds.</p>
+    <a href="sip-guide.html" class="guide-btn">📖 Read Complete SIP Guide</a>
+  </div>
+
+  <!-- 6. NEW: MORE CALCULATORS SECTION -->
+  <div class="card">
+    <h2>More Financial Calculators</h2>
+    <div class="tools-grid">
+      <a href="fd.html" class="tool-card"><div class="icon">🏦</div>FD Calculator</a>
+      <a href="ppf.html" class="tool-card"><div class="icon">📊</div>PPF Calculator</a>
+      <a href="emi.html" class="tool-card"><div class="icon">💳</div>EMI Calculator</a>
+      <a href="home-loan.html" class="tool-card"><div class="icon">🏠</div>Home Loan EMI</a>
+      <a href="retirement-calculator.html" class="tool-card"><div class="icon">👴</div>Retirement Calculator</a>
+      <a href="mutual-fund.html" class="tool-card"><div class="icon">📈</div>Mutual Fund Return</a>
+    </div>
   </div>
 
 </div>
 
-<!-- 4. SIMPLE FOOTER - UNIQUE -->
+<!-- 7. FOOTER -->
 <footer>
   <div class="footer-links">
     <a href="index.html">Home</a>
+    <a href="legal.html">Legal</a>
     <a href="disclaimer.html">Disclaimer</a>
     <a href="privacy.html">Privacy Policy</a>
     <a href="contact.html">Contact</a>
@@ -156,9 +175,9 @@ let lastResult = {};
 function format(num){return '₹' + Math.round(num).toLocaleString('en-IN')}
 
 function calculateSIP(){
-  const P = parseFloat(document.getElementById('monthly').value) || 5000;
+  const P = parseFloat(document.getElementById('monthly').value) || 1000;
   const r_annual = parseFloat(document.getElementById('rate').value)/100 || 0.12;
-  const years = parseInt(document.getElementById('years').value) || 10;
+  const years = parseInt(document.getElementById('years').value) || 20;
   
   let totalInvested = 0, totalValue = 0;
   let monthlyRate = r_annual/12;
@@ -190,7 +209,7 @@ function drawChart(data){
   if(lineChart) lineChart.destroy();
   lineChart = new Chart(document.getElementById('lineChart'),{
     type:'line',
-    data:{labels:data.map((_,i)=>`Year ${i+1}`),datasets:[{label:'Maturity Value',data:data,borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,0.1)',fill:true,tension:0.4,pointBackgroundColor:'#2563EB'}]},
+    data:{labels:data.map((_,i)=>`Year ${i+1}`),datasets:[{label:'Maturity Value',data:data,borderColor:'#2563EB',backgroundColor:'rgba(37,99,235,0.1)',fill:true,tension:0.4,pointBackgroundColor:'#2563EB',pointRadius:3}]},
     options:{responsive:true, plugins:{legend:{display:false}}}
   });
 }
@@ -206,10 +225,8 @@ function downloadPDF(){
     doc.text(`Investment Period: ${lastResult.years} Years`, 14, y); y+=15;
     doc.text(`Total Invested: ${format(lastResult.totalInvested)}`, 14, y); y+=10;
     doc.text(`Estimated Returns: ${format(lastResult.returns)}`, 14, y); y+=10;
-    doc.text(`Maturity Value: ${format(lastResult.totalValue)}`, 14, y); y+=15;
-    doc.setFontSize(9);
-    doc.text("Disclaimer: This is an estimate. Mutual funds are subject to market risks.", 14, y);
-    doc.save('SIP-Report-RajaramFinance.pdf');
+    doc.text(`Maturity Value: ${format(lastResult.totalValue)}`, 14, y);
+    doc.save('SIP-Report.pdf');
 }
 
 document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
