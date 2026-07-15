@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumpsum Calculator 2026 - One Time Investment Calculator | Rajaram Finance</title>
+<meta name="description" content="Free Lumpsum Calculator. Calculate returns on one-time investment. Mutual Fund, FD, PPF. Check Maturity Amount, Gains. Download PDF report.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{
+  --primary:#2563EB;
+  --accent:#10B981;
+  --dark:#0F172A;
+  --light:#F8FAFC;
+  --border:#E2E8F0;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
+body{background:var(--light);color:var(--dark)}
+header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);text-align:center}
+.logo{font-size:24px;font-weight:700}
+.logo .blue{color:var(--primary)}
+.logo .green{color:var(--accent)}
+
+.container{width:100%;max-width:700px;margin:0 auto;padding:20px}
+
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.card h2{font-size:20px;font-weight:700;color:#1E293B;margin-bottom:18px}
+
+.input-group{margin-bottom:16px}
+.input-group label{font-weight:600;margin-bottom:8px;font-size:14px;color:#475569;display:block}
+.input-wrapper{position:relative}
+.input-wrapper span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748B;font-weight:600;font-size:15px}
+.input-wrapper input{width:100%;padding:14px 14px 14px 45px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-weight:500;background:#fff}
+.input-wrapper input:focus{border-color:var(--primary);outline:none}
+
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.5px}
+.btn-primary:hover{background:#1D4ED8}
+
+.result-card{background:linear-gradient(135deg,#2563EB,#10B981);color:#fff;text-align:center;border:none}
+.result-card .label{font-size:12px;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.result-card .value{font-size:28px;font-weight:700;margin-bottom:16px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:15px}
+.result-mini{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px}
+.result-mini .label{font-size:11px}
+.result-mini .value{font-size:15px;font-weight:700;margin-top:2px}
+
+.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px}
+.btn-download:hover{background:#1E293B}
+
+.content h2{font-size:22px;color:var(--primary);margin-bottom:12px}
+.content p{line-height:1.8;color:#475569;margin-bottom:12px;font-size:15px}
+.example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
+.example-box b{color:var(--primary)}
+
+.why-sip-grid{display:grid;gap:12px;margin:15px 0}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-item .num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.why-item p{margin:0;color:#475569}
+
+.guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
+.guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
+.guide-box p{margin-bottom:15px;color:#475569}
+.guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
+.guide-btn:hover{background:#1D4ED8}
+
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+.tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
+.tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
+.tool-card .icon{font-size:24px;margin-bottom:8px}
+
+.disclaimer-box{background:#FEF3C7;border:1px solid #FBBF24;padding:16px;border-radius:8px;margin-top:15px;font-size:13px;line-height:1.6}
+.disclaimer-box b{color:#92400E}
+
+footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
+.footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:#94A3B8;text-decoration:none;font-size:14px}
+.footer-links a:hover{color:#fff}
+.copyright{font-size:13px;color:#64748B}
+</style>
+</head>
+<body>
+
+<header><div class="logo"><span class="blue">Rajaram</span> <span class="green">Finance</span></div></header>
+
+<div class="container">
+  
+  <!-- 1. INPUT - LUMPSUM -->
+  <div class="card">
+    <h2>Lumpsum Investment Calculator</h2>
+    <div class="input-group">
+      <label>Total Investment</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="amount" value="100000" oninput="calculateLumpsum()"></div>
+    </div>
+    <div class="input-group">
+      <label>Expected Return Rate %</label>
+      <div class="input-wrapper"><span>%</span><input type="number" id="rate" value="12" step="0.1" oninput="calculateLumpsum()"></div>
+    </div>
+    <div class="input-group">
+      <label>Time Period Years</label>
+      <div class="input-wrapper"><span>Yrs</span><input type="number" id="years" value="10" oninput="calculateLumpsum()"></div>
+    </div>
+    <button class="btn-primary" onclick="calculateLumpsum()">CALCULATE NOW</button>
+  </div>
+
+  <!-- 2. RESULT -->
+  <div class="card result-card">
+    <div class="label">MATURITY VALUE</div>
+    <div class="value" id="maturity">₹0</div>
+    <div class="label">TOTAL GAINS</div>
+    <div class="value" id="gains">₹0</div>
+    <div class="label">TOTAL INVESTMENT</div>
+    <div class="value" id="invested">₹0</div>
+    <div class="result-grid">
+      <div class="result-mini"><div class="label">INVESTED</div><div class="value" id="investTxt">₹0</div></div>
+      <div class="result-mini"><div class="label">YEARS</div><div class="value" id="yearTxt">10</div></div>
+      <div class="result-mini"><div class="label">RATE</div><div class="value" id="rateTxt">12%</div></div>
+    </div>
+    <button class="btn-download" id="downloadPdf">📄 Download PDF Report</button>
+  </div>
+
+  <!-- 3. GRAPH -->
+  <div class="card">
+    <h2>Investment Growth Chart</h2>
+    <canvas id="pieChart" height="120"></canvas>
+  </div>
+
+  <!-- 4. LUMPSUM CONTENT -->
+  <div class="card content">
+    <h2>What is Lumpsum Investment?</h2>
+    <p><b>Lumpsum Investment</b> means investing a big amount at one time. Formula: <b>A = P(1 + r/100)^t</b>. Best for Mutual Funds, FD, Bonds, PPF when you have idle cash.</p>
+    
+    <div class="example-box">
+      <b>Lumpsum Example:</b> Invest ₹1,00,000 at 12% for 10 years.
+      Maturity Amount = ₹3,10,585. Total Gains = ₹2,10,585.
+      Your money becomes 3x in 10 years.
+    </div>
+
+    <h2 style="margin-top:20px;font-size:18px">5 Benefits of Lumpsum Investing</h2>
+    <div class="why-sip-grid">
+      <div class="why-item"><div class="num">1</div><p><b>Power of Compounding:</b> One-time investment grows exponentially over long term.</p></div>
+      <div class="why-item"><div class="num">2</div><p><b>Best for Windfall:</b> Bonus, inheritance, sale of property - invest all at once.</p></div>
+      <div class="why-item"><div class="num">3</div><p><b>Higher Returns:</b> Equity Mutual Funds give 12-15% in long term vs FD 6-7%.</p></div>
+      <div class="why-item"><div class="num">4</div><p><b>No Market Timing:</b> Invest when you have money, let compounding do the work.</p></div>
+      <div class="why-item"><div class="num">5</div><p><b>Tax Efficient:</b> Equity LTCG tax only 10% above ₹1 Lakh after 1 year.</p></div>
+    </div>
+    <p><b>Key Insight:</b> Lumpsum works best for 5+ years. For short term use FD or Debt Funds. For long term use Equity Mutual Funds.</p>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <b>Disclaimer:</b> Mutual Fund returns are market linked. Past performance not guarantee of future. This calculator is for illustration only.
+    </div>
+  </div>
+
+  <!-- 5. LUMPSUM GUIDE -->
+  <div class="guide-box">
+    <h2>Want to Learn More About Lumpsum Investing?</h2>
+    <p>Read our complete guide on lumpsum vs SIP, best funds and how to invest ₹1 Lakh wisely.</p>
+    <a href="lumpsum-guide.html" class="guide-btn">📖 Read Complete Lumpsum Guide</a>
+  </div>
+
+  <!-- 6. MORE CALCULATORS - TUMHARE BANAYE HUE -->
+  <div class="card">
+    <h2>More Financial Calculators</h2>
+    <div class="tools-grid">
+      <a href="sip.html" class="tool-card"><div class="icon">📅</div>SIP Calculator</a>
+      <a href="mutual-fund.html" class="tool-card"><div class="icon">📊</div>Mutual Fund</a>
+      <a href="fd.html" class="tool-card"><div class="icon">🏦</div>FD Calculator</a>
+      <a href="ppf.html" class="tool-card"><div class="icon">🏛️</div>PPF Calculator</a>
+      <a href="rd.html" class="tool-card"><div class="icon">📆</div>RD Calculator</a>
+      <a href="income-tax.html" class="tool-card"><div class="icon">💰</div>Income Tax</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- 7. FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="articles.html">Article</a>
+  </div>
+  <div class="copyright">© 2026 Rajaram Finance. All Rights Reserved. | Made for Smart Investors</div>
+</footer>
+
+<script>
+const { jsPDF } = window.jspdf;
+let pieChart;
+let lastResult = {};
+
+function format(num){return '₹' + Math.round(num).toLocaleString('en-IN')}
+
+function calculateLumpsum(){
+  const P = parseFloat(document.getElementById('amount').value) || 100000;
+  const r = parseFloat(document.getElementById('rate').value) / 100 || 0.12;
+  const t = parseFloat(document.getElementById('years').value) || 10;
+  
+  // Lumpsum Formula: A = P * (1 + r)^t
+  let maturity = P * Math.pow(1 + r, t);
+  let gains = maturity - P;
+  
+  lastResult = {P, r, t, maturity, gains};
+  
+  document.getElementById('maturity').innerText = format(maturity);
+  document.getElementById('gains').innerText = format(gains);
+  document.getElementById('invested').innerText = format(P);
+  document.getElementById('investTxt').innerText = format(P);
+  document.getElementById('yearTxt').innerText = t;
+  document.getElementById('rateTxt').innerText = (r*100).toFixed(1)+'%';
+  
+  drawChart(P, gains);
+}
+
+function drawChart(principal, gains){
+  if(pieChart) pieChart.destroy();
+  pieChart = new Chart(document.getElementById('pieChart'),{
+    type:'pie',
+    data:{
+      labels:['Invested Amount', 'Total Gains'],
+      datasets:[{
+        data:[principal, gains],
+        backgroundColor:['#2563EB','#10B981'],
+        borderWidth:0
+      }]
+    },
+    options:{responsive:true, plugins:{legend:{position:'bottom'}}}
+  });
+}
+
+function downloadPDF(){
+    const doc = new jsPDF();
+    doc.setFontSize(18); doc.text("Lumpsum Investment Report", 14, 20);
+    doc.setFontSize(10); doc.text("Rajaram Finance", 14, 27);
+    let y=40;
+    doc.setFontSize(12);
+    doc.text(`Investment Amount: ${format(lastResult.P)}`, 14, y); y+=10;
+    doc.text(`Expected Return: ${(lastResult.r*100).toFixed(1)}%`, 14, y); y+=10;
+    doc.text(`Time Period: ${lastResult.t} Years`, 14, y); y+=15;
+    doc.text(`Maturity Amount: ${format(lastResult.maturity)}`, 14, y); y+=10;
+    doc.text(`Total Gains: ${format(lastResult.gains)}`, 14, y); y+=15;
+    doc.setFontSize(9);
+    doc.text("Disclaimer: Market linked returns. Not guaranteed.", 14, y);
+    doc.save('Lumpsum-Report.pdf');
+}
+
+document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
+window.onload = calculateLumpsum;
+</script>
+</body>
+</html>
