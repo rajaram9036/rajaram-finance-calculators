@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRA Calculator 2026 - Calculate HRA Exemption | Rajaram Finance</title>
+<meta name="description" content="Free HRA Calculator. Calculate HRA Exemption under section 10(13A). Check Metro vs Non-Metro. Download PDF report.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{
+  --primary:#2563EB;
+  --accent:#10B981;
+  --dark:#0F172A;
+  --light:#F8FAFC;
+  --border:#E2E8F0;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
+body{background:var(--light);color:var(--dark)}
+header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);text-align:center}
+.logo{font-size:24px;font-weight:700}
+.logo .blue{color:var(--primary)}
+.logo .green{color:var(--accent)}
+
+.container{width:100%;max-width:700px;margin:0 auto;padding:20px}
+
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.card h2{font-size:20px;font-weight:700;color:#1E293B;margin-bottom:18px}
+
+.input-group{margin-bottom:16px}
+.input-group label{font-weight:600;margin-bottom:8px;font-size:14px;color:#475569;display:block}
+.input-wrapper{position:relative}
+.input-wrapper span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748B;font-weight:600;font-size:15px}
+.input-wrapper input, .input-wrapper select{width:100%;padding:14px 14px 14px 45px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-weight:500;background:#fff}
+.input-wrapper input:focus, .input-wrapper select:focus{border-color:var(--primary);outline:none}
+
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.5px}
+.btn-primary:hover{background:#1D4ED8}
+
+.result-card{background:linear-gradient(135deg,#2563EB,#10B981);color:#fff;text-align:center;border:none}
+.result-card .label{font-size:12px;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.result-card .value{font-size:28px;font-weight:700;margin-bottom:16px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:15px}
+.result-mini{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px}
+.result-mini .label{font-size:11px}
+.result-mini .value{font-size:15px;font-weight:700;margin-top:2px}
+
+.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px}
+.btn-download:hover{background:#1E293B}
+
+.content h2{font-size:22px;color:var(--primary);margin-bottom:12px}
+.content p{line-height:1.8;color:#475569;margin-bottom:12px;font-size:15px}
+.example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
+.example-box b{color:var(--primary)}
+
+.why-sip-grid{display:grid;gap:12px;margin:15px 0}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-item .num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.why-item p{margin:0;color:#475569}
+
+.guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
+.guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
+.guide-box p{margin-bottom:15px;color:#475569}
+.guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
+.guide-btn:hover{background:#1D4ED8}
+
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+.tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
+.tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
+.tool-card .icon{font-size:24px;margin-bottom:8px}
+
+.disclaimer-box{background:#FEF3C7;border:1px solid #FBBF24;padding:16px;border-radius:8px;margin-top:15px;font-size:13px;line-height:1.6}
+.disclaimer-box b{color:#92400E}
+
+footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
+.footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:#94A3B8;text-decoration:none;font-size:14px}
+.footer-links a:hover{color:#fff}
+.copyright{font-size:13px;color:#64748B}
+</style>
+</head>
+<body>
+
+<header><div class="logo"><span class="blue">Rajaram</span> <span class="green">Finance</span></div></header>
+
+<div class="container">
+  
+  <!-- 1. INPUT - HRA -->
+  <div class="card">
+    <h2>HRA Exemption Calculator</h2>
+    <div class="input-group">
+      <label>Basic Salary + DA per Year</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="salary" value="600000" oninput="calculateHRA()"></div>
+    </div>
+    <div class="input-group">
+      <label>HRA Received per Year</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="hra" value="240000" oninput="calculateHRA()"></div>
+    </div>
+    <div class="input-group">
+      <label>Rent Paid per Year</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="rent" value="180000" oninput="calculateHRA()"></div>
+    </div>
+    <div class="input-group">
+      <label>City Type</label>
+      <div class="input-wrapper"><span>🏙️</span>
+        <select id="city" onchange="calculateHRA()">
+          <option value="50">Metro - Delhi, Mumbai, Kolkata, Chennai</option>
+          <option value="40">Non-Metro - Other Cities</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="calculateHRA()">CALCULATE EXEMPTION</button>
+  </div>
+
+  <!-- 2. RESULT -->
+  <div class="card result-card">
+    <div class="label">HRA EXEMPTION</div>
+    <div class="value" id="exemption">₹0</div>
+    <div class="label">TAXABLE HRA</div>
+    <div class="value" id="taxable">₹0</div>
+    <div class="label">TAX SAVING @30%</div>
+    <div class="value" id="saving">₹0</div>
+    <div class="result-grid">
+      <div class="result-mini"><div class="label">RULE 1</div><div class="value" id="rule1">₹0</div></div>
+      <div class="result-mini"><div class="label">RULE 2</div><div class="value" id="rule2">₹0</div></div>
+      <div class="result-mini"><div class="label">RULE 3</div><div class="value" id="rule3">₹0</div></div>
+    </div>
+    <button class="btn-download" id="downloadPdf">📄 Download PDF Report</button>
+  </div>
+
+  <!-- 3. GRAPH -->
+  <div class="card">
+    <h2>HRA Exemption Breakdown</h2>
+    <canvas id="barChart" height="120"></canvas>
+  </div>
+
+  <!-- 4. HRA CONTENT -->
+  <div class="card content">
+    <h2>What is HRA Exemption?</h2>
+    <p><b>HRA = House Rent Allowance</b>. Under Section 10(13A), salaried people can claim HRA exemption. Exemption is lowest of these 3:</p>
+    
+    <div class="example-box">
+      <b>HRA Formula:</b><br>
+      1. Actual HRA Received<br>
+      2. Rent Paid - 10% of Basic<br>
+      3. 50% of Basic for Metro, 40% for Non-Metro
+    </div>
+
+    <h2 style="margin-top:20px;font-size:18px">5 Key Rules for HRA Exemption</h2>
+    <div class="why-sip-grid">
+      <div class="why-item"><div class="num">1</div><p><b>Salaried Only:</b> Self-employed cannot claim HRA. Only salary people.</p></div>
+      <div class="why-item"><div class="num">2</div><p><b>Rent Receipt:</b> If rent > ₹1 Lakh/year, landlord PAN required.</p></div>
+      <div class="why-item"><div class="num">3</div><p><b>Own House:</b> If you live in own house, no HRA exemption.</p></div>
+      <div class="why-item"><div class="num">4</div><p><b>Metro vs Non-Metro:</b> Metro = 50% of Basic, Non-Metro = 40% of Basic.</p></div>
+      <div class="why-item"><div class="num">5</div><p><b>Not in Old Regime:</b> HRA exemption only in Old Tax Regime, not in New Regime.</p></div>
+    </div>
+    <p><b>Key Insight:</b> To get max exemption, keep rent = 50% of salary for metro cities. Submit rent receipts to HR.</p>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <b>Disclaimer:</b> HRA exemption available only in Old Tax Regime. For New Regime, HRA is fully taxable. Consult CA for exact filing.
+    </div>
+  </div>
+
+  <!-- 5. HRA GUIDE -->
+  <div class="guide-box">
+    <h2>Want to Learn More About Tax Saving?</h2>
+    <p>Read our complete guide on HRA, 80C, 80D and other deductions to save maximum tax.</p>
+    <a href="tax-saving-guide.html" class="guide-btn">📖 Read Complete Tax Guide</a>
+  </div>
+
+  <!-- 6. MORE CALCULATORS - TUMHARE BANAYE HUE -->
+  <div class="card">
+    <h2>More Financial Calculators</h2>
+    <div class="tools-grid">
+      <a href="income-tax.html" class="tool-card"><div class="icon">💰</div>Income Tax</a>
+      <a href="gold-loan.html" class="tool-card"><div class="icon">🏆</div>Gold Loan</a>
+      <a href="lumpsum.html" class="tool-card"><div class="icon">💎</div>Lumpsum</a>
+      <a href="ppf.html" class="tool-card"><div class="icon">🏛️</div>PPF Calculator</a>
+      <a href="home-loan.html" class="tool-card"><div class="icon">🏠</div>Home Loan EMI</a>
+      <a href="fd.html" class="tool-card"><div class="icon">🏦</div>FD Calculator</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- 7. FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="articles.html">Article</a>
+  </div>
+  <div class="copyright">© 2026 Rajaram Finance. All Rights Reserved. | Made for Salaried People</div>
+</footer>
+
+<script>
+const { jsPDF } = window.jspdf;
+let barChart;
+let lastResult = {};
+
+function format(num){return '₹' + Math.round(num).toLocaleString('en-IN')}
+
+function calculateHRA(){
+  const salary = parseFloat(document.getElementById('salary').value) || 600000;
+  const hra = parseFloat(document.getElementById('hra').value) || 240000;
+  const rent = parseFloat(document.getElementById('rent').value) || 180000;
+  const cityPer = parseFloat(document.getElementById('city').value) || 50;
+  
+  // 3 Rules for HRA Exemption
+  const rule1 = hra; // Actual HRA
+  const rule2 = rent - (salary * 0.10); // Rent - 10% of Basic
+  const rule3 = salary * (cityPer/100); // 50% or 40% of Basic
+  
+  let exemption = Math.min(rule1, rule2, rule3);
+  if(exemption < 0) exemption = 0;
+  
+  let taxableHRA = hra - exemption;
+  let taxSaving = exemption * 0.30; // Assuming 30% tax slab
+  
+  lastResult = {salary, hra, rent, exemption, taxableHRA, taxSaving, rule1, rule2, rule3};
+  
+  document.getElementById('exemption').innerText = format(exemption);
+  document.getElementById('taxable').innerText = format(taxableHRA);
+  document.getElementById('saving').innerText = format(taxSaving);
+  document.getElementById('rule1').innerText = format(rule1);
+  document.getElementById('rule2').innerText = format(rule2);
+  document.getElementById('rule3').innerText = format(rule3);
+  
+  drawChart(rule1, rule2, rule3);
+}
+
+function drawChart(r1, r2, r3){
+  if(barChart) barChart.destroy();
+  barChart = new Chart(document.getElementById('barChart'),{
+    type:'bar',
+    data:{
+      labels:['Actual HRA', 'Rent-10% Basic', '50%/40% Basic'],
+      datasets:[{
+        label:'Amount',
+        data:[r1, r2, r3],
+        backgroundColor:['#2563EB','#10B981','#F59E0B'],
+        borderWidth:0
+      }]
+    },
+    options:{responsive:true, plugins:{legend:{display:false}}}
+  });
+}
+
+function downloadPDF(){
+    const doc = new jsPDF();
+    doc.setFontSize(18); doc.text("HRA Exemption Report FY 2025-26", 14, 20);
+    doc.setFontSize(10); doc.text("Rajaram Finance", 14, 27);
+    let y=40;
+    doc.setFontSize(12);
+    doc.text(`Basic Salary: ${format(lastResult.salary)}`, 14, y); y+=10;
+    doc.text(`HRA Received: ${format(lastResult.hra)}`, 14, y); y+=10;
+    doc.text(`Rent Paid: ${format(lastResult.rent)}`, 14, y); y+=10;
+    doc.text(`HRA Exemption: ${format(lastResult.exemption)}`, 14, y); y+=10;
+    doc.text(`Taxable HRA: ${format(lastResult.taxableHRA)}`, 14, y); y+=10;
+    doc.text(`Tax Saving @30%: ${format(lastResult.taxSaving)}`, 14, y); y+=15;
+    doc.setFontSize(9);
+    doc.text("Disclaimer: Only for Old Tax Regime.", 14, y);
+    doc.save('HRA-Report.pdf');
+}
+
+document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
+window.onload = calculateHRA;
+</script>
+</body>
+</html>
