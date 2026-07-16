@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Salary Calculator 2026 - Estimate In-Hand Salary | Rajaram Finance</title>
+<meta name="description" content="Free Salary Calculator. Calculate In-Hand Salary after PF, ESI, Income Tax. Old vs New Tax Regime. Download PDF report.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{
+  --primary:#2563EB;
+  --accent:#10B981;
+  --dark:#0F172A;
+  --light:#F8FAFC;
+  --border:#E2E8F0;
+}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins', sans-serif}
+body{background:var(--light);color:var(--dark)}
+header{background:#fff;padding:18px 20px;border-bottom:1px solid var(--border);text-align:center}
+.logo{font-size:24px;font-weight:700}
+.logo .blue{color:var(--primary)}
+.logo .green{color:var(--accent)}
+
+.container{width:100%;max-width:700px;margin:0 auto;padding:20px}
+
+.card{background:#fff;border-radius:14px;padding:24px;margin-bottom:20px;border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+.card h2{font-size:20px;font-weight:700;color:#1E293B;margin-bottom:18px}
+
+.input-group{margin-bottom:16px}
+.input-group label{font-weight:600;margin-bottom:8px;font-size:14px;color:#475569;display:block}
+.input-wrapper{position:relative}
+.input-wrapper span{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:#64748B;font-weight:600;font-size:15px}
+.input-wrapper input, .input-wrapper select{width:100%;padding:14px 14px 14px 45px;border:1.5px solid var(--border);border-radius:8px;font-size:16px;font-weight:500;background:#fff}
+.input-wrapper input:focus, .input-wrapper select:focus{border-color:var(--primary);outline:none}
+
+.btn-group{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:15px}
+.btn-option{padding:12px;border:2px solid var(--border);background:#fff;border-radius:8px;font-weight:600;cursor:pointer;text-align:center;transition:0.2s}
+.btn-option.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+.btn-primary{background:var(--primary);color:#fff;border:none;padding:15px;width:100%;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;letter-spacing:0.5px}
+.btn-primary:hover{background:#1D4ED8}
+
+.result-card{background:linear-gradient(135deg,#2563EB,#10B981);color:#fff;text-align:center;border:none}
+.result-card .label{font-size:12px;opacity:0.9;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px}
+.result-card .value{font-size:28px;font-weight:700;margin-bottom:16px}
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:15px}
+.result-mini{background:rgba(255,255,255,0.15);padding:12px;border-radius:8px}
+.result-mini .label{font-size:11px}
+.result-mini .value{font-size:15px;font-weight:700;margin-top:2px}
+
+.btn-download{width:100%;background:var(--dark);color:#fff;border:none;padding:14px;border-radius:8px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px}
+.btn-download:hover{background:#1E293B}
+
+.content h2{font-size:22px;color:var(--primary);margin-bottom:12px}
+.content p{line-height:1.8;color:#475569;margin-bottom:12px;font-size:15px}
+.example-box{background:#EFF6FF;border-left:4px solid var(--primary);padding:16px;border-radius:8px;margin:15px 0}
+.example-box b{color:var(--primary)}
+
+.why-sip-grid{display:grid;gap:12px;margin:15px 0}
+.why-item{display:flex;gap:12px;align-items:flex-start}
+.why-item .num{background:var(--primary);color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.why-item p{margin:0;color:#475569}
+
+.guide-box{background:#fff;border:2px dashed var(--primary);padding:24px;border-radius:12px;text-align:center;margin-top:20px}
+.guide-box h2{font-size:20px;color:#1E293B;margin-bottom:10px}
+.guide-box p{margin-bottom:15px;color:#475569}
+.guide-btn{background:var(--primary);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600;display:inline-block;font-size:15px}
+.guide-btn:hover{background:#1D4ED8}
+
+.tools-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:600px){.tools-grid{grid-template-columns:repeat(3,1fr)}}
+.tool-card{background:#F8FAFC;border:1.5px solid var(--border);padding:16px;border-radius:10px;text-decoration:none;color:var(--dark);text-align:center;font-weight:600;transition:0.2s}
+.tool-card:hover{border-color:var(--primary);background:#EFF6FF;transform:translateY(-2px)}
+.tool-card .icon{font-size:24px;margin-bottom:8px}
+
+.disclaimer-box{background:#FEF3C7;border:1px solid #FBBF24;padding:16px;border-radius:8px;margin-top:15px;font-size:13px;line-height:1.6}
+.disclaimer-box b{color:#92400E}
+
+footer{background:var(--dark);color:#CBD5E1;padding:25px 20px;text-align:center;margin-top:30px}
+.footer-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.footer-links a{color:#94A3B8;text-decoration:none;font-size:14px}
+.footer-links a:hover{color:#fff}
+.copyright{font-size:13px;color:#64748B}
+</style>
+</head>
+<body>
+
+<header><div class="logo"><span class="blue">Rajaram</span> <span class="green">Finance</span></div></header>
+
+<div class="container">
+  
+  <!-- 1. INPUT - SALARY -->
+  <div class="card">
+    <h2>Salary Calculator - Estimate In-Hand Salary</h2>
+    
+    <div class="btn-group">
+      <div class="btn-option active" onclick="setRegime('old')">Old Regime</div>
+      <div class="btn-option" onclick="setRegime('new')">New Regime</div>
+    </div>
+
+    <div class="input-group">
+      <label>Annual CTC ₹</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="ctc" value="1200000" oninput="calculateSalary()"></div>
+    </div>
+    <div class="input-group">
+      <label>Basic + DA per Year ₹</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="basic" value="600000" oninput="calculateSalary()"></div>
+    </div>
+    <div class="input-group">
+      <label>HRA per Year ₹</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="hra" value="240000" oninput="calculateSalary()"></div>
+    </div>
+    <div class="input-group">
+      <label>Other Allowances per Year ₹</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="allowance" value="360000" oninput="calculateSalary()"></div>
+    </div>
+    <div class="input-group">
+      <label>Annual Deductions 80C, 80D etc ₹</label>
+      <div class="input-wrapper"><span>₹</span><input type="number" id="deduction" value="150000" oninput="calculateSalary()"></div>
+    </div>
+    <button class="btn-primary" onclick="calculateSalary()">CALCULATE IN-HAND</button>
+  </div>
+
+  <!-- 2. RESULT -->
+  <div class="card result-card">
+    <div class="label">MONTHLY IN-HAND SALARY</div>
+    <div class="value" id="inHand">₹0</div>
+    <div class="label">ANNUAL TAKE HOME</div>
+    <div class="value" id="annual">₹0</div>
+    <div class="label">TOTAL DEDUCTIONS</div>
+    <div class="value" id="totalDed">₹0</div>
+    <div class="result-grid">
+      <div class="result-mini"><div class="label">PF</div><div class="value" id="pf">₹0</div></div>
+      <div class="result-mini"><div class="label">INCOME TAX</div><div class="value" id="tax">₹0</div></div>
+      <div class="result-mini"><div class="label">ESI</div><div class="value" id="esi">₹0</div></div>
+      <div class="result-mini"><div class="label">PROF TAX</div><div class="value" id="pt">₹0</div></div>
+    </div>
+    <button class="btn-download" id="downloadPdf">📄 Download Salary Slip PDF</button>
+  </div>
+
+  <!-- 3. GRAPH -->
+  <div class="card">
+    <h2>Salary Breakdown</h2>
+    <canvas id="pieChart" height="120"></canvas>
+  </div>
+
+  <!-- 4. SALARY CONTENT -->
+  <div class="card content">
+    <h2>How is In-Hand Salary Calculated?</h2>
+    <p><b>In-Hand Salary = CTC - PF - ESI - Professional Tax - Income Tax</b>. This calculator supports both Old and New Tax Regime for FY 2025-26.</p>
+    
+    <div class="example-box">
+      <b>Example:</b> CTC ₹12 Lakh. Basic ₹6 Lakh. 
+      PF = 12% of Basic = ₹72,000. Tax Old Regime = ₹78,000.
+      In-Hand Monthly = ₹86,500 approx.
+    </div>
+
+    <h2 style="margin-top:20px;font-size:18px">Key Deductions from Salary</h2>
+    <div class="why-sip-grid">
+      <div class="why-item"><div class="num">1</div><p><b>PF:</b> 12% of Basic. Employee + Employer contribution.</p></div>
+      <div class="why-item"><div class="num">2</div><p><b>ESI:</b> 0.75% if salary < ₹21,000/month. For medical benefits.</p></div>
+      <div class="why-item"><div class="num">3</div><p><b>Professional Tax:</b> ₹200 to ₹2500 per year depending on state.</p></div>
+      <div class="why-item"><div class="num">4</div><p><b>Income Tax:</b> As per Old/New regime slabs. Standard deduction ₹50,000.</p></div>
+      <div class="why-item"><div class="num">5</div><p><b>80C Deduction:</b> PF, ELSS, LIC, Home Loan Principal upto ₹1.5 Lakh.</p></div>
+    </div>
+    <p><b>Key Insight:</b> New Regime has lower tax rates but no deductions like 80C, HRA. Old Regime is better if you have home loan + investments.</p>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer-box">
+      <b>Disclaimer:</b> Calculation as per FY 2025-26 tax slabs. Actual salary may vary based on company policy. Consult HR for exact breakup.
+    </div>
+  </div>
+
+  <!-- 5. SALARY GUIDE -->
+  <div class="guide-box">
+    <h2>Want to Save More Tax?</h2>
+    <p>Read our complete guide on Old vs New Tax Regime, 80C, HRA and tax saving tips for salaried people.</p>
+    <a href="tax-saving-guide.html" class="guide-btn">📖 Read Tax Saving Guide</a>
+  </div>
+
+  <!-- 6. MORE CALCULATORS - TUMHARE BANAYE HUE -->
+  <div class="card">
+    <h2>More Financial Calculators</h2>
+    <div class="tools-grid">
+      <a href="hra-calculator.html" class="tool-card"><div class="icon">🏠</div>HRA Calculator</a>
+      <a href="income-tax.html" class="tool-card"><div class="icon">💰</div>Income Tax</a>
+      <a href="home-loan.html" class="tool-card"><div class="icon">🏡</div>Home Loan EMI</a>
+      <a href="ppf.html" class="tool-card"><div class="icon">🏛️</div>PPF Calculator</a>
+      <a href="fd.html" class="tool-card"><div class="icon">🏦</div>FD Calculator</a>
+      <a href="lumpsum.html" class="tool-card"><div class="icon">💎</div>Lumpsum</a>
+    </div>
+  </div>
+
+</div>
+
+<!-- 7. FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact</a>
+    <a href="disclaimer.html">Disclaimer</a>
+    <a href="terms.html">Terms</a>
+    <a href="articles.html">Article</a>
+  </div>
+  <div class="copyright">© 2026 Rajaram Finance. All Rights Reserved. | Made for Working Professionals</div>
+</footer>
+
+<script>
+const { jsPDF } = window.jspdf;
+let pieChart;
+let lastResult = {};
+let regime = 'old';
+
+function format(num){return '₹' + Math.round(num).toLocaleString('en-IN')}
+
+function setRegime(r){
+  regime = r;
+  document.querySelectorAll('.btn-option').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+  calculateSalary();
+}
+
+function calculateTax(income){
+  let tax = 0;
+  if(regime == 'old'){
+    if(income <= 250000) tax = 0;
+    else if(income <= 500000) tax = (income - 250000) * 0.05;
+    else if(income <= 1000000) tax = 12500 + (income - 500000) * 0.2;
+    else tax = 112500 + (income - 1000000) * 0.3;
+  } else {
+    if(income <= 400000) tax = 0;
+    else if(income <= 800000) tax = (income - 400000) * 0.05;
+    else if(income <= 1200000) tax = 20000 + (income - 800000) * 0.1;
+    else if(income <= 1600000) tax = 60000 + (income - 1200000) * 0.15;
+    else if(income <= 2000000) tax = 120000 + (income - 1600000) * 0.2;
+    else tax = 200000 + (income - 2000000) * 0.3;
+  }
+  return tax * 1.04; // +4% cess
+}
+
+function calculateSalary(){
+  const ctc = parseFloat(document.getElementById('ctc').value) || 1200000;
+  const basic = parseFloat(document.getElementById('basic').value) || 600000;
+  const hra = parseFloat(document.getElementById('hra').value) || 240000;
+  const allowance = parseFloat(document.getElementById('allowance').value) || 360000;
+  const deduction = parseFloat(document.getElementById('deduction').value) || 150000;
+  
+  let pf = basic * 0.12;
+  let esi = (ctc/12 < 21000) ? ctc * 0.0075 : 0;
+  let profTax = 2500;
+  
+  let taxableIncome = ctc - pf - 50000; // standard deduction
+  if(regime == 'old') taxableIncome = taxableIncome - deduction - hra;
+  
+  let tax = calculateTax(taxableIncome);
+  
+  let totalDed = pf + esi + profTax + tax;
+  let inHandAnnual = ctc - totalDed;
+  let inHandMonthly = inHandAnnual / 12;
+  
+  lastResult = {ctc, basic, hra, allowance, pf, esi, profTax, tax, totalDed, inHandMonthly, inHandAnnual};
+  
+  document.getElementById('inHand').innerText = format(inHandMonthly);
+  document.getElementById('annual').innerText = format(inHandAnnual);
+  document.getElementById('totalDed').innerText = format(totalDed);
+  document.getElementById('pf').innerText = format(pf);
+  document.getElementById('tax').innerText = format(tax);
+  document.getElementById('esi').innerText = format(esi);
+  document.getElementById('pt').innerText = format(profTax);
+  
+  drawChart(inHandAnnual, totalDed);
+}
+
+function drawChart(inHand, ded){
+  if(pieChart) pieChart.destroy();
+  pieChart = new Chart(document.getElementById('pieChart'),{
+    type:'pie',
+    data:{
+      labels:['In-Hand Salary', 'Total Deductions'],
+      datasets:[{
+        data:[inHand, ded],
+        backgroundColor:['#10B981','#2563EB'],
+        borderWidth:0
+      }]
+    },
+    options:{responsive:true, plugins:{legend:{position:'bottom'}}}
+  });
+}
+
+function downloadPDF(){
+    const doc = new jsPDF();
+    doc.setFontSize(18); doc.text("Salary Calculation Report", 14, 20);
+    doc.setFontSize(10); doc.text("Rajaram Finance - FY 2025-26", 14, 27);
+    let y=40;
+    doc.setFontSize(12);
+    doc.text(`Annual CTC: ${format(lastResult.ctc)}`, 14, y); y+=10;
+    doc.text(`Tax Regime: ${regime.toUpperCase()}`, 14, y); y+=10;
+    doc.text(`PF: ${format(lastResult.pf)}`, 14, y); y+=10;
+    doc.text(`Income Tax: ${format(lastResult.tax)}`, 14, y); y+=10;
+    doc.text(`ESI: ${format(lastResult.esi)}`, 14, y); y+=10;
+    doc.text(`Prof Tax: ${format(lastResult.profTax)}`, 14, y); y+=10;
+    doc.text(`Total Deductions: ${format(lastResult.totalDed)}`, 14, y); y+=15;
+    doc.text(`Monthly In-Hand: ${format(lastResult.inHandMonthly)}`, 14, y); y+=10;
+    doc.text(`Annual Take Home: ${format(lastResult.inHandAnnual)}`, 14, y); y+=15;
+    doc.setFontSize(9);
+    doc.text("Disclaimer: For estimation only. Actual may vary.", 14, y);
+    doc.save('Salary-Report.pdf');
+}
+
+document.getElementById("downloadPdf").addEventListener("click", downloadPDF);
+window.onload = calculateSalary;
+</script>
+</body>
+</html>
