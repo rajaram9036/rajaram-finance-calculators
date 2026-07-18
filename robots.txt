@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rajaram9036.github.io/rajaram-finance-calculators/sitemap.xml
